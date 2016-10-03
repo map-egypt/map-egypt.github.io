@@ -6,6 +6,10 @@ export function setLanguage (lang) {
   currentLang = lang;
 }
 
+export function isLtr (lang) {
+  return lang !== 'ar'
+}
+
 export function getLanguage () {
   return currentLang;
 }
@@ -24,10 +28,10 @@ export function t (string, replace = {}) {
   // Transifex provides 1 file per language which we can require.
   let l = {
     en: { // require('./langfiles/en')
-      'hello': 'Screen is too small'
+      'hello': 'Hello'
     },
     ar: {
-      'hello': 'screen small ES'
+      'hello': 'مرحبا'
     }
   };
 

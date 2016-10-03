@@ -5,7 +5,7 @@ import { hashHistory } from 'react-router';
 import _ from 'lodash';
 import c from 'classnames';
 
-import { isValidLanguage, setLanguage } from '../utils/i18n';
+import { isValidLanguage, setLanguage, isLtr } from '../utils/i18n';
 
 var App = React.createClass({
   displayName: 'App',
@@ -24,22 +24,33 @@ var App = React.createClass({
     }
   },
 
+  updateLangClass: function (lang) {
+    if (isValidLanguage(lang)) {
+      document.documentElement.setAttribute('lang', lang);
+      document.documentElement.classList.remove('lang--ltr', 'lang--rtl');
+      const langClass = isLtr(lang) ? 'lang--ltr' : 'lang--rtl';
+      document.documentElement.classList.add(langClass);
+    }
+  },
+
   //
   // Start life-cycle methods
   //
   componentWillMount: function () {
     this.validateLanguage(this.props.params.lang);
+    this.updateLangClass(this.props.params.lang);
   },
 
   componentWillReceiveProps: function (nextProps) {
     this.validateLanguage(nextProps.params.lang);
+    this.updateLangClass(nextProps.params.lang);
   },
 
   //
   // Start render methods
   //
   render: function () {
-    let pageClass = _.get(_.last(this.props.routes), 'pageClass', '');
+    const pageClass = _.get(_.last(this.props.routes), 'pageClass', '');
 
     return (
       <div className={c('page', pageClass)}>

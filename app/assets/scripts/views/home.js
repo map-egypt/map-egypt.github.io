@@ -3,6 +3,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
+import { t } from '../utils/i18n';
+
 var Home = React.createClass({
   displayName: 'Home',
 
@@ -12,7 +14,8 @@ var Home = React.createClass({
   render: function () {
     return (
       <div>
-        Hello <Link to='/es'>Spanish</Link>
+        <h1>{t('hello')}</h1>
+        <Link to='/ar'>Ar</Link> <Link to='/en'>En</Link>
       </div>
     );
   }
