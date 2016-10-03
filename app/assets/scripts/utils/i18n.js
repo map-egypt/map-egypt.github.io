@@ -7,7 +7,7 @@ export function setLanguage (lang) {
 }
 
 export function isLtr (lang) {
-  return lang !== 'ar'
+  return lang !== 'ar';
 }
 
 export function getLanguage () {
