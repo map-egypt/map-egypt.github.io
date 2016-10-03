@@ -6,6 +6,8 @@ import _ from 'lodash';
 import c from 'classnames';
 
 import { isValidLanguage, setLanguage, isLtr } from '../utils/i18n';
+import PageFooter from '../components/page-footer';
+import PageHeader from '../components/page-header';
 
 var App = React.createClass({
   displayName: 'App',
@@ -54,9 +56,11 @@ var App = React.createClass({
 
     return (
       <div className={c('page', pageClass)}>
+      <PageHeader />
         <main className='page__body' role='main'>
           {this.props.children}
         </main>
+      <PageFooter />
       </div>
     );
   }
