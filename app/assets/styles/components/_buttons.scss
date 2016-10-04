@@ -22,7 +22,7 @@
   /* States */
 
   &:hover {
-    opacity: initial;
+    opacity: 0.7;
   }
 
   .drop--open > &,
@@ -59,7 +59,7 @@
   }
 
   /* Animation */
-  transition: background-color 0.24s ease 0s;
+  transition: opacity 0.24s ease 0s;
 }
 
 
@@ -78,24 +78,6 @@
   @include button-variation("bounded", null, $base-color);
 }
 
-/* Base Unbounded */
-
-.button--base-unbounded {
-  @include button-variation("unbounded", null, $base-color);
-}
-
-/* Achromic */
-
-.button--achromic {
-  @include button-variation("filled", "light", #fff);
-}
-
-/* Achromic Unbounded */
-
-.button--achromic-unbounded {
-  @include button-variation("unbounded", null, #fff);
-}
-
 /* Primary */
 
 .button--primary {
@@ -108,29 +90,6 @@
   @include button-variation("bounded", null, $primary-color);
 }
 
-/* Primary Unbounded */
-
-.button--primary-unbounded {
-  @include button-variation("unbounded", null, $primary-color);
-}
-
-/* Secondary */
-
-.button--secondary {
-  @include button-variation("filled", "dark", $secondary-color);
-}
-
-/* Secondary Bounded */
-
-.button--secondary-bounded {
-  @include button-variation("bounded", null, $secondary-color);
-}
-
-/* Secondary Unbounded */
-
-.button--secondary-unbounded {
-  @include button-variation("unbounded", null, $secondary-color);
-}
 
 
 /* Button size modifiers
@@ -272,3 +231,88 @@
     margin-top: -2px;
   }
 }
+
+//
+// Different buttons. Temporary... do not touch
+// 
+// .button--base {
+//   background-color: $base-color;
+
+//   &, &:visited {
+//     color: #fff;
+//   }
+//   &:hover {
+//     background-color: shade($base-color, 4%);
+//   }
+//   .drop--open > &,
+//   &.button--active,
+//   &.button--active:hover,
+//   &:active {
+//     background-color: shade($base-color, 8%);
+//   }
+// }
+
+// /* Base Bounded */
+
+// .button--base-bounded {
+//   background: none;
+//   box-shadow: inset 0 0 0 2px $base-color;
+
+//   &, &:visited {
+//     color: $base-color;
+//   }
+//   &:hover {
+//     color: #fff;
+//     background-color: $base-color;
+//     opacity: 1;
+//   }
+//   .drop--open > &,
+//   &.button--active,
+//   &.button--active:hover,
+//   &:active {
+//     color: #fff;
+//     background-color: $base-color;
+//   }
+// }
+
+// /* Primary */
+
+// .button--primary {
+//   background-color: $primary-color;
+
+//   &, &:visited {
+//     color: #fff;
+//   }
+//   &:hover {
+//     background-color: shade($primary-color, 4%);
+//   }
+//   .drop--open > &,
+//   &.button--active,
+//   &.button--active:hover,
+//   &:active {
+//     background-color: shade($primary-color, 8%);
+//   }
+// }
+
+// /* Primary Bounded */
+
+// .button--primary-bounded {
+//   background: none;
+//   box-shadow: inset 0 0 0 2px $primary-color;
+
+//   &, &:visited {
+//     color: $primary-color;
+//   }
+//   &:hover {
+//     color: #fff;
+//     background-color: $primary-color;
+//     opacity: 1;
+//   }
+//   .drop--open > &,
+//   &.button--active,
+//   &.button--active:hover,
+//   &:active {
+//     color: #fff;
+//     background-color: $primary-color;
+//   }
+// }

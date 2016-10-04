@@ -5,20 +5,20 @@
 /* Colors
    ========================================================================== */
 
-$base-color: #496A90;                                   // Kashmir Blue
-$primary-color: #36AA90;                                // Keppel
-$secondary-color: #AEAAD3;                              // Wistful
+$base-color: #2B2342;                                   //
+$primary-color: #55CBC9;                                // 
+$secondary-color: #FFD100;                              // 
 
 /* State colors */
 
+$success-color: #7BDC78;                                // Nephritis (Green)
+$warning-color: #FFD100;                                // Orange
 $danger-color: #e74c3c;                                 // Alizarin (Red-ish)
-$success-color: #27ae60;                                // Nephritis (Green)
-$warning-color: #f39c12;                                // Orange
 $info-color: #2980b9;                                   // Belize Hole (Blue)
 
 /* Helper colors */
 
-$link-color: $primary-color;
+$link-color: $base-color;
 $base-alpha-color: rgba($base-color, 0.12);
 $base-semi-alpha-color: rgba($base-color, 0.08);
 
@@ -34,11 +34,11 @@ $infographic-color-c: #A65890;
 
 $root-font-size: 16px;
 
-$base-font-color: $base-color;
-$base-font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$base-font-color: #9B9B9B;
+$base-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $base-font-style: normal;
 $base-font-light: 300;
-$base-font-regular: 400;
+$base-font-regular: 400;  
 $base-font-bold: 700;
 $base-font-weight: $base-font-regular;
 $base-font-size: 1rem;
@@ -46,7 +46,7 @@ $base-line-height: 1.5;
 
 $code-font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
 
-$heading-font-family: "Montserrat", "Helvetica Neue", Helvetica, Arial, sans-serif;
+$heading-font-family: "Playfair Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $heading-font-regular: 400;
 $heading-font-bold: 700;
 $heading-font-weight: $heading-font-bold;
@@ -62,10 +62,6 @@ $full-border-radius: 60rem;
 
 /* Sizing, spacing and media queries
    ========================================================================== */
-
-/* Sizing */
-
-$page-header-y: 0 !default;
 
 /* Spacing */
 

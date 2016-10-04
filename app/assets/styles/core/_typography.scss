@@ -212,6 +212,7 @@ abbr[title] {
   font-weight: $heading-font-weight;
   margin-top: 0;
   margin-bottom: $global-spacing;
+  color: $base-color;
 }
 
 .heading--xlarge {
@@ -239,19 +240,18 @@ abbr[title] {
   color: rgba($base-font-color, 0.48);
 }
 
-.heading-deco {
+.heading--deco {
   position: relative;
-  text-transform: uppercase;
   padding-bottom: 0.5rem;
 
   &::after {
     position: absolute;
-    top: calc(100% - 2px);
+    top: calc(100% - 3px);
     left: 0;
-    width: 2.5rem;
-    height: 2px;
+    width: 4rem;
+    height: 3px;
     content: "";
-    background: rgba($base-font-color, 0.32);
+    background: $secondary-color;
   }
 }
 

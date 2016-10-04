@@ -38,6 +38,8 @@ import Ministry from './views/ministry';
 import About from './views/about';
 import Contact from './views/contact';
 
+import Elements from './views/elements';
+
 render((
   <Provider store={store}>
     <Router history={hashHistory} render={applyRouterMiddleware(scrollerMiddleware)}>
@@ -51,6 +53,9 @@ render((
         <Route path='ministry/:name' component={Ministry} />
         <Route path='about' component={About} />
         <Route path='contact' component={Contact} />
+
+        <Route path='elements' component={Elements} />
+
         <IndexRoute component={Home} pageClass='page--homepage' />
       </Route>
       <Redirect from='/' to='/en' />
