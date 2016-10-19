@@ -29,6 +29,9 @@
 		&:first-child {
 			margin: ($global-spacing * 4) 0 $global-spacing 0;
 		};
+    &:last-child {
+      margin: $global-spacing 0 ($global-spacing * 4) 0;
+    };
 		&--title {
 			text-align: center;
 		}
@@ -44,10 +47,11 @@
 			@include col(4/12);	
 			padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;	
 		}
-		&__title {
-			text-align: center;	
-		};
 	}
+
+  &__section--related--title {
+    text-align: center;
+  }
 
 	&__table {
 		table-layout: fixed;
