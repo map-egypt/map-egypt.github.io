@@ -17,7 +17,7 @@ var Project = React.createClass({
               </ul>
               </div>
               <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-              <h1 className='inpage__title heading--deco'>Project Name</h1>
+              <h1 className='inpage__title heading--deco heading--large'>Project Name</h1>
               <dl className='inpage-meta project--ontime'>
                 <dt className='inpage-meta__label--status'>Status</dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>On time</dd>
@@ -106,7 +106,7 @@ var Project = React.createClass({
                       <div className='card__contents'>
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-                          <h1 className='card__title'><a className='link--deco' href=''>Project Name</a></h1>
+                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
   
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
@@ -137,7 +137,7 @@ var Project = React.createClass({
                       <div className='card__contents'>
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-                          <h1 className='card__title'><a className='link--deco' href=''>Project Name</a></h1>
+                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
   
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
@@ -168,7 +168,7 @@ var Project = React.createClass({
                       <div className='card__contents'>
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-                          <h1 className='card__title'><a className='link--deco' href=''>Project Name</a></h1>
+                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
   
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
