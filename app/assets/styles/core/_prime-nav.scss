@@ -1,0 +1,49 @@
+.page__headline {
+  float: left;
+  padding: $global-spacing $global-spacing $global-spacing 0;
+}
+
+.page__title {
+  box-shadow: inset -1px 0 0 $tertiary-color;
+  padding-right: $global-spacing;
+  height: 100%;
+}
+
+.page__prime-nav {
+  position: relative;
+  li {
+    display: inline-block;
+    list-style: none;
+    margin: ($global-spacing * 2.75) ($global-spacing * 2) 0 0;
+  }
+}
+
+.browse-menu {
+  float: left;
+  > li:first-child {
+    margin-left: 0;
+  };
+}
+
+.utilities-menu {
+  float: right;
+  > li {
+    &:nth-child(2) {
+      box-shadow: inset -1px 0 0 $tertiary-color;
+      padding-right: $global-spacing;
+      margin-right: $global-spacing;
+    };
+    &:last-child {
+      margin-right: 0;
+    };
+  }
+}
+
+.browse-menu__item {
+  position: relative;
+  line-height: 0.75rem;
+  font-size: 0.75rem;
+  display: inline-block;
+  list-style: none;
+  font-weight: $base-font-light;
+}

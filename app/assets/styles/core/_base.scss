@@ -71,7 +71,7 @@ a:focus {
 
 a.link--deco {
   text-decoration: none;
-  font-weight: $base-font-bold;
+  font-weight: $base-font-regular;
   background-image: linear-gradient(180deg, transparent 65%, rgba($base-color, 0.22) 0px);
   background-repeat: no-repeat;
   background-size: 0 100%;
@@ -85,6 +85,38 @@ a.link--deco {
 
 a.link--deco-active {
   background-size: 100% 100%;
+  font-weight: $base-font-bold;
+}
+
+a.link--primary {
+  text-decoration: none;
+  display: inline-block;
+  border-bottom: solid 2px rgba($base-color, 0.22);
+  position: relative;
+  line-height: 0.875rem;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+a.link--primary:before {
+  content: '';
+  display: block;
+  height: 1px;
+  position: absolute;
+  top: 100%;
+  width: 0;
+  border-bottom: solid 2px ($primary-color);
+  transition: width 0.4s ease;
+}
+
+a.link--primary:hover:before {
+    width: 100%;
+    opacity: 1;
+}
+
+a.link--secondary {
+  color: $base-font-color;
 }
 
 /* Rows

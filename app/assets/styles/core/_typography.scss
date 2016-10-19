@@ -234,10 +234,10 @@ abbr[title] {
 }
 
 .heading-alt {
-  font-family: $heading-font-family;
-  font-weight: $heading-font-regular;
+  font-family: $base-font-family;
+  font-weight: $base-font-light;
+  color: $base-color;
   text-transform: uppercase;
-  color: rgba($base-font-color, 0.48);
 }
 
 .heading--deco {
@@ -253,6 +253,14 @@ abbr[title] {
     content: "";
     background: $secondary-color;
   }
+}
+
+.heading--label {
+  font-weight: $base-font-regular;
+  color: $base-color;
+  margin-right: $global-spacing/2;
+  text-transform: uppercase;
+  font-size: 0.675rem;
 }
 
 h1 {

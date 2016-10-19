@@ -115,3 +115,7 @@
   pointer-events: none;
   cursor: not-allowed;
 }
+
+.inner {
+  @extend .row, .row--centered;
+}

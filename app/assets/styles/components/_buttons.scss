@@ -78,6 +78,10 @@
   @include button-variation("bounded", null, $base-color);
 }
 
+.button--base-unbounded {
+  @include button-variation("unbounded", null, $base-color);
+}
+
 /* Primary */
 
 .button--primary {
@@ -90,12 +94,18 @@
   @include button-variation("bounded", null, $primary-color);
 }
 
-
-
 /* Button size modifiers
    ========================================================================== */
 
 /* Small (24px) */
+
+.button--xsmall,
+.button-group--xsmall .button {
+  line-height: 1rem;
+  font-size: 0.675rem;
+  padding: 0.15rem 0.25rem;
+  min-width: 1.5rem;
+}
 
 .button--small,
 .button-group--small .button {
@@ -231,6 +241,29 @@
     margin-top: -2px;
   }
 }
+
+.button--filter-tag {
+  color: $primary-color;
+  background-color: $tertiary-color;
+  margin-right: 0.5rem;
+  &::after {
+    @extend %collecticon-xmark;
+    font-size: 0.675rem;
+  }
+}
+
+.button--filter-clear {
+  text-decoration: underline;
+  color: $base-font-color;
+  font-weight: $base-font-regular;
+}
+
+.button--secondary {
+  background-color: $tertiary-color;
+  color: $base-color;
+}
+
+
 
 //
 // Different buttons. Temporary... do not touch
