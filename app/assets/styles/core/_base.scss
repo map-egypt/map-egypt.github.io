@@ -90,10 +90,11 @@ a.link--deco-active {
 
 a.link--primary {
   text-decoration: none;
-  display: inline-block;
+  display: inline;
   border-bottom: solid 2px rgba($base-color, 0.22);
   position: relative;
   line-height: 0.875rem;
+  transition: box-shadow 0.4s ease;
   &:hover {
     opacity: 1;
   }
@@ -101,18 +102,19 @@ a.link--primary {
 
 a.link--primary:before {
   content: '';
-  display: block;
+  display: inline;
   height: 1px;
   position: absolute;
   top: 100%;
   width: 0;
+  box-shadow: inset 0 -1px 0 0 ($primary-color);
   border-bottom: solid 2px ($primary-color);
   transition: width 0.4s ease;
 }
 
 a.link--primary:hover:before {
-    width: 100%;
-    opacity: 1;
+  width: 100%;
+  opacity: 1;
 }
 
 a.link--secondary {
@@ -120,8 +122,8 @@ a.link--secondary {
 }
 
 /* Rows
-   ========================================================================== */
-
+   ========================================================================== 
+*/
 .row {
   @extend .clearfix;
   padding-left: $global-spacing;
@@ -146,7 +148,7 @@ a.link--secondary {
 
 
 /* Buttons
-   ========================================================================== */
+   ========================================================================== 
 
 /**
  * iOS "clickable elements" fix for role="button":
@@ -190,4 +192,5 @@ table {
 
 main {
   display: block;
+  overflow: hidden;
 }

@@ -16,7 +16,7 @@ var Project = React.createClass({
              	  <li><button className='button button--medium button--primary'>Share</button></li>
               </ul>
               </div>
-              <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
+              <p className='inpage__subtitle'><a className='link--secondary' href=''>Category</a></p>
               <h1 className='inpage__title heading--deco heading--large'>Project Name</h1>
               <dl className='inpage-meta project--ontime'>
                 <dt className='inpage-meta__label--status'>Status</dt>
@@ -33,7 +33,7 @@ var Project = React.createClass({
               <div className='inpage__col--map'>
               </div>
               <div className='inpage__col--content'>
-                 <ul className='inpage-stats'>
+                <ul className='inpage-stats'>
                   <li>$50M <small>funding</small></li>
                   <li>20,000 <small>households</small></li>
                 </ul>
@@ -41,7 +41,7 @@ var Project = React.createClass({
                   <li><span className='light'>Obejctive</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
                   <li><span className='light'>Location</span><a href='' className='link--primary'>Name of Location</a></li>
                   <li><span className='light'>Project Link </span><a href='' className='link--primary'>Name of Source</a></li>
-                  <li><span className='light'>Responsible Party </span><a href='' className='link--primary'>Name of Responsible Party</a></li>
+                  <li><span className='light'>Responsible Party </span><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
                   <li><span className='light'>Responsible Ministry Department</span><a href='' className='link--primary'>Name of Ministry Department</a></li>
                   <li><span className='light'>SDG Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
                   <li><span className='light'>SDS Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
