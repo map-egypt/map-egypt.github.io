@@ -72,9 +72,31 @@
 		table-layout: fixed;
 		margin: ($global-spacing * 2) 0;
 		position: relative;
+    @include media(medium-down) {
+      display: block; 
+    }
+
+    tbody {
+      @include media(medium-down) {
+        display: block;
+      }
+    }
+
 		thead {
 			box-shadow: inset 0 -1px 0 0 $tertiary-color;
-		}
+      @include media(medium-down) {
+      display: block; 
+      }
+      tr {
+        @include media(medium-down) {
+          display: block; 
+          position: absolute;
+          top: -9999px;
+          left: -9999px;
+        }
+      }
+    }
+
 		th {
 			color: $base-color;
 			font-weight: $base-font-light;
@@ -82,17 +104,71 @@
 			text-transform: uppercase;
 			font-size: 0.875rem;
 			padding-bottom: $global-spacing;
+      @include media(medium-down) {
+        display: block; 
+      }
 		}
+
 		td {
 			font-size: 0.75rem;
 			font-weight: $base-font-regular;
 			padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
+
+      @include media(medium-down) {
+        display: block; 
+        border: none;
+        position: relative;
+        &:last-child {
+          box-shadow: inset 0 -1px 0 0 $tertiary-color;
+          margin-bottom: $global-spacing;
+        };
+      }
+
 			.activity-name {
 				color: $base-color;
 				font-weight: $base-font-bold;
 				margin-bottom: 0;
 			}
 		}
+
+    td:before { 
+    @include media(medium-down) {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+    }
+  }
+
+    td:nth-of-type(n):before {
+      @extend th;
+      left: 0;
+      position: absolute;
+    }
+
+    td:nth-of-type(1):before { 
+      @include media(medium-down){
+      content: "Name and Description"; 
+      }
+    }
+    td:nth-of-type(2):before { 
+      @include media(medium-down){
+      content: "KPI"; 
+      }
+    }
+    td:nth-of-type(3):before { 
+      @include media(medium-down){
+      content: "Target"; 
+      }
+    }
+    td:nth-of-type(4):before { 
+      @include media(medium-down){
+      content: "Date"; 
+      }
+    }
+
 		.row-name {
 			width: 35%;
 		}

@@ -1,7 +1,6 @@
 .page__footer {
 	background-color: $base-color;
 	padding: ($global-spacing * 2) 0;
-	float: left;
 }
 
 .updates {
@@ -17,6 +16,13 @@
 	}
 	&__description {
 		color: #fff;
+	}
+	.form__input-group {
+		@include col(8/12);
+		@include media(medium-up){
+			@include col(6/12);
+		}
+
 	}
 }
 
