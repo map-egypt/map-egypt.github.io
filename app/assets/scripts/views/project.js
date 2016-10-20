@@ -65,7 +65,7 @@ var Project = React.createClass({
                   <tr>
                     <td className='project--ontime'>
                       <p className='card-meta__value--status activity-name'>Activity Name</p>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
                     </td>
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
@@ -74,7 +74,7 @@ var Project = React.createClass({
                   <tr>
                     <td className='project--ontime'>
                       <p className='card-meta__value--status activity-name'>Activity Name</p>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
                     </td>
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
@@ -83,7 +83,7 @@ var Project = React.createClass({
                   <tr>
                     <td className='project--ontime'>
                       <p className='card-meta__value--status activity-name'>Activity Name</p>
-                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
                     </td>
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
                     <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
