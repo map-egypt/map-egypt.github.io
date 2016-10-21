@@ -215,6 +215,10 @@ abbr[title] {
   color: $base-color;
 }
 
+.heading--xxlarge {
+  @include heading(2.25rem, xlarge-up);   // 28, 32, 36, 40
+}
+
 .heading--xlarge {
   @include heading(1.75rem, xlarge-up);   // 28, 32, 36, 40
 }
