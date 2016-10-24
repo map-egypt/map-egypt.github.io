@@ -14,7 +14,8 @@ var Elements = React.createClass({
 
         <hr />
 
-        <p><a href='#' className=''>Normal link</a></p>
+        <p><a href='#' className='link--primary'>Primary link</a></p>
+        <p><a href='#' className='link--secondary'>secondary link</a></p>
         <p><a href='#' className='link--deco'>Deco link</a></p>
         <p><a href='#' className='link--deco link--deco-active'>Deco link active</a></p>
 
@@ -29,8 +30,15 @@ var Elements = React.createClass({
         <hr />
 
         <div className='button-group button-group--horizontal'>
-          <button className='button button--primary-bounded button--active'>Primary</button>
+          <button className='button button--primary'>Primary</button>
           <button className='button button--primary-bounded'>Primary bounded</button>
+        </div>
+
+        <hr />
+
+        <div className='filters'>
+          <label className='heading--label'>Sort By:</label>
+          <button className='button button--medium button--secondary'>Category</button>
         </div>
 
         <hr />
@@ -39,8 +47,8 @@ var Elements = React.createClass({
           <article className='card project--ontime'>
             <div className='card__contents'>
               <header className='card__header'>
-                <p className='card__subtitle'>Category</p>
-                <h1 className='card__title'>Project Name</h1>
+                <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
+                <h1 className='card__title'><a className='link--deco' href=''>Project Name</a></h1>
 
                 <ul className='card-cmplt'>
                   <li><span>60% cmplt</span></li>
@@ -62,6 +70,54 @@ var Elements = React.createClass({
               </div>
             </div>
           </article>
+        </div>
+
+        <hr />
+
+        <fieldset className="form__fieldset">
+          <div className="form__group">
+           <label className="form__label">Checkbox options (custom)</label>
+           <label className="form__option form__option--custom-checkbox">
+             <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
+             <span className="form__option__text">Checkbox 1</span>
+             <span className="form__option__ui"></span>
+           </label>
+           <label className="form__option form__option--custom-checkbox">
+             <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
+             <span className="form__option__text">Checkbox 2</span>
+             <span className="form__option__ui"></span>
+           </label>
+           <label className="form__option form__option--custom-checkbox">
+             <input type="checkbox" name="form-checkbox" value="form-checkbox-3" />
+             <span className="form__option__text">Checkbox 3</span>
+             <span className="form__option__ui"></span>
+           </label>
+          </div>
+        </fieldset>
+
+        <fieldset className="form__fieldset">
+          <legend className="form__legend">Inputs</legend>
+             <div className="form__group">
+               <label className="form__label" for="form-input-5">Input group</label>
+               <div className="form__input-group">
+                 <input type="text" className="form__control form__control--medium" id="form-input-5" placeholder="This is a placeholder"/>
+                 <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--search-icon"><span>Button</span></button></span>
+               </div>
+             </div>
+             <div className="form__group">
+               <label className="form__label" for="form-input-6">Input group</label>
+               <div className="form__input-group">
+                 <input type="text" className="form__control form__control--medium" id="form-input-6" placeholder="Search location"/>
+                 <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--newsletter-icon"><span>Button</span></button></span>
+               </div>
+             </div>
+           </fieldset>
+
+        <div className='filters'>
+          <label className='heading--label'>Filters</label>
+          <button className='button button--small button--filter-tag'>Category</button>
+          <button className='button button--small button--filter-tag'>Project Type</button>
+          <button className='button button--xsmall button--filter-clear'>Clear Filters</button>
         </div>
 
       </div>

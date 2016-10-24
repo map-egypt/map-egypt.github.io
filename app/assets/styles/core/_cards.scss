@@ -6,8 +6,7 @@
   &__subtitle {
     margin-bottom: 0;
     font-weight: $base-font-light;
-    font-style: italic;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
   }
 
   &__title {
@@ -36,9 +35,9 @@
   border-radius: $base-border-radius;
 
   > li {
-    background: rgba($base-font-color, 0.5);
+    background: $base-color;
     width: 60%;
-    height: 0.5rem;
+    height: 0.25rem;
     border-radius: $base-border-radius;
 
     > span {
@@ -49,13 +48,6 @@
       white-space: nowrap;
       font-size: 0.75rem;
       line-height: 1;
-    }
-
-    .project--ontime & {
-      background: $success-color;
-    }
-    .project--delayed & {
-      background: $warning-color;
     }
   }
 }

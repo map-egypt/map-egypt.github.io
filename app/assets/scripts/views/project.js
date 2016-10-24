@@ -6,9 +6,198 @@ var Project = React.createClass({
 
   render: function () {
     return (
-      <div>
-        <h1>Project</h1>
-      </div>
+      <section className='inpage'>
+        <header className='inpage__header'>
+          <div className='inner'>
+            <div className='inpage__headline'>
+             <div className='inpage__headline-actions'>
+              <ul>
+             	  <li><button className='button button--medium button--primary'>Download</button></li>
+             	  <li><button className='button button--medium button--primary'>Share</button></li>
+              </ul>
+              </div>
+              <p className='inpage__subtitle'><a className='link--secondary' href=''>Category</a></p>
+              <h1 className='inpage__title heading--deco heading--large'>Project Name</h1>
+              <dl className='inpage-meta project--ontime'>
+                <dt className='inpage-meta__label--status'>Status</dt>
+                <dd className='inpage-meta__value inpage-meta__value--status'>On time</dd>
+                <dt className='inpage-meta__label'>Last Update: </dt>
+                <dd className='inpage-meta__value'> Jun. 30, 2016</dd>
+              </dl>
+            </div>
+          </div>
+        </header>
+        <div className='inpage__body'>
+        	<div className='inner'>
+            <section className='inpage__section inpage__section--overview'>
+              <div className='inpage__col--map'>
+              </div>
+              <div className='inpage__col--content'>
+                <ul className='inpage-stats'>
+                  <li>$50M <small>funding</small></li>
+                  <li>20,000 <small>households</small></li>
+                </ul>
+                <ul className='inpage__overview-links'>
+                  <li><span className='light'>Obejctive</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
+                  <li><span className='light'>Location</span><a href='' className='link--primary'>Name of Location</a></li>
+                  <li><span className='light'>Project Link </span><a href='' className='link--primary'>Name of Source</a></li>
+                  <li><span className='light'>Responsible Party </span><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
+                  <li><span className='light'>Responsible Ministry Department</span><a href='' className='link--primary'>Name of Ministry Department</a></li>
+                  <li><span className='light'>SDG Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
+                  <li><span className='light'>SDS Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
+                </ul>
+              </div>
+            </section>
+            <section className='inpage__section inpage__section--charts'>
+            </section>
+            <section className='inpage__section inpage__section--indicators'>
+              <h2 className='inpage__section--title'>Monitoring Indicators</h2>
+              <table className='inpage__table'>
+                <thead>
+                  <tr>
+                    <th className='row-name'>Name and Description</th>
+                    <th className='row-kpi'>KPI</th>
+                    <th className='row-target'>Target</th>
+                    <th className='row-date'>Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td className='project--ontime'>
+                      <p className='card-meta__value--status activity-name'>Activity Name</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
+                    </td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                    <td>02/20/16</td>
+                  </tr>
+                  <tr>
+                    <td className='project--ontime'>
+                      <p className='card-meta__value--status activity-name'>Activity Name</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
+                    </td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                    <td>02/20/16</td>
+                  </tr>
+                  <tr>
+                    <td className='project--ontime'>
+                      <p className='card-meta__value--status activity-name'>Activity Name</p>
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
+                    </td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                    <td>02/20/16</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+            <section className='inpage__section inpage__section--comparison'>
+              <h2 className='inpage__section--title'>Project Comparison By Cateogry</h2>
+            </section>
+        	</div>
+          <section className='inpage__section--related'>
+            <div className='inner'>
+              <h2 className='inpage__section--related--title'>Related Projects By SDS Goal</h2>
+              <ul className='related-projects'>
+                <li className='related-projects-card'>
+                  <div>
+                    <article className='card project--ontime'>
+                      <div className='card__contents'>
+                        <header className='card__header'>
+                          <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
+                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
+  
+                          <ul className='card-cmplt'>
+                            <li><span>60% cmplt</span></li>
+                          </ul>
+                        </header>
+                        <div className='card__body'>
+                          <dl className='card-meta'>
+                            <dt className='card-meta__label'>Status</dt>
+                            <dd className='card-meta__value card-meta__value--status'>On time</dd>
+                            <dt className='card-meta__label'>Location</dt>
+                            <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
+                          </dl>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
+  
+                          <ul className='card-stats'>
+                            <li>$50M <small>funding</small></li>
+                            <li>20,000 <small>households</small></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </li>
+
+                <li className='related-projects-card'>
+                  <div>
+                    <article className='card project--ontime'>
+                      <div className='card__contents'>
+                        <header className='card__header'>
+                          <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
+                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
+  
+                          <ul className='card-cmplt'>
+                            <li><span>60% cmplt</span></li>
+                          </ul>
+                        </header>
+                        <div className='card__body'>
+                          <dl className='card-meta'>
+                            <dt className='card-meta__label'>Status</dt>
+                            <dd className='card-meta__value card-meta__value--status'>On time</dd>
+                            <dt className='card-meta__label'>Location</dt>
+                            <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
+                          </dl>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
+  
+                          <ul className='card-stats'>
+                            <li>$50M <small>funding</small></li>
+                            <li>20,000 <small>households</small></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </li>
+
+                <li className='related-projects-card'>
+                  <div>
+                    <article className='card project--ontime'>
+                      <div className='card__contents'>
+                        <header className='card__header'>
+                          <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
+                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
+  
+                          <ul className='card-cmplt'>
+                            <li><span>60% cmplt</span></li>
+                          </ul>
+                        </header>
+                        <div className='card__body'>
+                          <dl className='card-meta'>
+                            <dt className='card-meta__label'>Status</dt>
+                            <dd className='card-meta__value card-meta__value--status'>On time</dd>
+                            <dt className='card-meta__label'>Location</dt>
+                            <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
+                          </dl>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
+  
+                          <ul className='card-stats'>
+                            <li>$50M <small>funding</small></li>
+                            <li>20,000 <small>households</small></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+          </section>
+        </div>
+      </section>
     );
   }
 });

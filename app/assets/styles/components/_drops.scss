@@ -10,7 +10,7 @@
 .drop__toggle {
   &--caret {
     &:after {
-      // @extend %collecticons-sm-chevron-down;
+      @extend %collecticon-sm-chevron-down;
       font-size: 1rem;
       line-height: inherit;
       vertical-align: top;
