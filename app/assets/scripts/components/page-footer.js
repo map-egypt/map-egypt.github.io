@@ -23,9 +23,9 @@ var PageFooter = React.createClass({
           </div>
           <div className='logos'>
             <ul className='logos__list'>
-              <li><a className='logos__item' target='_blank' href=''><img src='assets/graphics/content/iflri.png' alt='View sponsor website'/></a></li>
-              <li><a className='logos__item' target='_blank' href=''><img src='assets/graphics/content/malr.png' alt='View sponsor website'/></a></li>
-              <li><a className='logos__item' target='_blank' href=''><img width='150px' src='assets/graphics/content/usaid.jpg' alt='View sponsor website'/></a></li>
+              <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href=''><img src='assets/graphics/content/iflri.png' alt='View sponsor website'/></a></li>
+              <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href=''><img src='assets/graphics/content/malr.png' alt='View sponsor website'/></a></li>
+              <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href=''><img width='150px' src='assets/graphics/content/usaid.jpg' alt='View sponsor website'/></a></li>
             </ul>
           </div>
         </div>

@@ -21,7 +21,7 @@ var Home = React.createClass({
             <h1 className='inpage__title--home heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
             <div className='inpage__introduction--home'>
               <p className='description--home'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
-              <button className='button button--primary button--large'>Learn More</button>
+              <button type='button' className='button button--primary button--large'>Learn More</button>
             </div>
           </div>
         </header>
@@ -36,26 +36,26 @@ var Home = React.createClass({
                 <div className='stats--home'>
                   <ul className='category-reductions'>
                     <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
                   </ul>
                   <ul className='category-reductions'>
                     <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
                   </ul>
                   <ul className='category-reductions'>
                     <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
-                    <li><a href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
                   </ul>
                 </div>
               </div>
               <div className='inpage__section--footer'>
-                <button className='button button--primary button--large'>View All Projects</button>
+                <button type='button' className='button button--primary button--large'>View All Projects</button>
               </div>
             </section>
           </div>
@@ -63,8 +63,8 @@ var Home = React.createClass({
             <h2 className='inpage__section--title'>Other Progress Indicators</h2>
             <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
             <ul className='inpage__section--footer'>
-              <li><button className='button button--primary button--large'>SDS Indicators</button></li>
-              <li><button className='button button--primary button--large'>SDG Indicators</button></li>
+              <li><button type='button' className='button button--primary button--large'>SDS Indicators</button></li>
+              <li><button type='button' className='button button--primary button--large'>SDG Indicators</button></li>
             </ul>
           </section>
         </div>
