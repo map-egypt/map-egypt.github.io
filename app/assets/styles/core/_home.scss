@@ -1,42 +1,42 @@
 .overview--home {
-	@extend .clearfix;
+  @extend .clearfix;
 }
 
 .inpage {
-	&__subtitle--home {
-	font-weight: $base-font-light;
-	letter-spacing: $global-spacing/4;
-	margin-bottom: 0;
-	}	
+  &__subtitle--home {
+  font-weight: $base-font-light;
+  letter-spacing: $global-spacing/4;
+  margin-bottom: 0;
+  } 
 }
 
 .description--home {
-	@include media(medium-up) {
-		@include col(7/12);
-	}
-	@include col(12/12);
+  @include media(medium-up) {
+    @include col(7/12);
+  }
+  @include col(12/12);
 }
 
 .category-reductions {
-	list-style: none;
-	@include col(12/12);
-	box-shadow: inset 0 -1px 0 0 $tertiary-color;
-	padding-bottom: $global-spacing;
-	@include media(medium-up) {
-		margin-top: $global-spacing * 2;
-		@include col(3/12, $offset: 1/12);
-		box-shadow: inset -1px 0 0 $tertiary-color;
-	}
-	&:last-child {
-		box-shadow: none;
-	};
-	li {
-		margin-bottom: $global-spacing/2;
-	}
+  list-style: none;
+  @include col(12/12);
+  box-shadow: inset 0 -1px 0 0 $tertiary-color;
+  padding-bottom: $global-spacing;
+  @include media(medium-up) {
+    margin-top: $global-spacing * 2;
+    @include col(3/12, $offset: 1/12);
+    box-shadow: inset -1px 0 0 $tertiary-color;
+  }
+  &:last-child {
+    box-shadow: none;
+  };
+  li {
+    margin-bottom: $global-spacing/2;
+  }
 }
 
 .stats--home{
-	@extend .clearfix;
-	padding-bottom: $global-spacing;
-	box-shadow: inset 0 -1px 0 0 $tertiary-color;
+  @extend .clearfix;
+  padding-bottom: $global-spacing;
+  box-shadow: inset 0 -1px 0 0 $tertiary-color;
 }
