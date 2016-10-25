@@ -18,7 +18,7 @@
     }
   }
 
-	&__headline-actions {
+  &__headline-actions {
     float: none;
     margin-bottom: $global-spacing;
     @include media(medium-up){
@@ -34,31 +34,31 @@
         float: left;
         margin-right: 0.5rem;
         margin-bottom: 0.5rem;
-       	 &:last-child {
-        	margin-right: 0rem;
-        	};
+         &:last-child {
+          margin-right: 0rem;
+          };
         @include media(medium-up) {
           margin-bottom: 0;
         }
-    	}
-  	}
-	}
+      }
+    }
+  }
 
-	&__section {
-		background-color: #fff;
-		@include col(12/12);
-		margin-bottom: $global-spacing * 2;
-		padding: $global-spacing * 2;
-		box-shadow: inset 0 0 0 1px $tertiary-color;
-		&:first-child {
-			margin-top: $global-spacing * 4;
-		};
+  &__section {
+    background-color: #fff;
+    @include col(12/12);
+    margin-bottom: $global-spacing * 2;
+    padding: $global-spacing * 2;
+    box-shadow: inset 0 0 0 1px $tertiary-color;
+    &:first-child {
+      margin-top: $global-spacing * 4;
+    };
     &:last-child {
       margin-bottom: $global-spacing * 4;
     };
-		&--title {
-			text-align: center;
-		}
+    &--title {
+      text-align: center;
+    }
     &--footer {
       text-align: center;
       width: 100%;
@@ -69,13 +69,13 @@
         };
       }
     };
-	}
+  }
 
-	&__section--related {
-		@include col(12/12);
-		background-color: #fff;
-		padding: $global-spacing * 2 0;
-		.related-projects-card {
+  &__section--related {
+    @include col(12/12);
+    background-color: #fff;
+    padding: $global-spacing * 2 0;
+    .related-projects-card {
       list-style: none;
       padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
       display: inline-block;
@@ -85,17 +85,17 @@
         min-width: 15rem;
       }
       
-		}
-	}
+    }
+  }
 
   &__section--related--title {
     text-align: center;
   }
 
-	&__table {
-		table-layout: fixed;
-		margin: ($global-spacing * 2) 0;
-		position: relative;
+  &__table {
+    table-layout: fixed;
+    margin: ($global-spacing * 2) 0;
+    position: relative;
     @include media(medium-down) {
       display: block; 
     }
@@ -106,8 +106,8 @@
       }
     }
 
-		thead {
-			box-shadow: inset 0 -1px 0 0 $tertiary-color;
+    thead {
+      box-shadow: inset 0 -1px 0 0 $tertiary-color;
       @include media(medium-down) {
       display: block; 
       }
@@ -121,23 +121,23 @@
       }
     }
 
-		th {
-			color: $base-color;
-			font-weight: $base-font-light;
-			text-align: left;
-			text-transform: uppercase;
-			font-size: 0.875rem;
-			padding-bottom: $global-spacing;
+    th {
+      color: $base-color;
+      font-weight: $base-font-light;
+      text-align: left;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      padding-bottom: $global-spacing;
       @include media(medium-down) {
         display: block; 
       }
-		}
+    }
 
-		td {
-			font-size: 0.75rem;
+    td {
+      font-size: 0.75rem;
       position: relative;
-			font-weight: $base-font-regular;
-			padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
+      font-weight: $base-font-regular;
+      padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
 
       @include media(medium-down) {
         display: block; 
@@ -148,18 +148,18 @@
         };
       }
 
-			.activity-name {
-				color: $base-color;
-				font-weight: $base-font-bold;
-				margin-bottom: 0;
+      .activity-name {
+        color: $base-color;
+        font-weight: $base-font-bold;
+        margin-bottom: 0;
         position: absolute;
         top: $global-spacing;
         @include media(medium-down) {
           position: relative;
           top: 0;
         }
-			}
-		}
+      }
+    }
 
     td:before { 
     @include media(medium-down) {
@@ -199,10 +199,10 @@
       }
     }
 
-		.row-name {
-			width: 35%;
-		}
-	}
+    .row-name {
+      width: 35%;
+    }
+  }
 }
 
 .inpage-meta {
@@ -219,11 +219,11 @@
 
   &__label {
     text-transform: capitalize;
-		font-size: 0.75rem;
-		font-weight: $base-font-regular;
-		float: left;
-		line-height: 1rem;
-		margin-right: $global-spacing/2;
+    font-size: 0.75rem;
+    font-weight: $base-font-regular;
+    float: left;
+    line-height: 1rem;
+    margin-right: $global-spacing/2;
   }
 
   &__value {
@@ -259,24 +259,24 @@
 }
 
 .inpage__body {
-	background-color: $background-color;
+  background-color: $background-color;
 }
 
 .inpage__section--overview {
 
-	.inpage__col--map {
+  .inpage__col--map {
       @include col(12/12);
     @include media(medium-up) {
       @include col(5/12);
     }
-	}
+  }
 
-	.inpage__col--content {
+  .inpage__col--content {
     @include col(12/12);
     @include media(medium-up) {
       @include col(7/12);
     }
-	}
+  }
 }
 
 
@@ -317,31 +317,31 @@
 }
 
 .inpage__overview-links {
-	border-top: solid 1px $tertiary-color;
-	li {
-		font-size: 0.875rem;
-		float: left;
-		list-style: none;
-		padding-top: 1rem;
+  border-top: solid 1px $tertiary-color;
+  li {
+    font-size: 0.875rem;
+    float: left;
+    list-style: none;
+    padding-top: 1rem;
     @include col(12/12);
     @include media(medium-up) {
       @include col(5/12);
     }
-		
-		a {
+    
+    a {
       float: left;
       clear: left;
-			padding-top: $global-spacing/2
-		}
-		&:first-child {
-			@include col(12/12);
-		}
-		.light {
-			display: block;
-			color: $base-color;
-			font-weight: $base-font-light;
-			text-transform: uppercase;
-			margin-top: $global-spacing;
-		}
-	}
+      padding-top: $global-spacing/2
+    }
+    &:first-child {
+      @include col(12/12);
+    }
+    .light {
+      display: block;
+      color: $base-color;
+      font-weight: $base-font-light;
+      text-transform: uppercase;
+      margin-top: $global-spacing;
+    }
+  }
 }

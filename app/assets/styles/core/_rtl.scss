@@ -1,0 +1,221 @@
+.lang--rtl {
+  
+  body {
+    direction: rtl;
+    text-align: right;
+  }
+  
+  .page__headline {
+    float: right;
+    padding-right: 0;
+  }
+  
+  .page__title {
+    box-shadow: inset 1px 0 0 $tertiary-color;
+    padding-left: $global-spacing;
+    height: 100%;
+  }
+  
+  
+  .browse-menu {
+    float: right;
+     > li:first-child {
+      margin-right: $global-spacing;
+    };
+  }
+  
+  .utilities-menu {
+    float: left;
+    > li {
+      &:last-child {
+        margin-right: $global-spacing;
+      };
+    }
+  }
+  
+  .inpage {
+  
+    &__headline-actions {
+      float: left;
+    }
+    &-meta__value {
+      float: right;
+      &--status {
+        margin-right: 0rem; 
+        box-shadow: -1px 0 0 #2B2342;
+        &:before {
+          right: 0;
+        };
+      }
+    }
+    &-meta__label {
+      float: right;
+      margin-left: $global-spacing/2;
+    }
+    &-stats li {
+      float: right;
+      box-shadow: -1px 0 0 #E9E9E9;
+      padding-left: 2rem;
+      margin-left: 2rem;
+      margin-right: 0;
+      padding-right: 0;
+      @include media(medium-up) {
+        padding-left: 4rem;
+        margin-left: 4rem;
+        padding-right: 0;
+        margin-right: 0;
+      }
+    }
+    &__table {
+      th {
+      text-align: right
+      }
+      td {
+        padding-right: 0;
+        padding-left: $global-spacing * 2;
+      }
+    }
+  }
+  
+  .inpage__table td:nth-of-type(n):before {
+    right: 0;
+  }
+  
+  .inpage__section--overview {
+    .inpage__col--content {
+      @include media(medium-up){
+        float: right;
+      }
+    }
+  
+    .inpage__col--map {
+      @include media(medium-up){
+        float: left;
+      }
+    }
+  
+  }
+  
+  .heading--deco::after {
+    right: 0;
+  }
+  
+  .inpage__overview-links li {
+    @include media (medium-up) {
+      float: right;
+      margin-right: 0;
+    }
+  }
+  
+  .inpage__overview-links li a {
+    float: right;
+    clear: right;
+  }
+  
+  /*FOOTER*/
+  
+  .page__footer {
+    .updates {
+      @include media(medium-up) {
+        float: right;
+      }
+  
+    .form__input-group {
+      float: right;
+      }
+    }
+  
+    .form__input-group-button:last-child > .button {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+      border-top-left-radius: $base-border-radius;
+      border-bottom-left-radius: $base-border-radius;
+    }
+  
+    .form__input-group .form__control:first-child {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      border-top-right-radius: $base-border-radius;
+      border-bottom-right-radius: $base-border-radius;
+    }
+  
+    .logos {
+      @include media(medium-up) {
+        float: left;
+      }
+    }
+  }
+  
+  /*CARDS*/
+  
+  .card-body {
+    p {
+      float: right;
+    }
+  }
+  
+  .card-meta__value--status {
+    margin-left: 1rem;
+    padding-right: 0.75rem;
+    margin-right: 0;
+    padding-left: 0;
+  }
+  
+  .card-meta__value--status:before {
+    right: 0;
+  }
+  
+  .card-meta {
+    &__value {
+      float: right;
+    }
+  }
+  
+  .card-cmplt > li > span {
+    right: 100%;
+    left: 0;
+    margin-right: $global-spacing/2;
+    margin-left: 0;
+  }
+  
+  .card-stats li {
+    float: right;
+    box-shadow: -1px 0 0 #9B9B9B;
+    padding-left: 1rem;
+    margin-left: 1rem;
+    padding-right: 0rem; 
+    margin-right: 0rem; 
+  }
+  
+  .inpage__section--related .related-projects-card {
+    float: right;
+    padding: 2rem 0 2rem 2rem;
+  }
+  
+  /*homepage specific */
+  
+  .description--home {
+    float: right;
+    margin-right: 0;
+    margin-left: 3%;
+  }
+  
+  .category-reductions {
+    box-shadow: inset 0 1px 0 0 $tertiary-color;
+    @include media(medium-up) {
+      @include col(3/12, $offset: -(0.75/12));
+      box-shadow: inset 1px 0 0 $tertiary-color;
+      &:last-child {
+        box-shadow: inset 1px 0 0 $tertiary-color;
+      };
+    }
+    &:first-child {
+      box-shadow: none;
+    };
+  }
+  
+  .inpage__section--footer li:first-child {
+    margin-left: 1rem;
+  }
+
+}
