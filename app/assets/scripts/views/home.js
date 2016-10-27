@@ -20,7 +20,7 @@ var Home = React.createClass({
             <p className='inpage__subtitle--home'>tracking egypt</p>
             <h1 className='inpage__title--home heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
             <div className='inpage__introduction--home'>
-              <p className='description--home'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+              <p className='inpage__description--header'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
               <button type='button' className='button button--primary button--large'>Learn More</button>
             </div>
           </div>

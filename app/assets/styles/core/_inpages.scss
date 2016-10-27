@@ -18,6 +18,34 @@
     }
   }
 
+  &__description--header {
+    @include media(medium-up) {
+      @include col(7/12);
+    }
+    @include col(12/12);
+  }
+
+  &__project-actions {
+    margin-top: $global-spacing * 2;
+    @include col(12/12);
+    .map-actions{
+      @include col(8/12);
+    }
+    .map-toggle-container {
+      @include col(4/12);
+      .map-toggle {
+        float: right;
+      }
+    }
+    .map-filter-tags {
+      width: auto;
+    }
+  }
+
+  &__headline {
+    @extend .clearfix;
+  }
+
   &__headline-actions {
     float: none;
     margin-bottom: $global-spacing;
@@ -343,5 +371,17 @@
       text-transform: uppercase;
       margin-top: $global-spacing;
     }
+  }
+}
+
+.button--list {
+  li {
+    display: inline-block;
+    &:first-child {
+      margin-bottom: $global-spacing/2;
+       @include media(medium-up) {
+        margin-right: $global-spacing;
+      }   
+    };
   }
 }

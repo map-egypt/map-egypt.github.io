@@ -10,13 +10,6 @@
   } 
 }
 
-.description--home {
-  @include media(medium-up) {
-    @include col(7/12);
-  }
-  @include col(12/12);
-}
-
 .category-reductions {
   list-style: none;
   @include col(12/12);
