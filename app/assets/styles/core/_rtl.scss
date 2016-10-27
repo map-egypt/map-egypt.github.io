@@ -218,4 +218,27 @@
     margin-left: 1rem;
   }
 
+/*project browse*/
+.map-actions {
+  float: right;
+  margin-right: 0;
+}
+
+.button--list li{ 
+  &:first-child {
+    @include media(medium-up) { 
+     margin-left: 1rem;
+     margin-right: 0;
+    }
+  }
+} 
+
+
+.map-toggle-container {
+  float: left;
+  .map-toggle {
+    float: left;
+  }
+}
+
 }
