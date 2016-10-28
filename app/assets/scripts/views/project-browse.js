@@ -20,7 +20,7 @@ var ProjectBrowse = React.createClass({
             </div>
             <div className='inpage__project-actions'>
               <ul className='button--list map-actions'>
-                <li><button type='button' className='button button--medium button--primary'>Add Indicator Overlays</button></li>
+                <li><button type='button' className='button button--medium button--primary drop__toggle--caret'>Add Indicator Overlays</button></li>
                 <li><button type='button' className='button button--medium button--primary'>Add & Filter Projects</button></li>
               </ul>
               <div className='map-toggle-container'>
@@ -46,7 +46,13 @@ var ProjectBrowse = React.createClass({
               <h2 className='inpage__section--title'>Selected SDG Indicators</h2>
             </section>
             <section className='inpage__section'>
-              <h2 className='inpage__section--title'>Projects</h2>
+              <div className='inpage__section-navigation'>
+                <h2 className='inpage__section--title-aligned'>Projects</h2>
+                <div className='filters'>
+                  <label className='heading--label'>Sort By:</label>
+                  <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
+                </div>
+              </div>
             </section>
           </div>
         </div>

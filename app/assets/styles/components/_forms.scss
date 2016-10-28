@@ -369,8 +369,7 @@ label[for] {
 }
 
 .button--newsletter-icon:before {
-  @extend %collecticon;
-  content: "\EA03"
+  @extend %collecticon-envelope;
 }
 
 /* Form misc

@@ -12,7 +12,7 @@ var Project = React.createClass({
             <div className='inpage__headline'>
              <div className='inpage__headline-actions'>
               <ul>
-             	  <li><button className='button button--medium button--primary'>Download</button></li>
+             	  <li><button className='button button--medium button--primary button--download'>Download</button></li>
              	  <li><button className='button button--medium button--primary'>Share</button></li>
               </ul>
               </div>

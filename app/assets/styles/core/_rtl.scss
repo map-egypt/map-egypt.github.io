@@ -75,6 +75,17 @@
         padding-left: $global-spacing * 2;
       }
     }
+    &__section {
+    &--title-aligned {
+      text-align: right;
+      float: right;
+     }
+    &-navigation {
+      .filters {
+        float: left;
+        }
+      }
+    }
   }
   
   .inpage__table td:nth-of-type(n):before {

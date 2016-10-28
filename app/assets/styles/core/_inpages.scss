@@ -87,6 +87,15 @@
     &--title {
       text-align: center;
     }
+    &--title-aligned {
+      text-align: left;
+      float: left;
+    }
+    &-navigation {
+      .filters {
+        float: right;
+      }
+    }
     &--footer {
       text-align: center;
       width: 100%;
@@ -96,7 +105,8 @@
           margin-right: $global-spacing;
         };
       }
-    };
+    }
+
   }
 
   &__section--related {

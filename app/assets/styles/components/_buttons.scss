@@ -263,6 +263,15 @@
   color: $base-color;
 }
 
+.button--download {
+    &:after {
+      @extend %collecticon-download;
+      font-size: 0.875rem;
+      line-height: inherit;
+      margin-left: 0.5rem;
+    }
+}
+
 
 
 //

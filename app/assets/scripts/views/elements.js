@@ -24,6 +24,8 @@ var Elements = React.createClass({
         <p><button className='button button--base'>Base</button></p>
         <p><button className='button button--primary'>Primary</button></p>
 
+        <p><button className='button button--primary drop__toggle--caret'>Primary</button></p>
+
         <p><button className='button button--base-bounded'>Base bounded</button></p>
         <p><button className='button button--primary-bounded'>Primary bounded</button></p>
 
@@ -38,7 +40,7 @@ var Elements = React.createClass({
 
         <div className='filters'>
           <label className='heading--label'>Sort By:</label>
-          <button className='button button--medium button--secondary'>Category</button>
+          <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
         </div>
 
         <hr />
