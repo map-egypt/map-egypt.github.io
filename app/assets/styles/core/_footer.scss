@@ -19,7 +19,10 @@
   }
   .form__input-group {
     @include col(8/12);
-    @include media(medium-up){
+    @include media(xsmall-only) {
+      @include col(12/12);
+    }
+    @include media(large-up){
       @include col(6/12);
     }
 
@@ -27,7 +30,8 @@
 }
 
 .logos {
-  @include media(medium-up){
+  @include col(12/12);
+  @include media(large-up){
     @include col(6/12);
   }
 }
@@ -44,11 +48,14 @@
       margin: $global-spacing 0;
       float: left;
       margin-right: $global-spacing;
-      width: 100%;
-      padding: $global-spacing 0;
+      max-width: 15rem;
+      padding: $global-spacing $global-spacing;
       &:last-child {
         margin-right:0;
       };
+      @include media(xsmall-only) {
+        @include col(12/12);
+      }
       @include media(medium-up) {
         width: auto;
         padding: $global-spacing;
