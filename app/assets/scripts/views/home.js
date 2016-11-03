@@ -36,21 +36,21 @@ var Home = React.createClass({
                 <div className='stats--home'>
                   <ul className='category-reductions'>
                     <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                   </ul>
                   <ul className='category-reductions'>
                     <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                   </ul>
                   <ul className='category-reductions'>
                     <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                   </ul>
                 </div>
               </div>

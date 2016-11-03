@@ -14,7 +14,7 @@ var Elements = React.createClass({
 
         <hr />
 
-        <p><a href='#' className='link--primary'>Primary link</a></p>
+        <p><a href='#' className='link--primary'><span>Primary link</span></a></p>
         <p><a href='#' className='link--secondary'>secondary link</a></p>
         <p><a href='#' className='link--deco'>Deco link</a></p>
         <p><a href='#' className='link--deco link--deco-active'>Deco link active</a></p>
