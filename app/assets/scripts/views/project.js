@@ -30,6 +30,7 @@ var Project = React.createClass({
         <div className='inpage__body'>
         	<div className='inner'>
             <section className='inpage__section inpage__section--overview'>
+              <h1 className='visually hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
               </div>
               <div className='inpage__col--content'>
@@ -37,21 +38,64 @@ var Project = React.createClass({
                   <li>$50M <small>funding</small></li>
                   <li>20,000 <small>households</small></li>
                 </ul>
-                <ul className='inpage__overview-links'>
-                  <li><span className='light'>Obejctive</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
-                  <li><span className='light'>Location</span><a href='' className='link--primary'>Name of Location</a></li>
-                  <li><span className='light'>Project Link </span><a href='' className='link--primary'>Name of Source</a></li>
-                  <li><span className='light'>Responsible Party </span><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
-                  <li><span className='light'>Responsible Ministry Department</span><a href='' className='link--primary'>Name of Ministry Department</a></li>
-                  <li><span className='light'>SDG Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
-                  <li><span className='light'>SDS Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
-                </ul>
+
+                <div className='inpage__overview-links'>
+                    <h2 className='light heading-alt'>Objective</h2>
+                    <ul>
+                      <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
+                    </ul>
+
+                <div className='overview-item'>
+                  <h1 className='light heading-alt'>Location</h1>
+                  <ul>
+                    <li><a href='' className='link--primary'><span>Name of Location</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='light heading-alt'>Project Link</h2>
+                  <ul>
+                    <li><a href='' className='link--primary'><span>Name of Source</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='light heading-alt'>Responsible Party</h2>
+                  <ul>
+                    <li><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='light heading-alt'>Responsible Party</h2>
+                  <ul>
+                    <li><a href='' className='link--primary'><span>Name of Ministry Department</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='light heading-alt'>SDG Indicator</h2>
+                  <ul>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='light heading-alt'>SDG Indicator</h2>
+                  <ul>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                  </ul>
+                </div>
+
+                </div>
               </div>
             </section>
             <section className='inpage__section inpage__section--charts'>
             </section>
             <section className='inpage__section inpage__section--indicators'>
-              <h2 className='inpage__section--title'>Monitoring Indicators</h2>
+              <h1 className='inpage__section--title heading--medium'>Monitoring Indicators</h1>
               <table className='inpage__table'>
                 <thead>
                   <tr>
@@ -93,12 +137,12 @@ var Project = React.createClass({
               </table>
             </section>
             <section className='inpage__section inpage__section--comparison'>
-              <h2 className='inpage__section--title'>Project Comparison By Cateogry</h2>
+              <h1 className='inpage__section--title heading--medium'>Project Comparison By Cateogry</h1>
             </section>
         	</div>
           <section className='inpage__section--related'>
             <div className='inner'>
-              <h2 className='inpage__section--related--title'>Related Projects By SDS Goal</h2>
+              <h1 className='inpage__section--related--title heading--medium'>Related Projects By SDS Goal</h1>
               <ul className='related-projects'>
                 <li className='related-projects-card'>
                   <div>

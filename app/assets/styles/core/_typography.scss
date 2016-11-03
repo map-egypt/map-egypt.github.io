@@ -231,10 +231,13 @@ abbr[title] {
   @include heading(1.25rem, xlarge-up);   // 20, 24, 28, 32
 }
 
-.heading--small,
-.heading--xsmall,
-.heading--xxsmall {
+.heading--small {
   @include heading(1rem, xlarge-up);      // 16, 20, 24, 28
+}
+
+.heading--xsmall, 
+.heading--xxsmall {
+  @include heading(0.875rem, xlarge-up);
 }
 
 .heading-alt {
@@ -242,6 +245,8 @@ abbr[title] {
   font-weight: $base-font-light;
   color: $base-color;
   text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 0.675rem;
 }
 
 .heading--deco {

@@ -6,61 +6,65 @@
 
 .updates {
   @include col(12/12);
+  box-shadow: inset 0 -1px 0 0 $tertiary-color;
+  padding-bottom: $global-spacing;
 
   @include media(medium-up){
     @include col(6/12);
+    box-shadow: inset 0 -1px 0 0 $tertiary-color;
   }
+
+  @include media(large-up){
+    box-shadow: none;
+  }
+
   &__title,  {
     font-family: $base-font-family;
     color: $base-color;
     margin-bottom: 0;
   }
   &__description {
-    color: $base-color;
+    color: rgba($base-color, 0.5);
   }
   .form__input-group {
-    @include col(8/12);
-    @include media(xsmall-only) {
-      @include col(12/12);
-    }
+    @include col(12/12);
     @include media(large-up){
-      @include col(6/12);
+      @include col(8/12);
     }
-
   }
 }
 
+
 .logos {
-  @include col(12/12);
+  @include media(medium-up) {
+    @include col(12/12);
+  }
   @include media(large-up){
     @include col(6/12);
   }
-}
 
-.logos {
   &__list {
     margin: 0;
-    padding: 0;
-    
+    padding: 0;    
 
     li {
+      float: left;
       list-style: none;
-/*      box-shadow: 0 0 0 2px rgba(255,255,255, 0.2);*/
       border-radius: $base-border-radius;
       margin: $global-spacing 0;
-      float: left;
       margin-right: $global-spacing;
       max-width: 15rem;
-/*      padding: $global-spacing $global-spacing;*/
-      &:last-child {
-        margin-right:0;
-      };
-      @include media(xsmall-only) {
-        @include col(12/12);
-      }
       @include media(medium-up) {
+        float: left;
         width: auto;
-        padding: $global-spacing;
+        padding-top: $global-spacing;
+      }
+
+      @include media(large-up) {
+        float: right;
+        &:first-child {
+          margin-right: 0;
+        };
       }
     }
   }
@@ -74,6 +78,9 @@
     img {
       max-height: 4rem;
       vertical-align: middle;
+      @include media(small-down) {
+        max-height: 3rem;
+      }
     }
   }
 }

@@ -10,7 +10,8 @@
   }
 
   &__description {
-    @include col(12/12);
+    @include col(10/12, $offset: 1/12);
+    margin-bottom:($global-spacing * 2) ;
     text-align: center;
     @include media(medium-up) {
       @include center(600px);
@@ -367,31 +368,39 @@
 
 .inpage__overview-links {
   border-top: solid 1px $tertiary-color;
+
+  .overview-item {
+    @include col(6/12, $cycle:2);
+    @include media(small-down) {
+      @include col(12/12);
+    }
+  }
+
+  .light {
+    display: block;
+    margin-bottom: $global-spacing/2;
+    margin-top: $global-spacing;
+  }
+  ul {
+    margin: 0;
+    overflow:hidden;
+  }
+
   li {
     font-size: 0.875rem;
     float: left;
     list-style: none;
-    padding-top: 1rem;
+    padding-top: 0;
+    &:last-child {
+      margin-bottom: $global-spacing;
+    };
     @include col(12/12);
     @include media(medium-up) {
       @include col(5/12);
     }
     
-    a {
-      float: left;
-      clear: left;
-      padding-top: $global-spacing/2
-    }
-
     &:first-child {
       @include col(12/12);
-    }
-    .light {
-      display: block;
-      color: $base-color;
-      font-weight: $base-font-light;
-      text-transform: uppercase;
-      margin-top: $global-spacing;
     }
   }
 }
