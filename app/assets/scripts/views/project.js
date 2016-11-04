@@ -19,7 +19,7 @@ var Project = React.createClass({
               <p className='inpage__subtitle'><a className='link--secondary' href=''>Category</a></p>
               <h1 className='inpage__title heading--deco heading--large'>Project Name</h1>
               <dl className='inpage-meta project--ontime'>
-                <dt className='inpage-meta__label--status'>Status</dt>
+                <dt className='inpage-meta__label visually-hidden'>Status</dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>On time</dd>
                 <dt className='inpage-meta__label'>Last Update: </dt>
                 <dd className='inpage-meta__value'> Jun. 30, 2016</dd>
@@ -30,7 +30,7 @@ var Project = React.createClass({
         <div className='inpage__body'>
         	<div className='inner'>
             <section className='inpage__section inpage__section--overview'>
-              <h1 className='visually hidden'>Project Overview</h1>
+              <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
               </div>
               <div className='inpage__col--content'>
@@ -40,50 +40,50 @@ var Project = React.createClass({
                 </ul>
 
                 <div className='inpage__overview-links'>
-                    <h2 className='light heading-alt'>Objective</h2>
-                    <ul>
-                      <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
-                    </ul>
+                  <h2 className='overview-item__title heading-alt'>Objective</h2>
+                  <ul>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
+                  </ul>
 
                 <div className='overview-item'>
-                  <h1 className='light heading-alt'>Location</h1>
-                  <ul>
+                  <h1 className='overview-item__title heading-alt'>Location</h1>
+                  <ul className='link-list'>
                     <li><a href='' className='link--primary'><span>Name of Location</span></a></li>
                   </ul>
                 </div>
 
                 <div className='overview-item'>
-                  <h2 className='light heading-alt'>Project Link</h2>
-                  <ul>
+                  <h2 className='overview-item__title heading-alt'>Project Link</h2>
+                  <ul className='link-list'>
                     <li><a href='' className='link--primary'><span>Name of Source</span></a></li>
                   </ul>
                 </div>
 
                 <div className='overview-item'>
-                  <h2 className='light heading-alt'>Responsible Party</h2>
-                  <ul>
+                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
+                  <ul className='link-list'>
                     <li><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
                   </ul>
                 </div>
 
                 <div className='overview-item'>
-                  <h2 className='light heading-alt'>Responsible Party</h2>
-                  <ul>
+                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
+                  <ul className='link-list'>
                     <li><a href='' className='link--primary'><span>Name of Ministry Department</span></a></li>
                   </ul>
                 </div>
 
                 <div className='overview-item'>
-                  <h2 className='light heading-alt'>SDG Indicator</h2>
-                  <ul>
+                  <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
+                  <ul className='link-list'>
                     <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
                     <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
                   </ul>
                 </div>
 
                 <div className='overview-item'>
-                  <h2 className='light heading-alt'>SDG Indicator</h2>
-                  <ul>
+                  <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
+                  <ul className='link-list'>
                     <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
                     <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
                   </ul>

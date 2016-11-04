@@ -381,7 +381,7 @@
     }
   }
 
-  .light {
+.overview-item__title {
     display: block;
     margin-bottom: $global-spacing/2;
     margin-top: $global-spacing;
@@ -423,5 +423,6 @@
 .link-list {
   li {
     list-style: none;
+    margin-bottom: $global-spacing/4;
   }
 }
