@@ -100,14 +100,14 @@ var Elements = React.createClass({
         <fieldset className="form__fieldset">
           <legend className="form__legend">Inputs</legend>
              <div className="form__group">
-               <label className="form__label" for="form-input-5">Input group</label>
+               <label className="form__label" htmlFor="form-input-5">Input group</label>
                <div className="form__input-group">
                  <input type="text" className="form__control form__control--medium" id="form-input-5" placeholder="This is a placeholder"/>
                  <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--search-icon"><span>Button</span></button></span>
                </div>
              </div>
              <div className="form__group">
-               <label className="form__label" for="form-input-6">Input group</label>
+               <label className="form__label" htmlFor="form-input-6">Input group</label>
                <div className="form__input-group">
                  <input type="text" className="form__control form__control--medium" id="form-input-6" placeholder="Search location"/>
                  <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--newsletter-icon"><span>Button</span></button></span>

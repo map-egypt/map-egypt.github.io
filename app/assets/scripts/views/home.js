@@ -1,9 +1,9 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 
-import { t } from '../utils/i18n';
+// import { t } from '../utils/i18n';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -62,7 +62,7 @@ var Home = React.createClass({
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                     </ul>
                   </li>
-                </ul>                
+                </ul>
               </div>
               <div className='section__footer'>
                 <button type='button' className='button button--primary button--large'>View All Projects</button>

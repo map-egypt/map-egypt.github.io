@@ -12,8 +12,8 @@ var Project = React.createClass({
             <div className='inpage__headline'>
              <div className='inpage__headline-actions'>
               <ul>
-             	  <li><button className='button button--medium button--primary button--download'>Download</button></li>
-             	  <li><button className='button button--medium button--primary'>Share</button></li>
+                <li><button className='button button--medium button--primary button--download'>Download</button></li>
+                <li><button className='button button--medium button--primary'>Share</button></li>
               </ul>
               </div>
               <p className='inpage__subtitle'><a className='link--secondary' href=''>Category</a></p>
@@ -28,7 +28,7 @@ var Project = React.createClass({
           </div>
         </header>
         <div className='inpage__body'>
-        	<div className='inner'>
+          <div className='inner'>
             <section className='inpage__section inpage__section--overview'>
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
@@ -139,7 +139,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--medium'>Project Comparison By Cateogry</h1>
             </section>
-        	</div>
+          </div>
           <section className='inpage__section--bleed'>
             <div className='inner'>
               <h1 className='section__title heading--medium'>Related Projects By SDS Goal</h1>
@@ -151,7 +151,7 @@ var Project = React.createClass({
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
                           <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-  
+
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
                           </ul>
@@ -164,7 +164,7 @@ var Project = React.createClass({
                             <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
                           </dl>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-  
+
                           <ul className='card-stats'>
                             <li>$50M <small>funding</small></li>
                             <li>20,000 <small>households</small></li>
@@ -182,7 +182,7 @@ var Project = React.createClass({
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
                           <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-  
+
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
                           </ul>
@@ -195,7 +195,7 @@ var Project = React.createClass({
                             <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
                           </dl>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-  
+
                           <ul className='card-stats'>
                             <li>$50M <small>funding</small></li>
                             <li>20,000 <small>households</small></li>
@@ -213,7 +213,7 @@ var Project = React.createClass({
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
                           <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-  
+
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
                           </ul>
@@ -226,7 +226,7 @@ var Project = React.createClass({
                             <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
                           </dl>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-  
+
                           <ul className='card-stats'>
                             <li>$50M <small>funding</small></li>
                             <li>20,000 <small>households</small></li>
