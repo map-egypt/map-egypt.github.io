@@ -95,7 +95,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--charts'>
             </section>
             <section className='inpage__section inpage__section--indicators'>
-              <h1 className='inpage__section--title heading--medium'>Monitoring Indicators</h1>
+              <h1 className='section__title heading--medium'>Monitoring Indicators</h1>
               <table className='inpage__table'>
                 <thead>
                   <tr>
@@ -137,12 +137,12 @@ var Project = React.createClass({
               </table>
             </section>
             <section className='inpage__section inpage__section--comparison'>
-              <h1 className='inpage__section--title heading--medium'>Project Comparison By Cateogry</h1>
+              <h1 className='section__title heading--medium'>Project Comparison By Cateogry</h1>
             </section>
         	</div>
-          <section className='inpage__section--related'>
+          <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h1 className='inpage__section--related--title heading--medium'>Related Projects By SDS Goal</h1>
+              <h1 className='section__title heading--medium'>Related Projects By SDS Goal</h1>
               <ul className='related-projects'>
                 <li className='related-projects-card'>
                   <div>
