@@ -1,9 +1,9 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 
-import { t } from '../utils/i18n';
+// import { t } from '../utils/i18n';
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -17,10 +17,10 @@ var Home = React.createClass({
       <section className='inpage'>
         <header className='inpage__header'>
           <div className='inner'>
-            <p className='inpage__subtitle--home'>tracking egypt</p>
-            <h1 className='inpage__title--home heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
-            <div className='inpage__introduction--home'>
-              <p className='description--home'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+            <p className='inpage__subtitle--alt'>tracking egypt</p>
+            <h1 className='inpage__title heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
+            <div className='inpage__introduction'>
+              <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
               <button type='button' className='button button--primary button--large'>Learn More</button>
             </div>
           </div>
@@ -28,41 +28,51 @@ var Home = React.createClass({
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
-              <div className='map--home'>
+              <div className='map-home'>
               </div>
-              <div className='overview--home'>
-                <h2 className='inpage__section--title'>Overview of Agricultural Projects</h2>
-                <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
-                <div className='stats--home'>
-                  <ul className='category-reductions'>
-                    <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                  </ul>
-                  <ul className='category-reductions'>
-                    <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                  </ul>
-                  <ul className='category-reductions'>
-                    <li className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                    <li><a title='Visit project webpage' href='' className='link--primary'>Project Name</a></li>
-                  </ul>
-                </div>
+              <div className='overview-home'>
+                <h2 className='section__title'>Overview of Agricultural Projects</h2>
+                <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+                <ul className='category-stats'>
+                  <li className='category-stats__item'>
+                    <h3 className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></h3>
+                    <ul className='link-list'>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className='category-stats'>
+                  <li className='category-stats__item'>
+                    <h3 className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></h3>
+                    <ul className='link-list'>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
+                <ul className='category-stats'>
+                  <li className='category-stats__item'>
+                    <h3 className='inpage-stats heading--deco'>20%<small>reduction in poverty</small></h3>
+                    <ul className='link-list'>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
+                    </ul>
+                  </li>
+                </ul>
               </div>
-              <div className='inpage__section--footer'>
+              <div className='section__footer'>
                 <button type='button' className='button button--primary button--large'>View All Projects</button>
               </div>
             </section>
           </div>
-          <section className='inpage__section--related'>
-            <h2 className='inpage__section--title'>Other Progress Indicators</h2>
-            <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
-            <ul className='inpage__section--footer'>
+          <section className='inpage__section--bleed'>
+            <h2 className='section__title'>Other Progress Indicators</h2>
+            <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+            <ul className='section__footer'>
               <li><button type='button' className='button button--primary button--large'>SDS Indicators</button></li>
               <li><button type='button' className='button button--primary button--large'>SDG Indicators</button></li>
             </ul>

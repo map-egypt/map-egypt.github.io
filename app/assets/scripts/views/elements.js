@@ -14,7 +14,7 @@ var Elements = React.createClass({
 
         <hr />
 
-        <p><a href='#' className='link--primary'>Primary link</a></p>
+        <p><a href='#' className='link--primary'><span>Primary link</span></a></p>
         <p><a href='#' className='link--secondary'>secondary link</a></p>
         <p><a href='#' className='link--deco'>Deco link</a></p>
         <p><a href='#' className='link--deco link--deco-active'>Deco link active</a></p>
@@ -23,6 +23,8 @@ var Elements = React.createClass({
 
         <p><button className='button button--base'>Base</button></p>
         <p><button className='button button--primary'>Primary</button></p>
+
+        <p><button className='button button--primary drop__toggle--caret'>Primary</button></p>
 
         <p><button className='button button--base-bounded'>Base bounded</button></p>
         <p><button className='button button--primary-bounded'>Primary bounded</button></p>
@@ -38,7 +40,7 @@ var Elements = React.createClass({
 
         <div className='filters'>
           <label className='heading--label'>Sort By:</label>
-          <button className='button button--medium button--secondary'>Category</button>
+          <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
         </div>
 
         <hr />
@@ -98,14 +100,14 @@ var Elements = React.createClass({
         <fieldset className="form__fieldset">
           <legend className="form__legend">Inputs</legend>
              <div className="form__group">
-               <label className="form__label" for="form-input-5">Input group</label>
+               <label className="form__label" htmlFor="form-input-5">Input group</label>
                <div className="form__input-group">
                  <input type="text" className="form__control form__control--medium" id="form-input-5" placeholder="This is a placeholder"/>
                  <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--search-icon"><span>Button</span></button></span>
                </div>
              </div>
              <div className="form__group">
-               <label className="form__label" for="form-input-6">Input group</label>
+               <label className="form__label" htmlFor="form-input-6">Input group</label>
                <div className="form__input-group">
                  <input type="text" className="form__control form__control--medium" id="form-input-6" placeholder="Search location"/>
                  <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--newsletter-icon"><span>Button</span></button></span>

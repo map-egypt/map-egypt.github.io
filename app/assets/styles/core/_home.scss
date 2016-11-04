@@ -3,28 +3,21 @@
 }
 
 .inpage {
-  &__subtitle--home {
+  &__subtitle--alt {
   font-weight: $base-font-light;
   letter-spacing: $global-spacing/4;
   margin-bottom: 0;
   } 
 }
 
-.description--home {
-  @include media(medium-up) {
-    @include col(7/12);
-  }
-  @include col(12/12);
-}
-
-.category-reductions {
+.category-stats {
   list-style: none;
   @include col(12/12);
   box-shadow: inset 0 -1px 0 0 $tertiary-color;
   padding-bottom: $global-spacing;
   @include media(medium-up) {
     margin-top: $global-spacing * 2;
-    @include col(3/12, $offset: 1/12);
+    @include col(3/12, $offset: 0.8/12);
     box-shadow: inset -1px 0 0 $tertiary-color;
   }
   &:last-child {
@@ -33,10 +26,4 @@
   li {
     margin-bottom: $global-spacing/2;
   }
-}
-
-.stats--home{
-  @extend .clearfix;
-  padding-bottom: $global-spacing;
-  box-shadow: inset 0 -1px 0 0 $tertiary-color;
 }

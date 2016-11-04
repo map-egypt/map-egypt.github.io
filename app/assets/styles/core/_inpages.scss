@@ -2,6 +2,9 @@
 
   &__header {
     padding: ($global-spacing * 4) 0;
+    @include media(xsmall-only) {
+      padding-bottom: $global-spacing;
+    }
   }
 
   &__subtitle {
@@ -10,12 +13,14 @@
   }
 
   &__description {
-    @include col(12/12);
-    text-align: center;
     @include media(medium-up) {
-      @include center(600px);
-      text-align: center;
+      @include col(7/12);
     }
+    @include col(12/12);
+  }
+
+  &__headline {
+    @extend .clearfix;
   }
 
   &__headline-actions {
@@ -56,63 +61,57 @@
     &:last-child {
       margin-bottom: $global-spacing * 4;
     };
-    &--title {
-      text-align: center;
-    }
-    &--footer {
-      text-align: center;
-      width: 100%;
-      li {
-        display: inline-block;
-        &:first-child {
-          margin-right: $global-spacing;
-        };
-      }
-    };
-  }
+}
 
-  &__section--related {
+  &__section--bleed {
     @include col(12/12);
     background-color: #fff;
     padding: $global-spacing * 2 0;
+    .related-projects {
+      @extend .clearfix;
+      @include col(12/12);
+    }
     .related-projects-card {
       list-style: none;
       padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
       display: inline-block;
-      @include col(4/12); 
-      min-width: 20rem;
+      @include col(4/12, $offset: 0/12); 
+      min-width: 14rem; 
+      @include media(small-down) {
+        @include col(5.5/12);
+      }
+      @include media(xsmall-only) {
+        @include col(12/12);
+      }
       @include media(medium-up) {
-        min-width: 15rem;
+        max-width: 25rem;
+        @include col(4/12);
       }
       
     }
-  }
-
-  &__section--related--title {
-    text-align: center;
   }
 
   &__table {
     table-layout: fixed;
     margin: ($global-spacing * 2) 0;
     position: relative;
-    @include media(medium-down) {
+    @include media(small-down) {
       display: block; 
     }
 
     tbody {
-      @include media(medium-down) {
+      @include media(small-down) {
         display: block;
       }
     }
 
     thead {
       box-shadow: inset 0 -1px 0 0 $tertiary-color;
-      @include media(medium-down) {
+      @include media(small-down) {
       display: block; 
       }
       tr {
-        @include media(medium-down) {
+        @include media(small-down) {
           display: block; 
           position: absolute;
           top: -9999px;
@@ -128,7 +127,7 @@
       text-transform: uppercase;
       font-size: 0.875rem;
       padding-bottom: $global-spacing;
-      @include media(medium-down) {
+      @include media(small-down) {
         display: block; 
       }
     }
@@ -139,7 +138,7 @@
       font-weight: $base-font-regular;
       padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
 
-      @include media(medium-down) {
+      @include media(small-down) {
         display: block; 
         border: none;
         &:last-child {
@@ -154,7 +153,7 @@
         margin-bottom: 0;
         position: absolute;
         top: $global-spacing;
-        @include media(medium-down) {
+        @include media(small-down) {
           position: relative;
           top: 0;
         }
@@ -162,7 +161,7 @@
     }
 
     td:before { 
-    @include media(medium-down) {
+    @include media(small-down) {
       position: absolute;
       top: 6px;
       left: 6px;
@@ -179,28 +178,58 @@
     }
 
     td:nth-of-type(1):before { 
-      @include media(medium-down){
+      @include media(small-down){
       content: "Name and Description"; 
       }
     }
     td:nth-of-type(2):before { 
-      @include media(medium-down){
+      @include media(small-down){
       content: "KPI"; 
       }
     }
     td:nth-of-type(3):before { 
-      @include media(medium-down){
+      @include media(small-down){
       content: "Target"; 
       }
     }
     td:nth-of-type(4):before { 
-      @include media(medium-down){
+      @include media(small-down){
       content: "Date"; 
       }
     }
 
     .row-name {
       width: 35%;
+    }
+  }
+}
+
+.section {
+  &__description {
+    @include col(10/12, $offset: 1/12);
+    margin-bottom:($global-spacing * 2) ;
+    text-align: center;
+    @include media(medium-up) {
+      @include center(600px);
+      text-align: center;
+    }
+  }
+  &__title {
+    text-align: center;
+  }
+  &__footer {
+    text-align: center;
+    width: 100%;
+      li {
+        display: inline-block;
+        &:first-child {
+          margin-right: $global-spacing;
+        };
+      }
+    }
+  &__header {
+    .sort {
+      float: right;
     }
   }
 }
@@ -285,6 +314,7 @@
   list-style: none;
   font-size: 1.75rem;
   font-weight: $base-font-light;
+  font-family: $base-font-family;
   line-height: 1.5rem;
   overflow: hidden;
   @include media(medium-up) {
@@ -318,30 +348,56 @@
 
 .inpage__overview-links {
   border-top: solid 1px $tertiary-color;
+
+  .overview-item {
+    @include col(6/12, $cycle:2);
+    @include media(small-down) {
+      @include col(12/12);
+    }
+  }
+
+.overview-item__title {
+    display: block;
+    margin-bottom: $global-spacing/2;
+    margin-top: $global-spacing;
+  }
+  ul {
+    margin: 0;
+    overflow:hidden;
+  }
+
   li {
     font-size: 0.875rem;
     float: left;
     list-style: none;
-    padding-top: 1rem;
+    padding-top: 0;
+    &:last-child {
+      margin-bottom: $global-spacing;
+    };
     @include col(12/12);
     @include media(medium-up) {
       @include col(5/12);
     }
     
-    a {
-      float: left;
-      clear: left;
-      padding-top: $global-spacing/2
-    }
     &:first-child {
       @include col(12/12);
     }
-    .light {
-      display: block;
-      color: $base-color;
-      font-weight: $base-font-light;
-      text-transform: uppercase;
-      margin-top: $global-spacing;
-    }
+  }
+}
+
+.button--list {
+  li {
+    display: inline-block;
+    &:first-child {
+      margin-bottom: $global-spacing/2;
+      margin-right: $global-spacing/2;
+    };
+  }
+}
+
+.link-list {
+  li {
+    list-style: none;
+    margin-bottom: $global-spacing/4;
   }
 }

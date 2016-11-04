@@ -16,7 +16,7 @@ var PageFooter = React.createClass({
               <h1 className='updates__title heading--small'> Want Updates? </h1>
               <p className='updates__description'>Get notifications when we update projects quarterly.</p>
               <div className="form__input-group">
-                 <input type="text" className="form__control form__control--medium" id="form-input-6" placeholder="Search location"/>
+                 <input type="text" className="form__control form__control--medium" id="form-input-6" placeholder="alfred@thebutler.com"/>
                  <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--newsletter-icon"><span>Button</span></button></span>
                </div>
             </div>

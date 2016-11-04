@@ -12,14 +12,14 @@ var Project = React.createClass({
             <div className='inpage__headline'>
              <div className='inpage__headline-actions'>
               <ul>
-             	  <li><button className='button button--medium button--primary'>Download</button></li>
-             	  <li><button className='button button--medium button--primary'>Share</button></li>
+                <li><button className='button button--medium button--primary button--download'>Download</button></li>
+                <li><button className='button button--medium button--primary'>Share</button></li>
               </ul>
               </div>
               <p className='inpage__subtitle'><a className='link--secondary' href=''>Category</a></p>
               <h1 className='inpage__title heading--deco heading--large'>Project Name</h1>
               <dl className='inpage-meta project--ontime'>
-                <dt className='inpage-meta__label--status'>Status</dt>
+                <dt className='inpage-meta__label visually-hidden'>Status</dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>On time</dd>
                 <dt className='inpage-meta__label'>Last Update: </dt>
                 <dd className='inpage-meta__value'> Jun. 30, 2016</dd>
@@ -28,8 +28,9 @@ var Project = React.createClass({
           </div>
         </header>
         <div className='inpage__body'>
-        	<div className='inner'>
+          <div className='inner'>
             <section className='inpage__section inpage__section--overview'>
+              <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
               </div>
               <div className='inpage__col--content'>
@@ -37,21 +38,64 @@ var Project = React.createClass({
                   <li>$50M <small>funding</small></li>
                   <li>20,000 <small>households</small></li>
                 </ul>
-                <ul className='inpage__overview-links'>
-                  <li><span className='light'>Obejctive</span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
-                  <li><span className='light'>Location</span><a href='' className='link--primary'>Name of Location</a></li>
-                  <li><span className='light'>Project Link </span><a href='' className='link--primary'>Name of Source</a></li>
-                  <li><span className='light'>Responsible Party </span><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
-                  <li><span className='light'>Responsible Ministry Department</span><a href='' className='link--primary'>Name of Ministry Department</a></li>
-                  <li><span className='light'>SDG Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
-                  <li><span className='light'>SDS Indicator</span><a href='' className='link--primary'>Name of Indicator</a><a href='' className='link--primary'>Name of Indicator</a></li>
-                </ul>
+
+                <div className='inpage__overview-links'>
+                  <h2 className='overview-item__title heading-alt'>Objective</h2>
+                  <ul>
+                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
+                  </ul>
+
+                <div className='overview-item'>
+                  <h1 className='overview-item__title heading-alt'>Location</h1>
+                  <ul className='link-list'>
+                    <li><a href='' className='link--primary'><span>Name of Location</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='overview-item__title heading-alt'>Project Link</h2>
+                  <ul className='link-list'>
+                    <li><a href='' className='link--primary'><span>Name of Source</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
+                  <ul className='link-list'>
+                    <li><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
+                  <ul className='link-list'>
+                    <li><a href='' className='link--primary'><span>Name of Ministry Department</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
+                  <ul className='link-list'>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                  </ul>
+                </div>
+
+                <div className='overview-item'>
+                  <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
+                  <ul className='link-list'>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                  </ul>
+                </div>
+
+                </div>
               </div>
             </section>
             <section className='inpage__section inpage__section--charts'>
             </section>
             <section className='inpage__section inpage__section--indicators'>
-              <h2 className='inpage__section--title'>Monitoring Indicators</h2>
+              <h1 className='section__title heading--medium'>Monitoring Indicators</h1>
               <table className='inpage__table'>
                 <thead>
                   <tr>
@@ -93,12 +137,12 @@ var Project = React.createClass({
               </table>
             </section>
             <section className='inpage__section inpage__section--comparison'>
-              <h2 className='inpage__section--title'>Project Comparison By Cateogry</h2>
+              <h1 className='section__title heading--medium'>Project Comparison By Cateogry</h1>
             </section>
-        	</div>
-          <section className='inpage__section--related'>
+          </div>
+          <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h2 className='inpage__section--related--title'>Related Projects By SDS Goal</h2>
+              <h1 className='section__title heading--medium'>Related Projects By SDS Goal</h1>
               <ul className='related-projects'>
                 <li className='related-projects-card'>
                   <div>
@@ -107,7 +151,7 @@ var Project = React.createClass({
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
                           <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-  
+
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
                           </ul>
@@ -120,7 +164,7 @@ var Project = React.createClass({
                             <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
                           </dl>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-  
+
                           <ul className='card-stats'>
                             <li>$50M <small>funding</small></li>
                             <li>20,000 <small>households</small></li>
@@ -138,7 +182,7 @@ var Project = React.createClass({
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
                           <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-  
+
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
                           </ul>
@@ -151,7 +195,7 @@ var Project = React.createClass({
                             <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
                           </dl>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-  
+
                           <ul className='card-stats'>
                             <li>$50M <small>funding</small></li>
                             <li>20,000 <small>households</small></li>
@@ -169,7 +213,7 @@ var Project = React.createClass({
                         <header className='card__header'>
                           <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
                           <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-  
+
                           <ul className='card-cmplt'>
                             <li><span>60% cmplt</span></li>
                           </ul>
@@ -182,7 +226,7 @@ var Project = React.createClass({
                             <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
                           </dl>
                           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-  
+
                           <ul className='card-stats'>
                             <li>$50M <small>funding</small></li>
                             <li>20,000 <small>households</small></li>
