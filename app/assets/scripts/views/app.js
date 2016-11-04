@@ -35,12 +35,22 @@ var App = React.createClass({
     }
   },
 
+  onWindowResize: function () {
+    if (document.documentElement.clientWidth >= 800) {
+      document.documentElement.classList.remove('offcanvas-revealed');
+    }
+  },
+
   //
   // Start life-cycle methods
   //
   componentWillMount: function () {
     this.validateLanguage(this.props.params.lang);
     this.updateLangClass(this.props.params.lang);
+  },
+
+  componentDidMount: function () {
+    window.addEventListener('resize', _.throttle(this.onWindowResize, 50));
   },
 
   componentWillReceiveProps: function (nextProps) {

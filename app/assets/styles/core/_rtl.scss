@@ -15,24 +15,7 @@
     padding-left: $global-spacing;
     height: 100%;
   }
-  
-  
-  .browse-menu {
-    float: right;
-     > li:first-child {
-      margin-right: $global-spacing;
-    };
-  }
-  
-  .utilities-menu {
-    float: left;
-    > li {
-      &:last-child {
-        margin-right: $global-spacing;
-      };
-    }
-  }
-  
+
   .inpage {
   
     &__headline-actions {
