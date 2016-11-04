@@ -1,0 +1,50 @@
+.project-list {
+	.section__title {
+		float: left;
+	}
+}
+
+.inpage__actions {
+  margin-top: $global-spacing * 2;
+  @include col(12/12);
+  overflow: hidden;
+  @include media(small-down) {
+  	margin-top: $global-spacing;
+  }
+}
+
+.actions-filters {
+  @include col(8/12);
+  @include media(small-down) {
+  	@include col(12/12);
+  	.button--list {
+  		margin-bottom: $global-spacing;
+  	}
+  }
+  @include media(xsmall-only) {
+  	padding-bottom: $global-spacing;
+  }
+}
+
+.actions-toggle {
+  @include col(4/12);
+  .button--toggle {
+    float: right;
+  }
+  @include media(small-down) {
+  	@include col(12/12);
+  	margin-bottom: $global-spacing;
+  	.button--toggle {
+    	float: left;
+  	}
+  }
+}
+
+.filters {
+	oveflow: hidden;
+	@include media(small-down) {
+		padding-bottom: $global-spacing * 2;
+  }
+}
+
+

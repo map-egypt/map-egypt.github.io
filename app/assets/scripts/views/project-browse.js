@@ -16,26 +16,26 @@ var ProjectBrowse = React.createClass({
                 </ul>
               </div>
                 <h1 className='inpage__title heading--deco heading--large'>Projects and Indicators</h1>
-                <p className='inpage__description--header'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+                <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
             </div>
-            <div className='inpage__project-actions'>
-              <ul className='button--list map-actions'>
-                <li><button type='button' className='button button--medium button--primary drop__toggle--caret'>Add Indicator Overlays</button></li>
-                <li><button type='button' className='button button--medium button--primary'>Add & Filter Projects</button></li>
-              </ul>
-              <div className='map-toggle-container'>
-                <div className='button-group button-group--horizontal map-toggle'>
+            <div className='inpage__actions'>
+            <div className='actions-filters'>
+                <ul className='button--list'>
+                  <li><button type='button' className='button button--medium button--primary drop__toggle--caret'>Add Indicator Overlays</button></li>
+                  <li><button type='button' className='button button--medium button--primary'>Add & Filter Projects</button></li>
+                </ul>
+                <div className='filters'>
+                  <label className='heading--label'>Filters</label>
+                  <button className='button button--small button--tag'>Category</button>
+                  <button className='button button--small button--tag'>Project Type</button>
+                  <button className='button button--xsmall button--tag-unbounded'>Clear Filters</button>
+                </div>
+              </div>
+              <div className='actions-toggle'>
+                <div className='button-group button-group--horizontal button--toggle'>
                   <button className='button button--primary'>Map</button>
                   <button className='button button--primary-bounded'>List</button>
                 </div>
-              </div>
-            </div>
-            <div className='map-filter-tags'>
-              <div className='tags'>
-                <label className='heading--label'>Filters</label>
-                <button className='button button--small button--filter-tag'>Category</button>
-                <button className='button button--small button--filter-tag'>Project Type</button>
-                <button className='button button--xsmall button--filter-clear'>Clear Filters</button>
               </div>
             </div>
           </div>
@@ -43,12 +43,12 @@ var ProjectBrowse = React.createClass({
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
-              <h2 className='inpage__section--title'>Selected SDG Indicators</h2>
+              <h2 className='section__title'>Selected SDG Indicators</h2>
             </section>
-            <section className='inpage__section'>
-              <div className='inpage__section-navigation'>
-                <h2 className='inpage__section--title-aligned'>Projects</h2>
-                <div className='filters'>
+            <section className='inpage__section project-list'>
+              <div className='section__header'>
+                <h2 className='section__title'>Projects</h2>
+                <div className='sort'>
                   <label className='heading--label'>Sort By:</label>
                   <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
                 </div>
@@ -57,7 +57,7 @@ var ProjectBrowse = React.createClass({
           </div>
         </div>
 
-        <section className='modal modal--large'>
+       {/* <section className='modal modal--large'>
           <div className='modal__inner modal__projects'>
             <h1 className='inpage__title heading--deco heading--medium'>Add and Filter Projects</h1>
 
@@ -147,7 +147,7 @@ var ProjectBrowse = React.createClass({
             </div>
             <button className='modal__button-dismiss' title='close'></button>
           </div>
-        </section>
+        </section> */}
       </section>
     );
   }

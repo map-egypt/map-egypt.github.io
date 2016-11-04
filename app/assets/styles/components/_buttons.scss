@@ -242,7 +242,7 @@
   }
 }
 
-.button--filter-tag {
+.button--tag {
   color: $primary-color;
   background-color: $tertiary-color;
   margin-right: 0.5rem;
@@ -252,7 +252,7 @@
   }
 }
 
-.button--filter-clear {
+.button--tag-unbounded {
   text-decoration: underline;
   color: $base-font-color;
   font-weight: $base-font-regular;
@@ -264,12 +264,12 @@
 }
 
 .button--download {
-    &:after {
-      @extend %collecticon-download;
-      font-size: 0.875rem;
-      line-height: inherit;
-      margin-left: 0.5rem;
-    }
+  &:after {
+    @extend %collecticon-download;
+    font-size: 0.875rem;
+    line-height: inherit;
+    margin-left: 0.5rem;
+  }
 }
 
 
