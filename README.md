@@ -1,4 +1,4 @@
-# IFPRI Egypt
+# MAP Egypt
 
 
 ## Development environment
