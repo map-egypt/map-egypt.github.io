@@ -7,6 +7,10 @@ import createLogger from 'redux-logger';
 import { useScroll } from 'react-router-scroll';
 import { Router, Route, IndexRoute, Redirect, hashHistory, applyRouterMiddleware } from 'react-router';
 
+// Set up mapbox (which attaches to global `L`)
+import Mapbox from 'mapbox.js';
+L.mapbox.accessToken = 'pk.eyJ1IjoiYXNjYWxhbW9nbmEiLCJhIjoiM29weEZXayJ9.0Wpp3KbmiRcR_0YCFktCow';
+
 import config from './config';
 import reducer from './reducers';
 
