@@ -8,7 +8,7 @@ import { useScroll } from 'react-router-scroll';
 import { Router, Route, IndexRoute, Redirect, hashHistory, applyRouterMiddleware } from 'react-router';
 
 // Set up mapbox (which attaches to global `L`)
-import Mapbox from 'mapbox.js';
+import Mapbox from 'mapbox.js'; // eslint-disable-line no-unused-vars
 
 import config from './config';
 import reducer from './reducers';
