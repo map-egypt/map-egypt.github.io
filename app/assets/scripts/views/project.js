@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import Map from './map';
 
 var Project = React.createClass({
   displayName: 'Project',
@@ -30,6 +31,7 @@ var Project = React.createClass({
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section inpage__section--overview'>
+              <Map />
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
               </div>
