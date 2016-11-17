@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import createLogger from 'redux-logger';
 import { useScroll } from 'react-router-scroll';
 import { Router, Route, IndexRoute, Redirect, hashHistory, applyRouterMiddleware } from 'react-router';
+import storage from 'store2';
 
 // Set up mapbox (which attaches to global `L`)
 import Mapbox from 'mapbox.js'; // eslint-disable-line no-unused-vars
@@ -47,6 +48,7 @@ render((
   <Provider store={store}>
     <Router history={hashHistory} render={applyRouterMiddleware(scrollerMiddleware)}>
       <Route path='/uhoh' component={UhOh} />
+      <Route path='/access_token=:token' onEnter={redirectToLastUrl} />
       <Route path='/:lang' component={App}>
         <Route path='projects' component={ProjectBrowse} />
         <Route path='projects/:name' component={Project} />
@@ -65,3 +67,11 @@ render((
     </Router>
   </Provider>
 ), document.querySelector('#app-container'));
+
+function redirectToLastUrl (nextState, replace) {
+  const path = storage.get('last_path_before_auth');
+  if (path) {
+    storage.clear('last_path_before_auth');
+    replace({pathname: path});
+  }
+}
