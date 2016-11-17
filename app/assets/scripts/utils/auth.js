@@ -12,12 +12,12 @@ if (process.env.DS_ENV === 'testing') {
 }
 
 auth.on('authenticated', function (authResult) {
+  store.set('id_token', authResult.idToken);
+  store.set('access_token', authResult.accessToken);
   auth.getProfile(authResult.idToken, function (err, profile) {
     if (err) {
       throw new Error(err);
     }
-    store.set('id_token', authResult.idToken);
-    store.set('access_token', authResult.accessToken);
     store.set('profile', JSON.stringify(profile));
   });
 });
@@ -28,12 +28,12 @@ module.exports = {
     auth.show();
   },
   logout: () => {
-    store.clear('id_token');
-    store.clear('profile');
-    auth.logout();
+    store.remove('id_token');
+    store.remove('access_token');
+    store.remove('profile');
   },
-  loggedIn: () => {
-    return !!store.get('id_token');
+  authenticated: () => {
+    return !!store.get('access_token');
   },
   accessToken: () => { store.get('access_token'); },
   profile: () => {

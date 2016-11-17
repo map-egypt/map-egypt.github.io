@@ -25,6 +25,10 @@ var PageHeader = React.createClass({
     auth.login();
   },
 
+  onLogoutClick: function () {
+    auth.logout();
+  },
+
   // componentDidMount: function () {
   //   document.addEventListener('click', this.documentListener);
   // },
@@ -34,6 +38,7 @@ var PageHeader = React.createClass({
   // },
 
   render: function () {
+    const authenticated = auth.authenticated() || false;
     return (
       <header className='page__header' role='banner'>
         <div className='inner'>
@@ -53,7 +58,9 @@ var PageHeader = React.createClass({
               <ul className='utilities-menu'>
                 <li><Link to='/en' title='Switch to English' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>
                 <li><Link to='/ar' title='Switch to Arabic' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>Arabic</span></Link></li>
-                <li><Link title='Log in' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLoginClick}><span>Log In</span></Link></li>
+                {!authenticated && <li><Link title='Log in' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLoginClick}><span>Log In</span></Link></li>}
+                {authenticated && <li><Link to='/' title='Log out' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLogoutClick}><span>Log Out</span></Link></li>}
+
               </ul>
             </div>
           </nav>

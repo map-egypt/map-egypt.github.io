@@ -48,8 +48,8 @@ render((
   <Provider store={store}>
     <Router history={hashHistory} render={applyRouterMiddleware(scrollerMiddleware)}>
       <Route path='/uhoh' component={UhOh} />
-      <Route path='/access_token=:token' onEnter={redirectToLastUrl} />
-      <Route path='/:lang' component={App}>
+      <Route path='/access_token=:token' />
+      <Route path='/:lang' component={App} onEnter={redirectToLastUrl}>
         <Route path='projects' component={ProjectBrowse} />
         <Route path='projects/:name' component={Project} />
         <Route path='category/:name' component={Category} />
