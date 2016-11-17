@@ -12,7 +12,9 @@ const Map = React.createClass({
   },
 
   mountMap: function (el) {
-    this.map = window.L.mapbox.map(el);
+    this.map = window.L.mapbox.map(el, null, {
+      scrollWheelZoom: false
+    });
     window.L.tileLayer(tileLayer).addTo(this.map);
     this.map.fitBounds([
       [22.278144, 25.127830],
