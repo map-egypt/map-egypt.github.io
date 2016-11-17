@@ -3,8 +3,7 @@ import Lock from 'Auth0-Lock';
 import store from 'store2';
 import { authDomain, authClientId } from '../config';
 
-var auth
-
+var auth;
 // auth0.js fails our node-based tests, so just don't include it.
 if (process.env.DS_ENV === 'testing') {
   auth = {on: () => true};
