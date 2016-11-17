@@ -8,7 +8,7 @@ test('spot check actions and action creators', function (t) {
   const actionTypes = Object.keys(actions)
     .filter(k => typeof actions[k] === 'string');
   const actionCreators = Object.keys(actions)
-    .filter(k => typeof actions[k] === 'function');
+    .filter(k => typeof actions[k] === 'function' && typeof actions[k]() === 'object');
 
   t.deepEqual(actionTypes, actionTypes.map(k => actions[k]),
     'action type constant names match values');

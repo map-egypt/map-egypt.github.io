@@ -1,9 +1,9 @@
 'use strict';
 import Lock from 'Auth0-Lock';
-import store from 'store2';
+import store from 'store';
 import { authDomain, authClientId } from '../config';
 
-var auth;
+let auth;
 // auth0.js fails our node-based tests, so just don't include it.
 if (process.env.DS_ENV === 'testing') {
   auth = {on: () => true};
@@ -11,33 +11,33 @@ if (process.env.DS_ENV === 'testing') {
   auth = new Lock(authClientId, authDomain);
 }
 
+let isAuthenticated = !!store.get('access_token');
+const dispatches = [];
 auth.on('authenticated', function (authResult) {
   store.set('id_token', authResult.idToken);
   store.set('access_token', authResult.accessToken);
+
+  isAuthenticated = true;
+  dispatches.forEach((d) => d(isAuthenticated));
+
   auth.getProfile(authResult.idToken, function (err, profile) {
-    if (err) {
-      throw new Error(err);
-    }
+    if (err) { throw new Error(err); }
     store.set('profile', JSON.stringify(profile));
   });
 });
 
 module.exports = {
-  auth: auth,
-  login: () => {
-    auth.show();
-  },
+  login: () => auth.show(),
   logout: () => {
     store.remove('id_token');
     store.remove('access_token');
     store.remove('profile');
   },
-  authenticated: () => {
-    return !!store.get('access_token');
-  },
-  accessToken: () => { store.get('access_token'); },
-  profile: () => {
-    const profile = store.get('profile');
-    return profile && JSON.parse(profile) || false;
+  registerDispatch: function (dispatch) {
+    if (isAuthenticated) {
+      dispatch(isAuthenticated);
+    } else {
+      dispatches.push(dispatch);
+    }
   }
 };
