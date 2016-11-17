@@ -15,7 +15,8 @@ var App = React.createClass({
   propTypes: {
     routes: React.PropTypes.array,
     children: React.PropTypes.object,
-    params: React.PropTypes.object
+    params: React.PropTypes.object,
+    location: React.PropTypes.object
   },
 
   validateLanguage: function (lang) {
@@ -66,7 +67,7 @@ var App = React.createClass({
 
     return (
       <div className={c('page', pageClass)}>
-      <PageHeader />
+      <PageHeader location={this.props.location} />
         <main className='page__body' role='main'>
           {this.props.children}
         </main>
