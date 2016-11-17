@@ -31,9 +31,9 @@ var Project = React.createClass({
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section inpage__section--overview'>
-              <Map />
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
+                <Map />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>

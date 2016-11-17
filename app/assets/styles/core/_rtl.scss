@@ -74,6 +74,14 @@
       float: right;
      }
     }
+
+    &__col--map {
+      float: left;
+    }
+
+    &__col--content {
+      float: right;
+    }
   }
   
   .inpage__table td:nth-of-type(n):before {
