@@ -1,5 +1,5 @@
 'use strict';
-import Lock from 'Auth0-Lock';
+import Lock from 'auth0-lock';
 import store from 'store';
 import { authDomain, authClientId } from '../config';
 
