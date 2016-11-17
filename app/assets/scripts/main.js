@@ -3,14 +3,14 @@ import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import { useScroll } from 'react-router-scroll';
 import { Router, Route, IndexRoute, Redirect, hashHistory, applyRouterMiddleware } from 'react-router';
-import storage from 'store2';
+import storage from 'store';
 
 // Set up mapbox (which attaches to global `L`)
 import Mapbox from 'mapbox.js'; // eslint-disable-line no-unused-vars
-
 import config from './config';
 import reducer from './reducers';
 
@@ -22,7 +22,13 @@ const logger = createLogger({
   }
 });
 
-const store = createStore(reducer, applyMiddleware(logger));
+const store = createStore(reducer, applyMiddleware(
+  thunkMiddleware,
+  logger
+));
+
+import { getAuthStatus } from './actions';
+store.dispatch(getAuthStatus());
 
 const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
   return prevRouterProps &&
