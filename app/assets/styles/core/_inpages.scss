@@ -295,8 +295,10 @@
 
   .inpage__col--map {
       @include col(12/12);
+      margin-bottom: $global-spacing * 2;
     @include media(medium-up) {
       @include col(5/12);
+      margin-bottom: 0;
     }
   }
 

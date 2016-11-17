@@ -20,7 +20,7 @@
     "serve": "gulp collecticons && DS_ENV=development NODE_ENV=development gulp serve",
     "build": "DS_ENV=production NODE_ENV=production gulp",
     "lint": "eslint app/assets/scripts/ --ext .js",
-    "test": "DS_ENV=testing nyc ava test -c 4",
+    "test": "npm run lint && DS_ENV=testing nyc ava test -c 4",
     "report": "nyc report"
   },
   "ava": {
@@ -96,7 +96,6 @@
     "gulp-useref": "^3.1.2",
     "gulp-util": "^3.0.7",
     "jeet": "^6.1.5",
-    "mapbox-gl-js-mock": "^0.25.0",
     "node-bourbon": "^4.2.8",
     "node-notifier": "^4.6.1",
     "node-sass": "^3.10.1",
@@ -111,8 +110,9 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
+    "global": "^4.3.1",
     "lodash": "^4.16.2",
-    "mapbox-gl": "^0.25.0",
+    "mapbox.js": "^3.0.0",
     "qs": "^6.2.1",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",

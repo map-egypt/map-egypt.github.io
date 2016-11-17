@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 // import { t } from '../utils/i18n';
 
+import Map from './map';
+
 var Home = React.createClass({
   displayName: 'Home',
 
@@ -28,8 +30,7 @@ var Home = React.createClass({
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
-              <div className='map-home'>
-              </div>
+              <Map />
               <div className='overview-home'>
                 <h2 className='section__title'>Overview of Agricultural Projects</h2>
                 <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
