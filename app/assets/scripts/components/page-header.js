@@ -1,11 +1,17 @@
 'use strict';
 import React from 'react';
 import { Link } from 'react-router';
+import auth from '../utils/auth';
+import storage from 'store';
+import { updateAuth } from '../actions';
 
 var PageHeader = React.createClass({
   displayName: 'PageHeader',
 
   propTypes: {
+    location: React.PropTypes.object,
+    dispatch: React.PropTypes.func,
+    authenticated: React.PropTypes.bool
   },
 
   onRootMenuClick: function (e) {
@@ -17,8 +23,18 @@ var PageHeader = React.createClass({
     document.documentElement.classList.toggle('offcanvas-revealed');
   },
 
+  onLoginClick: function () {
+    storage.set('last_path_before_auth', this.props.location.pathname);
+    auth.login();
+  },
+
+  onLogoutClick: function () {
+    auth.logout();
+    this.props.dispatch(updateAuth(false));
+  },
+
   // componentDidMount: function () {
-  //   document.addEventListener('click', this.documentListener);
+    // document.addEventListener('click', this.documentListener);
   // },
 
   // componentWillUnmount: function () {
@@ -43,9 +59,11 @@ var PageHeader = React.createClass({
                 <li><Link to='/contact' title='Visit contact page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco' onClick={this.onRootMenuClick}><span>Contact</span></Link></li>
               </ul>
               <ul className='utilities-menu'>
-                <li><Link to='/en' title='Visit projects and indicators page' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>
-                <li><Link to='/ar' title='Visit about page' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>Arabic</span></Link></li>
-                <li><Link to='/about' title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onRootMenuClick}><span>Log In</span></Link></li>
+                <li><Link to='/en' title='Switch to English' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>
+                <li><Link to='/ar' title='Switch to Arabic' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>Arabic</span></Link></li>
+                {!this.props.authenticated && <li><Link title='Log in' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLoginClick}><span>Log In</span></Link></li>}
+                {this.props.authenticated && <li><Link to='/' title='Log out' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLogoutClick}><span>Log Out</span></Link></li>}
+
               </ul>
             </div>
           </nav>

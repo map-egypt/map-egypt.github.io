@@ -20,12 +20,15 @@ import { defaultsDeep } from 'lodash';
  *      polluting the repo.
  */
 
-var configurations = require('./config/*.js', {mode: 'hash'});
-var config = configurations.local || {};
+import local from './config/local';
+import staging from './config/staging';
+import production from './config/production';
+
+var config = local || {};
 
 if (process.env.DS_ENV === 'staging') {
-  defaultsDeep(config, configurations.staging);
+  defaultsDeep(config, staging);
 }
-defaultsDeep(config, configurations.production);
+defaultsDeep(config, production);
 
 module.exports = config;

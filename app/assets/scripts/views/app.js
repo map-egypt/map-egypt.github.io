@@ -15,7 +15,10 @@ var App = React.createClass({
   propTypes: {
     routes: React.PropTypes.array,
     children: React.PropTypes.object,
-    params: React.PropTypes.object
+    params: React.PropTypes.object,
+    location: React.PropTypes.object,
+    api: React.PropTypes.object,
+    dispatch: React.PropTypes.func
   },
 
   validateLanguage: function (lang) {
@@ -63,10 +66,13 @@ var App = React.createClass({
   //
   render: function () {
     const pageClass = _.get(_.last(this.props.routes), 'pageClass', '');
-
     return (
       <div className={c('page', pageClass)}>
-      <PageHeader />
+        <PageHeader
+          location={this.props.location}
+          dispatch={this.props.dispatch}
+          authenticated={this.props.api.authenticated}
+        />
         <main className='page__body' role='main'>
           {this.props.children}
         </main>
@@ -81,6 +87,7 @@ var App = React.createClass({
 
 function mapStateToProps (state) {
   return {
+    api: state.api
   };
 }
 
