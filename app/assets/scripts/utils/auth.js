@@ -14,14 +14,16 @@ if (process.env.DS_ENV === 'testing') {
   });
 }
 
-let isAuthenticated = !!store.get('access_token');
+let isAuthenticated = !!store.get('id_token');
 const dispatches = [];
 auth.on('authenticated', function (authResult) {
-  store.set('id_token', authResult.idToken);
-  store.set('access_token', authResult.accessToken);
-
-  isAuthenticated = true;
-  dispatches.forEach((d) => d(isAuthenticated));
+  // This can run too early and fail to set anything in storage.
+  // Wrapping in a timeout fixes it.
+  setTimeout(function () {
+    store.set('id_token', authResult.idToken);
+    isAuthenticated = true;
+    dispatches.forEach((d) => d(isAuthenticated));
+  }, 0);
 
   auth.getProfile(authResult.idToken, function (err, profile) {
     if (err) { throw new Error(err); }
@@ -33,7 +35,6 @@ module.exports = {
   login: () => auth.show(),
   logout: () => {
     store.remove('id_token');
-    store.remove('access_token');
     store.remove('profile');
   },
   registerDispatch: function (dispatch) {
