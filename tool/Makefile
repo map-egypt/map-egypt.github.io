@@ -12,6 +12,9 @@ geojson:
 	ogr2ogr -f GeoJSON -t_srs crs:84 \
 		geojson/egy-a3.geojson \
 		shp/egy_a3_boundary/Qism_Markaz.shp
+	ogr2ogr -f GeoJSON -t_srs crs:84 \
+		geojson/egy-districts.geojson \
+		shp/egy_districts/egy_districts_municipalities_dissolved.shp
 
 topojson:
 	mkdir -p topojson
@@ -40,5 +43,11 @@ topojson:
 	../node_modules/.bin/toposimplify tmp/a3.json \
 		-S 0.001 \
 		-o topojson/a3.json
+
+	../node_modules/.bin/geo2topo \
+		districts=geojson/egy-districts.geojson > tmp/districts.json
+	../node_modules/.bin/toposimplify tmp/districts.json \
+		-S 0.0005 \
+		-o topojson/districts.json
 
 	rm tmp/*.json
