@@ -1,0 +1,39 @@
+.auth0-lock-header {
+/*	display: none;*/
+}
+.auth0-lock-name {
+  display: none;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-header-logo {
+  height: 89px !important;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-view-content {
+  padding: ($global-spacing) 0;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-submit {
+  background-color: $primary-color;
+}
+
+.auth0-lock-body-content {
+  font-family: $base-font-family;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-input-wrap.auth0-lock-focused {
+  border-color: $primary-color !important;
+  border-width: 2px;
+}
+
+.auth0-lock.auth0-lock .auth0-lock-overlay{
+  background: radial-gradient(#ffffff, #ffffff) rgba(255, 255, 255, 0.8);
+}
+
+.auth0-lock.auth0-lock .auth0-lock-form .auth0-lock-alternative .auth0-lock-alternative-link {
+  color: $base-color !important;
+}
+
+.auth0-label-submit {
+  font-family: $base-font-family;
+}
