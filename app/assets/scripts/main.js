@@ -27,8 +27,10 @@ const store = createStore(reducer, applyMiddleware(
   logger
 ));
 
-import { getAuthStatus } from './actions';
+import { getAuthStatus, getProjects, getIndicators } from './actions';
 store.dispatch(getAuthStatus());
+store.dispatch(getProjects());
+store.dispatch(getIndicators());
 
 const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
   return prevRouterProps &&
