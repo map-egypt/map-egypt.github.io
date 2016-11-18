@@ -111,3 +111,13 @@ tmp
 .tmp
 dist
 .nyc_output
+
+################################################
+# Miscellaneous
+#
+# Output files from the topojson processing scripts
+################################################
+
+tool/geojson
+tool/topojson
+tool/tmp
