@@ -37,6 +37,10 @@ p, ul, ol, dl, pre, blockquote {
   margin: 0 0 $global-spacing 0;
 }
 
+p {
+  font-weight: $base-font-light;
+}
+
 
 /* Lead
    ========================================================================== */
@@ -255,9 +259,24 @@ abbr[title] {
 
   &::after {
     position: absolute;
-    top: calc(100% - 3px);
+    top: 100%;
     left: 0;
-    width: 4rem;
+    width: 6rem;
+    height: 3px;
+    content: "";
+    background: $secondary-color;
+  }
+}
+
+.heading--deco-small {
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    position: absolute;
+    top: calc(100%-1px);
+    left: 0;
+    width: 3rem;
     height: 3px;
     content: "";
     background: $secondary-color;

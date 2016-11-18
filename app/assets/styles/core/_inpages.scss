@@ -93,7 +93,7 @@
 
   &__table {
     table-layout: fixed;
-    margin: ($global-spacing * 2) 0;
+    margin: ($global-spacing * 2) $global-spacing;
     position: relative;
     @include media(small-down) {
       display: block; 
@@ -134,8 +134,9 @@
 
     td {
       font-size: 0.75rem;
+      line-height: 1.25rem;
       position: relative;
-      font-weight: $base-font-regular;
+      font-weight: $base-font-light;
       padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
 
       @include media(small-down) {
@@ -152,7 +153,7 @@
         font-weight: $base-font-bold;
         margin-bottom: 0;
         position: absolute;
-        top: $global-spacing;
+        top: 0.8rem;
         @include media(small-down) {
           position: relative;
           top: 0;
@@ -252,6 +253,7 @@
     font-weight: $base-font-regular;
     float: left;
     line-height: 1rem;
+    font-weight: $base-font-bold;
     margin-right: $global-spacing/2;
   }
 
@@ -320,8 +322,8 @@
   line-height: 1.5rem;
   overflow: hidden;
   @include media(medium-up) {
-    font-size: 2.75rem;
-    line-height: 2.25rem;
+    font-size: 3.25rem;
+    line-height: 2.75rem;
   }
 
   li {
@@ -350,6 +352,8 @@
 
 .inpage__overview-links {
   border-top: solid 1px $tertiary-color;
+  overflow: hidden;
+  padding-top: 1rem;
 
   .overview-item {
     @include col(6/12, $cycle:2);
