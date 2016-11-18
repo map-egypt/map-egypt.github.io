@@ -59,9 +59,9 @@ export function getIndicators () {
 
 export function getGeography () {
   return function (dispatch) {
-    reqwest(url.resolve(BASE_URL, 'assets/data/topojson/a2-withluxor.json'), function (resp) {
+    reqwest(url.resolve(BASE_URL, 'assets/data/topojson/districts.json'), function (resp) {
       try {
-        var features = topojson.feature(resp, resp.objects['egy2']);
+        var features = topojson.feature(resp, resp.objects.districts);
       } catch (e) {
         console.log('Topojson.feature() failed');
         return;
