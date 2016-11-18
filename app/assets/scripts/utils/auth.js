@@ -8,13 +8,11 @@ let auth;
 if (process.env.DS_ENV === 'testing') {
   auth = {on: () => true};
 } else {
-  auth = new Lock(authClientId, authDomain, { 
+  auth = new Lock(authClientId, authDomain, {
     theme: { primaryColor: '#55CBC9',
-    logo: 'assets/graphics/layout/logo.svg' } 
+    logo: 'assets/graphics/layout/logo.svg' }
   });
 }
-
-
 
 let isAuthenticated = !!store.get('access_token');
 const dispatches = [];
