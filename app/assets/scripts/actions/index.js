@@ -38,7 +38,7 @@ export function getProjects () {
     queryApi('projects', function (data) {
       return dispatch(updateProjects(data));
     });
-  }
+  };
 }
 
 export function getIndicators () {
@@ -46,11 +46,11 @@ export function getIndicators () {
     queryApi('indicators', function (data) {
       return dispatch(updateIndicators(data));
     });
-  }
+  };
 }
 
 // helper to wrap setting the token header if there is one
-function queryApi(asset, callback) {
+function queryApi (asset, callback) {
   const options = {
     url: url.resolve(api, asset),
     method: 'GET',
@@ -63,7 +63,7 @@ function queryApi(asset, callback) {
   if (token) {
     options.headers = {
       'Authorization': token
-    }
+    };
   }
   return reqwest(options);
 }
