@@ -16,6 +16,11 @@ $ npm install
 ### Getting started
 
 ```
+$ npm run build-geo
+```
+Build the geometries needed for the maps.
+
+```
 $ npm run serve
 ```
 Compiles the sass files, javascript, and launches the server making the site available at `http://localhost:3000/`
