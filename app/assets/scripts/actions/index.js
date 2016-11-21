@@ -1,13 +1,17 @@
 import reqwest from 'reqwest';
-import url from 'url';
-import { api } from '../config';
-import auth from '../utils/auth';
 import storage from 'store';
+import * as topojson from 'topojson-client';
+import url from 'url';
+import { api, baseUrl } from '../config';
+import auth from '../utils/auth';
+
+const BASE_URL = baseUrl || 'http://localhost:3000';
 
 export const ACTION = 'ACTION';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
 export const INDICATORS = 'INDICATORS';
+export const GEOGRAPHY = 'GEOGRAPHY';
 
 export function hideModalAbout () {
   return { type: ACTION };
@@ -23,6 +27,10 @@ export function updateProjects (data) {
 
 export function updateIndicators (data) {
   return { type: INDICATORS, data: data };
+}
+
+export function updateGeography (data) {
+  return { type: GEOGRAPHY, data: data };
 }
 
 export function getAuthStatus () {
@@ -45,6 +53,20 @@ export function getIndicators () {
   return function (dispatch) {
     queryApi('indicators', function (data) {
       return dispatch(updateIndicators(data));
+    });
+  };
+}
+
+export function getGeography () {
+  return function (dispatch) {
+    reqwest(url.resolve(BASE_URL, 'assets/data/topojson/districts.json'), function (resp) {
+      try {
+        var features = topojson.feature(resp, resp.objects.districts);
+      } catch (e) {
+        console.log('Topojson.feature() failed');
+        return;
+      }
+      return updateGeography(features);
     });
   };
 }
