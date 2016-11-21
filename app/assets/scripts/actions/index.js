@@ -12,6 +12,7 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
 export const INDICATORS = 'INDICATORS';
 export const GEOGRAPHY = 'GEOGRAPHY';
+export const LANGUAGE = 'LANGUAGE';
 
 export function hideModalAbout () {
   return { type: ACTION };
@@ -31,6 +32,10 @@ export function updateIndicators (data) {
 
 export function updateGeography (data) {
   return { type: GEOGRAPHY, data: data };
+}
+
+export function updateLang (lang) {
+  return { type: LANGUAGE, data: lang };
 }
 
 export function getAuthStatus () {
