@@ -11,15 +11,21 @@ const Map = React.createClass({
   propTypes: {
   },
 
+  componentWillUnmount: function () {
+    this.map.remove();
+  },
+
   mountMap: function (el) {
-    this.map = window.L.mapbox.map(el, null, {
-      scrollWheelZoom: false
-    });
-    window.L.tileLayer(tileLayer).addTo(this.map);
-    this.map.fitBounds([
-      [22.278144, 25.127830],
-      [31.118067, 33.719138]
-    ]);
+    if (el) {
+      this.map = window.L.mapbox.map(el, null, {
+        scrollWheelZoom: false
+      });
+      window.L.tileLayer(tileLayer).addTo(this.map);
+      this.map.fitBounds([
+        [22.278144, 25.127830],
+        [31.118067, 33.719138]
+      ]);
+    }
   },
 
   render: function () {

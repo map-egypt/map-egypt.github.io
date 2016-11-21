@@ -1,19 +1,20 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-// import { Link } from 'react-router';
-
-// import { t } from '../utils/i18n';
-
 import Map from './map';
+// import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 var Home = React.createClass({
   displayName: 'Home',
 
   propTypes: {
+    api: React.PropTypes.object
   },
 
   render: function () {
+
+    const projects = this.props.api.projects;
+
     return (
       <div>
       <section className='inpage'>
@@ -90,6 +91,7 @@ var Home = React.createClass({
 
 function mapStateToProps (state) {
   return {
+    api: state.api
   };
 }
 
