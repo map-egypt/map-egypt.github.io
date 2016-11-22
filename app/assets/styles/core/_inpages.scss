@@ -13,6 +13,7 @@
   }
 
   &__description {
+    font-size: 1.125rem;
     @include media(medium-up) {
       @include col(7/12);
     }
