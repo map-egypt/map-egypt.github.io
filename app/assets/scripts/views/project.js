@@ -1,6 +1,6 @@
 'use strict';
 import React from 'react';
-import Map from './map';
+import Map from '../components/map';
 
 var Project = React.createClass({
   displayName: 'Project',
