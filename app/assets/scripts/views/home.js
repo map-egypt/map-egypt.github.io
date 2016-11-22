@@ -12,9 +12,6 @@ var Home = React.createClass({
   },
 
   render: function () {
-
-    const projects = this.props.api.projects;
-
     return (
       <div>
       <section className='inpage'>

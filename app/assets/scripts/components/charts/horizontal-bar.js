@@ -1,7 +1,7 @@
-'use strict'
+'use strict';
 import React from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { debounce } from 'lodash';
+import { debounce, max } from 'lodash';
 import Axis from './axis';
 
 var HorizontalBarChart = React.createClass({
@@ -17,49 +17,49 @@ var HorizontalBarChart = React.createClass({
   getInitialState: function () {
     return {
       width: 0
-    }
+    };
   },
 
   onWindowResize: function () {
-    let rect = this.refs.chartContainer.getBoundingClientRect()
-    this.setState({ width: rect.width, height: rect.height })
+    let rect = this.refs.chartContainer.getBoundingClientRect();
+    this.setState({ width: rect.width, height: rect.height });
   },
 
   componentDidMount: function () {
     // Capture initial width (presumably set in css)
-    this.onWindowResize()
+    this.onWindowResize();
     // Debounce event.
-    this.onWindowResize = debounce(this.onWindowResize, 200)
-    window.addEventListener('resize', this.onWindowResize)
+    this.onWindowResize = debounce(this.onWindowResize, 200);
+    window.addEventListener('resize', this.onWindowResize);
   },
 
   componentWillUnmount: function () {
-    window.removeEventListener('resize', this.onWindowResize)
+    window.removeEventListener('resize', this.onWindowResize);
   },
 
   render: function () {
-    const { width, height } = this.state
-    const { data, margin, yTitle, xTitle } = this.props
-    const innerWidth = width - margin.left - margin.right
-    const innerHeight = height - margin.top - margin.bottom
+    const { width, height } = this.state;
+    const { data, margin, yTitle, xTitle } = this.props;
+    const innerWidth = width - margin.left - margin.right;
+    const innerHeight = height - margin.top - margin.bottom;
 
     // short circut if we have too small an area
     if (innerWidth <= 0) {
-      return <div className='chart-container' ref='chartContainer' />
+      return <div className='chart-container' ref='chartContainer' />;
     }
 
-    const dataNames = data.map(a => a.name)
-    const dataValues = data.map(a => a.value)
+    const dataNames = data.map(a => a.name);
+    const dataValues = data.map(a => a.value);
 
     const ordinalScale = scaleBand()
     .paddingInner(0.7)
-    .paddingOuter(0.1)
+    .paddingOuter(0.1);
 
-    let xScale = ordinalScale.rangeRound([0, innerWidth]).domain(dataNames)
-    let xLabels = dataNames
-    let yScale = scaleLinear().range([innerHeight, 0]).domain([0, _.max(dataValues)])
-    let yLabels = yScale.ticks(3)
-    let rectWidth = xScale.bandwidth()
+    let xScale = ordinalScale.rangeRound([0, innerWidth]).domain(dataNames);
+    let xLabels = dataNames;
+    let yScale = scaleLinear().range([innerHeight, 0]).domain([0, max(dataValues)]);
+    let yLabels = yScale.ticks(3);
+    let rectWidth = xScale.bandwidth();
 
     return (
       <div className='chart-container' ref='chartContainer'>
@@ -89,27 +89,27 @@ var HorizontalBarChart = React.createClass({
                 x={xScale(d.name)}
                 height={innerHeight - yScale(d.value)}
                 width={rectWidth}
-              />
-              })}
-            </g>
-            <text
-              x={-(height / 2) + 24}
-              y={4}
-              dy={'1em'}
-              transform={'rotate(-90)'}
-              textAnchor={'middle'}
-              className={'chart__axis-title'}
-              >{yTitle}</text>
-            <text
-              x={(width - margin.left - margin.right) / 2 + margin.left}
-              y={height - 14}
-              textAnchor={'middle'}
-              className={'chart__axis-title'}
-              >{xTitle}</text>
-          </svg>
-        </div>
-    )
+              />;
+            })}
+          </g>
+          <text
+            x={-(height / 2) + 24}
+            y={4}
+            dy={'1em'}
+            transform={'rotate(-90)'}
+            textAnchor={'middle'}
+            className={'chart__axis-title'}
+            >{yTitle}</text>
+          <text
+            x={(width - margin.left - margin.right) / 2 + margin.left}
+            y={height - 14}
+            textAnchor={'middle'}
+            className={'chart__axis-title'}
+            >{xTitle}</text>
+        </svg>
+      </div>
+    );
   }
-})
+});
 
 module.exports = HorizontalBarChart;

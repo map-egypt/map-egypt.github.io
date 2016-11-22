@@ -18,7 +18,8 @@ var App = React.createClass({
     params: React.PropTypes.object,
     location: React.PropTypes.object,
     api: React.PropTypes.object,
-    dispatch: React.PropTypes.func
+    dispatch: React.PropTypes.func,
+    meta: React.PropTypes.object
   },
 
   validateLanguage: function (lang) {

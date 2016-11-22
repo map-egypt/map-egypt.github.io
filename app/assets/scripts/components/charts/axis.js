@@ -13,21 +13,21 @@ const Axis = React.createClass({
   },
 
   render: function () {
-    const { scale, labels, orientation, height, margin } = this.props
-    let transform, dy
+    const { scale, labels, orientation, height, margin } = this.props;
+    let transform, dy;
     switch (orientation) {
       case 'top':
-        transform = `translate(${margin.left},${margin.top})`
-      dy = '-0.5em'
-      break
+        transform = `translate(${margin.left},${margin.top})`;
+        dy = '-0.5em';
+        break;
       case 'left':
-        transform = `translate(0,${margin.top})`
-      dy = '0.5em'
-      break
+        transform = `translate(0,${margin.top})`;
+        dy = '0.5em';
+        break;
       case 'bottom':
-        default:
-        transform = `translate(${margin.left},${height - margin.bottom})`
-      dy = '1em'
+      default:
+        transform = `translate(${margin.left},${height - margin.bottom})`;
+        dy = '1em';
     }
 
     return (
@@ -42,10 +42,10 @@ const Axis = React.createClass({
             textAnchor={orientation === 'left' ? 'end' : 'middle'}
             >
             {label}
-          </text>
-          })}
-        </g>
-    )
+          </text>;
+        })}
+      </g>
+    );
   }
 });
 

@@ -75,8 +75,8 @@ var ProjectBrowse = React.createClass({
   },
 
   render: function () {
-    const projects = this.props.api.projects;
-    const indicators = this.props.api.indicators;
+    // const projects = this.props.api.projects;
+    // const indicators = this.props.api.indicators;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
