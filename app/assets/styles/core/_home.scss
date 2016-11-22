@@ -1,5 +1,6 @@
-.overview--home {
+.overview-home {
   @extend .clearfix;
+  padding: ($global-spacing * 2) 0;
 }
 
 .inpage {
@@ -7,6 +8,7 @@
   font-weight: $base-font-light;
   letter-spacing: $global-spacing/4;
   margin-bottom: 0;
+  font-style: italic;
   } 
 }
 
@@ -25,5 +27,6 @@
   };
   li {
     margin-bottom: $global-spacing/2;
+    font-size: 0.875rem;
   }
 }

@@ -39,6 +39,7 @@ $root-font-size: 16px;
 $base-font-color: #9B9B9B;
 $base-font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
 $base-font-style: normal;
+$base-font-italic: 300i;
 $base-font-light: 300;
 $base-font-regular: 400;  
 $base-font-bold: 700;
@@ -72,7 +73,7 @@ $global-spacing: 1rem;
 /* Rows */
 
 $row-min-width: 320px;
-$row-max-width: 1280px;
+$row-max-width: 1180px;
 $jeet-max-width: $row-max-width; // reset jeet.gs max width
 
 /* Media queries */
