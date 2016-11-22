@@ -15,6 +15,14 @@
 
 .actions-filters {
   @include col(8/12);
+  .button--list {
+    li {
+      &:first-child {
+      margin-bottom: $global-spacing;
+      margin-right: $global-spacing * 2;
+    };
+    }
+  }
   @include media(small-down) {
   	@include col(12/12);
   	.button--list {

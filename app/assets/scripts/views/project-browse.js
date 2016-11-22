@@ -93,8 +93,8 @@ var ProjectBrowse = React.createClass({
             <div className='inpage__actions'>
             <div className='actions-filters'>
                 <ul className='button--list'>
-                  <li><button type='button' className='button button--medium button--primary drop__toggle--caret'>Add Indicator Overlays</button></li>
                   <li onClick={this.openModal}><button type='button' className='button button--medium button--primary'>Add &amp; Filter Projects</button></li>
+                  <li><button type='button' className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button></li>
                 </ul>
                 <div className='filters'>
                   <label className='heading--label'>Filters</label>
