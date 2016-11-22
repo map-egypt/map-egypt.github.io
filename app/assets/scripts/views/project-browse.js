@@ -15,8 +15,62 @@ var ProjectBrowse = React.createClass({
     api: React.PropTypes.object
   },
 
-  openModal: function () {
-    this.setState({ modal: true });
+  openModal: function () { this.setState({ modal: true }); },
+  closeModal: function () { this.setState({ modal: false }); },
+
+  renderModal: function () {
+    return (
+      <section className='modal modal--large'>
+        <div className='modal__inner modal__projects'>
+          <h1 className='inpage__title heading--deco heading--medium'>Add and Filter Projects</h1>
+          <div className='modal__filters'>
+            <div className='modal__filters--defaults'>
+              <label className="form__option form__option--custom-checkbox">
+                <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
+                <span className="form__option__text">Add All Projects</span>
+                <span className="form__option__ui"></span>
+              </label>
+              <a className='link--secondary'>reset filters</a>
+            </div>
+            <fieldset className="form__fieldset">
+              <div className="form__group">
+                <label className="form__label">Project Status</label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
+                  <span className="form__option__text">On Time</span>
+                  <span className="form__option__ui"></span>
+                </label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
+                  <span className="form__option__text">Delayed</span>
+                  <span className="form__option__ui"></span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset className="form__fieldset">
+              <div className="form__group">
+                <label className="form__label">Category</label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
+                  <span className="form__option__text">Category 1</span>
+                  <span className="form__option__ui"></span>
+                </label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
+                  <span className="form__option__text">Category 2</span>
+                  <span className="form__option__ui"></span>
+                </label>
+              </div>
+            </fieldset>
+            <ul className='button--list'>
+              <li><button type='button' className='button button--medium button--primary'>Apply</button></li>
+              <li><button type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
+            </ul>
+          </div>
+          <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
+        </div>
+      </section>
+    );
   },
 
   render: function () {
@@ -79,72 +133,12 @@ var ProjectBrowse = React.createClass({
           </div>
         </div>
 
-        {this.state.modal && showModal()}
+        {this.state.modal && this.renderModal()}
 
       </section>
     );
   }
 });
-
-function showModal () {
-  return (
-    <section className='modal modal--large'>
-      <div className='modal__inner modal__projects'>
-        <h1 className='inpage__title heading--deco heading--medium'>Add and Filter Projects</h1>
-
-        <div className='modal__filters'>
-          <div className='modal__filters--defaults'>
-            <label className="form__option form__option--custom-checkbox">
-              <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-              <span className="form__option__text">Add All Projects</span>
-              <span className="form__option__ui"></span>
-            </label>
-            <a className='link--secondary'>reset filters</a>
-          </div>
-
-          <fieldset className="form__fieldset">
-            <div className="form__group">
-              <label className="form__label">Project Status</label>
-              <label className="form__option form__option--custom-checkbox">
-                <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                <span className="form__option__text">On Time</span>
-                <span className="form__option__ui"></span>
-              </label>
-              <label className="form__option form__option--custom-checkbox">
-                <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                <span className="form__option__text">Delayed</span>
-                <span className="form__option__ui"></span>
-              </label>
-            </div>
-          </fieldset>
-
-          <fieldset className="form__fieldset">
-            <div className="form__group">
-              <label className="form__label">Category</label>
-              <label className="form__option form__option--custom-checkbox">
-                <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                <span className="form__option__text">Category 1</span>
-                <span className="form__option__ui"></span>
-              </label>
-              <label className="form__option form__option--custom-checkbox">
-                <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                <span className="form__option__text">Category 2</span>
-                <span className="form__option__ui"></span>
-              </label>
-            </div>
-          </fieldset>
-
-          <ul className='button--list'>
-            <li><button type='button' className='button button--medium button--primary'>Apply</button></li>
-            <li><button type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
-          </ul>
-
-        </div>
-        <button className='modal__button-dismiss' title='close'></button>
-      </div>
-    </section>
-  );
-}
 
 function mapStateToProps (state) {
   return {
