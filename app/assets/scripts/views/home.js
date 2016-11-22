@@ -2,7 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Map from '../components/map';
-// import HorizontalBarChart from '../components/charts/horizontal-bar';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
+
+const barChartMargin = { left: 150, right: 10, top: 10, bottom: 50 };
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -12,6 +14,18 @@ var Home = React.createClass({
   },
 
   render: function () {
+    const projects = this.props.api.projects;
+    const categories = {};
+    projects.forEach(function (project) {
+      project.categories.forEach(function (category) {
+        categories[category] = categories[category] + 1 || 1;
+      });
+    });
+    const bars = Object.keys(categories).map((category) => ({
+      name: category,
+      value: categories[category]
+    })).sort((a, b) => b.value > a.value ? -1 : 1);
+
     return (
       <div>
       <section className='inpage'>
@@ -63,6 +77,13 @@ var Home = React.createClass({
                   </li>
                 </ul>
               </div>
+
+              <HorizontalBarChart
+                data={bars}
+                margin={barChartMargin}
+                yTitle=''
+                xTitle='By category' />
+
               <div className='section__footer'>
                 <button type='button' className='button button--primary button--large'>View All Projects</button>
               </div>
