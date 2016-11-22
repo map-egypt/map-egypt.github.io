@@ -2,6 +2,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import ProjectCard from '../components/project-card';
+
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
 
@@ -68,6 +70,11 @@ var ProjectBrowse = React.createClass({
                   <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
                 </div>
               </div>
+
+              <ProjectCard />
+              <ProjectCard />
+              <ProjectCard />
+
             </section>
           </div>
         </div>
