@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
-import Map from './map';
+import Map from '../components/map';
 // import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 var Home = React.createClass({

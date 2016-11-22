@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
+import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 
 var ProjectBrowse = React.createClass({
@@ -111,6 +112,7 @@ var ProjectBrowse = React.createClass({
             </div>
           </div>
         </header>
+        <Map />
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
