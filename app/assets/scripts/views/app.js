@@ -18,7 +18,8 @@ var App = React.createClass({
     params: React.PropTypes.object,
     location: React.PropTypes.object,
     api: React.PropTypes.object,
-    dispatch: React.PropTypes.func
+    dispatch: React.PropTypes.func,
+    meta: React.PropTypes.object
   },
 
   validateLanguage: function (lang) {
@@ -72,6 +73,7 @@ var App = React.createClass({
           location={this.props.location}
           dispatch={this.props.dispatch}
           authenticated={this.props.api.authenticated}
+          lang={this.props.meta.lang}
         />
         <main className='page__body' role='main'>
           {this.props.children}
@@ -87,7 +89,8 @@ var App = React.createClass({
 
 function mapStateToProps (state) {
   return {
-    api: state.api
+    api: state.api,
+    meta: state.meta
   };
 }
 

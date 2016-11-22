@@ -27,7 +27,7 @@ const store = createStore(reducer, applyMiddleware(
   logger
 ));
 
-import { getAuthStatus, getProjects, getIndicators, getGeography } from './actions';
+import { getAuthStatus, getProjects, getIndicators, getGeography, updateLang } from './actions';
 store.dispatch(getAuthStatus());
 store.dispatch(getProjects());
 store.dispatch(getIndicators());
@@ -82,5 +82,14 @@ function redirectToLastUrl (nextState, replace) {
   if (path) {
     storage.clear('last_path_before_auth');
     replace({pathname: path});
+  }
+  detectLanguageChange(nextState.location);
+}
+
+function detectLanguageChange (location) {
+  const current = store.getState().meta.lang;
+  const next = location.pathname.split('/').filter(Boolean)[0];
+  if (!current || current !== next) {
+    store.dispatch(updateLang(next));
   }
 }

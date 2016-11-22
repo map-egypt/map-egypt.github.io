@@ -11,7 +11,8 @@ var PageHeader = React.createClass({
   propTypes: {
     location: React.PropTypes.object,
     dispatch: React.PropTypes.func,
-    authenticated: React.PropTypes.bool
+    authenticated: React.PropTypes.bool,
+    lang: React.PropTypes.string
   },
 
   onRootMenuClick: function (e) {
@@ -42,6 +43,7 @@ var PageHeader = React.createClass({
   // },
 
   render: function () {
+    const basepath = '/' + this.props.lang;
     return (
       <header className='page__header' role='banner'>
         <div className='inner'>
@@ -54,8 +56,8 @@ var PageHeader = React.createClass({
             <h2 className='page__prime-nav-title'><a href='#nav-block-browse' onClick={this.offcanvasMenuClick}><span>Menu</span></a></h2>
             <div className='nav-block' id='nav-block-browse'>
               <ul className='browse-menu'>
-                <li><Link to='/projects' title='Visit projects and indicators page' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>Projects & Indicators</span></Link></li>
-                <li><Link to='/about' title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco' onClick={this.onRootMenuClick}><span>About</span></Link></li>
+                <li><Link to={basepath + '/projects'} title='Visit projects and indicators page' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>Projects & Indicators</span></Link></li>
+                <li><Link to={basepath + '/about'} title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco' onClick={this.onRootMenuClick}><span>About</span></Link></li>
               </ul>
               <ul className='utilities-menu'>
                 <li><Link to='/en' title='Switch to English' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>

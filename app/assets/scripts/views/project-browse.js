@@ -1,10 +1,82 @@
 'use strict';
 import React from 'react';
+import { connect } from 'react-redux';
+
+import Map from '../components/map';
+import ProjectCard from '../components/project-card';
 
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
 
+  getInitialState: function () {
+    return { modal: false };
+  },
+
+  propTypes: {
+    api: React.PropTypes.object
+  },
+
+  openModal: function () { this.setState({ modal: true }); },
+  closeModal: function () { this.setState({ modal: false }); },
+
+  renderModal: function () {
+    return (
+      <section className='modal modal--large'>
+        <div className='modal__inner modal__projects'>
+          <h1 className='inpage__title heading--deco heading--medium'>Add and Filter Projects</h1>
+          <div className='modal__filters'>
+            <div className='modal__filters--defaults'>
+              <label className="form__option form__option--custom-checkbox">
+                <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
+                <span className="form__option__text">Add All Projects</span>
+                <span className="form__option__ui"></span>
+              </label>
+              <a className='link--secondary'>reset filters</a>
+            </div>
+            <fieldset className="form__fieldset">
+              <div className="form__group">
+                <label className="form__label">Project Status</label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
+                  <span className="form__option__text">On Time</span>
+                  <span className="form__option__ui"></span>
+                </label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
+                  <span className="form__option__text">Delayed</span>
+                  <span className="form__option__ui"></span>
+                </label>
+              </div>
+            </fieldset>
+            <fieldset className="form__fieldset">
+              <div className="form__group">
+                <label className="form__label">Category</label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
+                  <span className="form__option__text">Category 1</span>
+                  <span className="form__option__ui"></span>
+                </label>
+                <label className="form__option form__option--custom-checkbox">
+                  <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
+                  <span className="form__option__text">Category 2</span>
+                  <span className="form__option__ui"></span>
+                </label>
+              </div>
+            </fieldset>
+            <ul className='button--list'>
+              <li><button type='button' className='button button--medium button--primary'>Apply</button></li>
+              <li><button type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
+            </ul>
+          </div>
+          <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
+        </div>
+      </section>
+    );
+  },
+
   render: function () {
+    // const projects = this.props.api.projects;
+    // const indicators = this.props.api.indicators;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -22,7 +94,7 @@ var ProjectBrowse = React.createClass({
             <div className='actions-filters'>
                 <ul className='button--list'>
                   <li><button type='button' className='button button--medium button--primary drop__toggle--caret'>Add Indicator Overlays</button></li>
-                  <li><button type='button' className='button button--medium button--primary'>Add & Filter Projects</button></li>
+                  <li onClick={this.openModal}><button type='button' className='button button--medium button--primary'>Add &amp; Filter Projects</button></li>
                 </ul>
                 <div className='filters'>
                   <label className='heading--label'>Filters</label>
@@ -40,6 +112,7 @@ var ProjectBrowse = React.createClass({
             </div>
           </div>
         </header>
+        <Map />
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
@@ -53,107 +126,26 @@ var ProjectBrowse = React.createClass({
                   <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
                 </div>
               </div>
+
+              <ProjectCard />
+              <ProjectCard />
+              <ProjectCard />
+
             </section>
           </div>
         </div>
 
-       {/* <section className='modal modal--large'>
-          <div className='modal__inner modal__projects'>
-            <h1 className='inpage__title heading--deco heading--medium'>Add and Filter Projects</h1>
+        {this.state.modal && this.renderModal()}
 
-            <div className='modal__filters'>
-              <div className='modal__filters--defaults'>
-                 <label className="form__option form__option--custom-checkbox">
-                    <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                    <span className="form__option__text">Add All Projects</span>
-                    <span className="form__option__ui"></span>
-                 </label>
-                 <a className='link--secondary'>reset filters</a>
-              </div>
-
-              <fieldset className="form__fieldset">
-                <div className="form__group">
-                 <label className="form__label">Project Status</label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                   <span className="form__option__text">On Time</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                   <span className="form__option__text">Delayed</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                </div>
-              </fieldset>
-
-              <fieldset className="form__fieldset">
-                <div className="form__group">
-                 <label className="form__label">Category</label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                   <span className="form__option__text">Category 1</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                   <span className="form__option__text">Category 2</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                   <span className="form__option__text">Category 3</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                   <span className="form__option__text">Category 4</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                </div>
-              </fieldset>
-
-              <fieldset className="form__fieldset">
-                <div className="form__group">
-                 <label className="form__label">Category</label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                   <span className="form__option__text">Category 1</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                   <span className="form__option__text">Category 2</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                   <span className="form__option__text">Category 3</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                 <label className="form__option form__option--custom-checkbox">
-                   <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                   <span className="form__option__text">Category 4</span>
-                   <span className="form__option__ui"></span>
-                 </label>
-                </div>
-              </fieldset>
-
-              <ul className='button--list'>
-                <li><button type='button' className='button button--medium button--primary'>Apply</button></li>
-                <li><button type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
-              </ul>
-
-            </div>
-            <button className='modal__button-dismiss' title='close'></button>
-          </div>
-        </section> */}
       </section>
     );
   }
 });
 
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
+function mapStateToProps (state) {
+  return {
+    api: state.api
+  };
+}
 
-export default ProjectBrowse;
+module.exports = connect(mapStateToProps)(ProjectBrowse);
