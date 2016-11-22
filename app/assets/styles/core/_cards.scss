@@ -7,6 +7,7 @@
     margin-bottom: 0;
     font-weight: $base-font-light;
     font-size: 0.75rem;
+    line-height: 0.75rem;
   }
 
   &__title {
@@ -57,7 +58,7 @@
   font-size: 0.75rem;
   font-weight: $base-font-bold;
   color: $base-color;
-  margin-bottom: 0.5rem;
+  margin: 0.75rem 0;
 
   &__label {
     @extend .visually-hidden;
@@ -110,7 +111,7 @@
 
   li {
     float: left;
-    box-shadow: 1px 0 0 $base-font-color;
+    box-shadow: 1px 0 0 $tertiary-color;
     padding-right: 1rem;
     margin-right: 1rem; 
 
