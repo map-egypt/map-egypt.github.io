@@ -9,12 +9,12 @@ var ProjectCard = React.createClass({
 
   render: function () {
     return (
-      <div style={{ width: '20rem' }}>
+      <div className='project'>
         <article className='card project--ontime'>
           <div className='card__contents'>
             <header className='card__header'>
               <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-              <h1 className='card__title'><a className='link--deco' href=''>Project Name</a></h1>
+              <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
 
               <ul className='card-cmplt'>
                 <li><span>60% cmplt</span></li>

@@ -116,21 +116,29 @@ var ProjectBrowse = React.createClass({
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
-              <h2 className='section__title'>Selected SDG Indicators</h2>
+              <h1 className='section__title heading--small'>Selected SDG Indicators</h1>
             </section>
             <section className='inpage__section project-list'>
               <div className='section__header'>
-                <h2 className='section__title'>Projects</h2>
+                <h1 className='section__title'>Projects</h1>
                 <div className='sort'>
                   <label className='heading--label'>Sort By:</label>
                   <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
                 </div>
               </div>
-
-              <ProjectCard />
-              <ProjectCard />
-              <ProjectCard />
-
+              <div className='section__content'>
+                <ul className='projects-list'>
+                  <li className='projects-list__card'>
+                    <ProjectCard />
+                  </li>
+                  <li className='projects-list__card'>
+                    <ProjectCard />
+                  </li>
+                  <li className='projects-list__card'>
+                    <ProjectCard />
+                  </li>
+                </ul>
+              </div>
             </section>
           </div>
         </div>

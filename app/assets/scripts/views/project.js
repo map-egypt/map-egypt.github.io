@@ -97,7 +97,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--charts'>
             </section>
             <section className='inpage__section inpage__section--indicators'>
-              <h1 className='section__title heading--xsmall'>Monitoring Indicators</h1>
+              <h1 className='section__title heading--small'>Monitoring Indicators</h1>
               <table className='inpage__table'>
                 <thead>
                   <tr>
@@ -139,14 +139,14 @@ var Project = React.createClass({
               </table>
             </section>
             <section className='inpage__section inpage__section--comparison'>
-              <h1 className='section__title heading--xsmall'>Project Comparison By Cateogry</h1>
+              <h1 className='section__title heading--small'>Project Comparison By Cateogry</h1>
             </section>
           </div>
           <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h1 className='section__title heading--xsmall'>Related Projects By SDS Goal</h1>
-              <ul className='related-projects'>
-                <li className='related-projects-card'>
+              <h1 className='section__title heading--small'>Related Projects By SDS Goal</h1>
+              <ul className='projects-list'>
+                <li className='projects-list__card'>
                   <div>
                     <article className='card project--ontime'>
                       <div className='card__contents'>
@@ -177,7 +177,7 @@ var Project = React.createClass({
                   </div>
                 </li>
 
-                <li className='related-projects-card'>
+                <li className='projects-list__card'>
                   <div>
                     <article className='card project--ontime'>
                       <div className='card__contents'>
@@ -208,7 +208,7 @@ var Project = React.createClass({
                   </div>
                 </li>
 
-                <li className='related-projects-card'>
+                <li className='projects-list__card'>
                   <div>
                     <article className='card project--ontime'>
                       <div className='card__contents'>

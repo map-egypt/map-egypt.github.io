@@ -129,3 +129,45 @@
     color: rgba($base-color, 0.66);
   }
 }
+
+.project-list {
+  list-style: none;
+}
+
+.inpage__section--bleed {
+  .projects-list__card {
+    list-style: none;
+    padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
+    display: inline-block;
+    @include col(4/12, $offset: 0/12); 
+    max-width: 20rem;
+    min-width: 18rem; 
+    @include media(small-down) {
+      @include col(5.5/12);
+    }
+    @include media(xsmall-only) {
+      @include col(12/12);
+    }
+    @include media(medium-up) {
+      max-width: 25rem;
+      @include col(4/12);
+    }
+  }
+}
+
+.inpage__section {
+  .projects-list__card {
+    list-style: none;
+    padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
+    display: inline-block;
+    max-width: 20rem;
+    min-width: 18rem; 
+    @include col(4/12);
+    @include media(small-down) {
+      @include col(6/12);
+    }
+    @include media(xsmall-only) {
+      @include col(12/12);
+    }
+  }
+}

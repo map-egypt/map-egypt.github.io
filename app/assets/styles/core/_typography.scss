@@ -235,7 +235,11 @@ abbr[title] {
 }
 
 .heading--small {
-  @include heading(1rem, xlarge-up);      // 16, 20, 24, 28
+  font-size: 1.5rem;
+  @include media(small-down) {
+    font-size:1.25rem;
+    line-height: 1.75rem;
+  }
 }
 
 .heading--xsmall, 

@@ -47,4 +47,13 @@
   }
 }
 
+.section__header {
+  float: left;
+  @include col(12/12);
+}
+
+.section__content {
+  float: left;
+  @include col(12/12);
+}
 
