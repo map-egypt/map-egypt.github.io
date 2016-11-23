@@ -1,12 +1,53 @@
+
+
 .chart-container {
   height: 240px;
-  width: 50%;
+  width: 100%;
+  float: left;
 }
 
 .pie__slice__on-time {
-  fill: #333;
+  fill: $base-color;
 }
 
 .pie__slice__delayed {
-  fill: #999;
+  fill: rgba(43, 35, 66, 0.55);
+}
+
+.chart__bar {
+  fill: $base-color;
+}
+
+.chart__axis-ticks {
+  fill: $base-font-color;
+  font-size: 0.75rem;
+  font-weight: $base-font-light;
+}
+
+.status-key {
+  float:left;
+  margin-left: calc(50% + 2rem);
+  transform: translate(-50%, 0);
+  .status-key__label {
+    float: left;
+    font-size: 0.875rem;
+    color: $base-color;
+    margin-right: $global-spacing * 3;
+    position: relative;
+  }
+  .status-key__label:before {
+    content: '';
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    top: .325rem;
+    left: -1rem;
+    border-radius: .15rem;
+  }
+  .status-ontime:before {
+    background: $base-color;
+  }
+  .status-delayed:before {
+    background: rgba(43, 35, 66, 0.55);
+  }
 }

@@ -67,7 +67,7 @@
   &__section--bleed {
     @include col(12/12);
     background-color: #fff;
-    padding: $global-spacing * 2 0;
+    padding: $global-spacing * 4 0;
     .related-projects {
       @extend .clearfix;
       @include col(12/12);

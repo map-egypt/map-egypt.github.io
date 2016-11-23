@@ -10,8 +10,7 @@ var HorizontalBarChart = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
-    yTitle: React.PropTypes.string,
-    xTitle: React.PropTypes.string
+    yTitle: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -39,7 +38,7 @@ var HorizontalBarChart = React.createClass({
 
   render: function () {
     const { width, height } = this.state;
-    const { data, margin, yTitle, xTitle } = this.props;
+    const { data, margin, yTitle } = this.props;
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -100,12 +99,7 @@ var HorizontalBarChart = React.createClass({
             textAnchor={'middle'}
             className={'chart__axis-title'}
             >{yTitle}</text>
-          <text
-            x={(width - margin.left - margin.right) / 2 + margin.left}
-            y={height - 14}
-            textAnchor={'middle'}
-            className={'chart__axis-title'}
-            >{xTitle}</text>
+
         </svg>
       </div>
     );
