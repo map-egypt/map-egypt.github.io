@@ -1,5 +1,5 @@
 .error {
-  height: 200px;
+  height: 50vh;
   width: 100%;
   margin: 0 auto;
   padding: 20px;
@@ -8,18 +8,21 @@
   align-items: center;
   resize: both;
   text-align: center;
+  position: relative;
 }
 
 .error-content {
   width: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -30%);
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
-  padding: 20px;
   resize: both;
   p {
     font-size: 1.25rem;
+  }
+  a {
+    text-decoration: none;
   }
   .heading--deco::after {
     left: 50%;
