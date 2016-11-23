@@ -6,10 +6,13 @@ var UhOh = React.createClass({
 
   render: function () {
     return (
-      <div>
-        <h1>Uh Oh!</h1>
-        <p>You're seaching for something that doesn't exist...</p>
+    <div className='error'>
+      <div className='error-content'>
+        <h1 className='heading--xxlarge heading--deco'>Page Not Found</h1>
+        <p>We were not able to find the page you're looking for.</p>
+        <button className='button button--primary button--large'>Take Me Home</button>
       </div>
+    </div>
     );
   }
 });

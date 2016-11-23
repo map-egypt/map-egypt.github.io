@@ -1,0 +1,28 @@
+.error {
+  height: 200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  resize: both;
+  text-align: center;
+}
+
+.error-content {
+  width: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 20px;
+  resize: both;
+  p {
+    font-size: 1.25rem;
+  }
+  .heading--deco::after {
+    left: 50%;
+    transform: translate(-50%, 0)
+  }
+}

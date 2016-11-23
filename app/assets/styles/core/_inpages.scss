@@ -72,24 +72,6 @@
       @extend .clearfix;
       @include col(12/12);
     }
-    .related-projects-card {
-      list-style: none;
-      padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
-      display: inline-block;
-      @include col(4/12, $offset: 0/12); 
-      min-width: 14rem; 
-      @include media(small-down) {
-        @include col(5.5/12);
-      }
-      @include media(xsmall-only) {
-        @include col(12/12);
-      }
-      @include media(medium-up) {
-        max-width: 25rem;
-        @include col(4/12);
-      }
-      
-    }
   }
 
   &__table {
