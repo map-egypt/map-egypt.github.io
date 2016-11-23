@@ -34,14 +34,6 @@ var PageHeader = React.createClass({
     this.props.dispatch(updateAuth(false));
   },
 
-  // componentDidMount: function () {
-    // document.addEventListener('click', this.documentListener);
-  // },
-
-  // componentWillUnmount: function () {
-  //   document.removeEventListener('click', this.documentListener);
-  // },
-
   render: function () {
     const basepath = '/' + this.props.lang;
     return (

@@ -26,7 +26,7 @@ var App = React.createClass({
     if (isValidLanguage(lang)) {
       setLanguage(lang);
     } else {
-      hashHistory.replace('/uhoh');
+      hashHistory.replace('/404');
     }
   },
 
