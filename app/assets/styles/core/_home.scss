@@ -3,6 +3,25 @@
   padding: ($global-spacing * 2) 0;
 }
 
+.overview-charts {
+  box-shadow: inset 0 1px 0 0 $tertiary-color;
+  padding: ($global-spacing * 4) 0;
+  @extend .clearfix;
+  h3 {
+    font-size: 1rem;
+    font-family: $base-font-family;
+    text-align: center;
+  }
+}
+
+.chart-content {
+  @extend .clearfix;
+  @include col(12/12);
+  @include media(medium-up) {
+    @include col(6/12);
+  }
+}
+
 .inpage {
   &__subtitle--alt {
   font-weight: $base-font-light;

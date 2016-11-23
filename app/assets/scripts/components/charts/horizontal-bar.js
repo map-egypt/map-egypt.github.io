@@ -100,12 +100,7 @@ var HorizontalBarChart = React.createClass({
             textAnchor={'middle'}
             className={'chart__axis-title'}
             >{yTitle}</text>
-          <text
-            x={(width - margin.left - margin.right) / 2 + margin.left}
-            y={height - 14}
-            textAnchor={'middle'}
-            className={'chart__axis-title'}
-            >{xTitle}</text>
+
         </svg>
       </div>
     );

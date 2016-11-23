@@ -45,7 +45,7 @@ var PieChart = React.createClass({
 
     const arc = d3.arc()
       .outerRadius(radius - 10)
-      .innerRadius(0);
+      .innerRadius(100);
 
     const dataValues = d3.pie()
     .value((d) => d.value)(this.props.data);
