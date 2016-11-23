@@ -10,6 +10,7 @@ const BASE_URL = baseUrl || 'http://localhost:3000';
 export const ACTION = 'ACTION';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
+export const PROJECT = 'PROJECT';
 export const INDICATORS = 'INDICATORS';
 export const GEOGRAPHY = 'GEOGRAPHY';
 export const LANGUAGE = 'LANGUAGE';
@@ -24,6 +25,10 @@ export function updateAuth (data) {
 
 export function updateProjects (data) {
   return { type: PROJECTS, data: data };
+}
+
+export function updateProject (data) {
+  return { type: PROJECT, data: data };
 }
 
 export function updateIndicators (data) {
@@ -50,6 +55,17 @@ export function getProjects () {
   return function (dispatch) {
     queryApi('projects', function (data) {
       return dispatch(updateProjects(data));
+    });
+  };
+}
+
+export function getProject (id) {
+  if (!id) {
+    throw new Error('Project endpoint requires project id');
+  }
+  return function (dispatch) {
+    queryApi('projects/' + id, function (data) {
+      return dispatch(updateProject(data));
     });
   };
 }
