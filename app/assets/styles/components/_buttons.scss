@@ -244,7 +244,7 @@
 
 .button--tag {
   color: $primary-color;
-  background-color: $tertiary-color;
+  background-color: $input-color;
   margin-right: 0.5rem;
   &::after {
     @extend %collecticon-xmark;
@@ -259,7 +259,7 @@
 }
 
 .button--secondary {
-  background-color: $tertiary-color;
+  background-color: $input-color;
   color: $base-color;
 }
 
