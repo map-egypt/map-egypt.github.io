@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
-import { parseProjectDate } from '../utils/date';
+import * as Project from '../components/project-card';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -23,15 +23,13 @@ var Home = React.createClass({
       project.categories.forEach(function (category) {
         categories[category] = categories[category] + 1 || 1;
       });
-
-      let planned = parseProjectDate(project.planned_end_date);
-      let actual = parseProjectDate(project.actual_end_date);
-      if (!actual || !planned) {
+      const ontime = Project.ontime(project);
+      if (ontime === null) {
         return;
-      } else if (actual > planned) {
-        status.delayed += 1;
-      } else {
+      } else if (ontime) {
         status.ontime += 1;
+      } else {
+        project.delayed += 1;
       }
     });
 
