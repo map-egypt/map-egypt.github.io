@@ -38,7 +38,7 @@ var HorizontalBarChart = React.createClass({
 
   render: function () {
     const { width, height } = this.state;
-    const { data, margin, yTitle, xTitle } = this.props;
+    const { data, margin, yTitle} = this.props;
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
