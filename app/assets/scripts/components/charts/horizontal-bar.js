@@ -11,7 +11,6 @@ var HorizontalBarChart = React.createClass({
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
     yTitle: React.PropTypes.string,
-    xTitle: React.PropTypes.string
   },
 
   getInitialState: function () {
