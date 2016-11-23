@@ -236,6 +236,7 @@ abbr[title] {
 
 .heading--small {
   font-size: 1.5rem;
+  line-height: 2rem;
   @include media(small-down) {
     font-size:1.25rem;
     line-height: 1.75rem;
