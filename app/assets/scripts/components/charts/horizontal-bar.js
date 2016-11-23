@@ -10,7 +10,7 @@ var HorizontalBarChart = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
-    yTitle: React.PropTypes.string,
+    yTitle: React.PropTypes.string
   },
 
   getInitialState: function () {
