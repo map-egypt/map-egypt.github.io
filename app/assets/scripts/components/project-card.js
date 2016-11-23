@@ -73,4 +73,4 @@ var ProjectCard = React.createClass({
   }
 });
 module.exports = ProjectCard;
-module.exports.ontime = isOntime;
+module.exports.isOntime = isOntime;

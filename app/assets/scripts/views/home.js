@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
-import * as Project from '../components/project-card';
+import {isOntime} from '../components/project-card';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -23,7 +23,7 @@ var Home = React.createClass({
       project.categories.forEach(function (category) {
         categories[category] = categories[category] + 1 || 1;
       });
-      const ontime = Project.ontime(project);
+      const ontime = isOntime(project);
       if (ontime === null) {
         return;
       } else if (ontime) {

@@ -1,11 +1,48 @@
 'use strict';
+import path from 'path';
 import React from 'react';
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { get } from 'object-path';
 import Map from '../components/map';
+import { getProject } from '../actions';
+import slugify from '../utils/slugify';
+import { isOntime } from '../components/project-card';
+import { formatDate } from '../utils/date';
+import { tally, shortTally } from '../utils/format';
+
+function categoryLink (base, categoryName) {
+  return path.resolve(base, 'category', slugify(categoryName));
+}
 
 var Project = React.createClass({
   displayName: 'Project',
 
+  propTypes: {
+    params: React.PropTypes.object,
+    dispatch: React.PropTypes.func,
+    api: React.PropTypes.object,
+    meta: React.PropTypes.object
+  },
+
+  componentWillMount: function () {
+    this.props.dispatch(getProject(this.props.params.id));
+  },
+
   render: function () {
+    const meta = get(this.props.api, ['projectDetail', this.props.params.id]);
+    if (!meta) {
+      return <div></div>; // TODO loading indicator
+    }
+    const data = meta.data;
+    console.log(data);
+    const basepath = '/' + this.props.meta.lang;
+    const ontime = isOntime(data);
+    const lastUpdated = formatDate(meta.updated_at) || '';
+    const budget = get(data, 'budget', []).reduce((a, b) => {
+      return a + get(b, 'fund.amount', 0);
+    }, 0);
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -17,13 +54,17 @@ var Project = React.createClass({
                 <li><button className='button button--medium button--primary'>Share</button></li>
               </ul>
               </div>
-              <p className='inpage__subtitle'><a className='link--secondary' href=''>Category</a></p>
-              <h1 className='inpage__title heading--deco heading--large'>Project Name</h1>
-              <dl className='inpage-meta project--ontime'>
+              <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
+              <div>
+                {get(data, 'category', []).map((category, i) => <span key={i} className='inpage__subtitle'>
+                  <Link to={categoryLink(basepath, category)} className='link--secondary' href=''>{category}</Link>&nbsp;
+                </span>)}
+              </div>
+              <dl className={'inpage-meta project--' + ontime ? 'ontime' : 'delayed'}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
-                <dd className='inpage-meta__value inpage-meta__value--status'>On time</dd>
+                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
                 <dt className='inpage-meta__label'>Last Update: </dt>
-                <dd className='inpage-meta__value'> Jun. 30, 2016</dd>
+                <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
             </div>
           </div>
@@ -37,20 +78,27 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>$50M <small>funding</small></li>
-                  <li>20,000 <small>households</small></li>
+                  <li>${shortTally(budget)} <small>Funding</small></li>
+                  <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
 
                 <div className='inpage__overview-links'>
                   <h2 className='overview-item__title heading-alt'>Objective</h2>
                   <ul>
-                    <li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In auctor sed leo nec scelerisque. Nullam fermentum ligula vitae elit scelerisque, eget tempus quam tincidunt. Integer porta in est non tempus. Etiam vel arcu urna.</li>
+                    <li>{data.description}</li>
                   </ul>
 
                 <div className='overview-item'>
                   <h1 className='overview-item__title heading-alt'>Location</h1>
                   <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Location</span></a></li>
+                    {get(data, 'location', []).map((loc, i) => {
+                      const display = loc.district.district || loc.district.governorate;
+                      return (
+                        <li key={i}>
+                          <a href='' className='link--primary'><span>{display}</span></a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
 
@@ -71,23 +119,33 @@ var Project = React.createClass({
                 <div className='overview-item'>
                   <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
                   <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Ministry Department</span></a></li>
+                    <li><a href='' className='link--primary'><span>{data.responsible_ministry}</span></a></li>
                   </ul>
                 </div>
 
                 <div className='overview-item'>
                   <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
                   <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
-                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                    {get(data, 'sdg_indicator', []).map((indicator, i) => {
+                      return (
+                        <li key={i}>
+                          <a href='' className='link--primary'><span>{indicator}</span></a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
 
                 <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
+                  <h2 className='overview-item__title heading-alt'>SDS Indicator</h2>
                   <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
-                    <li><a href='' className='link--primary'><span>Name of Indicator</span></a></li>
+                    {get(data, 'sds_indicator', []).map((indicator, i) => {
+                      return (
+                        <li key={i}>
+                          <a href='' className='link--primary'><span>{indicator}</span></a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
 
@@ -251,4 +309,11 @@ var Project = React.createClass({
 // /////////////////////////////////////////////////////////////////// //
 // Connect functions
 
-export default Project;
+function mapStateToProps (state) {
+  return {
+    api: state.api,
+    meta: state.meta
+  };
+}
+
+module.exports = connect(mapStateToProps)(Project);
