@@ -7,8 +7,9 @@ import * as actions from '../app/assets/scripts/actions';
 test('spot check actions and action creators', function (t) {
   const actionTypes = Object.keys(actions)
     .filter(k => typeof actions[k] === 'string');
+  const ID = 'id';
   const actionCreators = Object.keys(actions)
-    .filter(k => typeof actions[k] === 'function' && typeof actions[k]() === 'object');
+    .filter(k => typeof actions[k] === 'function' && typeof actions[k](ID) === 'object');
 
   t.deepEqual(actionTypes, actionTypes.map(k => actions[k]),
     'action type constant names match values');

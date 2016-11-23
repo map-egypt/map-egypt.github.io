@@ -55,11 +55,11 @@ var HorizontalBarChart = React.createClass({
     .paddingInner(0.7)
     .paddingOuter(0.1);
 
-    let xScale = ordinalScale.rangeRound([0, innerWidth]).domain(dataNames);
-    let xLabels = dataNames;
-    let yScale = scaleLinear().range([innerHeight, 0]).domain([0, max(dataValues)]);
-    let yLabels = yScale.ticks(3);
-    let rectWidth = xScale.bandwidth();
+    let xScale = scaleLinear().range([0, innerWidth]).domain([0, max(dataValues)]);
+    let xLabels = xScale.ticks(3);
+    let yScale = ordinalScale.rangeRound([innerHeight, 0]).domain(dataNames);
+    let yLabels = dataNames;
+    let rectHeight = yScale.bandwidth();
 
     return (
       <div className='chart-container' ref='chartContainer'>
@@ -67,7 +67,7 @@ var HorizontalBarChart = React.createClass({
           <Axis
             scale={xScale}
             labels={xLabels}
-            orientation={'bottom'}
+            orientation='bottom'
             height={height}
             width={width}
             margin={margin}
@@ -85,10 +85,10 @@ var HorizontalBarChart = React.createClass({
               return <rect
                 key={d.name}
                 className='chart__bar'
-                y={yScale(d.value)}
-                x={xScale(d.name)}
-                height={innerHeight - yScale(d.value)}
-                width={rectWidth}
+                y={yScale(d.name) + rectHeight / 2}
+                x={0}
+                height={rectHeight}
+                width={xScale(d.value)}
               />;
             })}
           </g>

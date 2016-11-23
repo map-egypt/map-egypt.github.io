@@ -2,7 +2,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Map from '../components/map';
-// import HorizontalBarChart from '../components/charts/horizontal-bar';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
+import PieChart from '../components/charts/pie';
+import { parseProjectDate } from '../utils/date';
+
+const barChartMargin = { left: 150, right: 10, top: 10, bottom: 50 };
 
 var Home = React.createClass({
   displayName: 'Home',
@@ -12,6 +16,38 @@ var Home = React.createClass({
   },
 
   render: function () {
+    const projects = this.props.api.projects;
+    const categories = {};
+    const status = { ontime: 0, delayed: 0 };
+    projects.forEach(function (project) {
+      project.categories.forEach(function (category) {
+        categories[category] = categories[category] + 1 || 1;
+      });
+
+      let planned = parseProjectDate(project.planned_end_date);
+      let actual = parseProjectDate(project.actual_end_date);
+      if (!actual || !planned) {
+        return;
+      } else if (actual > planned) {
+        status.delayed += 1;
+      } else {
+        status.ontime += 1;
+      }
+    });
+
+    const bars = Object.keys(categories).map((category) => ({
+      name: category,
+      value: categories[category]
+    })).sort((a, b) => b.value > a.value ? -1 : 1);
+
+    const pie = [{
+      name: 'On Time',
+      value: status.ontime
+    }, {
+      name: 'Delayed',
+      value: status.delayed
+    }];
+
     return (
       <div>
       <section className='inpage'>
@@ -63,6 +99,15 @@ var Home = React.createClass({
                   </li>
                 </ul>
               </div>
+
+              <HorizontalBarChart
+                data={bars}
+                margin={barChartMargin}
+                yTitle=''
+                xTitle='By category' />
+
+              <PieChart data={pie} />
+
               <div className='section__footer'>
                 <button type='button' className='button button--primary button--large'>View All Projects</button>
               </div>
