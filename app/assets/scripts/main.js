@@ -56,7 +56,7 @@ import Elements from './views/elements';
 render((
   <Provider store={store}>
     <Router history={hashHistory} render={applyRouterMiddleware(scrollerMiddleware)}>
-      <Route path='/uhoh' component={UhOh} />
+      <Route path='/404' component={UhOh} />
       <Route path='/access_token=:token' />
       <Route path='/:lang' component={App} onEnter={redirectToLastUrl}>
         <Route path='projects' component={ProjectBrowse} />
