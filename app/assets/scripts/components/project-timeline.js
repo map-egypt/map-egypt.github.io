@@ -12,7 +12,6 @@ var ProjectTimeline = React.createClass({
 
   render: function () {
     const project = this.props.project;
-    console.log(project);
 
     const plannedStart = parseProjectDate(project.planned_start_date);
     const plannedEnd = parseProjectDate(project.planned_end_date);

@@ -223,7 +223,7 @@ var Project = React.createClass({
               )}
             </section>
             <section className='inpage__section inpage__section--comparison'>
-              <h1 className='section__title heading--small'>Project Comparison By Cateogry</h1>
+              <h1 className='section__title heading--small'>Project Comparison By Category</h1>
             </section>
           </div>
           <section className='inpage__section--bleed'>
