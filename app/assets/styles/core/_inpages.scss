@@ -7,6 +7,17 @@
     }
   }
 
+  &__header--alt {
+
+  }
+
+  &__body--alt {
+    padding: $global-spacing 0 ($global-spacing * 4) 0;
+    p {
+      @include col(10/12);
+    }
+  }
+
   &__subtitle {
     margin-bottom: 0;
     font-weight: $base-font-light;
