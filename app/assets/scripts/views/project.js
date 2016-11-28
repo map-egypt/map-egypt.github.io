@@ -13,6 +13,7 @@ import Map from '../components/map';
 import Share from '../components/share';
 import ProjectCard from '../components/project-card';
 import ProjectTimeline from '../components/project-timeline';
+// import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
@@ -184,6 +185,7 @@ var Project = React.createClass({
                 </div>
                 <div className='chart-content'>
                   <h3>Disbursement vs. Reach</h3>
+                  <p style={{'text-align': 'center'}}><em>Waiting for data...</em></p>
                 </div>
               </div>
 
