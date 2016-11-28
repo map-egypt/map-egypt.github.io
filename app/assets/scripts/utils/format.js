@@ -13,3 +13,11 @@ const shortTally = (n) => {
   return tally(n);
 };
 module.exports.shortTally = shortTally;
+
+function pct (n) {
+  if (n || typeof n === 'number') {
+    return n + '%';
+  }
+  return n;
+}
+module.exports.pct = pct;
