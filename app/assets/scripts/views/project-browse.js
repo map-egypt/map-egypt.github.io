@@ -13,7 +13,8 @@ var ProjectBrowse = React.createClass({
   },
 
   propTypes: {
-    api: React.PropTypes.object
+    api: React.PropTypes.object,
+    meta: React.PropTypes.object
   },
 
   openModal: function () { this.setState({ modal: true }); },
@@ -75,8 +76,7 @@ var ProjectBrowse = React.createClass({
   },
 
   render: function () {
-    // const projects = this.props.api.projects;
-    // const indicators = this.props.api.indicators;
+    const projects = this.props.api.projects;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -128,15 +128,17 @@ var ProjectBrowse = React.createClass({
               </div>
               <div className='section__content'>
                 <ul className='projects-list'>
-                  <li className='projects-list__card'>
-                    <ProjectCard />
-                  </li>
-                  <li className='projects-list__card'>
-                    <ProjectCard />
-                  </li>
-                  <li className='projects-list__card'>
-                    <ProjectCard />
-                  </li>
+                  {projects.map((p, i) => {
+                    return (
+                      <li key={i}
+                        className='projects-list__card'>
+                        <ProjectCard
+                          lang={this.props.meta.lang}
+                          project={p}
+                        />
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </section>
@@ -152,7 +154,8 @@ var ProjectBrowse = React.createClass({
 
 function mapStateToProps (state) {
   return {
-    api: state.api
+    api: state.api,
+    meta: state.meta
   };
 }
 

@@ -6,8 +6,17 @@
   &__subtitle {
     margin-bottom: 0;
     font-weight: $base-font-light;
-    font-size: 0.75rem;
-    line-height: 0.75rem;
+    font-size: 0.675rem;
+    line-height: 1rem;
+    margin: 0.5rem 0;
+    a {
+  /*    text-decoration: none;
+    color: $base-color;*/
+      margin-right: 0.35rem;
+ /*     background-color: $input-color;
+      padding: 0.15rem 0.25rem;*/
+     /* border-radius: 0.25rem;/**/
+    }
   }
 
   &__title {
@@ -20,7 +29,16 @@
     > *:last-child {
       margin-bottom: 0;
     }
+
+    p {
+      margin-bottom: 0.5rem;
+    }
   }
+
+}
+
+.card__categories {
+  margin-bottom: 0.75rem;
 }
 
 /* Project cards specifics
@@ -159,15 +177,23 @@
   .projects-list__card {
     list-style: none;
     padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
-    display: inline-block;
-    max-width: 20rem;
-    min-width: 18rem; 
-    @include col(4/12);
+/*    display: inline-block;*/
+   /* max-width: 20rem;*/
+
+    @include media(medium-up) {
+       @include col(4/12, $cycle: 3);
+        min-width: 10rem; 
+    }
+    @include media(medium-list-down) {
+      @include col(6/12, $uncycle: 3, $cycle: 2);
+ /*     max-width: 20rem;*/
+    }
     @include media(small-down) {
-      @include col(6/12);
+      @include col(6/12, $cycle: 2);
     }
     @include media(xsmall-only) {
-      @include col(12/12);
+      @include col(12/12, $uncycle: 1);
+      max-width: 18rem;
     }
   }
 }
