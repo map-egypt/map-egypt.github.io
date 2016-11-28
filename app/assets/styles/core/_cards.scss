@@ -55,7 +55,6 @@
 
   > li {
     background: $base-color;
-    width: 60%;
     height: 0.25rem;
     border-radius: $base-border-radius;
 
@@ -131,7 +130,7 @@
     float: left;
     box-shadow: 1px 0 0 $tertiary-color;
     padding-right: 1rem;
-    margin-right: 1rem; 
+    margin-right: 1rem;
 
     &:last-child {
       box-shadow: none;
@@ -157,9 +156,9 @@
     list-style: none;
     padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
     display: inline-block;
-    @include col(4/12, $offset: 0/12); 
+    @include col(4/12, $offset: 0/12);
     max-width: 20rem;
-    min-width: 18rem; 
+    min-width: 18rem;
     @include media(small-down) {
       @include col(5.5/12);
     }
@@ -182,7 +181,7 @@
 
     @include media(medium-up) {
        @include col(4/12, $cycle: 3);
-        min-width: 10rem; 
+        min-width: 10rem;
     }
     @include media(medium-list-down) {
       @include col(6/12, $uncycle: 3, $cycle: 2);

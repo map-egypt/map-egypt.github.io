@@ -120,6 +120,8 @@
     "global": "^4.3.1",
     "lodash": "^4.16.2",
     "mapbox.js": "^3.0.0",
+    "numeral": "^1.5.5",
+    "object-path": "^0.11.3",
     "qs": "^6.2.1",
     "react": "^15.3.2",
     "react-addons-css-transition-group": "^15.3.2",

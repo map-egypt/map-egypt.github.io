@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
-import * as Project from '../components/project-card';
+import {isOntime} from '../components/project-card';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -23,7 +23,7 @@ var Home = React.createClass({
       project.categories.forEach(function (category) {
         categories[category] = categories[category] + 1 || 1;
       });
-      const ontime = Project.ontime(project);
+      const ontime = isOntime(project);
       if (ontime === null) {
         return;
       } else if (ontime) {
@@ -99,22 +99,21 @@ var Home = React.createClass({
               </div>
 
               <div className='overview-charts'>
-              <div className='chart-content'>
-                <h3>Number of Projects By Category</h3>
-                <HorizontalBarChart
-                  data={bars}
-                  margin={barChartMargin}
-                  yTitle=''
-                  xTitle='By category' />
-              </div>
-              <div className='chart-content'>
-                <h3> Status </h3>
-                <PieChart data={pie} />
-                <div className='status-key'>
-                  <p className='status-key__label status-ontime'>On Time</p>
-                  <p className='status-key__label status-delayed'>Delayed</p>
+                <div className='chart-content'>
+                  <h3>Number of Projects By Category</h3>
+                  <HorizontalBarChart
+                    data={bars}
+                    margin={barChartMargin}
+                    yTitle='' />
                 </div>
-              </div>
+                <div className='chart-content'>
+                  <h3> Status </h3>
+                  <PieChart data={pie} />
+                  <div className='status-key'>
+                    <p className='status-key__label status-ontime'>On Time</p>
+                    <p className='status-key__label status-delayed'>Delayed</p>
+                  </div>
+                </div>
               </div>
               <div className='section__footer'>
                 <button type='button' className='button button--primary button--large'>View All Projects</button>

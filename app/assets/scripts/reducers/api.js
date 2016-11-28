@@ -1,7 +1,9 @@
 'use strict';
+import { set } from 'object-path';
 import {
   AUTHENTICATED,
   PROJECTS,
+  PROJECT,
   INDICATORS,
   GEOGRAPHY
 } from '../actions';
@@ -9,20 +11,29 @@ import {
 export const initialState = {
   authenticated: false,
   projects: [],
+  projectDetail: {},
   indicators: [],
   geography: null
 };
 
 export default function reducer (state = initialState, action) {
-  if (action.type === AUTHENTICATED) {
-    return Object.assign({}, state, { authenticated: action.data });
-  } else if (action.type === PROJECTS) {
-    return Object.assign({}, state, { projects: action.data });
-  } else if (action.type === INDICATORS) {
-    return Object.assign({}, state, { indicators: action.data });
-  } else if (action.type === GEOGRAPHY) {
-    return Object.assign({}, state, { geogrpahy: action.data });
-  } else {
-    return state;
+  state = Object.assign({}, state);
+  switch (action.type) {
+    case AUTHENTICATED:
+      set(state, 'authenticated', action.data);
+      break;
+    case PROJECTS:
+      set(state, 'projects', action.data);
+      break;
+    case PROJECT:
+      set(state, ['projectDetail', action.data.id], action.data);
+      break;
+    case INDICATORS:
+      set(state, 'indicators', action.data);
+      break;
+    case GEOGRAPHY:
+      set(state, 'geography', action.data);
+      break;
   }
+  return state;
 }

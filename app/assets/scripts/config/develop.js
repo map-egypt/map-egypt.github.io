@@ -3,5 +3,5 @@
 module.exports = {
   environment: 'production',
   api: 'https://ifpri-egypt-silo.herokuapp.com/',
-  baseUrl: 'https://map-egypt.github.io/'
+  baseUrl: 'http://localhost:3000'
 };

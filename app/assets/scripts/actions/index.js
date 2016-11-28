@@ -5,11 +5,10 @@ import url from 'url';
 import { api, baseUrl } from '../config';
 import auth from '../utils/auth';
 
-const BASE_URL = baseUrl || 'http://localhost:3000';
-
 export const ACTION = 'ACTION';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
+export const PROJECT = 'PROJECT';
 export const INDICATORS = 'INDICATORS';
 export const GEOGRAPHY = 'GEOGRAPHY';
 export const LANGUAGE = 'LANGUAGE';
@@ -24,6 +23,10 @@ export function updateAuth (data) {
 
 export function updateProjects (data) {
   return { type: PROJECTS, data: data };
+}
+
+export function updateProject (data) {
+  return { type: PROJECT, data: data };
 }
 
 export function updateIndicators (data) {
@@ -54,6 +57,17 @@ export function getProjects () {
   };
 }
 
+export function getProject (id) {
+  if (!id) {
+    throw new Error('Project endpoint requires project id');
+  }
+  return function (dispatch) {
+    queryApi('projects/' + id, function (data) {
+      return dispatch(updateProject(data));
+    });
+  };
+}
+
 export function getIndicators () {
   return function (dispatch) {
     queryApi('indicators', function (data) {
@@ -64,7 +78,7 @@ export function getIndicators () {
 
 export function getGeography () {
   return function (dispatch) {
-    reqwest(url.resolve(BASE_URL, 'assets/data/topojson/districts.json'), function (resp) {
+    reqwest(url.resolve(baseUrl, 'assets/data/topojson/districts.json'), function (resp) {
       try {
         var features = topojson.feature(resp, resp.objects.districts);
       } catch (e) {

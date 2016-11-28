@@ -11,3 +11,11 @@ module.exports.parseProjectDate = function (date) {
   const parsed = new Date(split[0], split[1] - 1); // month is 0-based
   return parsed.getTime();
 };
+
+module.exports.formatDate = function (date) {
+  if (!date) {
+    return false;
+  }
+  const d = new Date(date);
+  return d.toLocaleDateString();
+};

@@ -60,7 +60,7 @@ render((
       <Route path='/access_token=:token' />
       <Route path='/:lang' component={App} onEnter={redirectToLastUrl}>
         <Route path='projects' component={ProjectBrowse} />
-        <Route path='projects/:name' component={Project} />
+        <Route path='projects/:id' component={Project} />
         <Route path='category/:name' component={Category} />
         <Route path='donor/:name' component={Donor} />
         <Route path='owner/:name' component={Owner} />

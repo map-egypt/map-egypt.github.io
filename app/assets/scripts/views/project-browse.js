@@ -128,9 +128,9 @@ var ProjectBrowse = React.createClass({
               </div>
               <div className='section__content'>
                 <ul className='projects-list'>
-                  {projects.map((p, i) => {
+                  {projects.map((p) => {
                     return (
-                      <li key={i}
+                      <li key={p.id}
                         className='projects-list__card'>
                         <ProjectCard
                           lang={this.props.meta.lang}
