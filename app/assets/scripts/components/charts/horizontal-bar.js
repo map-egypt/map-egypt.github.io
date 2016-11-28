@@ -10,7 +10,9 @@ var HorizontalBarChart = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
-    yTitle: React.PropTypes.string
+    yTitle: React.PropTypes.string,
+    hideYAxis: React.PropTypes.bool,
+    hideXAxis: React.PropTypes.bool
   },
 
   getInitialState: function () {
@@ -63,24 +65,24 @@ var HorizontalBarChart = React.createClass({
     return (
       <div className='chart-container' ref='chartContainer'>
         <svg className='chart' width={width} height={height} ref='svg'>
-          <Axis
+          {!this.props.hideXAxis && <Axis
             scale={xScale}
             labels={xLabels}
             orientation='bottom'
             height={height}
             width={width}
             margin={margin}
-          />
-          <Axis
+          />}
+          {!this.props.hideYAxis && <Axis
             scale={yScale}
             labels={yLabels}
             orientation='left'
             height={height}
             width={width}
             margin={margin}
-          />
+          />}
           <g transform={`translate(${margin.left}, ${margin.top})`}>
-            {data.map(d => {
+            {data.map((d) => {
               return <rect
                 key={d.name}
                 className='chart__bar'
