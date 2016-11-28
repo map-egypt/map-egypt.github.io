@@ -88,27 +88,28 @@ var Project = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
-             <div className='inpage__headline-actions'>
-              <ul>
-                <li><button className='button button--medium button--primary button--download'>Download</button></li>
-                <li><Share path={this.props.location.pathname}/></li>
-              </ul>
+              <div className='inpage__headline-actions'>
+                <ul>
+                  <li><button className='button button--medium button--primary button--download'>Download</button></li>
+                  <li><Share path={this.props.location.pathname}/></li>
+                </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
-              <div>
+            </div>
+            <div className='inpage__subtitles'>
                 {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
                   <Link to={categoryLink(basepath, category)} className='link--secondary' href=''>{category}</Link>&nbsp;
                 </span>)}
-              </div>
+            </div>
               <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
                 <dt className='inpage-meta__label'>Last Update: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
-            </div>
 
             <ProjectTimeline project={data} />
+
           </div>
         </header>
         <div className='inpage__body'>

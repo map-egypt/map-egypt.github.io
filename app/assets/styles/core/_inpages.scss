@@ -7,10 +7,6 @@
     }
   }
 
-  &__header--alt {
-
-  }
-
   &__body--alt {
     padding: $global-spacing 0 ($global-spacing * 4) 0;
     p {
@@ -18,9 +14,13 @@
     }
   }
 
-  &__subtitle {
-    margin-bottom: 0;
+  &__subtitles {
+    margin-bottom: $global-spacing;
     font-weight: $base-font-light;
+    span {
+      margin-right: $global-spacing/2;
+      font-size: 0.875rem;
+    }
   }
 
   &__description {
@@ -33,6 +33,13 @@
 
   &__headline {
     @extend .clearfix;
+  }
+
+  &__title {
+    @include col(7/12);
+    @include media(small-down){
+      @include col(12/12);
+    }
   }
 
   &__headline-actions {
