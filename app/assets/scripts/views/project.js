@@ -4,12 +4,14 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
-import Map from '../components/map';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { isOntime } from '../components/project-card';
 import { formatDate } from '../utils/date';
 import { tally, shortTally } from '../utils/format';
+
+import Map from '../components/map';
+import Share from '../components/share';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -21,6 +23,7 @@ var Project = React.createClass({
   propTypes: {
     params: React.PropTypes.object,
     dispatch: React.PropTypes.func,
+    location: React.PropTypes.object,
     api: React.PropTypes.object,
     meta: React.PropTypes.object
   },
@@ -51,7 +54,7 @@ var Project = React.createClass({
              <div className='inpage__headline-actions'>
               <ul>
                 <li><button className='button button--medium button--primary button--download'>Download</button></li>
-                <li><button className='button button--medium button--primary'>Share</button></li>
+                <li><Share path={this.props.location.pathname}/></li>
               </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
