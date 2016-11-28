@@ -22,13 +22,17 @@ import { defaultsDeep } from 'lodash';
 
 import local from './config/local';
 import staging from './config/staging';
+import develop from './config/develop';
 import production from './config/production';
 
 var config = local || {};
 
 if (process.env.DS_ENV === 'staging') {
   defaultsDeep(config, staging);
+} else if (process.env.DS_ENV === 'development') {
+  defaultsDeep(config, develop);
+} else {
+  defaultsDeep(config, production);
 }
-defaultsDeep(config, production);
 
 module.exports = config;

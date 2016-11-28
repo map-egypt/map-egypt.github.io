@@ -5,8 +5,6 @@ import url from 'url';
 import { api, baseUrl } from '../config';
 import auth from '../utils/auth';
 
-const BASE_URL = baseUrl || 'http://localhost:3000';
-
 export const ACTION = 'ACTION';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
@@ -80,7 +78,7 @@ export function getIndicators () {
 
 export function getGeography () {
   return function (dispatch) {
-    reqwest(url.resolve(BASE_URL, 'assets/data/topojson/districts.json'), function (resp) {
+    reqwest(url.resolve(baseUrl, 'assets/data/topojson/districts.json'), function (resp) {
       try {
         var features = topojson.feature(resp, resp.objects.districts);
       } catch (e) {
