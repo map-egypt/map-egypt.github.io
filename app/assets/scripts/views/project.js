@@ -50,9 +50,14 @@ var Project = React.createClass({
       return a + get(b, 'fund.amount', 0);
     }, 0);
 
-    // const sdsGoals = get(data, 'sds_indicator').join(',');
-    // TODO hook up related sds goals when it's in the API
-    const relatedProjects = get(this.props.api, 'projects', []).filter(function (p) {
+    const sdsGoals = get(data, 'sds_indicator').join(',');
+    const relatedProjects = get(this.props.api, 'projects', []).filter(function (project) {
+      if (meta.id === project.id) { return false; } // don't include itself
+      for (let i = 0; i < project.sds_indicators.length; ++i) {
+        if (sdsGoals.indexOf(project.sds_indicators[i]) >= 0) {
+          return true;
+        }
+      }
       return false;
     });
 
