@@ -13,6 +13,9 @@ import Map from '../components/map';
 import Share from '../components/share';
 import ProjectCard from '../components/project-card';
 import ProjectTimeline from '../components/project-timeline';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
+
+const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -52,6 +55,11 @@ var Project = React.createClass({
       return false;
     });
 
+    const donors = get(data, 'budget', []).map((donor) => ({
+      name: donor.donor_name,
+      value: donor.fund.amount
+    })).sort((a, b) => b.value > a.value ? -1 : 1);
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -69,7 +77,7 @@ var Project = React.createClass({
                   <Link to={categoryLink(basepath, category)} className='link--secondary' href=''>{category}</Link>&nbsp;
                 </span>)}
               </div>
-              <dl className={'inpage-meta project--' + ontime ? 'ontime' : 'delayed'}>
+              <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
                 <dt className='inpage-meta__label'>Last Update: </dt>
@@ -165,6 +173,20 @@ var Project = React.createClass({
               </div>
             </section>
             <section className='inpage__section inpage__section--charts'>
+
+              <div className='overview-charts'>
+                <div className='chart-content'>
+                  <h3>Funding by Donor</h3>
+                  <HorizontalBarChart
+                    data={donors}
+                    margin={barChartMargin}
+                    yTitle='' />
+                </div>
+                <div className='chart-content'>
+                  <h3>Disbursement vs. Reach</h3>
+                </div>
+              </div>
+
             </section>
             <section className='inpage__section inpage__section--indicators'>
               <h1 className='section__title heading--small'>Monitoring Indicators</h1>
