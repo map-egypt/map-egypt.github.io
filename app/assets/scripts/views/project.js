@@ -185,7 +185,7 @@ var Project = React.createClass({
                 </div>
                 <div className='chart-content'>
                   <h3>Disbursement vs. Reach</h3>
-                  <p style={{'text-align': 'center'}}><em>Waiting for data...</em></p>
+                  <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
                 </div>
               </div>
 
