@@ -12,6 +12,7 @@ var ProjectTimeline = React.createClass({
 
   render: function () {
     const project = this.props.project;
+    console.log(project);
 
     const plannedStart = parseProjectDate(project.planned_start_date);
     const plannedEnd = parseProjectDate(project.planned_end_date);
@@ -19,17 +20,19 @@ var ProjectTimeline = React.createClass({
     const actualStart = project.actual_start_date ? parseProjectDate(project.actual_start_date) : null;
     const actualEnd = project.actual_end_date ? parseProjectDate(project.actual_end_date) : null;
 
-    const start = Math.min(plannedStart, actualStart);
-    const end = Math.max(plannedEnd, actualEnd);
+    const start = actualStart ? Math.min(plannedStart, actualStart) : plannedStart;
+    const end = actualEnd ? Math.max(plannedEnd, actualEnd) : plannedEnd;
 
     const scale = scaleTime().domain([new Date(start), new Date(end)]).range([0, 100]);
 
     return (
       <div className='timeline'>
-        <div className='timeline__unit'>
-          <h5>Current Progress</h5>
-          {actualStart && actualEnd && timeline(actualStart, actualEnd, scale)}
-        </div>
+        {actualStart && actualEnd && (
+          <div className='timeline__unit'>
+            <h5>Current Progress</h5>
+            {timeline(actualStart, actualEnd, scale)}
+          </div>
+        )}
         <div className='timeline__unit'>
           <h5>Proposed Timeline</h5>
           {timeline(plannedStart, plannedEnd, scale)}
