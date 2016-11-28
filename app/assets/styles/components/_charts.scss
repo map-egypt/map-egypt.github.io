@@ -51,3 +51,36 @@
     background: rgba(43, 35, 66, 0.55);
   }
 }
+
+/* Timeline */
+
+$timeline-height: 6px;
+$timeline-outer: #AAA;
+$timeline-inner: #666;
+
+.timeline__row {
+  background-color: $timeline-outer;
+  width: 100%;
+  height: $timeline-height;
+  position: relative;
+
+  hr {
+    background-color: $timeline-inner;
+    bottom: -32px;
+    height: $timeline-height * 2;
+    width: 1px;
+    position: absolute;
+  }
+}
+
+.timeline__inner {
+  background-color: $timeline-inner;
+  height: $timeline-height;
+  position: absolute;
+}
+
+.timeline__label {
+  bottom: -12px;
+  display: inline-block;
+  position: absolute;
+}
