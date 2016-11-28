@@ -265,10 +265,16 @@ abbr[title] {
     position: absolute;
     top: 100%;
     left: 0;
-    width: 6rem;
+    width: 4rem;
     height: 3px;
     content: "";
     background: $secondary-color;
+  }
+
+  @include media(medium-up) {
+    &::after {
+      width: 6rem;
+    }
   }
 }
 
