@@ -53,9 +53,9 @@ var ProjectCard = React.createClass({
               </dl>
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
               <div className='card__categories'>
-                {project.categories.map((c, i) => {
+                {project.categories.map((c) => {
                   return (
-                    <span key={i} className='card__subtitle'>
+                    <span key={c} className='card__subtitle'>
                       <Link to={categoryLink(basepath, c)} className='link--secondary' href=''>{c},</Link>
                     </span>
                   );

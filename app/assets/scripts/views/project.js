@@ -6,12 +6,12 @@ import { connect } from 'react-redux';
 import { get } from 'object-path';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
-import { isOntime } from '../components/project-card';
-import { formatDate } from '../utils/date';
+import { formatDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally } from '../utils/format';
 
 import Map from '../components/map';
 import Share from '../components/share';
+import ProjectCard from '../components/project-card';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -38,13 +38,18 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
-    console.log(data);
     const basepath = '/' + this.props.meta.lang;
-    const ontime = isOntime(data);
+    const ontime = ProjectCard.isOntime(data);
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => {
       return a + get(b, 'fund.amount', 0);
     }, 0);
+
+    // const sdsGoals = get(data, 'sds_indicator').join(',');
+    // TODO hook up related sds goals when it's in the API
+    const relatedProjects = get(this.props.api, 'projects', []).filter(function (p) {
+      return false;
+    });
 
     return (
       <section className='inpage'>
@@ -59,7 +64,7 @@ var Project = React.createClass({
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
               <div>
-                {get(data, 'category', []).map((category, i) => <span key={i} className='inpage__subtitle'>
+                {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
                   <Link to={categoryLink(basepath, category)} className='link--secondary' href=''>{category}</Link>&nbsp;
                 </span>)}
               </div>
@@ -95,9 +100,10 @@ var Project = React.createClass({
                   <h1 className='overview-item__title heading-alt'>Location</h1>
                   <ul className='link-list'>
                     {get(data, 'location', []).map((loc, i) => {
-                      const display = loc.district.district || loc.district.governorate;
+                      const display = loc.district.district && loc.district.district.toLowerCase() !== 'all'
+                        ? loc.district.district : loc.district.governorate;
                       return (
-                        <li key={i}>
+                        <li key={display}>
                           <a href='' className='link--primary'><span>{display}</span></a>
                         </li>
                       );
@@ -131,7 +137,7 @@ var Project = React.createClass({
                   <ul className='link-list'>
                     {get(data, 'sdg_indicator', []).map((indicator, i) => {
                       return (
-                        <li key={i}>
+                        <li key={indicator}>
                           <a href='' className='link--primary'><span>{indicator}</span></a>
                         </li>
                       );
@@ -144,7 +150,7 @@ var Project = React.createClass({
                   <ul className='link-list'>
                     {get(data, 'sds_indicator', []).map((indicator, i) => {
                       return (
-                        <li key={i}>
+                        <li key={indicator}>
                           <a href='' className='link--primary'><span>{indicator}</span></a>
                         </li>
                       );
@@ -159,45 +165,35 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--indicators'>
               <h1 className='section__title heading--small'>Monitoring Indicators</h1>
-              <table className='inpage__table'>
-                <thead>
-                  <tr>
-                    <th className='row-name'>Name and Description</th>
-                    <th className='row-kpi'>KPI</th>
-                    <th className='row-target'>Target</th>
-                    <th className='row-date'>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td className='project--ontime'>
-                      <p className='card-meta__value--status activity-name'>Activity Name</p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
-                    </td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                    <td>02/20/16</td>
-                  </tr>
-                  <tr>
-                    <td className='project--ontime'>
-                      <p className='card-meta__value--status activity-name'>Activity Name</p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
-                    </td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                    <td>02/20/16</td>
-                  </tr>
-                  <tr>
-                    <td className='project--ontime'>
-                      <p className='card-meta__value--status activity-name'>Activity Name</p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.
-                    </td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                    <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
-                    <td>02/20/16</td>
-                  </tr>
-                </tbody>
-              </table>
+              {Array.isArray(data.kmi) && (
+                <table className='inpage__table'>
+                  <thead>
+                    <tr>
+                      <th className='row-name'>Component</th>
+                      <th className='row-kpi'>KPI</th>
+                      <th className='row-target'>Target</th>
+                      <th className='row-current'>Current</th>
+                      <th className='row-date'>Date</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {data.kmi.map((d) => {
+                      const status = d.status.toLowerCase() === 'implemented' ? 'ontime' : 'delayed';
+                      return (
+                        <tr key={d.kpi}>
+                          <td className={'project--' + status}>
+                            <p className='card-meta__value--status activity-name'>{d.component}</p>
+                          </td>
+                          <td>{d.kpi}</td>
+                          <td>{d.target}</td>
+                          <td>{d.current}</td>
+                          <td>{formatDate(parseProjectDate(d.date))}</td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              )}
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Cateogry</h1>
@@ -207,98 +203,17 @@ var Project = React.createClass({
             <div className='inner'>
               <h1 className='section__title heading--small'>Related Projects By SDS Goal</h1>
               <ul className='projects-list'>
-                <li className='projects-list__card'>
-                  <div>
-                    <article className='card project--ontime'>
-                      <div className='card__contents'>
-                        <header className='card__header'>
-                          <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-
-                          <ul className='card-cmplt'>
-                            <li><span>60% cmplt</span></li>
-                          </ul>
-                        </header>
-                        <div className='card__body'>
-                          <dl className='card-meta'>
-                            <dt className='card-meta__label'>Status</dt>
-                            <dd className='card-meta__value card-meta__value--status'>On time</dd>
-                            <dt className='card-meta__label'>Location</dt>
-                            <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
-                          </dl>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-
-                          <ul className='card-stats'>
-                            <li>$50M <small>funding</small></li>
-                            <li>20,000 <small>households</small></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </li>
-
-                <li className='projects-list__card'>
-                  <div>
-                    <article className='card project--ontime'>
-                      <div className='card__contents'>
-                        <header className='card__header'>
-                          <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-
-                          <ul className='card-cmplt'>
-                            <li><span>60% cmplt</span></li>
-                          </ul>
-                        </header>
-                        <div className='card__body'>
-                          <dl className='card-meta'>
-                            <dt className='card-meta__label'>Status</dt>
-                            <dd className='card-meta__value card-meta__value--status'>On time</dd>
-                            <dt className='card-meta__label'>Location</dt>
-                            <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
-                          </dl>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-
-                          <ul className='card-stats'>
-                            <li>$50M <small>funding</small></li>
-                            <li>20,000 <small>households</small></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </li>
-
-                <li className='projects-list__card'>
-                  <div>
-                    <article className='card project--ontime'>
-                      <div className='card__contents'>
-                        <header className='card__header'>
-                          <p className='card__subtitle'><a className='link--secondary' href=''>Category</a></p>
-                          <h1 className='card__title heading--small'><a className='link--deco' href=''>Project Name</a></h1>
-
-                          <ul className='card-cmplt'>
-                            <li><span>60% cmplt</span></li>
-                          </ul>
-                        </header>
-                        <div className='card__body'>
-                          <dl className='card-meta'>
-                            <dt className='card-meta__label'>Status</dt>
-                            <dd className='card-meta__value card-meta__value--status'>On time</dd>
-                            <dt className='card-meta__label'>Location</dt>
-                            <dd className='card-meta__value card-meta__value--location'>Location 1, Location 2</dd>
-                          </dl>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et dui gravida, posuere diam id, congue augue. Pellentesque nec purus ex. Vestibulum ante.</p>
-
-                          <ul className='card-stats'>
-                            <li>$50M <small>funding</small></li>
-                            <li>20,000 <small>households</small></li>
-                          </ul>
-                        </div>
-                      </div>
-                    </article>
-                  </div>
-                </li>
+                {relatedProjects.map((p) => {
+                  return (
+                    <li key={p.id}
+                      className='projects-list__card'>
+                      <ProjectCard
+                        lang={this.props.meta.lang}
+                        project={p}
+                      />
+                    </li>
+                    );
+                })}
 
               </ul>
             </div>
