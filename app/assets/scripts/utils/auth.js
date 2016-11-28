@@ -1,6 +1,7 @@
 'use strict';
 import Lock from 'auth0-lock';
 import store from 'store';
+import decode from 'jwt-decode';
 import { authDomain, authClientId } from '../config';
 
 let auth;
@@ -14,7 +15,32 @@ if (process.env.DS_ENV === 'testing') {
   });
 }
 
-let isAuthenticated = !!store.get('id_token');
+function getTokenExpirationDate (token) {
+  const decoded = decode(token);
+
+  if (!decoded.exp) {
+    return null;
+  }
+
+  const date = new Date(0);
+  date.setUTCSeconds(decoded.exp);
+
+  return date;
+}
+
+function isTokenExpired (token) {
+  const date = getTokenExpirationDate(token);
+  const offsetSeconds = 3600; // Expire an hour before
+  if (date === null) {
+    return false;
+  }
+
+  return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
+}
+
+let token = store.get('id_token');
+let isAuthenticated = !!token && !isTokenExpired(token);
+
 const dispatches = [];
 auth.on('authenticated', function (authResult) {
   // This can run too early and fail to set anything in storage.
