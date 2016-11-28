@@ -4,6 +4,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import { extend } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
@@ -17,6 +18,9 @@ import ProjectTimeline from '../components/project-timeline';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
+const comparisonChartMargin = extend({}, barChartMargin, {
+  left: 10
+});
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -46,12 +50,12 @@ var Project = React.createClass({
     const basepath = '/' + this.props.meta.lang;
     const ontime = ProjectCard.isOntime(data);
     const lastUpdated = formatDate(meta.updated_at) || '';
-    const budget = get(data, 'budget', []).reduce((a, b) => {
-      return a + get(b, 'fund.amount', 0);
-    }, 0);
+    const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
+
+    const allProjects = get(this.props.api, 'projects', []);
 
     const sdsGoals = get(data, 'sds_indicator').join(',');
-    const relatedProjects = get(this.props.api, 'projects', []).filter(function (project) {
+    const relatedProjects = allProjects.filter(function (project) {
       if (meta.id === project.id) { return false; } // don't include itself
       for (let i = 0; i < project.sds_indicators.length; ++i) {
         if (sdsGoals.indexOf(project.sds_indicators[i]) >= 0) {
@@ -60,6 +64,19 @@ var Project = React.createClass({
       }
       return false;
     });
+
+    // All three project comparison charts need to have the same ordering in the Y axis,
+    // so don't do any more sorting after the budget map.
+    const budgets = allProjects.map((project) => ({
+      name: project.name,
+      value: get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
+      project: project
+    })).sort((a, b) => b.value > a.value ? -1 : 1);
+
+    const completion = budgets.map((d) => ({
+      name: d.name,
+      value: ProjectCard.percentComplete(d.project)
+    }));
 
     const donors = get(data, 'budget', []).map((donor) => ({
       name: donor.donor_name,
@@ -229,6 +246,27 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
+              <div className='chart-content' style={{width: '46%'}}>
+                <h3>Funding</h3>
+                <HorizontalBarChart
+                  data={budgets}
+                  margin={barChartMargin}
+                  yTitle=''
+                />
+              </div>
+              <div className='chart-content' style={{width: '26%'}}>
+                <h3>Percentage Complete</h3>
+                <HorizontalBarChart
+                  data={completion}
+                  margin={comparisonChartMargin}
+                  yTitle=''
+                  hideYAxis={true}
+                />
+              </div>
+              <div className='chart-content' style={{width: '26%'}}>
+                <h3>Reach</h3>
+                <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
+              </div>
             </section>
           </div>
           <section className='inpage__section--bleed'>
