@@ -12,6 +12,7 @@ import { tally, shortTally } from '../utils/format';
 import Map from '../components/map';
 import Share from '../components/share';
 import ProjectCard from '../components/project-card';
+import ProjectTimeline from '../components/project-timeline';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -75,6 +76,8 @@ var Project = React.createClass({
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
             </div>
+
+            <ProjectTimeline project={data} />
           </div>
         </header>
         <div className='inpage__body'>
