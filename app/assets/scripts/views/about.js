@@ -7,7 +7,7 @@ var About = React.createClass({
   render: function () {
     return (
       <section className='inpage'>
-      	<header className='inpage__header--alt'>
+        <header className='inpage__header--alt'>
           <div className='inner'>
             <div className='inpage__headline'>
               <h1 className='inpage__title heading--deco heading--large'>About</h1>
