@@ -5,11 +5,19 @@ import { connect } from 'react-redux';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 
+const PROJECTS = 'projects';
+const INDICATORS = 'indicators';
+
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
 
   getInitialState: function () {
-    return { modal: false };
+    return {
+      modal: false,
+      activeModal: null,
+      indicatorToggle: false,
+      indicator: null
+    };
   },
 
   propTypes: {
@@ -17,10 +25,31 @@ var ProjectBrowse = React.createClass({
     meta: React.PropTypes.object
   },
 
-  openModal: function () { this.setState({ modal: true }); },
-  closeModal: function () { this.setState({ modal: false }); },
+  toggleIndicatorDropdown: function () { this.setState({indicatorToggle: !this.state.indicatorToggle}); },
+  openIndicatorSelector: function (indicator) {
+    this.setState({
+      modal: true,
+      activeModal: INDICATORS,
+      indicatorToggle: false,
+      indicator
+    });
+  },
+  openProjectSelector: function () { this.setState({ modal: true, activeModal: PROJECTS }); },
+  closeModal: function () { this.setState({ modal: false, activeModal: null }); },
 
-  renderModal: function () {
+  renderIndicatorSelector: function () {
+    return (
+      <section className='modal modal--large'>
+        <div className='modal__inner modal__projects'>
+          <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
+          <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.indicator.toUpperCase()} Indicators</h1>
+          <p>Add and compare development indicators listed below.</p>
+        </div>
+      </section>
+    );
+  },
+
+  renderProjectSelector: function () {
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
@@ -93,8 +122,21 @@ var ProjectBrowse = React.createClass({
             <div className='inpage__actions'>
             <div className='actions-filters'>
                 <ul className='button--list'>
-                  <li onClick={this.openModal}><button type='button' className='button button--medium button--primary'>Add &amp; Filter Projects</button></li>
-                  <li><button type='button' className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button></li>
+                  <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>Add &amp; Filter Projects</button></li>
+                  <li>
+                    <span className='dropdown__container'>
+                      <button type='button' onClick={this.toggleIndicatorDropdown}
+                        className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button>
+                      {this.state.indicatorToggle &&
+                        <ul className='dropdown__list button--secondary'>
+                          {['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'].map((d) => {
+                            const key = d.toLowerCase().split(' ')[0];
+                            return <li key={key} onClick={() => this.openIndicatorSelector(key)} className='dropdown__item' data-value={key}>{d}</li>
+                          })}
+                        </ul>
+                      }
+                    </span>
+                  </li>
                 </ul>
                 <div className='filters'>
                   <label className='heading--label'>Filters</label>
@@ -145,7 +187,8 @@ var ProjectBrowse = React.createClass({
           </div>
         </div>
 
-        {this.state.modal && this.renderModal()}
+        {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
+        {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
 
       </section>
     );
