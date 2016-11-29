@@ -5,6 +5,7 @@ import { get } from 'object-path';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 var Donor = React.createClass({
   displayName: 'Donor',
@@ -33,6 +34,14 @@ var Donor = React.createClass({
     const projectBudgets = donorProjects
       .map((project) => project.budget)
       .reduce((a, b) => a.concat(b), []);
+
+    const chartData = donorProjects.map((project) => {
+      return {
+        name: project.name,
+        value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0),
+        project: project
+      };
+    }).sort((a, b) => b.value > a.value ? -1 : 1);
 
     // TODO change this to 2 amounts dispursed and remaining
     const totalBudget = projectBudgets.reduce((currentValue, budget) => {
@@ -67,26 +76,30 @@ var Donor = React.createClass({
                   <li>{Math.floor(totalBudget / 1000000)}M <small>Total Funds</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
+                  <HorizontalBarChart
+                    data={chartData}
+                    margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
+                  />
                 </div>
               </div>
             </section>
           </div>
 
-            <section className='inpage__section--bleed'>
-              <div className='inner'>
-                <h1 className='section__title heading--small'>Projects Contributed To</h1>
-                <ul className='projects-list'>
-                  {donorProjects.map((p) => {
-                    return (
-                      <li key={p.id} className='projects-list__card'>
-                        <ProjectCard lang={this.props.meta.lang}
-                          project={p} />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </section>
+          <section className='inpage__section--bleed'>
+            <div className='inner'>
+              <h1 className='section__title heading--small'>Projects Contributed To</h1>
+              <ul className='projects-list'>
+                {donorProjects.map((p) => {
+                  return (
+                    <li key={p.id} className='projects-list__card'>
+                      <ProjectCard lang={this.props.meta.lang}
+                        project={p} />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          </section>
         </div>
       </section>
     );
