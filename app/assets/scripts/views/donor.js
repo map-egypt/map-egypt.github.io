@@ -6,6 +6,7 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
+import { shortTally } from '../utils/format';
 
 var Donor = React.createClass({
   displayName: 'Donor',
@@ -73,7 +74,7 @@ var Donor = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>{Math.floor(totalBudget / 1000000)}M <small>Total Funds</small></li>
+                  <li> {shortTally(totalBudget)} <small>Total Funds</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
                   <HorizontalBarChart
