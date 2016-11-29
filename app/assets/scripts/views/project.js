@@ -167,7 +167,7 @@ var Project = React.createClass({
                   </ul>
                 </div>
 
-                <div className='overview-item'>
+                <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
                   <ul className='link-list'>
                     {get(data, 'sdg_indicator', []).map((indicator, i) => {
@@ -180,7 +180,7 @@ var Project = React.createClass({
                   </ul>
                 </div>
 
-                <div className='overview-item'>
+                <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDS Indicator</h2>
                   <ul className='link-list'>
                     {get(data, 'sds_indicator', []).map((indicator, i) => {
@@ -222,7 +222,7 @@ var Project = React.createClass({
                       <th className='row-name'>Component</th>
                       <th className='row-kpi'>KPI</th>
                       <th className='row-target'>Target</th>
-                      <th className='row-current'>Current</th>
+                      <th className='row-progress'>Progress</th>
                       <th className='row-date'>Date</th>
                     </tr>
                   </thead>

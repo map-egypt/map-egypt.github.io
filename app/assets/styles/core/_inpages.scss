@@ -154,7 +154,6 @@
         font-weight: $base-font-bold;
         margin-bottom: 0;
         position: absolute;
-        top: 0.8rem;
         @include media(small-down) {
           position: relative;
           top: 0;
@@ -196,12 +195,15 @@
     }
     td:nth-of-type(4):before { 
       @include media(small-down){
-      content: "Date"; 
+      content: "Progress"; 
       }
     }
 
     .row-name {
       width: 35%;
+    }
+    .row-target, .row-progress, .row-date {
+      width: 12%;
     }
   }
 }
@@ -362,12 +364,16 @@
       @include col(12/12);
     }
   }
+  .overview-item--alt {
+    @include col(12/12);  
+  }
+}
 
 .overview-item__title {
     display: block;
     margin-bottom: $global-spacing/2;
     margin-top: $global-spacing;
-  }
+  
   ul {
     margin: 0;
     overflow:hidden;
@@ -381,11 +387,6 @@
     &:last-child {
       margin-bottom: $global-spacing;
     };
-    @include col(12/12);
-    @include media(medium-up) {
-      @include col(5/12);
-    }
-    
     &:first-child {
       @include col(12/12);
     }
