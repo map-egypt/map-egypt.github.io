@@ -98,7 +98,7 @@ var Home = React.createClass({
                 </ul>
               </div>
 
-              <div className='overview-charts'>
+              <div className='overview-home-charts'>
                 <div className='chart-content'>
                   <h3>Number of Projects By Category</h3>
                   <HorizontalBarChart
