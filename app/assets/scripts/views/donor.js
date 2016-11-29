@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { get } from 'object-path';
 import Share from '../components/share';
 import Map from '../components/map';
+import ProjectCard from '../components/project-card';
 
 var Donor = React.createClass({
   displayName: 'Donor',
@@ -65,12 +66,27 @@ var Donor = React.createClass({
                 <ul className='inpage-stats'>
                   <li>{Math.floor(totalBudget / 1000000)}M <small>Total Funds</small></li>
                 </ul>
-              </div>
-
-              <div className='inpage__overview-chart'>
+                <div className='inpage__overview-chart'>
+                </div>
               </div>
             </section>
           </div>
+
+            <section className='inpage__section--bleed'>
+              <div className='inner'>
+                <h1 className='section__title heading--small'>Projects Contributed To</h1>
+                <ul className='projects-list'>
+                  {donorProjects.map((p) => {
+                    return (
+                      <li key={p.id} className='projects-list__card'>
+                        <ProjectCard lang={this.props.meta.lang}
+                          project={p} />
+                      </li>
+                    );
+                  })}
+                </ul>
+              </div>
+            </section>
         </div>
       </section>
     );
