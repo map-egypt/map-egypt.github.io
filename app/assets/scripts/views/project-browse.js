@@ -22,7 +22,8 @@ var ProjectBrowse = React.createClass({
 
   propTypes: {
     api: React.PropTypes.object,
-    meta: React.PropTypes.object
+    meta: React.PropTypes.object,
+    dispatch: React.PropTypes.func
   },
 
   toggleIndicatorDropdown: function () { this.setState({indicatorToggle: !this.state.indicatorToggle}); },
@@ -131,7 +132,9 @@ var ProjectBrowse = React.createClass({
                         <ul className='dropdown__list button--secondary'>
                           {['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'].map((d) => {
                             const key = d.toLowerCase().split(' ')[0];
-                            return <li key={key} onClick={() => this.openIndicatorSelector(key)} className='dropdown__item' data-value={key}>{d}</li>
+                            return <li key={key}
+                              onClick={() => this.openIndicatorSelector(key)}
+                              className='dropdown__item' data-value={key}>{d}</li>;
                           })}
                         </ul>
                       }

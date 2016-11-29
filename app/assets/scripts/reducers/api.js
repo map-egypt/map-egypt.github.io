@@ -5,6 +5,7 @@ import {
   PROJECTS,
   PROJECT,
   INDICATORS,
+  INDICATOR,
   GEOGRAPHY
 } from '../actions';
 
@@ -30,6 +31,9 @@ export default function reducer (state = initialState, action) {
       break;
     case INDICATORS:
       set(state, 'indicators', action.data);
+      break;
+    case INDICATOR:
+      set(state, ['indicatorDetail', action.data.id], action.data);
       break;
     case GEOGRAPHY:
       set(state, 'geography', action.data);

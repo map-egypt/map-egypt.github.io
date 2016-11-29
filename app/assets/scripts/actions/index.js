@@ -10,6 +10,7 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
 export const PROJECT = 'PROJECT';
 export const INDICATORS = 'INDICATORS';
+export const INDICATOR = 'INDICATOR';
 export const GEOGRAPHY = 'GEOGRAPHY';
 export const LANGUAGE = 'LANGUAGE';
 
@@ -31,6 +32,10 @@ export function updateProject (data) {
 
 export function updateIndicators (data) {
   return { type: INDICATORS, data: data };
+}
+
+export function updateIndicator (data) {
+  return { type: INDICATOR, data: data };
 }
 
 export function updateGeography (data) {
@@ -72,6 +77,17 @@ export function getIndicators () {
   return function (dispatch) {
     queryApi('indicators', function (data) {
       return dispatch(updateIndicators(data));
+    });
+  };
+}
+
+export function getIndicator (id) {
+  if (!id) {
+    throw new Error('Indicator endpoint requires indicator id');
+  }
+  return function (dispatch) {
+    queryApi('indicators/' + id, function (data) {
+      return dispatch(updateIndicator(data));
     });
   };
 }
