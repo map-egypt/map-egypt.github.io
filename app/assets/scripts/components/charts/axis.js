@@ -1,6 +1,8 @@
 'use strict';
 import React from 'react';
 
+const defaultFormat = (x) => x;
+
 const Axis = React.createClass({
 
   propTypes: {
@@ -9,7 +11,8 @@ const Axis = React.createClass({
     orientation: React.PropTypes.string,
     height: React.PropTypes.number,
     width: React.PropTypes.number,
-    margin: React.PropTypes.object
+    margin: React.PropTypes.object,
+    format: React.PropTypes.func
   },
 
   render: function () {
@@ -30,6 +33,8 @@ const Axis = React.createClass({
         dy = '1em';
     }
 
+    const format = this.props.format || defaultFormat;
+
     return (
       <g className='axis' transform={transform}>
         {labels.map(label => {
@@ -41,7 +46,7 @@ const Axis = React.createClass({
             dy={dy}
             textAnchor={orientation === 'left' ? 'end' : 'middle'}
             >
-            {label}
+            {format(label)}
           </text>;
         })}
       </g>

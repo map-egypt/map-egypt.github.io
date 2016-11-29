@@ -12,7 +12,9 @@ var HorizontalBarChart = React.createClass({
     margin: React.PropTypes.object,
     yTitle: React.PropTypes.string,
     hideYAxis: React.PropTypes.bool,
-    hideXAxis: React.PropTypes.bool
+    hideXAxis: React.PropTypes.bool,
+    xFormat: React.PropTypes.func,
+    yFormat: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -72,6 +74,7 @@ var HorizontalBarChart = React.createClass({
             height={height}
             width={width}
             margin={margin}
+            format={this.props.xFormat}
           />}
           {!this.props.hideYAxis && <Axis
             scale={yScale}
@@ -80,6 +83,7 @@ var HorizontalBarChart = React.createClass({
             height={height}
             width={width}
             margin={margin}
+            format={this.props.yFormat}
           />}
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d) => {
