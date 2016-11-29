@@ -9,7 +9,10 @@ var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
 
   getInitialState: function () {
-    return { modal: false };
+    return {
+      modal: false,
+      listView: false
+    };
   },
 
   propTypes: {
@@ -19,6 +22,9 @@ var ProjectBrowse = React.createClass({
 
   openModal: function () { this.setState({ modal: true }); },
   closeModal: function () { this.setState({ modal: false }); },
+
+  selectListView: function () { this.setState({ listView: true }); },
+  selectMapView: function () { this.setState({ listView: false }); },
 
   renderModal: function () {
     return (
@@ -77,6 +83,8 @@ var ProjectBrowse = React.createClass({
 
   render: function () {
     const projects = this.props.api.projects;
+    const selectedClassNames = 'button button--primary';
+    const deselectedClassNames = 'button button--primary-bounded';
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -105,15 +113,16 @@ var ProjectBrowse = React.createClass({
               </div>
               <div className='actions-toggle'>
                 <div className='button-group button-group--horizontal button--toggle'>
-                  <button className='button button--primary'>Map</button>
-                  <button className='button button--primary-bounded'>List</button>
+                  <button onClick={this.selectMapView} className={this.state.listView ? deselectedClassNames : selectedClassNames}>Map</button>
+                  <button onClick={this.selectListView} className={this.state.listView ? selectedClassNames : deselectedClassNames}>List</button>
                 </div>
               </div>
             </div>
           </div>
         </header>
-        <Map />
-        <div className='inpage__body'>
+
+        {this.state.listView
+        ? (<div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
               <h1 className='section__title heading--small'>Selected SDG Indicators</h1>
@@ -143,7 +152,8 @@ var ProjectBrowse = React.createClass({
               </div>
             </section>
           </div>
-        </div>
+        </div>)
+        : <Map />}
 
         {this.state.modal && this.renderModal()}
 
