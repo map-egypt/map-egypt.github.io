@@ -72,7 +72,7 @@
     background-color: #fff;
     @include col(12/12);
     margin-bottom: $global-spacing * 2;
-    padding: $global-spacing * 2;
+    padding: $global-spacing * 3;
     box-shadow: inset 0 0 0 1px $tertiary-color;
     &:first-child {
       margin-top: $global-spacing * 4;
@@ -98,6 +98,10 @@
     position: relative;
     @include media(small-down) {
       display: block; 
+    }
+
+    .card-meta__value--status:before {
+      top: 0.34rem;
     }
 
     tbody {
@@ -198,6 +202,12 @@
       content: "Progress"; 
       }
     }
+    td:nth-of-type(5):before { 
+      @include media(small-down){
+      content: "Date"; 
+      }
+    }
+
 
     .row-name {
       width: 35%;
@@ -211,7 +221,7 @@
 .section {
   &__description {
     @include col(10/12, $offset: 1/12);
-    margin-bottom:($global-spacing * 2) ;
+    margin-bottom:($global-spacing * 2);
     text-align: center;
     @include media(medium-up) {
       @include center(600px);
@@ -220,6 +230,7 @@
   }
   &__title {
     text-align: center;
+    padding-bottom: $global-spacing;
   }
   &__footer {
     text-align: center;
@@ -305,6 +316,13 @@
       @include col(5/12);
       margin-bottom: 0;
     }
+
+   .map__container {
+    @include media(medium-up){
+      height: 750px;
+    }
+    height: 300px;
+   }
   }
 
   .inpage__col--content {

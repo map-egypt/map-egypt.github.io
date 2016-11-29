@@ -1,9 +1,15 @@
-
-
 .chart-container {
   height: 240px;
   width: 100%;
   float: left;
+}
+
+.chart-content {
+  h3 {
+    font-family: $base-font-family;
+    font-size: 1rem;
+    text-align: center;
+  }
 }
 
 .pie__slice__on-time {
@@ -67,7 +73,9 @@ $timeline-inner: $base-color;
   @include media(medium-up) {
     margin-bottom: 0;
   }
-
+  &:last-child{
+    margin-top: 0.5rem;
+  }
   .heading-alt {
     font-size: 0.75rem;
   }
@@ -110,7 +118,7 @@ $timeline-inner: $base-color;
 }
 
 .timeline__label {
-  bottom: -12px;
+  bottom: -9px;
   display: inline-block;
   position: absolute;
   font-family: $base-font-family;

@@ -1,0 +1,11 @@
+.inpage__section--comparison {
+	.chart-content {
+    @include col(6/12);
+  }
+}
+
+.inpage__section--charts {
+  .overview-charts {
+    padding: 0;
+  }
+}

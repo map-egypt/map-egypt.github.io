@@ -27,6 +27,13 @@
   letter-spacing: $global-spacing/4;
   margin-bottom: 0;
   font-style: italic;
+  }
+
+  .home {
+    .inpage__title {
+      @include col(12/12);
+    }
+
   } 
 }
 

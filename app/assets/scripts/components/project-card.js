@@ -58,7 +58,7 @@ var ProjectCard = React.createClass({
 
     return (
       <div className='project'>
-        <article className={'card project--' + ontime ? 'ontime' : 'delayed'}>
+        <article className={'card project--' + (ontime ? 'ontime' : 'delayed')}>
           <div className='card__contents'>
             <header className='card__header'>
               <h1 className='card__title heading--small'><Link to={path.resolve(basepath, 'projects', project.id)} className='link--deco' href=''>{project.name}</Link></h1>

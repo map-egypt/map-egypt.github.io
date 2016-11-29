@@ -248,7 +248,7 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
-              <div className='chart-content' style={{width: '46%'}}>
+              <div className='chart-content' style={{width: '50%'}}>
                 <h3>Funding</h3>
                 <HorizontalBarChart
                   data={budgets}
@@ -256,7 +256,7 @@ var Project = React.createClass({
                   yTitle=''
                 />
               </div>
-              <div className='chart-content' style={{width: '26%'}}>
+              <div className='chart-content' style={{width: '20%'}}>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
@@ -265,7 +265,7 @@ var Project = React.createClass({
                   hideYAxis={true}
                 />
               </div>
-              <div className='chart-content' style={{width: '26%'}}>
+              <div className='chart-content' style={{width: '20%'}}>
                 <h3>Reach</h3>
                 <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
               </div>
