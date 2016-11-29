@@ -1,6 +1,5 @@
 'use strict';
 import React from 'react';
-import { connect } from 'react-redux';
 import window from 'global/window';
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
@@ -9,6 +8,7 @@ const Map = React.createClass({
   displayName: 'Map',
 
   propTypes: {
+    api: React.PropTypes.object
   },
 
   componentWillUnmount: function () {
@@ -33,9 +33,4 @@ const Map = React.createClass({
   }
 });
 
-function mapStateToProps (state) {
-  return {
-  };
-}
-
-module.exports = connect(mapStateToProps)(Map);
+module.exports = Map;

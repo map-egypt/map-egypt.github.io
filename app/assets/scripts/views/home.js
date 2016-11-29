@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import { get } from 'object-path';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
@@ -18,18 +19,27 @@ var Home = React.createClass({
   render: function () {
     const projects = this.props.api.projects;
     const categories = {};
+    const regions = {};
     const status = { ontime: 0, delayed: 0 };
     projects.forEach(function (project) {
-      project.categories.forEach(function (category) {
+      get(project, 'categories', []).forEach(function (category) {
         categories[category] = categories[category] + 1 || 1;
       });
+
+      get(project, 'location', []).forEach(function (location) {
+        // TODO look at district or marker to see if there's more granular data
+        const region = location.district.governorate;
+        regions[region] = regions[region] || [];
+        regions[region].push(location);
+      });
+
       const ontime = isOntime(project);
       if (ontime === null) {
         return;
       } else if (ontime) {
         status.ontime += 1;
       } else {
-        project.delayed += 1;
+        status.delayed += 1;
       }
     });
 
@@ -45,7 +55,6 @@ var Home = React.createClass({
       name: 'Delayed',
       value: status.delayed
     }];
-
     return (
       <div>
       <section className='inpage'>
