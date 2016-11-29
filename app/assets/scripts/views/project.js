@@ -17,7 +17,7 @@ import ProjectTimeline from '../components/project-timeline';
 // import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
-const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
+const barChartMargin = { left: 250, right: 10, top: 10, bottom: 50 };
 const comparisonChartMargin = extend({}, barChartMargin, {
   left: 10
 });
@@ -88,27 +88,28 @@ var Project = React.createClass({
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
-             <div className='inpage__headline-actions'>
-              <ul>
-                <li><button className='button button--medium button--primary button--download'>Download</button></li>
-                <li><Share path={this.props.location.pathname}/></li>
-              </ul>
+              <div className='inpage__headline-actions'>
+                <ul>
+                  <li><button className='button button--medium button--primary button--download'>Download</button></li>
+                  <li><Share path={this.props.location.pathname}/></li>
+                </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
-              <div>
+            </div>
+            <div className='inpage__subtitles'>
                 {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
                   <Link to={categoryLink(basepath, category)} className='link--secondary' href=''>{category}</Link>&nbsp;
                 </span>)}
-              </div>
+            </div>
               <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
                 <dt className='inpage-meta__label'>Last Update: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
-            </div>
 
             <ProjectTimeline project={data} />
+
           </div>
         </header>
         <div className='inpage__body'>
@@ -166,7 +167,7 @@ var Project = React.createClass({
                   </ul>
                 </div>
 
-                <div className='overview-item'>
+                <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
                   <ul className='link-list'>
                     {get(data, 'sdg_indicator', []).map((indicator, i) => {
@@ -179,7 +180,7 @@ var Project = React.createClass({
                   </ul>
                 </div>
 
-                <div className='overview-item'>
+                <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDS Indicator</h2>
                   <ul className='link-list'>
                     {get(data, 'sds_indicator', []).map((indicator, i) => {
@@ -221,7 +222,7 @@ var Project = React.createClass({
                       <th className='row-name'>Component</th>
                       <th className='row-kpi'>KPI</th>
                       <th className='row-target'>Target</th>
-                      <th className='row-current'>Current</th>
+                      <th className='row-progress'>Progress</th>
                       <th className='row-date'>Date</th>
                     </tr>
                   </thead>
@@ -246,7 +247,7 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
-              <div className='chart-content' style={{width: '46%'}}>
+              <div className='chart-content' style={{width: '50%'}}>
                 <h3>Funding</h3>
                 <HorizontalBarChart
                   data={budgets}
@@ -254,7 +255,7 @@ var Project = React.createClass({
                   yTitle=''
                 />
               </div>
-              <div className='chart-content' style={{width: '26%'}}>
+              <div className='chart-content' style={{width: '20%'}}>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
@@ -263,7 +264,7 @@ var Project = React.createClass({
                   hideYAxis={true}
                 />
               </div>
-              <div className='chart-content' style={{width: '26%'}}>
+              <div className='chart-content' style={{width: '20%'}}>
                 <h3>Reach</h3>
                 <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
               </div>

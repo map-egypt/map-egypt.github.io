@@ -7,10 +7,6 @@
     }
   }
 
-  &__header--alt {
-
-  }
-
   &__body--alt {
     padding: $global-spacing 0 ($global-spacing * 4) 0;
     p {
@@ -18,9 +14,13 @@
     }
   }
 
-  &__subtitle {
-    margin-bottom: 0;
+  &__subtitles {
+    margin-bottom: $global-spacing;
     font-weight: $base-font-light;
+    span {
+      margin-right: $global-spacing/2;
+      font-size: 0.875rem;
+    }
   }
 
   &__description {
@@ -33,6 +33,13 @@
 
   &__headline {
     @extend .clearfix;
+  }
+
+  &__title {
+    @include col(7/12);
+    @include media(small-down){
+      @include col(12/12);
+    }
   }
 
   &__headline-actions {
@@ -65,7 +72,7 @@
     background-color: #fff;
     @include col(12/12);
     margin-bottom: $global-spacing * 2;
-    padding: $global-spacing * 2;
+    padding: $global-spacing * 3;
     box-shadow: inset 0 0 0 1px $tertiary-color;
     &:first-child {
       margin-top: $global-spacing * 4;
@@ -82,87 +89,6 @@
     .related-projects {
       @extend .clearfix;
       @include col(12/12);
-    }
-  }
-
-  &__table {
-    table-layout: fixed;
-    margin: ($global-spacing * 2) $global-spacing;
-    position: relative;
-    @include media(small-down) {
-      display: block; 
-    }
-
-    tbody {
-      @include media(small-down) {
-        display: block;
-      }
-    }
-
-    thead {
-      box-shadow: inset 0 -1px 0 0 $tertiary-color;
-      @include media(small-down) {
-      display: block; 
-      }
-      tr {
-        @include media(small-down) {
-          display: block; 
-          position: absolute;
-          top: -9999px;
-          left: -9999px;
-        }
-      }
-    }
-
-    th {
-      color: $base-color;
-      font-weight: $base-font-light;
-      text-align: left;
-      text-transform: uppercase;
-      font-size: 0.875rem;
-      padding-bottom: $global-spacing;
-      @include media(small-down) {
-        display: block; 
-      }
-    }
-
-    td {
-      font-size: 0.75rem;
-      line-height: 1.25rem;
-      position: relative;
-      font-weight: $base-font-light;
-      padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
-
-      @include media(small-down) {
-        display: block; 
-        border: none;
-        &:last-child {
-          box-shadow: inset 0 -1px 0 0 $tertiary-color;
-          margin-bottom: $global-spacing;
-        };
-      }
-
-      .activity-name {
-        color: $base-color;
-        font-weight: $base-font-bold;
-        margin-bottom: 0;
-        position: absolute;
-        top: 0.8rem;
-        @include media(small-down) {
-          position: relative;
-          top: 0;
-        }
-      }
-    }
-
-    td:before { 
-    @include media(small-down) {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%; 
-      padding-right: 10px; 
-      white-space: nowrap;
     }
   }
 
@@ -189,20 +115,28 @@
     }
     td:nth-of-type(4):before { 
       @include media(small-down){
+      content: "Progress"; 
+      }
+    }
+    td:nth-of-type(5):before { 
+      @include media(small-down){
       content: "Date"; 
       }
     }
 
+
     .row-name {
       width: 35%;
     }
-  }
+    .row-target, .row-progress, .row-date {
+      width: 12%;
+    }
 }
 
 .section {
   &__description {
     @include col(10/12, $offset: 1/12);
-    margin-bottom:($global-spacing * 2) ;
+    margin-bottom:($global-spacing * 2);
     text-align: center;
     @include media(medium-up) {
       @include center(600px);
@@ -211,6 +145,7 @@
   }
   &__title {
     text-align: center;
+    padding-bottom: $global-spacing;
   }
   &__footer {
     text-align: center;
@@ -296,6 +231,13 @@
       @include col(5/12);
       margin-bottom: 0;
     }
+
+   .map__container {
+    @include media(medium-up){
+      height: 750px;
+    }
+    height: 300px;
+   }
   }
 
   .inpage__col--content {
@@ -355,12 +297,16 @@
       @include col(12/12);
     }
   }
+  .overview-item--alt {
+    @include col(12/12);  
+  }
+}
 
 .overview-item__title {
     display: block;
     margin-bottom: $global-spacing/2;
     margin-top: $global-spacing;
-  }
+  
   ul {
     margin: 0;
     overflow:hidden;
@@ -374,11 +320,6 @@
     &:last-child {
       margin-bottom: $global-spacing;
     };
-    @include col(12/12);
-    @include media(medium-up) {
-      @include col(5/12);
-    }
-    
     &:first-child {
       @include col(12/12);
     }
@@ -399,5 +340,6 @@
   li {
     list-style: none;
     margin-bottom: $global-spacing/4;
+    font-size: 0.875rem;
   }
 }

@@ -1,9 +1,15 @@
-
-
 .chart-container {
   height: 240px;
   width: 100%;
   float: left;
+}
+
+.chart-content {
+  h3 {
+    font-family: $base-font-family;
+    font-size: 1rem;
+    text-align: center;
+  }
 }
 
 .pie__slice__on-time {
@@ -55,12 +61,40 @@
 /* Timeline */
 
 $timeline-height: 6px;
-$timeline-outer: #AAA;
-$timeline-inner: #666;
+$timeline-outer: rgba($base-color, 0.3);
+$timeline-inner: $base-color;
+
+.timeline__unit {
+  @include col(12/12);
+  margin-bottom: $global-spacing * 2;
+  &:first-child {
+    margin-top: $global-spacing;
+  }
+  @include media(medium-up) {
+    margin-bottom: 0;
+  }
+  &:last-child{
+    margin-top: 0.5rem;
+  }
+  .heading-alt {
+    font-size: 0.75rem;
+  }
+}
+
+.timeline__headline {
+  @include col(12/12);
+  @include media(medium-up) {
+    @include col(2/12);
+  }
+}
 
 .timeline__row {
+  @include col(12/12);
+  @include media(medium-up) {
+    @include col(10/12);
+  }
   background-color: $timeline-outer;
-  width: 100%;
+  margin-top: $global-spacing/4;
   height: $timeline-height;
   position: relative;
 
@@ -73,6 +107,10 @@ $timeline-inner: #666;
   }
 }
 
+.timeline__label {
+
+}
+
 .timeline__inner {
   background-color: $timeline-inner;
   height: $timeline-height;
@@ -80,7 +118,11 @@ $timeline-inner: #666;
 }
 
 .timeline__label {
-  bottom: -12px;
+  bottom: -9px;
   display: inline-block;
   position: absolute;
+  font-family: $base-font-family;
+  font-weight: $base-font-light;
+  font-size: 0.657rem;
+  color: $base-font-color;
 }
