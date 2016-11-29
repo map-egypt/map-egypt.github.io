@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Map from '../components/map';
-import ProjectCard from '../components/project-card';
+import ProjectList from '../components/project-list';
 
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
@@ -82,7 +82,6 @@ var ProjectBrowse = React.createClass({
   },
 
   render: function () {
-    const projects = this.props.api.projects;
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
     return (
@@ -122,38 +121,8 @@ var ProjectBrowse = React.createClass({
         </header>
 
         {this.state.listView
-        ? (<div className='inpage__body'>
-          <div className='inner'>
-            <section className='inpage__section'>
-              <h1 className='section__title heading--small'>Selected SDG Indicators</h1>
-            </section>
-            <section className='inpage__section project-list'>
-              <div className='section__header'>
-                <h1 className='section__title'>Projects</h1>
-                <div className='sort'>
-                  <label className='heading--label'>Sort By:</label>
-                  <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
-                </div>
-              </div>
-              <div className='section__content'>
-                <ul className='projects-list'>
-                  {projects.map((p) => {
-                    return (
-                      <li key={p.id}
-                        className='projects-list__card'>
-                        <ProjectCard
-                          lang={this.props.meta.lang}
-                          project={p}
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </section>
-          </div>
-        </div>)
-        : <Map />}
+          ? <ProjectList projects={this.props.api.projects} meta={this.props.meta} />
+          : <Map />}
 
         {this.state.modal && this.renderModal()}
 
