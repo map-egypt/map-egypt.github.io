@@ -17,10 +17,11 @@ import ProjectTimeline from '../components/project-timeline';
 // import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
-const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
+const barChartMargin = { left: 250, right: 10, top: 10, bottom: 50 };
 const comparisonChartMargin = extend({}, barChartMargin, {
   left: 10
 });
+
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
