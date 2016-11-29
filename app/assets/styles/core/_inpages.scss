@@ -92,90 +92,6 @@
     }
   }
 
-  &__table {
-    table-layout: fixed;
-    margin: ($global-spacing * 2) $global-spacing;
-    position: relative;
-    @include media(small-down) {
-      display: block; 
-    }
-
-    .card-meta__value--status:before {
-      top: 0.34rem;
-    }
-
-    tbody {
-      @include media(small-down) {
-        display: block;
-      }
-    }
-
-    thead {
-      box-shadow: inset 0 -1px 0 0 $tertiary-color;
-      @include media(small-down) {
-      display: block; 
-      }
-      tr {
-        @include media(small-down) {
-          display: block; 
-          position: absolute;
-          top: -9999px;
-          left: -9999px;
-        }
-      }
-    }
-
-    th {
-      color: $base-color;
-      font-weight: $base-font-light;
-      text-align: left;
-      text-transform: uppercase;
-      font-size: 0.875rem;
-      padding-bottom: $global-spacing;
-      @include media(small-down) {
-        display: block; 
-      }
-    }
-
-    td {
-      font-size: 0.75rem;
-      line-height: 1.25rem;
-      position: relative;
-      font-weight: $base-font-light;
-      padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
-
-      @include media(small-down) {
-        display: block; 
-        border: none;
-        &:last-child {
-          box-shadow: inset 0 -1px 0 0 $tertiary-color;
-          margin-bottom: $global-spacing;
-        };
-      }
-
-      .activity-name {
-        color: $base-color;
-        font-weight: $base-font-bold;
-        margin-bottom: 0;
-        position: absolute;
-        @include media(small-down) {
-          position: relative;
-          top: 0;
-        }
-      }
-    }
-
-    td:before { 
-    @include media(small-down) {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      width: 45%; 
-      padding-right: 10px; 
-      white-space: nowrap;
-    }
-  }
-
     td:nth-of-type(n):before {
       @extend th;
       left: 0;
@@ -215,7 +131,6 @@
     .row-target, .row-progress, .row-date {
       width: 12%;
     }
-  }
 }
 
 .section {
