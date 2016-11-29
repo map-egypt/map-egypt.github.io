@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
-import { tally, shortTally } from '../utils/format';
+import { tally, shortTally, pct } from '../utils/format';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -23,19 +23,21 @@ function isOntime (project) {
   }
 }
 
-function percentComplete (start, end) {
-  if (!end) {
-    return false;
+function percentComplete (project) {
+  const end = project.actual_end_date || project.planned_end_date;
+  const start = project.actual_start_date;
+  if (!end || !start) {
+    return 0;
   }
   const now = new Date().getTime();
   const endDate = parseProjectDate(end);
   if (now > endDate) {
-    return '100%';
+    return 100;
   } else {
     let startDate = parseProjectDate(start);
     let period = endDate - startDate;
     let elapsed = now - startDate;
-    return Math.round(elapsed / period * 100) + '%';
+    return Math.round(elapsed / period * 100);
   }
 }
 
@@ -52,10 +54,7 @@ var ProjectCard = React.createClass({
     const ontime = isOntime(project);
     const basepath = '/' + this.props.lang;
     const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);
-
-    const end = project.actual_end_date || project.planned_end_date;
-    const completion = project.actual_start_date && end
-      ? percentComplete(project.actual_start_date, end) : '0%';
+    let completion = pct(percentComplete(project));
 
     return (
       <div className='project'>
@@ -100,3 +99,4 @@ var ProjectCard = React.createClass({
 });
 module.exports = ProjectCard;
 module.exports.isOntime = isOntime;
+module.exports.percentComplete = percentComplete;
