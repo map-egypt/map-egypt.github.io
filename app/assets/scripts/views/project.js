@@ -22,7 +22,6 @@ const comparisonChartMargin = extend({}, barChartMargin, {
   left: 10
 });
 
-
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
 }
