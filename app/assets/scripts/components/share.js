@@ -30,7 +30,7 @@ const ShareButton = React.createClass({
         <div className='form__group'>
           <label className="form__label">Copy URL to Share</label>
           <div className="form__input-group">
-            <input type="text" className="form__control form__control--medium" readonly='readonly' value={url.resolve(baseUrl, this.props.path)}/>
+            <input readonly type="text" className="form__control form__control--medium" readOnly value={url.resolve(baseUrl, this.props.path)}/>
             <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--copy-icon"><span>Button</span></button></span>
           </div>
           </div>
