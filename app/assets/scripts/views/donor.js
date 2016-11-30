@@ -7,6 +7,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally } from '../utils/format';
+import slugify from '../utils/slugify';
 
 var Donor = React.createClass({
   displayName: 'Donor',
@@ -25,10 +26,15 @@ var Donor = React.createClass({
     }
 
     const donorName = this.props.params.name;
+    let donorDisplayName
 
     const donorProjects = projects.filter((project) => {
       return get(project, 'budget', []).some((item) => {
-        return item.donor_name.toLowerCase() === donorName.toLowerCase();
+        let sluggedName = slugify(item.donor_name);
+        if (sluggedName === donorName) {
+          donorDisplayName = item.donor_name;
+        }
+        return sluggedName === donorName;
       });
     });
 
@@ -61,7 +67,7 @@ var Donor = React.createClass({
                 </ul>
               </div>
             </div>
-            <h1 className='inpage__title heading--deco heading--large'>{donorName}</h1>
+            <h1 className='inpage__title heading--deco heading--large'>{donorDisplayName}</h1>
           </div>
         </header>
         <div className='inpage__body'>
