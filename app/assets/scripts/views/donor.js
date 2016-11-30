@@ -61,7 +61,7 @@ var Donor = React.createClass({
           <div className='inner'>
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
-                <ul className='inpage-stats'>
+                <ul>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname}/></li>
                 </ul>
@@ -70,7 +70,7 @@ var Donor = React.createClass({
             <h1 className='inpage__title heading--deco heading--large'>{donorDisplayName}</h1>
           </div>
         </header>
-        <div className='inpage__body'>
+        <div className='inpage__body donor'>
           <div className='inner'>
             <section className='inpage__section inpage__section--overview'>
 
