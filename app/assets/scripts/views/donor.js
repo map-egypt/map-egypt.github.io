@@ -6,7 +6,7 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
-import { shortTally } from '../utils/format';
+import { shortTally, tally } from '../utils/format';
 import slugify from '../utils/slugify';
 
 var Donor = React.createClass({
@@ -26,7 +26,7 @@ var Donor = React.createClass({
     }
 
     const donorName = this.props.params.name;
-    let donorDisplayName
+    let donorDisplayName;
 
     const donorProjects = projects.filter((project) => {
       return get(project, 'budget', []).some((item) => {
@@ -55,6 +55,8 @@ var Donor = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
+    const singleProject = donorProjects.length <= 1 ? ' inpage__section--single' : '';
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -72,7 +74,7 @@ var Donor = React.createClass({
         </header>
         <div className='inpage__body'>
           <div className='inner'>
-            <section className='inpage__section inpage__section--overview'>
+            <section className={'inpage__section inpage__section--overview' + singleProject}>
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
@@ -81,12 +83,14 @@ var Donor = React.createClass({
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
                   <li> {shortTally(totalBudget)} <small>Total Funds</small></li>
+                  <li> {tally(donorProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
-                  <HorizontalBarChart
+                  {!singleProject && (<HorizontalBarChart
                     data={chartData}
                     margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
-                  />
+                    yFormat
+                  />)}
                 </div>
               </div>
             </section>
