@@ -55,7 +55,7 @@ var Donor = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
-    const singleProject = donorProjects.length <= 1 ? ' inpage__section--single' : '';
+    const singleProject = donorProjects.length <= 1 ? ' donor--single' : '';
 
     return (
       <section className='inpage'>
@@ -72,9 +72,9 @@ var Donor = React.createClass({
             <h1 className='inpage__title heading--deco heading--large'>{donorDisplayName}</h1>
           </div>
         </header>
-        <div className='inpage__body donor'>
+        <div className={'inpage__body donor' + singleProject}>
           <div className='inner'>
-            <section className={'inpage__section inpage__section--overview' + singleProject}>
+            <section className='inpage__section inpage__section--overview'>
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
