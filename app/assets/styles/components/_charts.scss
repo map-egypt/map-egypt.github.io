@@ -126,3 +126,12 @@ $timeline-inner: $base-color;
   font-size: 0.657rem;
   color: $base-font-color;
 }
+
+.chart__axis--line {
+  stroke: #AAA;
+  stroke-width: 1px;
+}
+
+.chart__inline {
+  .axis__left .chart__axis-ticks { display: none; }
+}

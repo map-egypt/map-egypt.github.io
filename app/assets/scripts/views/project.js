@@ -73,8 +73,8 @@ var Project = React.createClass({
       project: project
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
-    const completion = budgets.map((d) => ({
-      name: d.name,
+    const completion = budgets.map((d, i) => ({
+      name: i,
       value: ProjectCard.percentComplete(d.project)
     }));
 
@@ -258,13 +258,12 @@ var Project = React.createClass({
                   xFormat={shortTally}
                 />
               </div>
-              <div className='chart-content' style={{width: '20%'}}>
+              <div className='chart-content chart__inline' style={{width: '20%'}}>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
                   margin={comparisonChartMargin}
                   yTitle=''
-                  hideYAxis={true}
                   xFormat={pct}
                 />
               </div>

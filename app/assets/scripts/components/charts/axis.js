@@ -34,10 +34,11 @@ const Axis = React.createClass({
     }
 
     const format = this.props.format || defaultFormat;
+    const domain = scale.domain();
 
     return (
-      <g className='axis' transform={transform}>
-        {labels.map(label => {
+      <g className={'axis axis__' + orientation} transform={transform}>
+        {labels.map((label, i) => {
           return <text
             key={label}
             className='chart__axis-ticks'
@@ -49,6 +50,13 @@ const Axis = React.createClass({
             {format(label)}
           </text>;
         })}
+        <line
+          className='chart__axis--line'
+          x1={orientation === 'left' ? margin.left : scale(domain[0]) }
+          y1='0'
+          x2={orientation === 'left' ? margin.left : scale(domain[1])}
+          y2={orientation === 'left' ? scale(domain[0]) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 1.5 : 0) + margin.top : 0}
+        />
       </g>
     );
   }
