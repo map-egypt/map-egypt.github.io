@@ -4,6 +4,7 @@
     padding: ($global-spacing * 4) 0;
     @include media(xsmall-only) {
       padding-bottom: $global-spacing;
+      padding-top: $global-spacing;
     }
   }
 
@@ -353,6 +354,9 @@
   margin-top: $global-spacing * 1.5;
   &__group {
     @include col(12/12);
+    @include media(xsmall-only) {
+      margin-bottom: $global-spacing;
+    }
   }
 
   &__label {
@@ -361,5 +365,9 @@
     line-height: 1.75rem;
     margin-right: $global-spacing/2;
     margin-bottom: 0;
+    @include media(xsmall-only) {
+      float: none;
+      line-height: 0.75rem;
+    }
   }
 }
