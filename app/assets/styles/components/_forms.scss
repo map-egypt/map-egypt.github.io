@@ -140,7 +140,6 @@ textarea.form__control {
   position: relative;
   display: table;
   border-collapse: separate;
-  width: 50%;
 }
 
 .form__input-group-button:first-child > .button,
@@ -370,6 +369,11 @@ label[for] {
 .button--newsletter-icon:before {
   @extend %collecticon-envelope;
 }
+
+.button--copy-icon:before {
+  @extend %collecticon-clipboard-list;
+}
+
 
 /* Form misc
    ========================================================================== */
