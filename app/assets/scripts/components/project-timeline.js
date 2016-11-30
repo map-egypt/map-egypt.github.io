@@ -26,14 +26,12 @@ var ProjectTimeline = React.createClass({
 
     return (
       <div className='timeline'>
-        {actualStart && actualEnd && (
-          <div className='timeline__unit'>
-            <h5>Current Progress</h5>
-            {timeline(actualStart, actualEnd, scale)}
-          </div>
-        )}
         <div className='timeline__unit'>
-          <h5>Proposed Timeline</h5>
+          <h5 className='timeline__headline heading-alt'>Current Progress</h5>
+          {actualStart && actualEnd && timeline(actualStart, actualEnd, scale)}
+        </div>
+        <div className='timeline__unit'>
+          <h5 className='timeline__headline heading-alt'>Proposed Timeline</h5>
           {timeline(plannedStart, plannedEnd, scale)}
         </div>
       </div>

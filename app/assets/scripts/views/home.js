@@ -58,7 +58,7 @@ var Home = React.createClass({
     return (
       <div>
       <section className='inpage'>
-        <header className='inpage__header'>
+        <header className='inpage__header home'>
           <div className='inner'>
             <p className='inpage__subtitle--alt'>tracking egypt</p>
             <h1 className='inpage__title heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
@@ -107,7 +107,7 @@ var Home = React.createClass({
                 </ul>
               </div>
 
-              <div className='overview-charts'>
+              <div className='overview-home-charts'>
                 <div className='chart-content'>
                   <h3>Number of Projects By Category</h3>
                   <HorizontalBarChart

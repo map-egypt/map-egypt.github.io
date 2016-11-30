@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Map from '../components/map';
-import ProjectCard from '../components/project-card';
+import ProjectList from '../components/project-list';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
@@ -16,7 +16,8 @@ var ProjectBrowse = React.createClass({
       modal: false,
       activeModal: null,
       indicatorToggle: false,
-      indicator: null
+      indicator: null,
+      listView: false
     };
   },
 
@@ -37,6 +38,9 @@ var ProjectBrowse = React.createClass({
   },
   openProjectSelector: function () { this.setState({ modal: true, activeModal: PROJECTS }); },
   closeModal: function () { this.setState({ modal: false, activeModal: null }); },
+
+  selectListView: function () { this.setState({ listView: true }); },
+  selectMapView: function () { this.setState({ listView: false }); },
 
   renderIndicatorSelector: function () {
     return (
@@ -106,7 +110,8 @@ var ProjectBrowse = React.createClass({
   },
 
   render: function () {
-    const projects = this.props.api.projects;
+    const selectedClassNames = 'button button--primary';
+    const deselectedClassNames = 'button button--primary-bounded';
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -150,45 +155,17 @@ var ProjectBrowse = React.createClass({
               </div>
               <div className='actions-toggle'>
                 <div className='button-group button-group--horizontal button--toggle'>
-                  <button className='button button--primary'>Map</button>
-                  <button className='button button--primary-bounded'>List</button>
+                  <button onClick={this.selectMapView} className={this.state.listView ? deselectedClassNames : selectedClassNames}>Map</button>
+                  <button onClick={this.selectListView} className={this.state.listView ? selectedClassNames : deselectedClassNames}>List</button>
                 </div>
               </div>
             </div>
           </div>
         </header>
-        <Map />
-        <div className='inpage__body'>
-          <div className='inner'>
-            <section className='inpage__section'>
-              <h1 className='section__title heading--small'>Selected SDG Indicators</h1>
-            </section>
-            <section className='inpage__section project-list'>
-              <div className='section__header'>
-                <h1 className='section__title'>Projects</h1>
-                <div className='sort'>
-                  <label className='heading--label'>Sort By:</label>
-                  <button className='button button--medium button--secondary drop__toggle--caret'>Category</button>
-                </div>
-              </div>
-              <div className='section__content'>
-                <ul className='projects-list'>
-                  {projects.map((p) => {
-                    return (
-                      <li key={p.id}
-                        className='projects-list__card'>
-                        <ProjectCard
-                          lang={this.props.meta.lang}
-                          project={p}
-                        />
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            </section>
-          </div>
-        </div>
+
+        {this.state.listView
+          ? <ProjectList projects={this.props.api.projects} meta={this.props.meta} />
+          : <Map />}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
