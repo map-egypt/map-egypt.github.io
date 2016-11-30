@@ -81,6 +81,10 @@ $timeline-inner: $base-color;
   }
 }
 
+.timeline {
+  overflow: hidden;
+}
+
 .timeline__headline {
   @include col(12/12);
   @include media(medium-up) {

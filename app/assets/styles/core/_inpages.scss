@@ -15,11 +15,11 @@
   }
 
   &__subtitles {
-    margin-bottom: $global-spacing;
+    margin-bottom: 0;
     font-weight: $base-font-light;
     span {
       margin-right: $global-spacing/2;
-      font-size: 0.875rem;
+      font-size: 0.75rem;
     }
   }
 
@@ -33,6 +33,10 @@
 
   &__headline {
     @extend .clearfix;
+    .inpage-meta {
+      display: block;
+      margin-bottom: 0rem;
+    }
   }
 
   &__title {
@@ -123,7 +127,6 @@
       content: "Date"; 
       }
     }
-
 
     .row-name {
       width: 35%;
@@ -341,5 +344,22 @@
     list-style: none;
     margin-bottom: $global-spacing/4;
     font-size: 0.875rem;
+    color: $base-color;
+  }
+}
+
+.tags {
+  float: left;
+  margin-top: $global-spacing * 1.5;
+  &__group {
+    @include col(12/12);
+  }
+
+  &__label {
+    float: left;
+    font-size: 0.75rem;
+    line-height: 1.75rem;
+    margin-right: $global-spacing/2;
+    margin-bottom: 0;
   }
 }

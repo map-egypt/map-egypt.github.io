@@ -94,28 +94,34 @@ var Project = React.createClass({
                   <li><Share path={this.props.location.pathname}/></li>
                 </ul>
               </div>
+              <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
+                <dt className='inpage-meta__label visually-hidden'>Status</dt>
+                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
+                <dt className='inpage-meta__label'>Last Update: </dt>
+                <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
+              </dl>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
             </div>
-            <div className='inpage__subtitles'>
-              {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
-                <Link to={linkPath(basepath, 'category', category)} className='link--secondary' href=''>{category}</Link>&nbsp;
-              </span>)}
-            </div>
-
-            <div className='inpage__subtitles'>
-              {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
-                  <Link to={linkPath(basepath, 'donor', donor.name)} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
-                </span>)}
-            </div>
-
-            <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
-              <dt className='inpage-meta__label visually-hidden'>Status</dt>
-              <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
-              <dt className='inpage-meta__label'>Last Update: </dt>
-              <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
-            </dl>
-
             <ProjectTimeline project={data} />
+
+            <div className='tags'>
+              <div className='tags__group'>
+                <p className='tags__label'>Categories:</p>
+                <div className='inpage__subtitles'>
+                  {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
+                    <Link to={linkPath(basepath, 'category', category)} className='link--secondary' href=''>{category}</Link>&nbsp;
+                  </span>)}
+                </div>
+              </div>
+              <div className='tags__group'>
+                <p className='tags__label'>Donors:</p>
+                <div className='inpage__subtitles'>
+                  {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
+                      <Link to={linkPath(basepath, 'donor', donor.name)} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
+                    </span>)}
+                </div>
+              </div>
+            </div>
 
           </div>
         </header>
@@ -146,7 +152,7 @@ var Project = React.createClass({
                         ? loc.district.district : loc.district.governorate;
                       return (
                         <li key={display}>
-                          <a href='' className='link--primary'><span>{display}</span></a>
+                          <span>{display}</span>
                         </li>
                       );
                     })}
@@ -180,7 +186,7 @@ var Project = React.createClass({
                     {get(data, 'sdg_indicator', []).map((indicator, i) => {
                       return (
                         <li key={indicator}>
-                          <a href='' className='link--primary'><span>{indicator}</span></a>
+                          <span>{indicator}</span>
                         </li>
                       );
                     })}
@@ -193,7 +199,7 @@ var Project = React.createClass({
                     {get(data, 'sds_indicator', []).map((indicator, i) => {
                       return (
                         <li key={indicator}>
-                          <a href='' className='link--primary'><span>{indicator}</span></a>
+                          <span>{indicator}</span>
                         </li>
                       );
                     })}
