@@ -17,16 +17,16 @@ var PageFooter = React.createClass({
                 <h1 className='updates__title heading--xsmall'> Want Updates? </h1>
                 <p className='updates__description'>Get notifications when we update projects <span className='italic'>quarterly</span>.</p>
                 <div className="form__input-group">
-                   <input type="text" className="form__control form__control--medium" id="form-input-6" placeholder="Enter email address"/>
-                   <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--newsletter-icon"><span>Button</span></button></span>
+                   <input type="text" className="form__control form__control--large" id="form-input-6" placeholder="Enter email address"/>
+                   <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--large button--newsletter-icon"><span>Button</span></button></span>
                  </div>
               </div>
             </div>
             <div className='logos'>
               <ul className='logos__list'>
                 <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href='http://www.agr-egypt.gov.eg/'><img src='assets/graphics/content/malr.png' alt='View sponsor website'/></a></li>
-                <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href='https://www.usaid.gov/'><img width='150px' src='assets/graphics/content/usaid.png' alt='View sponsor website'/></a></li>
                 <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href='http://www.ifpri.org/'><img src='assets/graphics/content/iflri.png' alt='View sponsor website'/></a></li>
+                <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href='https://www.usaid.gov/'><img width='150px' src='assets/graphics/content/usaid.png' alt='View sponsor website'/></a></li>
               </ul>
             </div>
           </div>

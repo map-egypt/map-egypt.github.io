@@ -52,9 +52,6 @@
       border-radius: $base-border-radius;
       margin: $global-spacing $global-spacing/2;
       max-width: 15rem;
-        &:first-child {
-          margin-left: 0;
-        };
       @include media(medium-up) {
         float: left;
         width: auto;
