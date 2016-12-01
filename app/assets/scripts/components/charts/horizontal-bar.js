@@ -11,8 +11,8 @@ var HorizontalBarChart = React.createClass({
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
     yTitle: React.PropTypes.string,
-    hideYAxis: React.PropTypes.bool,
-    hideXAxis: React.PropTypes.bool
+    xFormat: React.PropTypes.func,
+    yFormat: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -65,28 +65,30 @@ var HorizontalBarChart = React.createClass({
     return (
       <div className='chart-container' ref='chartContainer'>
         <svg className='chart' width={width} height={height} ref='svg'>
-          {!this.props.hideXAxis && <Axis
+          <Axis
             scale={xScale}
             labels={xLabels}
             orientation='bottom'
             height={height}
             width={width}
             margin={margin}
-          />}
-          {!this.props.hideYAxis && <Axis
+            format={this.props.xFormat}
+          />
+          <Axis
             scale={yScale}
             labels={yLabels}
             orientation='left'
             height={height}
             width={width}
             margin={margin}
-          />}
+            format={this.props.yFormat}
+          />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
-            {data.map((d) => {
+            {data.map((d, i) => {
               return <rect
                 key={d.name}
                 className='chart__bar'
-                y={yScale(d.name) + rectHeight / 2}
+                y={yScale(d.name) + rectHeight / 3}
                 x={0}
                 height={rectHeight}
                 width={xScale(d.value)}

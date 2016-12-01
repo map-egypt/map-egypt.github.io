@@ -8,7 +8,7 @@ import { extend } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally } from '../utils/format';
+import { tally, shortTally, pct } from '../utils/format';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -17,7 +17,7 @@ import ProjectTimeline from '../components/project-timeline';
 // import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
-const barChartMargin = { left: 250, right: 10, top: 10, bottom: 50 };
+const barChartMargin = { left: 250, right: 15, top: 10, bottom: 50 };
 const comparisonChartMargin = extend({}, barChartMargin, {
   left: 10
 });
@@ -73,8 +73,8 @@ var Project = React.createClass({
       project: project
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
-    const completion = budgets.map((d) => ({
-      name: d.name,
+    const completion = budgets.map((d, i) => ({
+      name: i,
       value: ProjectCard.percentComplete(d.project)
     }));
 
@@ -204,7 +204,9 @@ var Project = React.createClass({
                   <HorizontalBarChart
                     data={donors}
                     margin={barChartMargin}
-                    yTitle='' />
+                    yTitle=''
+                    xFormat={shortTally}
+                  />
                 </div>
                 <div className='chart-content'>
                   <h3>Disbursement vs. Reach</h3>
@@ -253,15 +255,16 @@ var Project = React.createClass({
                   data={budgets}
                   margin={barChartMargin}
                   yTitle=''
+                  xFormat={shortTally}
                 />
               </div>
-              <div className='chart-content' style={{width: '20%'}}>
+              <div className='chart-content chart__inline' style={{width: '20%'}}>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
                   margin={comparisonChartMargin}
                   yTitle=''
-                  hideYAxis={true}
+                  xFormat={pct}
                 />
               </div>
               <div className='chart-content' style={{width: '20%'}}>
