@@ -5,6 +5,9 @@ import { get } from 'object-path';
 
 import Map from '../components/map';
 import ProjectList from '../components/project-list';
+import AutoSuggest from '../components/auto-suggest';
+import { governorates } from '../utils/governorates';
+import { GOVERNORATE } from '../utils/map-utils';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
@@ -20,7 +23,8 @@ var ProjectBrowse = React.createClass({
       indicatorToggle: false,
       listView: false,
       activeIndicatorType: null,
-      activeIndicators: []
+      activeIndicators: [],
+      activeGovernorate: null
     };
   },
 
@@ -28,6 +32,13 @@ var ProjectBrowse = React.createClass({
     api: React.PropTypes.object,
     meta: React.PropTypes.object,
     dispatch: React.PropTypes.func
+  },
+
+  zoomToGovernorate: function (event, value) {
+    const selected = value.suggestion;
+    this.setState({
+      activeGovernorate: selected
+    });
   },
 
   toggleIndicatorDropdown: function () {
@@ -50,7 +61,6 @@ var ProjectBrowse = React.createClass({
   selectMapView: function () { this.setState({ listView: false }); },
 
   renderIndicatorSelector: function () {
-    const indicators = get(this.props.api, 'indicators', []);
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
@@ -120,8 +130,14 @@ var ProjectBrowse = React.createClass({
   render: function () {
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
-    const projects = this.props.api.projects;
-    const indicators = this.props.api.indicators;
+
+    let mapLocation;
+    const governorateId = get(this.state, 'activeGovernorate.egy');
+    if (governorateId) {
+      const features = get(this.props.api, 'geography.' + GOVERNORATE + '.features', []);
+      mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
+    }
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -170,12 +186,20 @@ var ProjectBrowse = React.createClass({
                 </div>
               </div>
             </div>
+            <div className='autosuggest'>
+              <AutoSuggest
+                suggestions={governorates}
+                getDisplayName={(d) => d.name}
+                placeholder='Zoom to Governorate'
+                onSelect={this.zoomToGovernorate}
+              />
+            </div>
           </div>
         </header>
 
         {this.state.listView
           ? <ProjectList projects={this.props.api.projects} meta={this.props.meta} />
-          : <Map />}
+          : <Map location={mapLocation} />}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
