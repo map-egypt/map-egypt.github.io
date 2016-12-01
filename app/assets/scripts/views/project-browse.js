@@ -101,6 +101,20 @@ var ProjectBrowse = React.createClass({
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
           <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
           <p>Add and compare development indicators listed below.</p>
+
+          {activeIndicators.length ? (
+            <div>
+              <span>Selected Indicators:&nbsp;</span>
+              {activeIndicators.map((name) => {
+                return (
+                  <span
+                    key={name}
+                    onClick={() => this.toggleActiveIndicator(name)}>x {name}</span>
+                );
+              })}
+            </div>
+          ) : null}
+
           <div>
             <ul>
               {themeNames.length && themeNames.map((name) => {
