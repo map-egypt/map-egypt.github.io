@@ -119,13 +119,13 @@ var ProjectBrowse = React.createClass({
               return (
                 <label key={name}
                   className={'form__option form__option--custom-checkbox' + (activeIndicators.indexOf(name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
-                  <input type="checkbox" name="form-checkbox"
+                  <input type='checkbox' name='form-checkbox'
                     checked={activeIndicators.indexOf(name) >= 0}
                     id={id}
                     value={name}
                     onChange={() => this.toggleActiveIndicator(name)} />
-                  <span className="form__option__text">{name}</span>
-                  <span className="form__option__ui"></span>
+                  <span className='form__option__text'>{name}</span>
+                  <span className='form__option__ui'></span>
                 </label>
               );
             })}
@@ -146,40 +146,40 @@ var ProjectBrowse = React.createClass({
           <h1 className='inpage__title heading--deco heading--medium'>Add and Filter Projects</h1>
           <div className='modal__filters'>
             <div className='modal__filters--defaults'>
-              <label className="form__option form__option--custom-checkbox">
-                <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                <span className="form__option__text">Add All Projects</span>
-                <span className="form__option__ui"></span>
+              <label className='form__option form__option--custom-checkbox'>
+                <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
+                <span className='form__option__text'>Add All Projects</span>
+                <span className='form__option__ui'></span>
               </label>
               <a className='link--secondary'>reset filters</a>
             </div>
-            <fieldset className="form__fieldset">
-              <div className="form__group">
-                <label className="form__label">Project Status</label>
-                <label className="form__option form__option--custom-checkbox">
-                  <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                  <span className="form__option__text">On Time</span>
-                  <span className="form__option__ui"></span>
+            <fieldset className='form__fieldset'>
+              <div className='form__group'>
+                <label className='form__label'>Project Status</label>
+                <label className='form__option form__option--custom-checkbox'>
+                  <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
+                  <span className='form__option__text'>On Time</span>
+                  <span className='form__option__ui'></span>
                 </label>
-                <label className="form__option form__option--custom-checkbox">
-                  <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                  <span className="form__option__text">Delayed</span>
-                  <span className="form__option__ui"></span>
+                <label className='form__option form__option--custom-checkbox'>
+                  <input type='checkbox' name='form-checkbox' value='form-checkbox-2' />
+                  <span className='form__option__text'>Delayed</span>
+                  <span className='form__option__ui'></span>
                 </label>
               </div>
             </fieldset>
-            <fieldset className="form__fieldset">
-              <div className="form__group">
-                <label className="form__label">Category</label>
-                <label className="form__option form__option--custom-checkbox">
-                  <input type="checkbox" name="form-checkbox" id="form-checkbox-1" value="Checkbox 1" />
-                  <span className="form__option__text">Category 1</span>
-                  <span className="form__option__ui"></span>
+            <fieldset className='form__fieldset'>
+              <div className='form__group'>
+                <label className='form__label'>Category</label>
+                <label className='form__option form__option--custom-checkbox'>
+                  <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
+                  <span className='form__option__text'>Category 1</span>
+                  <span className='form__option__ui'></span>
                 </label>
-                <label className="form__option form__option--custom-checkbox">
-                  <input type="checkbox" name="form-checkbox" value="form-checkbox-2" />
-                  <span className="form__option__text">Category 2</span>
-                  <span className="form__option__ui"></span>
+                <label className='form__option form__option--custom-checkbox'>
+                  <input type='checkbox' name='form-checkbox' value='form-checkbox-2' />
+                  <span className='form__option__text'>Category 2</span>
+                  <span className='form__option__ui'></span>
                 </label>
               </div>
             </fieldset>
