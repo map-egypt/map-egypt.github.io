@@ -49,6 +49,7 @@ var ProjectBrowse = React.createClass({
   },
 
   openIndicatorSelector: function (activeIndicatorType) {
+    activeIndicatorType = activeIndicatorType.split(' ')[0].toUpperCase();
     this.setState({
       modal: true,
       activeModal: INDICATORS,
@@ -82,11 +83,9 @@ var ProjectBrowse = React.createClass({
   selectMapView: function () { this.setState({ listView: false }); },
 
   renderIndicatorSelector: function () {
-    const { activeIndicators, activeIndicatorTheme } = this.state;
-    const indicatorType = this.state.activeIndicatorType
-    .toLowerCase().split(' ')[0]; // 'sdg', 'sds', 'other'
+    const { activeIndicators, activeIndicatorTheme, activeIndicatorType } = this.state;
     const indicators = get(this.props.api, 'indicators', []).filter((indicator) => {
-      return indicator.type.toLowerCase().indexOf(indicatorType) >= 0;
+      return indicator.type.toUpperCase().indexOf(activeIndicatorType) >= 0;
     });
 
     const themes = {};
@@ -114,19 +113,26 @@ var ProjectBrowse = React.createClass({
             </ul>
           </div>
           <div>
-            <form>
-              {availableIndicators.length && availableIndicators.map((indicator) => {
-                let name = indicator.name;
-                let id = 'subtypes-' + slugify(name);
-                return (
-                  <li key={name}
-                  className={'lis__subitem' + (activeIndicators.indexOf(name) >= 0 ? ' list__subitem--selected' : '')}>
-                    <input type='checkbox' id={id} onClick={() => this.toggleActiveIndicator(name)} />
-                    <label htmlFor={id}>{name}</label>
-                  </li>
-                );
-              })}
-            </form>
+            {availableIndicators.length && availableIndicators.map((indicator) => {
+              let name = indicator.name;
+              let id = 'subtypes-' + slugify(name);
+              return (
+                <label key={name}
+                  className={'form__option form__option--custom-checkbox' + (activeIndicators.indexOf(name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
+                  <input type="checkbox" name="form-checkbox"
+                    checked={activeIndicators.indexOf(name) >= 0}
+                    id={id}
+                    value={name}
+                    onChange={() => this.toggleActiveIndicator(name)} />
+                  <span className="form__option__text">{name}</span>
+                  <span className="form__option__ui"></span>
+                </label>
+              );
+            })}
+            <ul className='button--list'>
+              <li><button type='button' className='button button--medium button--primary'>Apply</button></li>
+              <li><button type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
+            </ul>
           </div>
         </div>
       </section>
