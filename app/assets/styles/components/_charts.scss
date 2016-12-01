@@ -67,6 +67,9 @@ $timeline-inner: $base-color;
 .timeline__unit {
   @include col(12/12);
   margin-bottom: $global-spacing * 2;
+  @include media(xsmall-only) {
+    margin-bottom: $global-spacing;
+  }
   &:first-child {
     margin-top: $global-spacing;
   }
@@ -81,8 +84,13 @@ $timeline-inner: $base-color;
   }
 }
 
+.timeline {
+  overflow: hidden;
+}
+
 .timeline__headline {
   @include col(12/12);
+  margin-bottom: $global-spacing * 1.5;
   @include media(medium-up) {
     @include col(2/12);
   }
@@ -105,10 +113,6 @@ $timeline-inner: $base-color;
     width: 1px;
     position: absolute;
   }
-}
-
-.timeline__label {
-
 }
 
 .timeline__inner {
