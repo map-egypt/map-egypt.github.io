@@ -2,12 +2,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import { without } from 'lodash';
 
 import Map from '../components/map';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE } from '../utils/map-utils';
+import slugify from '../utils/slugify';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
@@ -23,6 +25,7 @@ var ProjectBrowse = React.createClass({
       indicatorToggle: false,
       listView: false,
       activeIndicatorType: null,
+      activeIndicatorTheme: null,
       activeIndicators: [],
       activeGovernorate: null
     };
@@ -54,6 +57,24 @@ var ProjectBrowse = React.createClass({
     });
   },
 
+  selectIndicatorSubType: function (type) {
+    this.setState({
+      activeIndicatorTheme: type
+    });
+  },
+
+  toggleActiveIndicator: function (indicator) {
+    let active = this.state.activeIndicators;
+    if (active.indexOf(indicator) >= -0) {
+      active = without(active, indicator);
+    } else {
+      active = active.concat([indicator]);
+    }
+    this.setState({
+      activeIndicators: active
+    });
+  },
+
   openProjectSelector: function () { this.setState({ modal: true, activeModal: PROJECTS }); },
   closeModal: function () { this.setState({ modal: false, activeModal: null }); },
 
@@ -61,12 +82,52 @@ var ProjectBrowse = React.createClass({
   selectMapView: function () { this.setState({ listView: false }); },
 
   renderIndicatorSelector: function () {
+    const { activeIndicators, activeIndicatorTheme } = this.state;
+    const indicatorType = this.state.activeIndicatorType
+    .toLowerCase().split(' ')[0]; // 'sdg', 'sds', 'other'
+    const indicators = get(this.props.api, 'indicators', []).filter((indicator) => {
+      return indicator.type.toLowerCase().indexOf(indicatorType) >= 0;
+    });
+
+    const themes = {};
+    indicators.forEach((indicator) => {
+      themes[indicator.theme] = themes[indicator.theme] || [];
+      themes[indicator.theme].push(indicator);
+    });
+    const themeNames = Object.keys(themes);
+    const availableIndicators = get(themes, activeIndicatorTheme, []);
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
           <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
           <p>Add and compare development indicators listed below.</p>
+          <div>
+            <ul>
+              {themeNames.length && themeNames.map((name) => {
+                return (
+                  <li key={name}
+                  className={'list__item' + (name === activeIndicatorTheme ? ' list__item--active' : '')}
+                  onClick={() => this.selectIndicatorSubType(name)}>{name}</li>
+                );
+              })}
+            </ul>
+          </div>
+          <div>
+            <form>
+              {availableIndicators.length && availableIndicators.map((indicator) => {
+                let name = indicator.name;
+                let id = 'subtypes-' + slugify(name);
+                return (
+                  <li key={name}
+                  className={'lis__subitem' + (activeIndicators.indexOf(name) >= 0 ? ' list__subitem--selected' : '')}>
+                    <input type='checkbox' id={id} onClick={() => this.toggleActiveIndicator(name)} />
+                    <label htmlFor={id}>{name}</label>
+                  </li>
+                );
+              })}
+            </form>
+          </div>
         </div>
       </section>
     );
@@ -162,10 +223,9 @@ var ProjectBrowse = React.createClass({
                       {this.state.indicatorToggle &&
                         <ul className='dropdown__list button--secondary'>
                           {indicatorTypes.map((d) => {
-                            const key = d.toLowerCase().split(' ')[0];
-                            return <li key={key}
-                              onClick={() => this.openIndicatorSelector(key)}
-                              className='dropdown__item' data-value={key}>{d}</li>;
+                            return <li key={d}
+                              onClick={() => this.openIndicatorSelector(d)}
+                              className='dropdown__item'>{d}</li>;
                           })}
                         </ul>
                       }
