@@ -1,6 +1,6 @@
 'use strict';
 
-const electorates = [
+const governorates = [
   {"egy":"EGY1158","name":"Red Sea","id":31},
   {"egy":"EGY1159","name":"Behera","id":18},
   {"egy":"EGY1160","name":"Dakahlia","id":12},
@@ -32,11 +32,13 @@ const electorates = [
 
 module.exports.getEGY = function (id) {
   id = +id;
-  const result = electorates.find((d) => d.id === id);
+  const result = governorates.find((d) => d.id === id);
   return result && result.egy || false;
 }
 
 module.exports.getId = function (egy) {
-  const result = electorates.find((d) => d.egy === egy);
+  const result = governorates.find((d) => d.egy === egy);
   return result && result.id || false;
 }
+
+module.exports.governorates = governorates;
