@@ -16,7 +16,7 @@ var Home = React.createClass({
   },
 
   render: function () {
-    const projects = this.props.api.projects;
+    const { projects, authenticated } = this.props.api;
     const categories = {};
     const status = { ontime: 0, delayed: 0 };
     projects.forEach(function (project) {
