@@ -1,12 +1,14 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import { get } from 'object-path';
 
 import Map from '../components/map';
 import ProjectList from '../components/project-list';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
+const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
 
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
@@ -16,8 +18,9 @@ var ProjectBrowse = React.createClass({
       modal: false,
       activeModal: null,
       indicatorToggle: false,
-      indicator: null,
-      listView: false
+      listView: false,
+      activeIndicatorType: null,
+      activeIndicators: []
     };
   },
 
@@ -27,15 +30,19 @@ var ProjectBrowse = React.createClass({
     dispatch: React.PropTypes.func
   },
 
-  toggleIndicatorDropdown: function () { this.setState({indicatorToggle: !this.state.indicatorToggle}); },
-  openIndicatorSelector: function (indicator) {
+  toggleIndicatorDropdown: function () {
+    this.setState({indicatorToggle: !this.state.indicatorToggle});
+  },
+
+  openIndicatorSelector: function (activeIndicatorType) {
     this.setState({
       modal: true,
       activeModal: INDICATORS,
       indicatorToggle: false,
-      indicator
+      activeIndicatorType
     });
   },
+
   openProjectSelector: function () { this.setState({ modal: true, activeModal: PROJECTS }); },
   closeModal: function () { this.setState({ modal: false, activeModal: null }); },
 
@@ -43,11 +50,12 @@ var ProjectBrowse = React.createClass({
   selectMapView: function () { this.setState({ listView: false }); },
 
   renderIndicatorSelector: function () {
+    const indicators = get(this.props.api, 'indicators', []);
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
-          <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.indicator.toUpperCase()} Indicators</h1>
+          <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
           <p>Add and compare development indicators listed below.</p>
         </div>
       </section>
@@ -112,6 +120,8 @@ var ProjectBrowse = React.createClass({
   render: function () {
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
+    const projects = this.props.api.projects;
+    const indicators = this.props.api.indicators;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -135,7 +145,7 @@ var ProjectBrowse = React.createClass({
                         className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button>
                       {this.state.indicatorToggle &&
                         <ul className='dropdown__list button--secondary'>
-                          {['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'].map((d) => {
+                          {indicatorTypes.map((d) => {
                             const key = d.toLowerCase().split(' ')[0];
                             return <li key={key}
                               onClick={() => this.openIndicatorSelector(key)}
