@@ -4,4 +4,41 @@
     height: 400px;
     }
   }
+  .inpage__header {
+    padding-bottom: 2rem;
+  }
+
+  .donor--single {
+    .inpage__col--map {
+      @include col(8/12);
+      @include media(small-down){
+        @include col(12/12);
+      }
+    .map__container {
+      @include media(small-down) {
+        height: 300px;
+        }
+      }
+    }
+    .inpage__col--content {
+      @include media(small-down){
+        @include col(12/12);
+      }
+      @include col(4/12);
+      .inpage-stats li {
+        box-shadow: 0px 1px 0 0 #E9E9E9;
+        padding: $global-spacing 0 $global-spacing/2 0;
+        &:first-child {
+          padding-top: 0;
+        }
+        @include media(small-down) {
+          padding: 0;
+          &:first-child {
+            box-shadow: 1px 0 0 #E9E9E9;
+            padding-right: $global-spacing;
+          }
+        }
+      }
+    }
+  }
 }

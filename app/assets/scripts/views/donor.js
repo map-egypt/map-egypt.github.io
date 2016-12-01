@@ -58,7 +58,7 @@ var Donor = React.createClass({
     const singleProject = donorProjects.length <= 1 ? ' donor--single' : '';
 
     return (
-      <section className='inpage'>
+      <section className='inpage donor'>
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
@@ -68,8 +68,8 @@ var Donor = React.createClass({
                   <li><Share path={this.props.location.pathname}/></li>
                 </ul>
               </div>
+              <h1 className='inpage__title heading--deco heading--large'>{donorDisplayName}</h1>
             </div>
-            <h1 className='inpage__title heading--deco heading--large'>{donorDisplayName}</h1>
           </div>
         </header>
         <div className={'inpage__body donor' + singleProject}>
