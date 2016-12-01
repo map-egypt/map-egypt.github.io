@@ -17,8 +17,8 @@ var PageFooter = React.createClass({
                 <h1 className='updates__title heading--xsmall'> Want Updates? </h1>
                 <p className='updates__description'>Get notifications when we update projects <span className='italic'>quarterly</span>.</p>
                 <div className="form__input-group">
-                   <input type="text" className="form__control form__control--medium" id="form-input-6" placeholder="Enter email address"/>
-                   <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--newsletter-icon"><span>Button</span></button></span>
+                   <input type="text" className="form__control form__control--large" id="form-input-6" placeholder="Enter email address"/>
+                   <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--large button--newsletter-icon"><span>Button</span></button></span>
                  </div>
               </div>
             </div>
