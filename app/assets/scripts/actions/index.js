@@ -92,18 +92,18 @@ export function getIndicator (id) {
   };
 }
 
-export function getGeography () {
+export function getGeography (name) {
   return function (dispatch) {
     // a2-withluxor.json = governorate boundaries post 2009.
     // if we need pre-2009 governorate boundaries, we can generate them in /tool.
     reqwest(url.resolve(baseUrl, 'assets/data/topojson/a2-withluxor.json'), function (resp) {
       try {
-        var features = topojson.feature(resp, resp.objects['egy2']);
+        var features = topojson.feature(resp, resp.objects[name]);
       } catch (e) {
         console.log('Topojson.feature() failed');
         return;
       }
-      return dispatch(updateGeography(features));
+      return dispatch(updateGeography({ features, name }));
     });
   };
 }
