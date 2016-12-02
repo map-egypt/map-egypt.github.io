@@ -162,6 +162,16 @@ var Category = React.createClass({
                   xFormat={pct}
                 />
               </div>
+              <ul className='projects-list'>
+                {categoryProjects.map((p) => {
+                  return (
+                    <li key={p.id} className='projects-list__card'>
+                      <ProjectCard lang={this.props.meta.lang}
+                        project={p} />
+                    </li>
+                  );
+                })}
+              </ul>
             </section>
           </div>
         </div>
