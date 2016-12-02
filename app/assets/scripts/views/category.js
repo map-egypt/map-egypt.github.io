@@ -84,7 +84,7 @@ var Category = React.createClass({
 
     const chartData = categoryProjects.map((project) => {
       return {
-        name: project.name,
+        name: (project.name).substring(0, 25) + '...',
         value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0),
         project: project
       };
@@ -127,14 +127,14 @@ var Category = React.createClass({
           <div className='inner'>
             <section className='inpage__section'>
               <h1 className='section__title heading--small'>Comparison</h1>
-              <div className='chart-content'>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Number of Projects per Category</h3>
                 <HorizontalBarChart
                   data={numProjectsChartData}
                   margin={{ left: 150, right: 20, top: 10, bottom: 50 }}
                 />
               </div>
-              <div className='chart-content'>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Funding of Projects per Category</h3>
                 <HorizontalBarChart
                   data={budgetPerCategoryChartData}
@@ -145,22 +145,22 @@ var Category = React.createClass({
             </section>
             <section className='inpage__section'>
               <h1 className='section__title heading--small'>Projects</h1>
-              <div className='chart-content' style={{width: '50%'}}>
-                <h3>Funding</h3>
-                <HorizontalBarChart
+              <div className='chart-content chart__inline--labels'>
+                {!singleProject && (<h3>Funding</h3>)}
+                 {!singleProject && (<HorizontalBarChart
                  data={chartData}
-                 margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
+                 margin={{ left: 150, right: 20, top: 10, bottom: 50 }}
                  xFormat={shortTally}
-                />
+                />)}
                </div>
-               <div className='chart-content chart__inline' style={{width: '20%'}}>
-                <h3>Percentage Complete</h3>
-                <HorizontalBarChart
+               <div className='chart-content chart__inline--labels'>
+                {!singleProject && (<h3>Percentage Complete</h3>)}
+                {!singleProject && (<HorizontalBarChart
                   data={completion}
-                  margin={{ left: 20, right: 50, top: 10, bottom: 50 }}
+                  margin={{ left: 150, right: 20, top: 10, bottom: 50 }}
                   yTitle=''
                   xFormat={pct}
-                />
+                />)}
               </div>
               <ul className='projects-list'>
                 {categoryProjects.map((p) => {

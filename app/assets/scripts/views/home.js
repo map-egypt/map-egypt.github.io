@@ -99,14 +99,14 @@ var Home = React.createClass({
               </div>
 
               <div className='overview-home-charts'>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Number of Projects By Category</h3>
                   <HorizontalBarChart
                     data={bars}
                     margin={barChartMargin}
                     yTitle='' />
                 </div>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3> Status </h3>
                   <PieChart data={pie} />
                   <div className='status-key'>

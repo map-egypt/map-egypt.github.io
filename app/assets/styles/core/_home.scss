@@ -9,14 +9,6 @@
   @extend .clearfix;
 }
 
-.chart-content {
-  @extend .clearfix;
-  @include col(12/12);
-  @include media(medium-up) {
-    @include col(6/12);
-  }
-}
-
 .inpage {
   &__subtitle--alt {
   font-weight: $base-font-light;

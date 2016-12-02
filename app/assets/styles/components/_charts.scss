@@ -12,6 +12,29 @@
   }
 }
 
+.home {
+  .chart__inline--labels {
+  @include col(6/12);
+  @include media(small-down) {
+    @include col(12/12);
+  }
+}
+
+}
+.chart__inline--labels {
+  @include col(5.5/12);
+  @include media(small-down) {
+    @include col(12/12);
+  }
+}
+
+.chart__inline {
+  @include col(3/12);
+  @include media(small-down) {
+    @include col(12/12);
+  }
+}
+
 .pie__slice__on-time {
   fill: $base-color;
 }
