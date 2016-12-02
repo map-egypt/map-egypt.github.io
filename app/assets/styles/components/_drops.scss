@@ -38,6 +38,7 @@
   background: #fff;
   box-shadow: 0 4px 16px 8px $base-alpha-color;
   border-radius: $base-border-radius;
+  margin-top: $global-spacing/2;
 
   /* Animation */
 
@@ -52,6 +53,10 @@
     right: 0;
   }
 }
+.drop--align-left {
+  left: 0;
+}
+
 
 .share--box {
   .form__group {
@@ -163,15 +168,18 @@
 .drop__menu {
   @extend .clearfix;
   list-style: none;
-  margin: (-$global-spacing) (-$global-spacing) $global-spacing (-$global-spacing);
-  box-shadow: 0 2px 0 0 $base-alpha-color;
+  box-shadow: 0 4px 16px 8px $base-alpha-color;
+  margin-top: $global-spacing/2;
   padding: ($global-spacing / 2) 0;
   max-width: 16rem;
   font-weight: $base-font-regular;
+  background-color: #fff;
+  position: absolute;
+  border-radius: $global-spacing/4;
 
   &:last-child {
     margin-bottom: (-$global-spacing);
-    box-shadow: none;
+ /*   box-shadow: none;*/
   }
 
   .drop__menu-item {

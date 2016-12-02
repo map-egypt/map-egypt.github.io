@@ -5,6 +5,7 @@ import { get } from 'object-path';
 import { without, clone } from 'lodash';
 
 import Map from '../components/map';
+import Share from '../components/share';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
 import { governorates } from '../utils/governorates';
@@ -253,7 +254,7 @@ var ProjectBrowse = React.createClass({
             <div className='inpage__headline'>
              <div className='inpage__headline-actions'>
                 <ul>
-                  <li><button type='button' className='button button--medium button--primary'>Share</button></li>
+                  <li><Share path={this.props.location.pathname}/></li>
                 </ul>
               </div>
                 <h1 className='inpage__title heading--deco heading--large'>Projects and Indicators</h1>
@@ -268,7 +269,7 @@ var ProjectBrowse = React.createClass({
                       <button type='button' onClick={this.toggleIndicatorDropdown}
                         className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button>
                       {this.state.indicatorToggle &&
-                        <ul className='drop__menu drop__content button--secondary'>
+                        <ul className='drop__menu drop--align-left button--secondary'>
                           {indicatorTypes.map((d) => {
                             return <li key={d}
                               onClick={() => this.openIndicatorSelector(d)}
