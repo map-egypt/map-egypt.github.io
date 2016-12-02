@@ -49,20 +49,32 @@
   p {
     @include col(12/12);
   }
-  .indicators {
+  .indicators__container {
+    border: solid 1px $tertiary-color;
+    float: left;
+    @include col(12/12);
     margin-bottom: $global-spacing * 2;
+  }
+  .indicators {
     @include col(4/12);
     margin-right: 0;
     .list__item--active {
-        border-right: 0;
-        font-weight: $base-font-bold;
+      border-right: 0;
+      font-weight: $base-font-bold;
+    }
+    ul {
+      margin-bottom: 0;
     }
     li {
       list-style: none;
-      padding: $global-spacing;
+      padding: 5%;
       border: solid 1px $tertiary-color;
-      margin-bottom: -1px;
+      border-top: 0;
+      border-left: 0;
       color: $base-color;
+      &:last-child {
+        border-bottom: 0
+      };
       @include media(small-down) {
         font-size: 0.875rem;
       }
@@ -81,18 +93,18 @@
   .indicators--options {
    /* background: #F4F4F4;*/
     @include col(8/12);
-    height: 229px;
+   /* height: 229px;*/
     padding: $global-spacing;
-    border: solid 1px $tertiary-color;
+    /*border: solid 1px $tertiary-color;
     border-left: 0;
-    margin-left: -1px;
+*/    margin-left: -1px;
     margin-bottom: -1px;
     @include media(small-down) {
       font-size: 0.75rem;
-      height: 217px;
+    /*  height: 217px;*/
     }
     @include media(xsmall-only) {
-      height: 238px;
+    /*  height: 238px;*/
     }
   }
   .button--list {
