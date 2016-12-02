@@ -6,8 +6,10 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
-import { tally, shortTally, pct } from '../utils/format';
+import { tally, shortTally, pct, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
+
+const chartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
 
 var Category = React.createClass({
   displayName: 'Category',
@@ -27,7 +29,7 @@ var Category = React.createClass({
 
     // Count number of projects per category
     const justCategories = projects.map((project) => {
-      let budget = project.budget.reduce((cur, item) => cur + item.fund.amount, 0);
+      let budget = project.budget.reduce((cur, item) => cur + get(item, 'fund.amount', 0), 0);
       return get(project, 'categories', []).map((category) => {
         return { category, budget };
       });
@@ -52,14 +54,14 @@ var Category = React.createClass({
 
     const numProjectsChartData = Object.keys(numProjectsPerCategory).map((key) => {
       return {
-        name: key.substring(0, 25) + '...',
+        name: key,
         value: numProjectsPerCategory[key]
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const budgetPerCategoryChartData = Object.keys(budgetPerCategory).map((key) => {
       return {
-        name: key.substring(0, 25) + '...',
+        name: key,
         value: budgetPerCategory[key]
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
@@ -83,7 +85,7 @@ var Category = React.createClass({
 
     const chartData = categoryProjects.map((project) => {
       return {
-        name: (project.name).substring(0, 25) + '...',
+        name: project.name,
         value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0),
         project: project
       };
@@ -130,14 +132,16 @@ var Category = React.createClass({
                 <h3>Number of Projects per Category</h3>
                 <HorizontalBarChart
                   data={numProjectsChartData}
-                  margin={{ left: 150, right: 20, top: 10, bottom: 50 }}
+                  yFormat={shortText}
+                  margin={chartMargin}
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
                 <h3>Funding of Projects per Category</h3>
                 <HorizontalBarChart
                   data={budgetPerCategoryChartData}
-                  margin={{ left: 150, right: 20, top: 10, bottom: 50 }}
+                  margin={chartMargin}
+                  yFormat={shortText}
                   xFormat={shortTally}
                 />
               </div>
@@ -148,17 +152,19 @@ var Category = React.createClass({
                 {!singleProject && (<h3>Funding</h3>)}
                  {!singleProject && (<HorizontalBarChart
                  data={chartData}
-                 margin={{ left: 150, right: 20, top: 10, bottom: 50 }}
+                 margin={chartMargin}
                  xFormat={shortTally}
+                 yFormat={shortText}
                 />)}
                </div>
                <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>Percentage Complete</h3>)}
                 {!singleProject && (<HorizontalBarChart
                   data={completion}
-                  margin={{ left: 150, right: 20, top: 10, bottom: 50 }}
+                  margin={chartMargin}
                   yTitle=''
                   xFormat={pct}
+                  yFormat={shortText}
                 />)}
               </div>
               <ul className='projects-list'>
