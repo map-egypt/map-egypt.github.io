@@ -1,10 +1,12 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import {isOntime} from '../components/project-card';
+import {shortText, tally} from '../utils/format';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -12,7 +14,8 @@ var Home = React.createClass({
   displayName: 'Home',
 
   propTypes: {
-    api: React.PropTypes.object
+    api: React.PropTypes.object,
+    meta: React.PropTypes.object
   },
 
   render: function () {
@@ -29,7 +32,7 @@ var Home = React.createClass({
       } else if (ontime) {
         status.ontime += 1;
       } else {
-        project.delayed += 1;
+        status.delayed += 1;
       }
     });
 
@@ -104,6 +107,8 @@ var Home = React.createClass({
                   <HorizontalBarChart
                     data={bars}
                     margin={barChartMargin}
+                    yFormat={shortText}
+                    xFormat={tally}
                     yTitle='' />
                 </div>
                 <div className='chart-content chart__inline--labels'>
@@ -116,7 +121,7 @@ var Home = React.createClass({
                 </div>
               </div>
               <div className='section__footer'>
-                <button type='button' className='button button--primary button--large'>View All Projects</button>
+                <Link to={'/' + this.props.meta.lang + '/projects'} type='button' className='button button--primary button--large'>View All Projects</Link>
               </div>
             </section>
           </div>
@@ -140,7 +145,8 @@ var Home = React.createClass({
 
 function mapStateToProps (state) {
   return {
-    api: state.api
+    api: state.api,
+    meta: state.meta
   };
 }
 
