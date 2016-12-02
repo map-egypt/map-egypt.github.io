@@ -374,7 +374,7 @@ var ProjectBrowse = React.createClass({
     const { activeProjectFilters } = this.state;
 
     return (
-      <section className='inpage'>
+      <section className='inpage project-browse'>
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
@@ -428,16 +428,23 @@ var ProjectBrowse = React.createClass({
                 </div>
               </div>
             </div>
-            <div className='autosuggest'>
-              <AutoSuggest
-                suggestions={governorates}
-                getDisplayName={(d) => d.name}
-                placeholder='Zoom to Governorate'
-                onSelect={this.zoomToGovernorate}
-              />
-            </div>
           </div>
         </header>
+        <div className='map__actions'>
+          <div className='inner'>
+            <div className='map__search-input'>
+              <div className='autosuggest'>
+                  <AutoSuggest
+                  suggestions={governorates}
+                  getDisplayName={(d) => d.name}
+                  placeholder='Zoom to Governorate'
+                  onSelect={this.zoomToGovernorate}
+                  />
+              </div>
+              <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--search-icon"><span>Button</span></button></span>
+            </div>
+          </div>
+        </div>
 
         {this.state.listView
           ? <ProjectList projects={projects} meta={this.props.meta} />

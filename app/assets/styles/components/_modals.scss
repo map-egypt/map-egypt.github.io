@@ -42,6 +42,12 @@
 
 .modal__projects {
   padding: $global-spacing * 2;
+  .form__fieldset {
+    @include col(12/12);
+    @include media(medium-up) {
+      @include col(5/12);
+    }
+  }
 }
 
 .modal__indicators {
