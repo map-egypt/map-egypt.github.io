@@ -80,8 +80,8 @@ var Home = React.createClass({
 
     return (
       <div>
-      <section className='inpage'>
-        <header className='inpage__header home'>
+      <section className='inpage home'>
+        <header className='inpage__header'>
           <div className='inner'>
             <p className='inpage__subtitle--alt'>tracking egypt</p>
             <h1 className='inpage__title heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
@@ -93,8 +93,8 @@ var Home = React.createClass({
         </header>
         <div className='inpage__body'>
           <div className='inner'>
+            <Map markers={markers}/>
             <section className='inpage__section'>
-              <Map markers={markers}/>
               <div className='overview-home'>
                 <h2 className='section__title'>Overview of Agricultural Projects</h2>
                 <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
