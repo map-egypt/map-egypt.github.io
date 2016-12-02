@@ -268,11 +268,11 @@ var ProjectBrowse = React.createClass({
                       <button type='button' onClick={this.toggleIndicatorDropdown}
                         className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button>
                       {this.state.indicatorToggle &&
-                        <ul className='dropdown__list button--secondary'>
+                        <ul className='drop__menu drop__content button--secondary'>
                           {indicatorTypes.map((d) => {
                             return <li key={d}
                               onClick={() => this.openIndicatorSelector(d)}
-                              className='dropdown__item'>{d}</li>;
+                              className='drop__menu-item'>{d}</li>;
                           })}
                         </ul>
                       }
