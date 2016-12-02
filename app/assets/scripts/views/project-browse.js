@@ -116,6 +116,7 @@ var ProjectBrowse = React.createClass({
     });
   },
 
+  // indicator modals
   toggleIndicatorDropdown: function () {
     this.setState({indicatorToggle: !this.state.indicatorToggle});
   },
@@ -151,6 +152,16 @@ var ProjectBrowse = React.createClass({
   selectIndicatorSubType: function (type) {
     this.setState({
       activeIndicatorTheme: type
+    });
+  },
+
+  // project modal
+  openProjectSelector: function () {
+    this.setState({
+      modal: true,
+      indicatorToggle: false,
+      activeModal: PROJECTS,
+      selectedProjectFilters: this.state.activeProjectFilters.length ? clone(this.state.activeProjectFilters) : []
     });
   },
 
@@ -215,7 +226,6 @@ var ProjectBrowse = React.createClass({
     });
   },
 
-  openProjectSelector: function () { this.setState({ modal: true, activeModal: PROJECTS }); },
   closeModal: function () { this.setState({ modal: false, activeModal: null }); },
 
   selectListView: function () { this.setState({ listView: true }); },
@@ -299,9 +309,8 @@ var ProjectBrowse = React.createClass({
   },
 
   renderProjectSelector: function () {
-    const projects = this.props.api.projects;
-    const selectedFilters = this.state.selectedProjectFilters;
-    console.log(selectedFilters);
+    let projects = this.props.api.projects;
+    const { selectedProjectFilters } = this.state;
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
@@ -326,7 +335,7 @@ var ProjectBrowse = React.createClass({
                     <label key={item.display}
                       className='form__option form__option--custom-checkbox'>
                       <input
-                        checked={!!selectedFilters.find((f) => f.display === item.display)}
+                        checked={!!selectedProjectFilters.find((f) => f.display === item.display)}
                         type='checkbox'
                         name='form-checkbox'
                         value={item.display}
@@ -360,7 +369,6 @@ var ProjectBrowse = React.createClass({
   render: function () {
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
-    const projects = this.props.api.projects;
 
     let mapLocation;
     const governorateId = get(this.state, 'activeGovernorate.egy');
@@ -369,9 +377,15 @@ var ProjectBrowse = React.createClass({
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
     }
 
-    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
-
+    let { projects } = this.props.api;
     const { activeProjectFilters } = this.state;
+    if (activeProjectFilters.length) {
+      activeProjectFilters.forEach((filter) => {
+        projects = projects.filter(filter.filter);
+      });
+    }
+
+    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
 
     return (
       <section className='inpage'>

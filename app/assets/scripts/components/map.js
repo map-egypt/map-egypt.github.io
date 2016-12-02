@@ -63,8 +63,8 @@ const Map = React.createClass({
       this.fitMap(newProps);
     }
 
-    if (newProps.markers && newProps.markers.length &&
-                              (!this.props.markers || JSON.stringify(newProps.markers) !== JSON.stringify(this.props.markers))) {
+    if (newProps.markers.length !== this.props.markers.length ||
+        JSON.stringify(newProps.markers) !== JSON.stringify(this.props.markers)) {
       this.addClusterMarkers(newProps.markers);
     }
   },

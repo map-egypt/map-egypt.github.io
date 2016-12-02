@@ -14,9 +14,6 @@ const ProjectList = React.createClass({
     const {projects, meta} = this.props;
     return <div className='inpage__body'>
       <div className='inner'>
-        <section className='inpage__section'>
-          <h1 className='section__title heading--small'>Selected SDG Indicators</h1>
-        </section>
         <section className='inpage__section project-list'>
           <div className='section__header'>
             <h1 className='section__title'>Projects</h1>
