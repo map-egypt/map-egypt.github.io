@@ -6,7 +6,6 @@ import * as governorates from './governorates';
 module.exports.GOVERNORATE = 'egy2';
 
 module.exports.getProjectCentroids = function (projects, features) {
-
   const markers = [];
   if (!features || !projects.length) {
     return markers;

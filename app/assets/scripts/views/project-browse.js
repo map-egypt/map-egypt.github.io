@@ -8,7 +8,7 @@ import Map from '../components/map';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
 import { governorates } from '../utils/governorates';
-import { GOVERNORATE } from '../utils/map-utils';
+import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 
 const PROJECTS = 'projects';
@@ -238,6 +238,7 @@ var ProjectBrowse = React.createClass({
   render: function () {
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
+    const projects = this.props.api.projects;
 
     let mapLocation;
     const governorateId = get(this.state, 'activeGovernorate.egy');
@@ -245,6 +246,8 @@ var ProjectBrowse = React.createClass({
       const features = get(this.props.api, 'geography.' + GOVERNORATE + '.features', []);
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
     }
+
+    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
 
     return (
       <section className='inpage'>
@@ -305,8 +308,8 @@ var ProjectBrowse = React.createClass({
         </header>
 
         {this.state.listView
-          ? <ProjectList projects={this.props.api.projects} meta={this.props.meta} />
-          : <Map location={mapLocation} />}
+          ? <ProjectList projects={projects} meta={this.props.meta} />
+          : <Map location={mapLocation} markers={markers}/>}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
