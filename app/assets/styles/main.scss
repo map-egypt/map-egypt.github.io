@@ -35,7 +35,6 @@
 
 @import "vendor/normalize";
 @import "vendor/reset";
-@import "vendor/marker-cluster";
 
 /**
  * Using Kenneth Ormandy's OpenType features—ligatures, kerning, and
@@ -77,6 +76,7 @@
 @import "core/projects";
 @import "core/donor";
 
+@import "vendor/marker-cluster";
 
 /* Components
    ========================================================================== */
@@ -88,3 +88,5 @@
 @import "components/login";
 @import "components/charts";
 @import "components/dropdown";
+
+

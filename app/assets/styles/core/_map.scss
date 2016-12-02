@@ -2,3 +2,22 @@
   width: 100%;
   height: 380px;
 }
+
+.leaflet-popup-close-button {
+  top: 5px !important;
+  right: 5px !important;
+}
+
+.leaflet-container h5 {
+  font-size: 1rem !important;
+}
+
+.leaflet-popup-content {
+  padding: ($global-spacing * 1.5) $global-spacing $global-spacing $global-spacing !important;
+}
+
+.marker__description {
+  font-size: 0.875rem !important;
+	font-family: $base-font-family;
+  color: $base-color;
+}
