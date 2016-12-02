@@ -7,7 +7,6 @@
 .inpage__actions {
   margin-top: $global-spacing * 2;
   @include col(12/12);
-  overflow: hidden;
   @include media(small-down) {
   	margin-top: $global-spacing;
   }
@@ -16,7 +15,7 @@
 .actions-filters {
   @include col(8/12);
   .button--list {
-    li {
+    > li {
       &:first-child {
       margin-bottom: $global-spacing;
       margin-right: $global-spacing * 2;

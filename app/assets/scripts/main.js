@@ -11,8 +11,14 @@ import storage from 'store';
 
 // Set up mapbox (which attaches to global `L`)
 import Mapbox from 'mapbox.js'; // eslint-disable-line no-unused-vars
+import Clusters from 'leaflet.markercluster'; // eslint-disable-line no-unused-vars
+
+import window from 'global/window';
+window.L.mapbox.accessToken = 'pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
+
 import config from './config';
 import reducer from './reducers';
+import { GOVERNORATE } from './utils/map-utils';
 
 const logger = createLogger({
   level: 'info',
@@ -31,7 +37,7 @@ import { getAuthStatus, getProjects, getIndicators, getGeography, updateLang } f
 store.dispatch(getAuthStatus());
 store.dispatch(getProjects());
 store.dispatch(getIndicators());
-store.dispatch(getGeography());
+store.dispatch(getGeography(GOVERNORATE)); // fetch governorates
 
 const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
   return prevRouterProps &&

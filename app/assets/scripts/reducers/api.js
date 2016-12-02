@@ -5,6 +5,7 @@ import {
   PROJECTS,
   PROJECT,
   INDICATORS,
+  INDICATOR,
   GEOGRAPHY
 } from '../actions';
 
@@ -13,7 +14,7 @@ export const initialState = {
   projects: [],
   projectDetail: {},
   indicators: [],
-  geography: null
+  geography: {}
 };
 
 export default function reducer (state = initialState, action) {
@@ -31,8 +32,11 @@ export default function reducer (state = initialState, action) {
     case INDICATORS:
       set(state, 'indicators', action.data);
       break;
+    case INDICATOR:
+      set(state, ['indicatorDetail', action.data.id], action.data);
+      break;
     case GEOGRAPHY:
-      set(state, 'geography', action.data);
+      set(state, ['geography', action.data.name], action.data.features);
       break;
   }
   return state;

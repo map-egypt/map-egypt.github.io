@@ -10,6 +10,7 @@ export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
 export const PROJECT = 'PROJECT';
 export const INDICATORS = 'INDICATORS';
+export const INDICATOR = 'INDICATOR';
 export const GEOGRAPHY = 'GEOGRAPHY';
 export const LANGUAGE = 'LANGUAGE';
 
@@ -31,6 +32,10 @@ export function updateProject (data) {
 
 export function updateIndicators (data) {
   return { type: INDICATORS, data: data };
+}
+
+export function updateIndicator (data) {
+  return { type: INDICATOR, data: data };
 }
 
 export function updateGeography (data) {
@@ -76,16 +81,29 @@ export function getIndicators () {
   };
 }
 
-export function getGeography () {
+export function getIndicator (id) {
+  if (!id) {
+    throw new Error('Indicator endpoint requires indicator id');
+  }
   return function (dispatch) {
-    reqwest(url.resolve(baseUrl, 'assets/data/topojson/districts.json'), function (resp) {
+    queryApi('indicators/' + id, function (data) {
+      return dispatch(updateIndicator(data));
+    });
+  };
+}
+
+export function getGeography (name) {
+  return function (dispatch) {
+    // a2-withluxor.json = governorate boundaries post 2009.
+    // if we need pre-2009 governorate boundaries, we can generate them in /tool.
+    reqwest(url.resolve(baseUrl, 'assets/data/topojson/a2-withluxor.json'), function (resp) {
       try {
-        var features = topojson.feature(resp, resp.objects.districts);
+        var features = topojson.feature(resp, resp.objects[name]);
       } catch (e) {
         console.log('Topojson.feature() failed');
         return;
       }
-      return updateGeography(features);
+      return dispatch(updateGeography({ features, name }));
     });
   };
 }
