@@ -8,7 +8,7 @@ import { extend } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct } from '../utils/format';
+import { tally, shortTally, pct, shortText } from '../utils/format';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -17,7 +17,7 @@ import ProjectTimeline from '../components/project-timeline';
 // import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
-const barChartMargin = { left: 250, right: 15, top: 10, bottom: 50 };
+const barChartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
 const comparisonChartMargin = extend({}, barChartMargin, {
   left: 10
 });
@@ -74,7 +74,7 @@ var Project = React.createClass({
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const completion = budgets.map((d, i) => ({
-      name: i,
+      name: d.name,
       value: ProjectCard.percentComplete(d.project)
     }));
 
@@ -212,7 +212,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--charts'>
 
               <div className='overview-charts'>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Funding by Donor</h3>
                   <HorizontalBarChart
                     data={donors}
@@ -221,7 +221,7 @@ var Project = React.createClass({
                     xFormat={shortTally}
                   />
                 </div>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Disbursement vs. Reach</h3>
                   <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
                 </div>
@@ -262,25 +262,27 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
-              <div className='chart-content' style={{width: '50%'}}>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Funding</h3>
                 <HorizontalBarChart
                   data={budgets}
                   margin={barChartMargin}
                   yTitle=''
                   xFormat={shortTally}
+                  yFormat={shortText}
                 />
               </div>
-              <div className='chart-content chart__inline' style={{width: '20%'}}>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
                   margin={comparisonChartMargin}
                   yTitle=''
                   xFormat={pct}
+                  yFormat={shortText}
                 />
               </div>
-              <div className='chart-content' style={{width: '20%'}}>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Reach</h3>
                 <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
               </div>

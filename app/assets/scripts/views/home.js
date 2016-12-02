@@ -1,6 +1,8 @@
 'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
+import {shortText, tally} from '../utils/format';
 import { get } from 'object-path';
 import getCentroid from '@turf/centroid';
 import Map from '../components/map';
@@ -16,7 +18,8 @@ var Home = React.createClass({
   displayName: 'Home',
 
   propTypes: {
-    api: React.PropTypes.object
+    api: React.PropTypes.object,
+    meta: React.PropTypes.object
   },
 
   render: function () {
@@ -131,14 +134,16 @@ var Home = React.createClass({
               </div>
 
               <div className='overview-home-charts'>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Number of Projects By Category</h3>
                   <HorizontalBarChart
                     data={bars}
                     margin={barChartMargin}
+                    yFormat={shortText}
+                    xFormat={tally}
                     yTitle='' />
                 </div>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3> Status </h3>
                   <PieChart data={pie} />
                   <div className='status-key'>
@@ -148,7 +153,7 @@ var Home = React.createClass({
                 </div>
               </div>
               <div className='section__footer'>
-                <button type='button' className='button button--primary button--large'>View All Projects</button>
+                <Link to={'/' + this.props.meta.lang + '/projects'} type='button' className='button button--primary button--large'>View All Projects</Link>
               </div>
             </section>
           </div>
@@ -172,7 +177,8 @@ var Home = React.createClass({
 
 function mapStateToProps (state) {
   return {
-    api: state.api
+    api: state.api,
+    meta: state.meta
   };
 }
 
