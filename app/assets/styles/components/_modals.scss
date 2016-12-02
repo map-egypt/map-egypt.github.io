@@ -44,6 +44,74 @@
   padding: $global-spacing * 2;
 }
 
+.modal__indicators {
+  padding: $global-spacing * 2;
+  p {
+    @include col(12/12);
+  }
+  .indicators__container {
+    border: solid 1px $tertiary-color;
+    float: left;
+    @include col(12/12);
+    margin-bottom: $global-spacing * 2;
+  }
+  .indicators {
+    @include col(4/12);
+    margin-right: 0;
+    .list__item--active {
+      border-right: 0;
+      font-weight: $base-font-bold;
+    }
+    ul {
+      margin-bottom: 0;
+    }
+    li {
+      list-style: none;
+      padding: 5%;
+      border: solid 1px $tertiary-color;
+      border-top: 0;
+      border-left: 0;
+      color: $base-color;
+      &:last-child {
+        border-bottom: 0
+      };
+      @include media(small-down) {
+        font-size: 0.875rem;
+      }
+      &:hover {
+        background: #F4F4F4;
+      }
+      &:active {
+
+      };
+    }
+  }
+  .indicators--selected {
+    @include col(12/12);
+    margin-bottom: $global-spacing;
+  }
+  .indicators--options {
+   /* background: #F4F4F4;*/
+    @include col(8/12);
+   /* height: 229px;*/
+    padding: $global-spacing;
+    /*border: solid 1px $tertiary-color;
+    border-left: 0;
+*/    margin-left: -1px;
+    margin-bottom: -1px;
+    @include media(small-down) {
+      font-size: 0.75rem;
+    /*  height: 217px;*/
+    }
+    @include media(xsmall-only) {
+    /*  height: 238px;*/
+    }
+  }
+  .button--list {
+    @include col(12/12);
+  }
+}
+
 
 .modal__filters {
     @include col(12/12);

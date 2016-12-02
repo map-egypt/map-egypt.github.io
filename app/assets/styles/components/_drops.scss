@@ -38,12 +38,12 @@
   background: #fff;
   box-shadow: 0 4px 16px 8px $base-alpha-color;
   border-radius: $base-border-radius;
-  margin-top: 0.5rem;
-/*  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.16s ease 0s, margin 0.16s ease 0s, visibility 0.16s linear 0s;*/
 
+  /* Animation */
 
+  // opacity: 0;
+  // visibility: hidden;
+  // transition: opacity 0.16s ease 0s, margin 0.16s ease 0s, visibility 0.16s linear 0s;
 }
 
 .drop--align-right {

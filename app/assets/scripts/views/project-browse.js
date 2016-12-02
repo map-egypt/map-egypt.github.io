@@ -119,52 +119,54 @@ var ProjectBrowse = React.createClass({
     const availableIndicators = get(themes, activeIndicatorTheme, []);
     return (
       <section className='modal modal--large'>
-        <div className='modal__inner modal__projects'>
+        <div className='modal__inner modal__indicators'>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
           <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
           <p>Add and compare development indicators listed below.</p>
 
           {selectedIndicators.length ? (
-            <div>
-              <span>Selected Indicators:&nbsp;</span>
+            <div className='indicators--selected'>
+              <span className='heading--label'>Selected Indicators:&nbsp;</span>
               {selectedIndicators.map((name) => {
                 return (
-                  <span
+                  <span className='button--small button--tag'
                     key={name}
-                    onClick={() => this.toggleSelectedIndicator(name)}>x {name}</span>
+                    onClick={() => this.toggleSelectedIndicator(name)}>{name}</span>
                 );
               })}
             </div>
           ) : null}
-
-          <div>
-            <ul>
-              {themeNames.length && themeNames.map((name) => {
+          <div className='indicators__container'>
+            <div className='indicators'>
+              <ul>
+                {themeNames.length && themeNames.map((name) => {
+                  return (
+                    <li key={name}
+                    className={'list__item' + (name === activeIndicatorTheme ? ' list__item--active' : '')}
+                    onClick={() => this.selectIndicatorSubType(name)}>{name}</li>
+                  );
+                })}
+              </ul>
+            </div>
+            <div className='indicators--options'>
+              {availableIndicators.length && availableIndicators.map((indicator) => {
+                let name = indicator.name;
+                let id = 'subtypes-' + slugify(name);
                 return (
-                  <li key={name}
-                  className={'list__item' + (name === activeIndicatorTheme ? ' list__item--active' : '')}
-                  onClick={() => this.selectIndicatorSubType(name)}>{name}</li>
+                  <label key={name}
+                    className={'form__option form__option--custom-checkbox' + (selectedIndicators.indexOf(name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
+                    <input type='checkbox' name='form-checkbox'
+                      checked={selectedIndicators.indexOf(name) >= 0}
+                      id={id}
+                      value={name}
+                      onChange={() => this.toggleSelectedIndicator(name)} />
+                    <span className='form__option__text'>{name}</span>
+                    <span className='form__option__ui'></span>
+                  </label>
                 );
               })}
-            </ul>
+            </div>
           </div>
-          <div>
-            {availableIndicators.length && availableIndicators.map((indicator) => {
-              let name = indicator.name;
-              let id = 'subtypes-' + slugify(name);
-              return (
-                <label key={name}
-                  className={'form__option form__option--custom-checkbox' + (selectedIndicators.indexOf(name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
-                  <input type='checkbox' name='form-checkbox'
-                    checked={selectedIndicators.indexOf(name) >= 0}
-                    id={id}
-                    value={name}
-                    onChange={() => this.toggleSelectedIndicator(name)} />
-                  <span className='form__option__text'>{name}</span>
-                  <span className='form__option__ui'></span>
-                </label>
-              );
-            })}
             <ul className='button--list'>
               <li><button
                   onClick={this.confirmIndicators}
@@ -173,7 +175,6 @@ var ProjectBrowse = React.createClass({
                   onClick={this.cancelIndicators}
                   type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
             </ul>
-          </div>
         </div>
       </section>
     );
@@ -267,11 +268,11 @@ var ProjectBrowse = React.createClass({
                       <button type='button' onClick={this.toggleIndicatorDropdown}
                         className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button>
                       {this.state.indicatorToggle &&
-                        <ul className='dropdown__list button--secondary'>
+                        <ul className='drop__menu drop__content button--secondary'>
                           {indicatorTypes.map((d) => {
                             return <li key={d}
                               onClick={() => this.openIndicatorSelector(d)}
-                              className='dropdown__item'>{d}</li>;
+                              className='drop__menu-item'>{d}</li>;
                           })}
                         </ul>
                       }
