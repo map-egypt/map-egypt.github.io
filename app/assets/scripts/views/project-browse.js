@@ -7,6 +7,7 @@ import { without, clone } from 'lodash';
 import Map from '../components/map';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
+import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
@@ -15,20 +16,90 @@ const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
 const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
 
+function countByProp (array, property) {
+  const result = {};
+  array.forEach((item) => {
+    const name = property ? item[property] : item;
+    result[name] = result[name] || 0;
+    result[name] += 1;
+  });
+  return result;
+}
+
+// Project filters
+const STATUS = {
+  display: 'Project Status',
+  items: [
+    { display: 'On Time', filter: isOntime },
+    { display: 'Delayed', filter: (p) => !isOntime(p) }
+  ]
+};
+
+const CATEGORY = {
+  display: 'Category',
+  items: (projects) => {
+    const categories = countByProp(projects.reduce((a, b) => a.concat(b.categories), []));
+    return Object.keys(categories).map((category) => ({
+      display: `${category} (${categories[category]})`,
+      filter: (p) => Array.isArray(p.categories) && p.categories.indexOf(category) >= 0
+    }));
+  }
+};
+
+const DONOR = {
+  display: 'Donor',
+  items: (projects) => {
+    const donors = countByProp(projects.reduce((a, b) => a.concat(b.budget), []), 'donor_name');
+    return Object.keys(donors).map((donor) => ({
+      display: `${donor} (${donors[donor]})`,
+      filter: (p) => Array.isArray(p.budget) && p.budget.find((budget) => budget.donor_name === donor)
+    }));
+  }
+};
+
+const SDS = {
+  display: 'SDS Goals',
+  items: (projects) => {
+    const goals = countByProp(projects.reduce((a, b) => a.concat(b.sds_indicators), []));
+    return Object.keys(goals).map((goal) => ({
+      display: `${goal} (${goals[goal]})`,
+      filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.indexOf(goal) >= 0
+    }));
+  }
+};
+
+const projectFilters = [STATUS, CATEGORY, DONOR, SDS];
+
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
 
   getInitialState: function () {
     return {
+
+      // modal open or closed
       modal: false,
+
+      // which modal (projects or indicators)
       activeModal: null,
+
+      // is the indicator dropdown open
       indicatorToggle: false,
+
+      // is the view set to list view or map
       listView: false,
+
+      // what's the currently active indicator
       activeIndicatorType: null,
       activeIndicatorTheme: null,
       selectedIndicators: [],
       activeIndicators: [],
-      activeGovernorate: null
+      activeIndicator: null,
+
+      // which governorate are we zoomed into
+      activeGovernorate: null,
+
+      selectedProjectFilters: [],
+      activeProjectFilters: []
     };
   },
 
@@ -62,7 +133,6 @@ var ProjectBrowse = React.createClass({
   cancelIndicators: function () {
     this.setState({
       modal: false,
-      activeModal: null,
       activeIndicatorType: null,
       activeIndicatorTheme: null,
       selectedIndicators: this.state.activeIndicators.length ? clone(this.state.activeIndicators) : []
@@ -72,7 +142,6 @@ var ProjectBrowse = React.createClass({
   confirmIndicators: function () {
     this.setState({
       modal: false,
-      activeModal: null,
       activeIndicatorType: null,
       activeIndicatorTheme: null,
       activeIndicators: this.state.selectedIndicators.length ? clone(this.state.selectedIndicators) : []
@@ -94,6 +163,55 @@ var ProjectBrowse = React.createClass({
     }
     this.setState({
       selectedIndicators: active
+    });
+  },
+
+  cancelFilters: function () {
+    this.setState({
+      modal: false,
+      selectedProjectFilters: this.state.activeProjectFilters.length ? clone(this.state.activeProjectFilters) : []
+    });
+  },
+
+  confirmFilters: function () {
+    this.setState({
+      modal: false,
+      activeProjectFilters: this.state.selectedProjectFilters.length ? clone(this.state.selectedProjectFilters) : []
+    });
+  },
+
+  resetProjectFilters: function () {
+    this.setState({
+      selectedProjectFilters: []
+    });
+  },
+
+  clearProjectFilters: function () {
+    this.setState({
+      selectedProjectFilters: [],
+      activeProjectFilters: []
+    });
+  },
+
+  toggleSelectedFilter: function (filter) {
+    let selected = this.state.selectedProjectFilters;
+    let index = selected.map((f) => f.display).indexOf(filter.display);
+    if (index >= 0) {
+      selected.splice(index, 1);
+    } else {
+      selected = selected.concat([filter]);
+    }
+    this.setState({
+      selectedProjectFilters: selected
+    });
+  },
+
+  removeActiveFilter: function (filter) {
+    let active = this.state.activeProjectFilters;
+    let index = active.map((f) => f.display).indexOf(filter.display);
+    active.splice(index, 1);
+    this.setState({
+      activeProjectFilters: active
     });
   },
 
@@ -181,6 +299,9 @@ var ProjectBrowse = React.createClass({
   },
 
   renderProjectSelector: function () {
+    const projects = this.props.api.projects;
+    const selectedFilters = this.state.selectedProjectFilters;
+    console.log(selectedFilters);
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
@@ -192,41 +313,42 @@ var ProjectBrowse = React.createClass({
                 <span className='form__option__text'>Add All Projects</span>
                 <span className='form__option__ui'></span>
               </label>
-              <a className='link--secondary'>reset filters</a>
+              <a onClick={this.resetProjectFilters} className='link--secondary'>reset filters</a>
             </div>
-            <fieldset className='form__fieldset'>
-              <div className='form__group'>
-                <label className='form__label'>Project Status</label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
-                  <span className='form__option__text'>On Time</span>
-                  <span className='form__option__ui'></span>
-                </label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' value='form-checkbox-2' />
-                  <span className='form__option__text'>Delayed</span>
-                  <span className='form__option__ui'></span>
-                </label>
-              </div>
-            </fieldset>
-            <fieldset className='form__fieldset'>
-              <div className='form__group'>
-                <label className='form__label'>Category</label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
-                  <span className='form__option__text'>Category 1</span>
-                  <span className='form__option__ui'></span>
-                </label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' value='form-checkbox-2' />
-                  <span className='form__option__text'>Category 2</span>
-                  <span className='form__option__ui'></span>
-                </label>
-              </div>
-            </fieldset>
+
+            {projectFilters.map((filter) => (
+
+              <fieldset key={filter.display}
+                className='form__fieldset'>
+                <div className='form__group'>
+                  <label className='form__label'>{filter.display}</label>
+                  {(Array.isArray(filter.items) ? filter.items : filter.items(projects)).map((item) => (
+                    <label key={item.display}
+                      className='form__option form__option--custom-checkbox'>
+                      <input
+                        checked={!!selectedFilters.find((f) => f.display === item.display)}
+                        type='checkbox'
+                        name='form-checkbox'
+                        value={item.display}
+                        onChange={() => this.toggleSelectedFilter(item)}
+                      />
+                      <span className='form__option__text'>{item.display}</span>
+                      <span className='form__option__ui'></span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            ))}
+
             <ul className='button--list'>
-              <li><button type='button' className='button button--medium button--primary'>Apply</button></li>
-              <li><button type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
+              <li><button
+                  onClick={this.confirmFilters}
+                  type='button'
+                  className='button button--medium button--primary'>Apply</button></li>
+              <li><button
+                  onClick={this.cancelFilters}
+                  type='button'
+                  className='button button--medium button--primary-bounded'>Cancel</button></li>
             </ul>
           </div>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
@@ -248,6 +370,8 @@ var ProjectBrowse = React.createClass({
     }
 
     const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    const { activeProjectFilters } = this.state;
 
     return (
       <section className='inpage'>
@@ -282,12 +406,20 @@ var ProjectBrowse = React.createClass({
                     </span>
                   </li>
                 </ul>
-                <div className='filters'>
-                  <label className='heading--label'>Filters</label>
-                  <button className='button button--small button--tag'>Category</button>
-                  <button className='button button--small button--tag'>Project Type</button>
-                  <button className='button button--xsmall button--tag-unbounded'>Clear Filters</button>
-                </div>
+                {activeProjectFilters.length ? (
+                  <div className='filters'>
+                    <label className='heading--label'>Filters</label>
+                    {activeProjectFilters.map((filter) => (
+                      <button
+                        onClick={() => this.removeActiveFilter(filter)}
+                        key={filter.display}
+                        className='button button--small button--tag'>{filter.display}</button>
+                    ))}
+                    <button
+                      onClick={this.clearProjectFilters}
+                      className='button button--xsmall button--tag-unbounded'>Clear Filters</button>
+                  </div>
+                ) : null}
               </div>
               <div className='actions-toggle'>
                 <div className='button-group button-group--horizontal button--toggle'>
