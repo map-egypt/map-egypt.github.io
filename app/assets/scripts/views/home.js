@@ -4,13 +4,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import {shortText, tally} from '../utils/format';
 import { get } from 'object-path';
-import getCentroid from '@turf/centroid';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import { isOntime } from '../components/project-card';
-import * as governorates from '../utils/governorates';
-import { GOVERNORATE } from '../utils/map-utils';
+import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -25,18 +23,10 @@ var Home = React.createClass({
   render: function () {
     const projects = this.props.api.projects;
     const categories = {};
-    const regions = {};
     const status = { ontime: 0, delayed: 0 };
     projects.forEach(function (project) {
       get(project, 'categories', []).forEach(function (category) {
         categories[category] = categories[category] + 1 || 1;
-      });
-
-      get(project, 'location', []).forEach(function (location) {
-        // TODO look at district or marker to see if there's more granular data
-        const region = location.district.governorate;
-        regions[region] = regions[region] || [];
-        regions[region].push(project);
       });
 
       const ontime = isOntime(project);
@@ -49,24 +39,7 @@ var Home = React.createClass({
       }
     });
 
-    const markers = [];
-    const features = get(this.props.api, 'geography.' + GOVERNORATE + '.features');
-    if (features) {
-      Object.keys(regions).forEach(function (id) {
-        const meta = governorates.byId(id);
-        const feature = features.find((f) => f.properties.admin_id === meta.egy);
-        const centroid = get(getCentroid(feature), 'geometry.coordinates');
-        if (centroid) {
-          regions[id].forEach(function (project) {
-            markers.push({
-              centroid,
-              region: meta.name,
-              name: project.name
-            });
-          });
-        }
-      });
-    }
+    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
 
     const bars = Object.keys(categories).map((category) => ({
       name: category,
