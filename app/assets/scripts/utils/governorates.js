@@ -30,15 +30,15 @@ const governorates = [
   {egy: 'EGY1184', name: 'Luxor', id: 29}
 ];
 
-module.exports.getEGY = function (id) {
+module.exports.byId = function (id) {
   id = +id;
   const result = governorates.find((d) => d.id === id);
-  return result && result.egy || false;
+  return result;
 };
 
-module.exports.getId = function (egy) {
+module.exports.byEgy = function (egy) {
   const result = governorates.find((d) => d.egy === egy);
-  return result && result.id || false;
+  return result;
 };
 
 module.exports.governorates = governorates;

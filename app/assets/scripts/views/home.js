@@ -2,10 +2,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import getCentroid from '@turf/centroid';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
-import {isOntime} from '../components/project-card';
+import { isOntime } from '../components/project-card';
+import * as governorates from '../utils/governorates';
+import { GOVERNORATE } from '../utils/map-utils';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -30,7 +33,7 @@ var Home = React.createClass({
         // TODO look at district or marker to see if there's more granular data
         const region = location.district.governorate;
         regions[region] = regions[region] || [];
-        regions[region].push(location);
+        regions[region].push(project);
       });
 
       const ontime = isOntime(project);
@@ -42,6 +45,25 @@ var Home = React.createClass({
         status.delayed += 1;
       }
     });
+
+    const markers = [];
+    const features = get(this.props.api, 'geography.' + GOVERNORATE + '.features');
+    if (features) {
+      Object.keys(regions).forEach(function (id) {
+        const meta = governorates.byId(id);
+        const feature = features.find((f) => f.properties.admin_id === meta.egy);
+        const centroid = get(getCentroid(feature), 'geometry.coordinates');
+        if (centroid) {
+          regions[id].forEach(function (project) {
+            markers.push({
+              centroid,
+              region: meta.name,
+              name: project.name
+            });
+          });
+        }
+      });
+    }
 
     const bars = Object.keys(categories).map((category) => ({
       name: category,
@@ -55,6 +77,7 @@ var Home = React.createClass({
       name: 'Delayed',
       value: status.delayed
     }];
+
     return (
       <div>
       <section className='inpage'>
@@ -71,7 +94,7 @@ var Home = React.createClass({
         <div className='inpage__body'>
           <div className='inner'>
             <section className='inpage__section'>
-              <Map />
+              <Map markers={markers}/>
               <div className='overview-home'>
                 <h2 className='section__title'>Overview of Agricultural Projects</h2>
                 <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
