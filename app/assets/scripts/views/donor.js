@@ -6,7 +6,7 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
-import { shortTally, tally } from '../utils/format';
+import { shortTally, tally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 
 var Donor = React.createClass({
@@ -89,7 +89,8 @@ var Donor = React.createClass({
                   {!singleProject && (<HorizontalBarChart
                     data={chartData}
                     margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
-                    yFormat
+                    xFormat={shortTally}
+                    yFormat={shortText}
                   />)}
                 </div>
               </div>

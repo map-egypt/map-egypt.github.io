@@ -64,7 +64,6 @@ var Category = React.createClass({
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
-    // //////////////////////////////
     const categoryName = this.props.params.name;
     let categoryDisplayName;
 
@@ -91,7 +90,7 @@ var Category = React.createClass({
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const completion = chartData.map((d, i) => ({
-      name: i,
+      name: d.name,
       value: ProjectCard.percentComplete(d.project)
     }));
 

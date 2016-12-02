@@ -8,7 +8,7 @@ import { extend } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct } from '../utils/format';
+import { tally, shortTally, pct, shortText } from '../utils/format';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -74,7 +74,7 @@ var Project = React.createClass({
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const completion = budgets.map((d, i) => ({
-      name: i,
+      name: d.name,
       value: ProjectCard.percentComplete(d.project)
     }));
 
@@ -269,6 +269,7 @@ var Project = React.createClass({
                   margin={barChartMargin}
                   yTitle=''
                   xFormat={shortTally}
+                  yFormat={shortText}
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
@@ -278,6 +279,7 @@ var Project = React.createClass({
                   margin={comparisonChartMargin}
                   yTitle=''
                   xFormat={pct}
+                  yFormat={shortText}
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
