@@ -23,12 +23,19 @@ const ShareButton = React.createClass({
   },
 
   render: function () {
+    const openClass = this.state.isOpen ? ' drop__content--open' : '';
     return (
       <span className='share--container'>
         <button className='button button--medium button--primary' onClick={this.show}>Share</button>
-        {this.state.isOpen && <div className='share--box'>
-          <p>Copy this: {url.resolve(baseUrl, this.props.path)}</p>
-          <p onClick={this.close}>Close this</p>
+        {this.state.isOpen && <div className={'share--box drop__content drop--align-right' + openClass}>
+        <div className='form__group'>
+          <label className="form__label">Copy URL to Share</label>
+          <div className="form__input-group">
+            <input readOnly type="text" className="form__control form__control--medium" value={url.resolve(baseUrl, this.props.path)}/>
+            <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--copy-icon"><span>Button</span></button></span>
+          </div>
+          </div>
+          <button className='modal__button-dismiss' title='close' onClick={this.close}></button>
         </div>}
       </span>
     );

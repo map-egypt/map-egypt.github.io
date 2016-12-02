@@ -21,3 +21,9 @@ function pct (n) {
   return n;
 }
 module.exports.pct = pct;
+
+function shortText (s, length) {
+  length = length || 20;
+  return s.slice(0, length) + '...';
+}
+module.exports.shortText = shortText;

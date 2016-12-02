@@ -8,7 +8,7 @@ import { extend } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct } from '../utils/format';
+import { tally, shortTally, pct, shortText } from '../utils/format';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -17,13 +17,13 @@ import ProjectTimeline from '../components/project-timeline';
 // import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
-const barChartMargin = { left: 250, right: 15, top: 10, bottom: 50 };
+const barChartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
 const comparisonChartMargin = extend({}, barChartMargin, {
   left: 10
 });
 
-function categoryLink (base, categoryName) {
-  return path.resolve(base, 'category', slugify(categoryName));
+function linkPath (base, type, id) {
+  return path.resolve(base, type, slugify(id));
 }
 
 var Project = React.createClass({
@@ -74,7 +74,7 @@ var Project = React.createClass({
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const completion = budgets.map((d, i) => ({
-      name: i,
+      name: d.name,
       value: ProjectCard.percentComplete(d.project)
     }));
 
@@ -94,21 +94,34 @@ var Project = React.createClass({
                   <li><Share path={this.props.location.pathname}/></li>
                 </ul>
               </div>
-              <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
-            </div>
-            <div className='inpage__subtitles'>
-                {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
-                  <Link to={categoryLink(basepath, category)} className='link--secondary' href=''>{category}</Link>&nbsp;
-                </span>)}
-            </div>
               <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
                 <dt className='inpage-meta__label'>Last Update: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
-
+              <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
+            </div>
             <ProjectTimeline project={data} />
+
+            <div className='tags'>
+              <div className='tags__group'>
+                <p className='tags__label'>Categories:</p>
+                <div className='inpage__subtitles'>
+                  {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
+                    <Link to={linkPath(basepath, 'category', category)} className='link--secondary' href=''>{category}</Link>&nbsp;
+                  </span>)}
+                </div>
+              </div>
+              <div className='tags__group'>
+                <p className='tags__label'>Donors:</p>
+                <div className='inpage__subtitles'>
+                  {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
+                      <Link to={linkPath(basepath, 'donor', donor.name)} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
+                    </span>)}
+                </div>
+              </div>
+            </div>
 
           </div>
         </header>
@@ -139,7 +152,7 @@ var Project = React.createClass({
                         ? loc.district.district : loc.district.governorate;
                       return (
                         <li key={display}>
-                          <a href='' className='link--primary'><span>{display}</span></a>
+                          <span>{display}</span>
                         </li>
                       );
                     })}
@@ -173,7 +186,7 @@ var Project = React.createClass({
                     {get(data, 'sdg_indicator', []).map((indicator, i) => {
                       return (
                         <li key={indicator}>
-                          <a href='' className='link--primary'><span>{indicator}</span></a>
+                          <span>{indicator}</span>
                         </li>
                       );
                     })}
@@ -186,7 +199,7 @@ var Project = React.createClass({
                     {get(data, 'sds_indicator', []).map((indicator, i) => {
                       return (
                         <li key={indicator}>
-                          <a href='' className='link--primary'><span>{indicator}</span></a>
+                          <span>{indicator}</span>
                         </li>
                       );
                     })}
@@ -199,7 +212,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--charts'>
 
               <div className='overview-charts'>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Funding by Donor</h3>
                   <HorizontalBarChart
                     data={donors}
@@ -208,7 +221,7 @@ var Project = React.createClass({
                     xFormat={shortTally}
                   />
                 </div>
-                <div className='chart-content'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Disbursement vs. Reach</h3>
                   <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
                 </div>
@@ -249,25 +262,27 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
-              <div className='chart-content' style={{width: '50%'}}>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Funding</h3>
                 <HorizontalBarChart
                   data={budgets}
                   margin={barChartMargin}
                   yTitle=''
                   xFormat={shortTally}
+                  yFormat={shortText}
                 />
               </div>
-              <div className='chart-content chart__inline' style={{width: '20%'}}>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
                   margin={comparisonChartMargin}
                   yTitle=''
                   xFormat={pct}
+                  yFormat={shortText}
                 />
               </div>
-              <div className='chart-content' style={{width: '20%'}}>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Reach</h3>
                 <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
               </div>

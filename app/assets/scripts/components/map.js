@@ -2,6 +2,7 @@
 import React from 'react';
 import window from 'global/window';
 import bbox from '@turf/bbox';
+const L = window.L;
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
 
@@ -20,7 +21,8 @@ const Map = React.createClass({
   displayName: 'Map',
 
   propTypes: {
-    location: React.PropTypes.object
+    location: React.PropTypes.object,
+    markers: React.PropTypes.array
   },
 
   fitMap: function (props) {
@@ -35,6 +37,23 @@ const Map = React.createClass({
     this.map.fitBounds(bounds);
   },
 
+  addClusterMarkers: function (markers) {
+    const markerLayer = this.markerLayer;
+    markerLayer.clearLayers();
+    markers.forEach(function (marker) {
+      const leafletMarker = L.marker(marker.centroid, {
+        icon: L.mapbox.marker.icon({'marker-symbol': 'garden', 'marker-color': '0044FF'})
+      });
+      leafletMarker.bindPopup(
+        `<div class='marker__internal'>` +
+          `<h5 class='marker__title'>${marker.name}</h5>` +
+          `<p class='marker__description'>Governorate: <strong>${marker.region}</strong></p>` +
+        `</div>`
+      );
+      markerLayer.addLayer(leafletMarker);
+    });
+  },
+
   componentWillUnmount: function () {
     this.map.remove();
   },
@@ -43,16 +62,23 @@ const Map = React.createClass({
     if (newProps.location && (!this.props.location || JSON.stringify(newProps.location) !== JSON.stringify(this.props.location))) {
       this.fitMap(newProps);
     }
+
+    if (newProps.markers && newProps.markers.length &&
+                              (!this.props.markers || JSON.stringify(newProps.markers) !== JSON.stringify(this.props.markers))) {
+      this.addClusterMarkers(newProps.markers);
+    }
   },
 
   mountMap: function (el) {
     if (el) {
-      this.map = window.L.mapbox.map(el, null, {
+      this.map = L.mapbox.map(el, null, {
         scrollWheelZoom: false
       });
-      window.L.tileLayer(tileLayer).addTo(this.map);
+      L.tileLayer(tileLayer).addTo(this.map);
+      this.markerLayer = L.markerClusterGroup();
+      this.map.addLayer(this.markerLayer);
+      this.fitMap(this.props);
     }
-    this.fitMap(this.props);
   },
 
   render: function () {

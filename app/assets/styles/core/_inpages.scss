@@ -4,6 +4,7 @@
     padding: ($global-spacing * 4) 0;
     @include media(xsmall-only) {
       padding-bottom: $global-spacing;
+      padding-top: $global-spacing;
     }
   }
 
@@ -15,11 +16,11 @@
   }
 
   &__subtitles {
-    margin-bottom: $global-spacing;
+    margin-bottom: 0;
     font-weight: $base-font-light;
     span {
       margin-right: $global-spacing/2;
-      font-size: 0.875rem;
+      font-size: 0.75rem;
     }
   }
 
@@ -33,6 +34,20 @@
 
   &__headline {
     @extend .clearfix;
+    .inpage-meta {
+      display: block;
+      margin-bottom: 0rem;
+    }
+  }
+
+  &__header-data {
+    margin-top: $global-spacing;
+    .inpage-stats li{
+      font-size: 2.25rem;
+      line-height: 1.75rem;
+      padding-right: $global-spacing * 2;
+      margin-right: $global-spacing * 2;
+    }
   }
 
   &__title {
@@ -44,6 +59,7 @@
 
   &__headline-actions {
     float: none;
+    position: relative;
     margin-bottom: $global-spacing;
     @include media(medium-up){
       float: right;
@@ -340,5 +356,29 @@
     list-style: none;
     margin-bottom: $global-spacing/4;
     font-size: 0.875rem;
+    color: $base-color;
+  }
+}
+
+.tags {
+  float: left;
+  margin-top: $global-spacing * 1.5;
+  &__group {
+    @include col(12/12);
+    @include media(xsmall-only) {
+      margin-bottom: $global-spacing;
+    }
+  }
+
+  &__label {
+    float: left;
+    font-size: 0.75rem;
+    line-height: 1.75rem;
+    margin-right: $global-spacing/2;
+    margin-bottom: 0;
+    @include media(xsmall-only) {
+      float: none;
+      line-height: 0.75rem;
+    }
   }
 }

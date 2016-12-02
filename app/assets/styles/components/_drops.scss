@@ -22,10 +22,12 @@
   }
 }
 
+
+
 .drop__content {
   position: absolute;
   z-index: 1000;
-  width: 12rem;
+  width: 15rem;
   margin: 0;
   padding: $global-spacing;
   overflow: hidden;
@@ -39,65 +41,27 @@
 
   /* Animation */
 
-/*  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.16s ease 0s, margin 0.16s ease 0s, visibility 0.16s linear 0s;
-*/
-  /* Positioning modifiers */
+  // opacity: 0;
+  // visibility: hidden;
+  // transition: opacity 0.16s ease 0s, margin 0.16s ease 0s, visibility 0.16s linear 0s;
+}
 
-  .drop--down > & {
-    top: 100%;
-    margin-top: -$global-spacing;
-  }
-
-  .drop--up > & {
-    bottom: 100%;
-    margin-bottom: -$global-spacing;
-  }
-
-  /* Aligning modifiers */
-
-  .drop--align-left > & {
-    left: 0;
-  }
-
-  .drop--align-center > & {
-    left: 50%;
-    transform: translate(-50%, 0);
-  }
-
-  .drop--align-right > & {
+.drop--align-right {
+  left: none;
+  @include media(medium-up) {
     right: 0;
-    left: auto;
-  }
-
-  /* Animation modifiers */
-
-  .drop--open > & {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .drop--down.drop--open > & {
-    margin-top: $global-spacing / 2;
-  }
-
-  .drop--up.drop--open > & {
-    margin-bottom: $global-spacing / 2;
   }
 }
 
-[data-hook^="dropdown:close"],
-[data-hook=" dropdown:close"] {
-  * {
-    pointer-events: none;
+.share--box {
+  .form__group {
+    margin: ($global-spacing/2) 0;
+  }
+  .modal__button-dismiss {
+    top: $global-spacing/4;
+    right: $global-spacing/4;
   }
 }
-
-/*
-  React specific styles to handle animations.
-  The tether library is being used and needs animations for all directions.
- */
 
 .drop__content--react {
   position: relative;
