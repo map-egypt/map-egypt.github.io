@@ -283,18 +283,17 @@ var ProjectBrowse = React.createClass({
           <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
           <p>Add and compare development indicators listed below.</p>
 
-          {selectedIndicators.length ? (
-            <div className='indicators--selected'>
-              <span className='heading--label'>Selected Indicators:&nbsp;</span>
-              {selectedIndicators.map((name) => {
-                return (
-                  <span className='button--small button--tag'
-                    key={name}
-                    onClick={() => this.toggleSelectedIndicator(name)}>{name}</span>
-                );
-              })}
-            </div>
-          ) : null}
+          <div className='indicators--selected'>
+            <span className='heading--label'>Selected Indicators:&nbsp;</span>
+            {selectedIndicators.map((name) => {
+              return (
+                <span className='button--small button--tag'
+                  key={name}
+                  onClick={() => this.toggleSelectedIndicator(name)}>{name}</span>
+              );
+            })}
+          </div>
+
           <div className='indicators__container'>
             <div className='indicators'>
               <ul>
