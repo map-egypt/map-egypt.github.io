@@ -25,3 +25,15 @@
 	font-family: $base-font-family;
   color: $base-color;
 }
+
+.map__outer {
+  position: relative;
+}
+
+.indicator__overlay {
+  position: absolute;
+  top: 80px;
+  left: 10px;
+  padding: 5px;
+  background-color: white;
+}
