@@ -23,7 +23,7 @@ var Home = React.createClass({
   },
 
   render: function () {
-    const { projects, authenticated } = this.props.api;
+    const { projects } = this.props.api;
     const categories = {};
     const regions = {};
     const status = { ontime: 0, delayed: 0 };

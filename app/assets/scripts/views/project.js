@@ -4,7 +4,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
-import { extend } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
@@ -14,7 +13,7 @@ import Map from '../components/map';
 import Share from '../components/share';
 import ProjectCard from '../components/project-card';
 import ProjectTimeline from '../components/project-timeline';
-// import VerticalBarChart from '../components/charts/vertical-bar';
+import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 const barChartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
@@ -40,7 +39,6 @@ var Project = React.createClass({
 
   render: function () {
     const authenticated = this.props.api.authenticated;
-    console.log(authenticated);
     const meta = get(this.props.api, ['projectDetail', this.props.params.id]);
     if (!meta) {
       return <div></div>; // TODO loading indicator
@@ -72,15 +70,29 @@ var Project = React.createClass({
       project: project
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
-    const completion = budgets.map((d, i) => ({
+    const completion = budgets.map((d) => ({
       name: d.name,
       value: ProjectCard.percentComplete(d.project)
+    }));
+
+    const served = budgets.map((d) => ({
+      name: d.name,
+      value: +get(d.project, 'number_served.number_served', 0)
     }));
 
     const donors = get(data, 'budget', []).map((donor) => ({
       name: donor.donor_name,
       value: donor.fund.amount
     })).sort((a, b) => b.value > a.value ? -1 : 1);
+
+    const disbursement = get(data, 'disbursed', []).map((fund) => ({
+      name: parseProjectDate(fund.date),
+      type: fund.type.split(' ')[0],
+      value: fund.fund.amount
+    })).sort((a, b) => a.name > b.name ? 1 : -1).map((d) => ({
+      name: formatDate(d.name) + ' (' + d.type + ')',
+      value: d.value
+    }));
 
     return (
       <section className='inpage'>
@@ -223,7 +235,12 @@ var Project = React.createClass({
                 {authenticated ? (
                   <div className='chart-content chart__inline--labels'>
                     <h3>Disbursement vs. Reach</h3>
-                    <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
+                    <VerticalBarChart
+                      data={disbursement}
+                      margin={barChartMargin}
+                      yTitle=''
+                      yFormat={shortTally}
+                    />
                   </div>
                 ) : null}
               </div>
@@ -286,7 +303,13 @@ var Project = React.createClass({
               {authenticated ? (
                 <div className='chart-content chart__block'>
                   <h3>Reach</h3>
-                  <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
+                  <HorizontalBarChart
+                    data={served}
+                    margin={barChartMargin}
+                    yTitle=''
+                    xFormat={tally}
+                    yFormat={shortText}
+                  />
                 </div>
               ) : null}
             </section>

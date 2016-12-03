@@ -52,10 +52,10 @@ const Axis = React.createClass({
         })}
         <line
           className='chart__axis--line'
-          x1={orientation === 'left' ? margin.left : scale(domain[0]) }
+          x1={orientation === 'left' ? margin.left : 0 }
           y1='0'
           x2={orientation === 'left' ? margin.left : scale(domain[1])}
-          y2={orientation === 'left' ? scale(domain[0]) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 1.5 : 0) + margin.top : 0}
+          y2={orientation === 'left' ? height - margin.bottom - margin.top : 0 }
         />
       </g>
     );
