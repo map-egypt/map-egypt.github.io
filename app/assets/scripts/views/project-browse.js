@@ -512,14 +512,15 @@ var ProjectBrowse = React.createClass({
           : (<div className='map__outer'>
               <Map location={mapLocation} markers={markers} overlay={overlay}/>
               {activeIndicators.length ? (<div className='indicator__overlay'>
+                <h1 className='heading--label'>Selected Indicator Overlays</h1>
                 <ul className='indicator__overlay--list'>
                   {activeIndicators.map((indicator) => (
                     <li
                       key={indicator}
                       onClick={() => true}
                       className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
-                      <span onClick={() => this.setActiveIndicator(indicator)}>{indicator}</span>
-                      <span onClick={() => this.removeActiveIndicator(indicator)}>x</span>
+                      <a onClick={() => this.setActiveIndicator(indicator)}>{indicator}</a>
+                      <span className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}> X </span>
                     </li>
                   ))}
                 </ul>
