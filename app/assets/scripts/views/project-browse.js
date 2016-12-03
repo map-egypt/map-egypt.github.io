@@ -138,7 +138,8 @@ var ProjectBrowse = React.createClass({
       modal: true,
       activeModal: INDICATORS,
       indicatorToggle: false,
-      activeIndicatorType
+      activeIndicatorType,
+      selectedIndicators: this.state.activeIndicators.length ? clone(this.state.activeIndicators) : []
     });
   },
 
@@ -165,6 +166,22 @@ var ProjectBrowse = React.createClass({
   selectIndicatorSubType: function (type) {
     this.setState({
       activeIndicatorTheme: type
+    });
+  },
+
+  setActiveIndicator: function (activeIndicator) {
+    this.setState({ activeIndicator });
+  },
+
+  removeActiveIndicator: function (indicator) {
+    const { activeIndicator, activeIndicators } = this.state;
+    const nextActiveIndicators = without(activeIndicators, indicator);
+    // if the one we're removing is currently active, make the next one active
+    const nextActiveIndicator = activeIndicator !== indicator ? activeIndicator
+      : nextActiveIndicators.length ? nextActiveIndicators[0] : null;
+    this.setState({
+      activeIndicators: nextActiveIndicators,
+      activeIndicator: nextActiveIndicator
     });
   },
 
@@ -489,9 +506,17 @@ var ProjectBrowse = React.createClass({
           : (<div>
               <Map location={mapLocation} markers={markers} overlay={overlay}/>
               {activeIndicators.length ? (<div className='indicator__overlay'>
-                {activeIndicators.map((indicator) => (
-                  <span key={indicator}>{indicator}</span>
-                ))};
+                <ul className='indicator__overlay--list'>
+                  {activeIndicators.map((indicator) => (
+                    <li
+                      key={indicator}
+                      onClick={() => true}
+                      className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
+                      <span onClick={() => this.setActiveIndicator(indicator)}>{indicator}</span>
+                      <span onClick={() => this.removeActiveIndicator(indicator)}>x</span>
+                    </li>
+                  ))}
+                </ul>
               </div>) : null}
             </div>)}
 
