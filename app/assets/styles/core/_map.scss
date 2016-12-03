@@ -2,3 +2,6 @@
   width: 100%;
   height: 380px;
 }
+.leaflet-overlay-pane svg {
+  pointer-events: all;
+}

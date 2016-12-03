@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { get } from 'object-path';
 import { without, clone } from 'lodash';
 
+import { getIndicator } from '../actions';
 import Map from '../components/map';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
@@ -109,6 +110,16 @@ var ProjectBrowse = React.createClass({
     dispatch: React.PropTypes.func
   },
 
+  componentWillUpdate: function (nextProps, nextState) {
+    const activeIndicator = nextState.activeIndicator;
+    if (activeIndicator && activeIndicator !== this.state.activeIndicator) {
+      const meta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
+      if (meta && meta.id) {
+        this.props.dispatch(getIndicator(meta.id));
+      }
+    }
+  },
+
   zoomToGovernorate: function (event, value) {
     const selected = value.suggestion;
     this.setState({
@@ -141,11 +152,13 @@ var ProjectBrowse = React.createClass({
   },
 
   confirmIndicators: function () {
+    const active = this.state.selectedIndicators.length ? clone(this.state.selectedIndicators) : [];
     this.setState({
       modal: false,
       activeIndicatorType: null,
       activeIndicatorTheme: null,
-      activeIndicators: this.state.selectedIndicators.length ? clone(this.state.selectedIndicators) : []
+      activeIndicators: active,
+      activeIndicator: active.length ? active[0] : null
     });
   },
 
@@ -377,15 +390,32 @@ var ProjectBrowse = React.createClass({
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
     }
 
+    const { activeProjectFilters, activeIndicator } = this.state;
+
     let { projects } = this.props.api;
-    const { activeProjectFilters } = this.state;
     if (activeProjectFilters.length) {
       activeProjectFilters.forEach((filter) => {
         projects = projects.filter(filter.filter);
       });
     }
-
     const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    let overlay;
+    if (activeIndicator) {
+      const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
+      const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
+      const regions = get(this.props.api, 'geography.' + GOVERNORATE);
+      if (indicatorData) {
+        overlay = {
+          id: indicatorData.id,
+          values: indicatorData.data.data.map((d) => ({
+            id: d.sub_nat_id,
+            value: d.data_value
+          })),
+          regions
+        };
+      }
+    }
 
     return (
       <section className='inpage'>
@@ -455,7 +485,9 @@ var ProjectBrowse = React.createClass({
 
         {this.state.listView
           ? <ProjectList projects={projects} meta={this.props.meta} />
-          : <Map location={mapLocation} markers={markers}/>}
+          : (<div>
+              <Map location={mapLocation} markers={markers} overlay={overlay}/>
+            </div>)}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
