@@ -150,6 +150,14 @@ const Map = React.createClass({
       this.map.addLayer(this.markerLayer);
 
       this.fitMap(this.props);
+
+      const { markers, overlay } = this.props;
+      if (markers) {
+        this.addClusterMarkers(markers);
+      }
+      if (overlay) {
+        this.renderOverlay(overlay);
+      }
     }
   },
 
