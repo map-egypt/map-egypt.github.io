@@ -257,7 +257,8 @@ var ProjectBrowse = React.createClass({
       themes[indicator.theme].push(indicator);
     });
     const themeNames = Object.keys(themes);
-    const availableIndicators = get(themes, activeIndicatorTheme, []);
+    const indicatorTheme = activeIndicatorTheme || themeNames[0];
+    const availableIndicators = get(themes, indicatorTheme, []);
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
@@ -283,7 +284,7 @@ var ProjectBrowse = React.createClass({
                 {themeNames.length && themeNames.map((name) => {
                   return (
                     <li key={name}
-                    className={'list__item' + (name === activeIndicatorTheme ? ' list__item--active' : '')}
+                    className={'list__item' + (name === indicatorTheme ? ' list__item--active' : '')}
                     onClick={() => this.selectIndicatorSubType(name)}>{name}</li>
                   );
                 })}
@@ -390,7 +391,7 @@ var ProjectBrowse = React.createClass({
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
     }
 
-    const { activeProjectFilters, activeIndicator } = this.state;
+    const { activeProjectFilters, activeIndicators, activeIndicator } = this.state;
 
     let { projects } = this.props.api;
     if (activeProjectFilters.length) {
@@ -487,6 +488,11 @@ var ProjectBrowse = React.createClass({
           ? <ProjectList projects={projects} meta={this.props.meta} />
           : (<div>
               <Map location={mapLocation} markers={markers} overlay={overlay}/>
+              {activeIndicators.length ? (<div className='indicator__overlay'>
+                {activeIndicators.map((indicator) => (
+                  <span key={indicator}>{indicator}</span>
+                ))};
+              </div>) : null}
             </div>)}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
