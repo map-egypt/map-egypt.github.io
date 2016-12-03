@@ -4,6 +4,7 @@
     padding: ($global-spacing * 4) 0;
     @include media(xsmall-only) {
       padding-bottom: $global-spacing;
+      padding-top: $global-spacing;
     }
   }
 
@@ -15,11 +16,11 @@
   }
 
   &__subtitles {
-    margin-bottom: $global-spacing;
+    margin-bottom: 0;
     font-weight: $base-font-light;
     span {
       margin-right: $global-spacing/2;
-      font-size: 0.875rem;
+      font-size: 0.75rem;
     }
   }
 
@@ -33,6 +34,21 @@
 
   &__headline {
     @extend .clearfix;
+    display: inline;
+    .inpage-meta {
+      display: block;
+      margin-bottom: 0rem;
+    }
+  }
+
+  &__header-data {
+    margin-top: $global-spacing;
+    .inpage-stats li{
+      font-size: 2.25rem;
+      line-height: 1.75rem;
+      padding-right: $global-spacing * 2;
+      margin-right: $global-spacing * 2;
+    }
   }
 
   &__title {
@@ -44,6 +60,7 @@
 
   &__headline-actions {
     float: none;
+    position: relative;
     margin-bottom: $global-spacing;
     @include media(medium-up){
       float: right;
@@ -92,45 +109,44 @@
     }
   }
 
-    td:nth-of-type(n):before {
-      @extend th;
-      left: 0;
-      position: absolute;
-    }
+  td:nth-of-type(n):before {
+    @extend th;
+    left: 0;
+    position: absolute;
+  }
 
-    td:nth-of-type(1):before { 
-      @include media(small-down){
-      content: "Name and Description"; 
-      }
+  td:nth-of-type(1):before {
+    @include media(small-down){
+      content: "Name and Description";
     }
-    td:nth-of-type(2):before { 
-      @include media(small-down){
-      content: "KPI"; 
-      }
+  }
+  td:nth-of-type(2):before {
+    @include media(small-down){
+      content: "KPI";
     }
-    td:nth-of-type(3):before { 
-      @include media(small-down){
-      content: "Target"; 
-      }
+  }
+  td:nth-of-type(3):before {
+    @include media(small-down){
+      content: "Target";
     }
-    td:nth-of-type(4):before { 
-      @include media(small-down){
-      content: "Progress"; 
-      }
+  }
+  td:nth-of-type(4):before {
+    @include media(small-down){
+      content: "Progress";
     }
-    td:nth-of-type(5):before { 
-      @include media(small-down){
-      content: "Date"; 
-      }
+  }
+  td:nth-of-type(5):before {
+    @include media(small-down){
+      content: "Date";
     }
+  }
 
-
-    .row-name {
-      width: 35%;
-    }
-    .row-target, .row-progress, .row-date {
-      width: 12%;
-    }
+  .row-name {
+    width: 35%;
+  }
+  .row-target, .row-progress, .row-date {
+    width: 12%;
+  }
 }
 
 .section {
@@ -298,7 +314,7 @@
     }
   }
   .overview-item--alt {
-    @include col(12/12);  
+    @include col(12/12);
   }
 }
 
@@ -306,7 +322,7 @@
     display: block;
     margin-bottom: $global-spacing/2;
     margin-top: $global-spacing;
-  
+
   ul {
     margin: 0;
     overflow:hidden;
@@ -327,7 +343,7 @@
 }
 
 .button--list {
-  li {
+  > li {
     display: inline-block;
     &:first-child {
       margin-bottom: $global-spacing/2;
@@ -341,5 +357,29 @@
     list-style: none;
     margin-bottom: $global-spacing/4;
     font-size: 0.875rem;
+    color: $base-color;
+  }
+}
+
+.tags {
+  float: left;
+  margin-top: $global-spacing * 1.5;
+  &__group {
+    @include col(12/12);
+    @include media(xsmall-only) {
+      margin-bottom: $global-spacing;
+    }
+  }
+
+  &__label {
+    float: left;
+    font-size: 0.75rem;
+    line-height: 1.75rem;
+    margin-right: $global-spacing/2;
+    margin-bottom: 0;
+    @include media(xsmall-only) {
+      float: none;
+      line-height: 0.75rem;
+    }
   }
 }

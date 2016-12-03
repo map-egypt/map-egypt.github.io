@@ -62,7 +62,7 @@ select.form__control {
   background: $base-font-color;
 
   &:hover {
-    background: shade($base-font-color, 4%);
+    opacity: 0.7;
   }
 
   &:active {
@@ -140,7 +140,6 @@ textarea.form__control {
   position: relative;
   display: table;
   border-collapse: separate;
-  width: 50%;
 }
 
 .form__input-group-button:first-child > .button,
@@ -196,6 +195,15 @@ textarea.form__control {
 .form__input-group .form__control,
 .form__input-group-button {
   display: table-cell;
+}
+
+footer {
+  .form__input-group .form__control,
+  .form__input-group-button {
+    display: table-cell;
+    border-radius: 0.25rem;
+    background-color: #fff
+  }
 }
 
 
@@ -370,6 +378,11 @@ label[for] {
 .button--newsletter-icon:before {
   @extend %collecticon-envelope;
 }
+
+.button--copy-icon:before {
+  @extend %collecticon-clipboard-list;
+}
+
 
 /* Form misc
    ========================================================================== */

@@ -12,6 +12,29 @@
   }
 }
 
+.home {
+  .chart__inline--labels {
+  @include col(6/12);
+  @include media(small-down) {
+    @include col(12/12);
+  }
+}
+
+}
+.chart__inline--labels {
+  @include col(5.5/12);
+  @include media(small-down) {
+    @include col(12/12);
+  }
+}
+
+.chart__inline {
+  @include col(3/12);
+  @include media(small-down) {
+    @include col(12/12);
+  }
+}
+
 .pie__slice__on-time {
   fill: $base-color;
 }
@@ -67,6 +90,9 @@ $timeline-inner: $base-color;
 .timeline__unit {
   @include col(12/12);
   margin-bottom: $global-spacing * 2;
+  @include media(xsmall-only) {
+    margin-bottom: $global-spacing;
+  }
   &:first-child {
     margin-top: $global-spacing;
   }
@@ -81,8 +107,13 @@ $timeline-inner: $base-color;
   }
 }
 
+.timeline {
+  overflow: hidden;
+}
+
 .timeline__headline {
   @include col(12/12);
+  margin-bottom: $global-spacing * 1.5;
   @include media(medium-up) {
     @include col(2/12);
   }
@@ -107,10 +138,6 @@ $timeline-inner: $base-color;
   }
 }
 
-.timeline__label {
-
-}
-
 .timeline__inner {
   background-color: $timeline-inner;
   height: $timeline-height;
@@ -125,4 +152,13 @@ $timeline-inner: $base-color;
   font-weight: $base-font-light;
   font-size: 0.657rem;
   color: $base-font-color;
+}
+
+.chart__axis--line {
+  stroke: #AAA;
+  stroke-width: 1px;
+}
+
+.chart__inline {
+  .axis__left .chart__axis-ticks { display: none; }
 }

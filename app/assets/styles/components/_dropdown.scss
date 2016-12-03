@@ -1,0 +1,26 @@
+.dropdown__container {
+  display: inline-block;
+  position: relative;
+}
+
+.dropdown__list {
+  border-radius: $base-border-radius;
+  position: absolute;
+  left: 0;
+  top: 3em;
+  width: 100%;
+  display: inline-block;
+  z-index: 999;
+}
+
+.dropdown__item {
+  display: block;
+  line-height: 1.5rem;
+  font-size: 1rem;
+  padding: 1rem 1rem;
+  min-width: 2rem;
+  &:hover {
+    opacity: 0.7;
+  }
+  cursor: pointer;
+}
