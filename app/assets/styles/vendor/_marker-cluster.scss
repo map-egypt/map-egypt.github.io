@@ -14,10 +14,12 @@
 }
 
 .marker-cluster-small {
-	background-color: rgba(181, 226, 140, 0.6);
+	background-color: rgba($base-color, 0.6);
 	}
 .marker-cluster-small div {
-	background-color: rgba(110, 204, 57, 0.6);
+	background-color: rgba($base-color, 0.6);
+	color: #fff;
+	font-weight: $base-font-bold;
 	}
 
 .marker-cluster-medium {

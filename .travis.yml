@@ -4,7 +4,7 @@ node_js:
 env:
   global:
   - CXX=g++-4.8
-  - DEPLOY_BRANCH=master
+  - DEPLOY_BRANCH=develop
   - secure: kk1w7MPBvfAu2OpsIGhnZyB2XNkC9/fINt6naKDJbI/VT584u/BgGjpkIq5fPEWi51a4Dp+YLKTay4PRXgc84FVl92A9sGuiqmPEwfrA7TdcQQHbB7ckc5Ff7EAbXeD7Tv5yM/zBKfGXP4d2R9lsNwt0qKKe4zXhMaKSq3V+GB8F+qBbGk46RKrjcltkZ5HDdRyGiYtC9TtDI+ECo8UYXbhMx52BQCSs6JbyOcyUG/FM6WaPs0dV9SCQnLY5bE5kSVHQE7G3EqnFmCnzVPtZkdbNt+gVBBBeypS6R/wpxUU40zTlxQ7RFYcrUWvvXCWjCNB/krwzODSM50un3q8Bxj6SQBd302ZYPcmdQfThgH+JjUcYFgKQH/+CkrIKiss/5a8FqVt4bwHu2K8uonmWzb3t7WqAKwPcksLnecXYfOw/iqbWLQMHAqobnWfLXYntD8I/9M4FhPeJgqybY0xGgglcb/AgRKmA+NDN8/fdijiBVEwzqthdmOBXFNHg9asLmG5s+SmdZTyzETsJvahdY5ITsQV/HwCw7gzEBNoDZdFVGosX4GAdGvxyMynVMZh3EW0KdRK1JgQx8h2HUsz3LL1c3mYgKfHRyafeuHs4NbG6Fac572X3yqyL+Yrxu5Pu6gmaWazh64dteSpUJuWsylbyIKEKzuxKwKF+ReN+a00=
 addons:
   apt:
@@ -16,6 +16,9 @@ cache:
   apt: true
   directories:
   - node_modules
+branches:
+  except:
+  - master
 before_install:
 - chmod +x ./.build_scripts/deploy.sh
 - chmod +x ./.build_scripts/lint.sh

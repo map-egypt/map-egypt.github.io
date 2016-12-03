@@ -62,12 +62,17 @@ const Map = React.createClass({
     markerLayer.clearLayers();
     markers.forEach(function (marker) {
       const leafletMarker = L.marker(marker.centroid, {
-        icon: L.mapbox.marker.icon({'marker-symbol': 'garden', 'marker-color': '0044FF'})
+        icon: L.mapbox.marker.icon({'marker-symbol': 'circle', 'marker-color': '2B2342'})
       });
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
           `<h5 class='marker__title'>${marker.name}</h5>` +
-          `<p class='marker__description'>Governorate: <strong>${marker.region}</strong></p>` +
+          `<dl class='card-meta'>` +
+                `<dt class='card-meta__label'>Status</dt>` +
+                `<dd class='card-meta__value card-meta__value--status'>Delayed</dd>` +
+                `<dt class='card-meta__label'>Location</dt>` +
+                `<dd class='card-meta__value card-meta__value--location'>${marker.region}</dd>` +
+              `</dl>` +
         `</div>`
       );
       markerLayer.addLayer(leafletMarker);
