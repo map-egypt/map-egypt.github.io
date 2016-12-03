@@ -75,6 +75,10 @@ const Map = React.createClass({
   },
 
   renderOverlay: function (overlay) {
+    if (this.overlay) {
+      this.overlay.remove();
+    }
+    if (!overlay) { return; }
     const { values, regions } = overlay;
     const domain = values.map((d) => +d.value);
     const scale = scaleQuantile().domain(domain).range(SEQUENTIAL);
@@ -95,10 +99,6 @@ const Map = React.createClass({
     regions.features.forEach(function (feature) {
       feature.properties._value = get(idMap, feature.properties.admin_id);
     });
-
-    if (this.overlay) {
-      this.overlayer.remove();
-    }
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
       const id = feature.properties.admin_id;
@@ -126,7 +126,7 @@ const Map = React.createClass({
       this.addClusterMarkers(props.markers);
     }
 
-    if (props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) {
+    if ((props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) || (this.props.overlay && !props.overlay)) {
       this.renderOverlay(props.overlay);
     }
   },
