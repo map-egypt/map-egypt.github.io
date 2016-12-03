@@ -36,6 +36,7 @@ var ProjectBrowse = React.createClass({
   propTypes: {
     api: React.PropTypes.object,
     meta: React.PropTypes.object,
+    location: React.PropTypes.object,
     dispatch: React.PropTypes.func
   },
 
