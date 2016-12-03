@@ -38,8 +38,14 @@ function isTokenExpired (token) {
   return !(date.valueOf() > (new Date().valueOf() + (offsetSeconds * 1000)));
 }
 
-let token = store.get('id_token');
-let isAuthenticated = !!token && !isTokenExpired(token);
+const token = store.get('id_token');
+const isExpired = token && isTokenExpired(token);
+let isAuthenticated = !!token && !isExpired;
+
+// remove token if it's expired
+if (token && isExpired) {
+  store.remove('id_token');
+}
 
 const dispatches = [];
 auth.on('authenticated', function (authResult) {
