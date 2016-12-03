@@ -18,9 +18,6 @@ import ProjectTimeline from '../components/project-timeline';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 const barChartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
-const comparisonChartMargin = extend({}, barChartMargin, {
-  left: 10
-});
 
 function linkPath (base, type, id) {
   return path.resolve(base, type, slugify(id));
@@ -42,6 +39,8 @@ var Project = React.createClass({
   },
 
   render: function () {
+    const authenticated = this.props.api.authenticated;
+    console.log(authenticated);
     const meta = get(this.props.api, ['projectDetail', this.props.params.id]);
     if (!meta) {
       return <div></div>; // TODO loading indicator
@@ -212,7 +211,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--charts'>
 
               <div className='overview-charts'>
-                <div className='chart-content chart__inline--labels'>
+                <div className={'chart-content chart__inline--labels' + (!authenticated ? ' chart__block' : '')}>
                   <h3>Funding by Donor</h3>
                   <HorizontalBarChart
                     data={donors}
@@ -221,10 +220,12 @@ var Project = React.createClass({
                     xFormat={shortTally}
                   />
                 </div>
-                <div className='chart-content chart__inline--labels'>
-                  <h3>Disbursement vs. Reach</h3>
-                  <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
-                </div>
+                {authenticated ? (
+                  <div className='chart-content chart__inline--labels'>
+                    <h3>Disbursement vs. Reach</h3>
+                    <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
+                  </div>
+                ) : null}
               </div>
 
             </section>
@@ -262,7 +263,7 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
-              <div className='chart-content chart__inline--labels'>
+              <div className='chart-content chart__block'>
                 <h3>Funding</h3>
                 <HorizontalBarChart
                   data={budgets}
@@ -272,20 +273,22 @@ var Project = React.createClass({
                   yFormat={shortText}
                 />
               </div>
-              <div className='chart-content chart__inline--labels'>
+              <div className='chart-content chart__block'>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
-                  margin={comparisonChartMargin}
+                  margin={barChartMargin}
                   yTitle=''
                   xFormat={pct}
                   yFormat={shortText}
                 />
               </div>
-              <div className='chart-content chart__inline--labels'>
-                <h3>Reach</h3>
-                <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
-              </div>
+              {authenticated ? (
+                <div className='chart-content chart__block'>
+                  <h3>Reach</h3>
+                  <p style={{textAlign: 'center'}}><em>Waiting for data...</em></p>
+                </div>
+              ) : null}
             </section>
           </div>
           <section className='inpage__section--bleed'>
