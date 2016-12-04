@@ -25,13 +25,13 @@ module.exports.getProjectCentroids = function (projects, features) {
     const meta = governorates.byId(id);
     const feature = features.find((f) => f.properties.admin_id === meta.egy);
     const centroid = get(getCentroid(feature), 'geometry.coordinates');
-    console.log(centroid);
     if (centroid) {
       regions[id].forEach(function (project) {
         markers.push({
           centroid: [centroid[1], centroid[0]],
           region: meta.name,
-          name: project.name
+          name: project.name,
+          id: project.id
         });
       });
     }

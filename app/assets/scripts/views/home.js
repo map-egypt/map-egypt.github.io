@@ -69,7 +69,7 @@ var Home = React.createClass({
         </header>
         <div className='inpage__body'>
           <div className='inner'>
-            <Map markers={markers}/>
+            <Map markers={markers} lang={this.props.meta.lang} />
             <section className='inpage__section'>
               <div className='overview-home'>
                 <h2 className='section__title'>Overview of Agricultural Projects</h2>
