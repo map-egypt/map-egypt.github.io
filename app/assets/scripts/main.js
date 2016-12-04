@@ -34,7 +34,13 @@ const store = createStore(reducer, applyMiddleware(
 ));
 
 import { getAuthStatus, getProjects, getIndicators, getGeography, updateLang } from './actions';
-store.dispatch(getAuthStatus());
+import { hasValidToken } from './utils/auth';
+const needsValidatedFetch = !hasValidToken();
+store.dispatch(getAuthStatus(function () {
+  if (needsValidatedFetch) {
+    store.dispatch(getProjects());
+  }
+}));
 store.dispatch(getProjects());
 store.dispatch(getIndicators());
 store.dispatch(getGeography(GOVERNORATE)); // fetch governorates

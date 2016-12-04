@@ -46,10 +46,13 @@ export function updateLang (lang) {
   return { type: LANGUAGE, data: lang };
 }
 
-export function getAuthStatus () {
+export function getAuthStatus (cb) {
   return function (dispatch) {
     auth.registerDispatch(function (isAuthenticated) {
       dispatch(updateAuth(isAuthenticated));
+      if (cb && typeof cb === 'function') {
+        cb();
+      }
     });
   };
 }

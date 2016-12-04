@@ -75,5 +75,9 @@ module.exports = {
     } else {
       dispatches.push(dispatch);
     }
+  },
+  hasValidToken: () => {
+    let t = store.get('id_token');
+    return !!t && !isTokenExpired(t);
   }
 };
