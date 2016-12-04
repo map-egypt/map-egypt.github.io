@@ -118,7 +118,7 @@
     "auth0-lock": "^10.6.1",
     "classnames": "^2.2.5",
     "d3": "^4.3.0",
-    "d3-scale": "^1.0.3",
+    "d3-scale": "^1.0.4",
     "global": "^4.3.1",
     "jwt-decode": "^2.1.0",
     "leaflet.markercluster": "^1.0.0",

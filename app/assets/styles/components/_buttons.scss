@@ -247,7 +247,7 @@
   background-color: $input-color;
   margin-right: 0.5rem;
   border-radius: 0.25rem;
-  &::after {
+  &:after {
     margin-left: $global-spacing/2;
     @extend %collecticon-xmark;
     font-size: 0.675rem;

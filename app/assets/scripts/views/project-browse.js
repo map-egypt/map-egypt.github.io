@@ -4,32 +4,104 @@ import { connect } from 'react-redux';
 import { get } from 'object-path';
 import { without, clone } from 'lodash';
 
+import { getIndicator } from '../actions';
 import Map from '../components/map';
 import Share from '../components/share';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
+import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
-import { GOVERNORATE } from '../utils/map-utils';
+import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
 const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
 
+function countByProp (array, property) {
+  const result = {};
+  array.forEach((item) => {
+    const name = property ? item[property] : item;
+    result[name] = result[name] || 0;
+    result[name] += 1;
+  });
+  return result;
+}
+
+// Project filters
+const STATUS = {
+  display: 'Project Status',
+  items: [
+    { display: 'On Time', filter: isOntime },
+    { display: 'Delayed', filter: (p) => !isOntime(p) }
+  ]
+};
+
+const CATEGORY = {
+  display: 'Category',
+  items: (projects) => {
+    const categories = countByProp(projects.reduce((a, b) => a.concat(b.categories), []));
+    return Object.keys(categories).map((category) => ({
+      display: `${category} (${categories[category]})`,
+      filter: (p) => Array.isArray(p.categories) && p.categories.indexOf(category) >= 0
+    }));
+  }
+};
+
+const DONOR = {
+  display: 'Donor',
+  items: (projects) => {
+    const donors = countByProp(projects.reduce((a, b) => a.concat(b.budget), []), 'donor_name');
+    return Object.keys(donors).map((donor) => ({
+      display: `${donor} (${donors[donor]})`,
+      filter: (p) => Array.isArray(p.budget) && p.budget.find((budget) => budget.donor_name === donor)
+    }));
+  }
+};
+
+const SDS = {
+  display: 'SDS Goals',
+  items: (projects) => {
+    const goals = countByProp(projects.reduce((a, b) => a.concat(b.sds_indicators), []));
+    return Object.keys(goals).map((goal) => ({
+      display: `${goal} (${goals[goal]})`,
+      filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.indexOf(goal) >= 0
+    }));
+  }
+};
+
+const projectFilters = [STATUS, CATEGORY, DONOR, SDS];
+
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
 
   getInitialState: function () {
     return {
+
+      // modal open or closed
       modal: false,
+
+      // which modal (projects or indicators)
       activeModal: null,
+
+      // is the indicator dropdown open
       indicatorToggle: false,
+
+      // is the view set to list view or map
       listView: false,
+
+      // what's the currently active indicator
       activeIndicatorType: null,
       activeIndicatorTheme: null,
       selectedIndicators: [],
       activeIndicators: [],
-      activeGovernorate: null
+      activeIndicator: null,
+
+      // which governorate are we zoomed into
+      activeGovernorate: null,
+
+      selectedProjectFilters: [],
+      activeProjectFilters: []
     };
   },
 
@@ -40,6 +112,16 @@ var ProjectBrowse = React.createClass({
     dispatch: React.PropTypes.func
   },
 
+  componentWillUpdate: function (nextProps, nextState) {
+    const activeIndicator = nextState.activeIndicator;
+    if (activeIndicator && activeIndicator !== this.state.activeIndicator) {
+      const meta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
+      if (meta && meta.id) {
+        this.props.dispatch(getIndicator(meta.id));
+      }
+    }
+  },
+
   zoomToGovernorate: function (event, value) {
     const selected = value.suggestion;
     this.setState({
@@ -47,6 +129,7 @@ var ProjectBrowse = React.createClass({
     });
   },
 
+  // indicator modals
   toggleIndicatorDropdown: function () {
     this.setState({indicatorToggle: !this.state.indicatorToggle});
   },
@@ -57,14 +140,14 @@ var ProjectBrowse = React.createClass({
       modal: true,
       activeModal: INDICATORS,
       indicatorToggle: false,
-      activeIndicatorType
+      activeIndicatorType,
+      selectedIndicators: this.state.activeIndicators.length ? clone(this.state.activeIndicators) : []
     });
   },
 
   cancelIndicators: function () {
     this.setState({
       modal: false,
-      activeModal: null,
       activeIndicatorType: null,
       activeIndicatorTheme: null,
       selectedIndicators: this.state.activeIndicators.length ? clone(this.state.activeIndicators) : []
@@ -72,18 +155,45 @@ var ProjectBrowse = React.createClass({
   },
 
   confirmIndicators: function () {
+    const active = this.state.selectedIndicators.length ? clone(this.state.selectedIndicators) : [];
     this.setState({
       modal: false,
-      activeModal: null,
       activeIndicatorType: null,
       activeIndicatorTheme: null,
-      activeIndicators: this.state.selectedIndicators.length ? clone(this.state.selectedIndicators) : []
+      activeIndicators: active,
+      activeIndicator: active.length ? active[0] : null
     });
   },
 
   selectIndicatorSubType: function (type) {
     this.setState({
       activeIndicatorTheme: type
+    });
+  },
+
+  setActiveIndicator: function (activeIndicator) {
+    this.setState({ activeIndicator });
+  },
+
+  removeActiveIndicator: function (indicator) {
+    const { activeIndicator, activeIndicators } = this.state;
+    const nextActiveIndicators = without(activeIndicators, indicator);
+    // if the one we're removing is currently active, make the next one active
+    const nextActiveIndicator = activeIndicator !== indicator ? activeIndicator
+      : nextActiveIndicators.length ? nextActiveIndicators[0] : null;
+    this.setState({
+      activeIndicators: nextActiveIndicators,
+      activeIndicator: nextActiveIndicator
+    });
+  },
+
+  // project modal
+  openProjectSelector: function () {
+    this.setState({
+      modal: true,
+      indicatorToggle: false,
+      activeModal: PROJECTS,
+      selectedProjectFilters: this.state.activeProjectFilters.length ? clone(this.state.activeProjectFilters) : []
     });
   },
 
@@ -99,7 +209,55 @@ var ProjectBrowse = React.createClass({
     });
   },
 
-  openProjectSelector: function () { this.setState({ modal: true, activeModal: PROJECTS }); },
+  cancelFilters: function () {
+    this.setState({
+      modal: false,
+      selectedProjectFilters: this.state.activeProjectFilters.length ? clone(this.state.activeProjectFilters) : []
+    });
+  },
+
+  confirmFilters: function () {
+    this.setState({
+      modal: false,
+      activeProjectFilters: this.state.selectedProjectFilters.length ? clone(this.state.selectedProjectFilters) : []
+    });
+  },
+
+  resetProjectFilters: function () {
+    this.setState({
+      selectedProjectFilters: []
+    });
+  },
+
+  clearProjectFilters: function () {
+    this.setState({
+      selectedProjectFilters: [],
+      activeProjectFilters: []
+    });
+  },
+
+  toggleSelectedFilter: function (filter) {
+    let selected = this.state.selectedProjectFilters;
+    let index = selected.map((f) => f.display).indexOf(filter.display);
+    if (index >= 0) {
+      selected.splice(index, 1);
+    } else {
+      selected = selected.concat([filter]);
+    }
+    this.setState({
+      selectedProjectFilters: selected
+    });
+  },
+
+  removeActiveFilter: function (filter) {
+    let active = this.state.activeProjectFilters;
+    let index = active.map((f) => f.display).indexOf(filter.display);
+    active.splice(index, 1);
+    this.setState({
+      activeProjectFilters: active
+    });
+  },
+
   closeModal: function () { this.setState({ modal: false, activeModal: null }); },
 
   selectListView: function () { this.setState({ listView: true }); },
@@ -118,7 +276,8 @@ var ProjectBrowse = React.createClass({
       themes[indicator.theme].push(indicator);
     });
     const themeNames = Object.keys(themes);
-    const availableIndicators = get(themes, activeIndicatorTheme, []);
+    const indicatorTheme = activeIndicatorTheme || themeNames[0];
+    const availableIndicators = get(themes, indicatorTheme, []);
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
@@ -126,25 +285,24 @@ var ProjectBrowse = React.createClass({
           <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
           <p>Add and compare development indicators listed below.</p>
 
-          {selectedIndicators.length ? (
-            <div className='indicators--selected'>
-              <span className='heading--label'>Selected Indicators:&nbsp;</span>
-              {selectedIndicators.map((name) => {
-                return (
-                  <span className='button--small button--tag'
-                    key={name}
-                    onClick={() => this.toggleSelectedIndicator(name)}>{name}</span>
-                );
-              })}
-            </div>
-          ) : null}
+          <div className='indicators--selected'>
+            <span className='heading--label'>Selected Indicators:&nbsp;</span>
+            {selectedIndicators.map((name) => {
+              return (
+                <span className='button--small button--tag'
+                  key={name}
+                  onClick={() => this.toggleSelectedIndicator(name)}>{name}</span>
+              );
+            })}
+          </div>
+
           <div className='indicators__container'>
             <div className='indicators'>
               <ul>
                 {themeNames.length && themeNames.map((name) => {
                   return (
                     <li key={name}
-                    className={'list__item' + (name === activeIndicatorTheme ? ' list__item--active' : '')}
+                    className={'list__item' + (name === indicatorTheme ? ' list__item--active' : '')}
                     onClick={() => this.selectIndicatorSubType(name)}>{name}</li>
                   );
                 })}
@@ -183,6 +341,8 @@ var ProjectBrowse = React.createClass({
   },
 
   renderProjectSelector: function () {
+    let projects = this.props.api.projects;
+    const { selectedProjectFilters } = this.state;
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
@@ -194,41 +354,42 @@ var ProjectBrowse = React.createClass({
                 <span className='form__option__text'>Add All Projects</span>
                 <span className='form__option__ui'></span>
               </label>
-              <a className='link--secondary'>reset filters</a>
+              <a onClick={this.resetProjectFilters} className='link--secondary'>reset filters</a>
             </div>
-            <fieldset className='form__fieldset'>
-              <div className='form__group'>
-                <label className='form__label'>Project Status</label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
-                  <span className='form__option__text'>On Time</span>
-                  <span className='form__option__ui'></span>
-                </label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' value='form-checkbox-2' />
-                  <span className='form__option__text'>Delayed</span>
-                  <span className='form__option__ui'></span>
-                </label>
-              </div>
-            </fieldset>
-            <fieldset className='form__fieldset'>
-              <div className='form__group'>
-                <label className='form__label'>Category</label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
-                  <span className='form__option__text'>Category 1</span>
-                  <span className='form__option__ui'></span>
-                </label>
-                <label className='form__option form__option--custom-checkbox'>
-                  <input type='checkbox' name='form-checkbox' value='form-checkbox-2' />
-                  <span className='form__option__text'>Category 2</span>
-                  <span className='form__option__ui'></span>
-                </label>
-              </div>
-            </fieldset>
+
+            {projectFilters.map((filter) => (
+
+              <fieldset key={filter.display}
+                className='form__fieldset'>
+                <div className='form__group'>
+                  <label className='form__label'>{filter.display}</label>
+                  {(Array.isArray(filter.items) ? filter.items : filter.items(projects)).map((item) => (
+                    <label key={item.display}
+                      className='form__option form__option--custom-checkbox'>
+                      <input
+                        checked={!!selectedProjectFilters.find((f) => f.display === item.display)}
+                        type='checkbox'
+                        name='form-checkbox'
+                        value={item.display}
+                        onChange={() => this.toggleSelectedFilter(item)}
+                      />
+                      <span className='form__option__text'>{item.display}</span>
+                      <span className='form__option__ui'></span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            ))}
+
             <ul className='button--list'>
-              <li><button type='button' className='button button--medium button--primary'>Apply</button></li>
-              <li><button type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
+              <li><button
+                  onClick={this.confirmFilters}
+                  type='button'
+                  className='button button--medium button--primary'>Apply</button></li>
+              <li><button
+                  onClick={this.cancelFilters}
+                  type='button'
+                  className='button button--medium button--primary-bounded'>Cancel</button></li>
             </ul>
           </div>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
@@ -248,8 +409,35 @@ var ProjectBrowse = React.createClass({
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
     }
 
+    const { activeProjectFilters, activeIndicators, activeIndicator } = this.state;
+
+    let { projects } = this.props.api;
+    if (activeProjectFilters.length) {
+      activeProjectFilters.forEach((filter) => {
+        projects = projects.filter(filter.filter);
+      });
+    }
+    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    let overlay;
+    if (activeIndicator) {
+      const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
+      const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
+      const regions = get(this.props.api, 'geography.' + GOVERNORATE);
+      if (indicatorData) {
+        overlay = {
+          id: indicatorData.id,
+          values: indicatorData.data.data.map((d) => ({
+            id: d.sub_nat_id,
+            value: d.data_value
+          })),
+          regions
+        };
+      }
+    }
+
     return (
-      <section className='inpage'>
+      <section className='inpage project-browse'>
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
@@ -281,12 +469,20 @@ var ProjectBrowse = React.createClass({
                     </span>
                   </li>
                 </ul>
-                <div className='filters'>
-                  <label className='heading--label'>Filters</label>
-                  <button className='button button--small button--tag'>Category</button>
-                  <button className='button button--small button--tag'>Project Type</button>
-                  <button className='button button--xsmall button--tag-unbounded'>Clear Filters</button>
-                </div>
+                {activeProjectFilters.length ? (
+                  <div className='filters'>
+                    <label className='heading--label'>Filters</label>
+                    {activeProjectFilters.map((filter) => (
+                      <button
+                        onClick={() => this.removeActiveFilter(filter)}
+                        key={filter.display}
+                        className='button button--small button--tag'>{filter.display}</button>
+                    ))}
+                    <button
+                      onClick={this.clearProjectFilters}
+                      className='button button--xsmall button--tag-unbounded'>Clear Filters</button>
+                  </div>
+                ) : null}
               </div>
               <div className='actions-toggle'>
                 <div className='button-group button-group--horizontal button--toggle'>
@@ -295,20 +491,43 @@ var ProjectBrowse = React.createClass({
                 </div>
               </div>
             </div>
-            <div className='autosuggest'>
-              <AutoSuggest
-                suggestions={governorates}
-                getDisplayName={(d) => d.name}
-                placeholder='Zoom to Governorate'
-                onSelect={this.zoomToGovernorate}
-              />
-            </div>
           </div>
         </header>
+        <div className='map__actions'>
+          <div className='inner'>
+            <div className='map__search-input'>
+              <div className='autosuggest'>
+                  <AutoSuggest
+                  suggestions={governorates}
+                  getDisplayName={(d) => d.name}
+                  placeholder='Zoom to Governorate'
+                  onSelect={this.zoomToGovernorate}
+                  />
+              </div>
+              <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--search-icon"><span>Button</span></button></span>
+            </div>
+          </div>
+        </div>
 
         {this.state.listView
-          ? <ProjectList projects={this.props.api.projects} meta={this.props.meta} />
-          : <Map location={mapLocation} />}
+          ? <ProjectList projects={projects} meta={this.props.meta} />
+          : (<div className='map__outer'>
+              <Map location={mapLocation} markers={markers} overlay={overlay}/>
+              {activeIndicators.length ? (<div className='indicator__overlay'>
+                <h1 className='heading--label'>Selected Indicator Overlays</h1>
+                <ul className='indicator__overlay--list'>
+                  {activeIndicators.map((indicator) => (
+                    <li
+                      key={indicator}
+                      onClick={() => true}
+                      className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
+                      <a onClick={() => this.setActiveIndicator(indicator)}>{indicator}</a>
+                      <span className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}> X </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>) : null}
+            </div>)}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}

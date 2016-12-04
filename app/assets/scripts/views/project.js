@@ -8,6 +8,7 @@ import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText } from '../utils/format';
+import { byId } from '../utils/governorates';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -159,11 +160,12 @@ var Project = React.createClass({
                   <h1 className='overview-item__title heading-alt'>Location</h1>
                   <ul className='link-list'>
                     {get(data, 'location', []).map((loc, i) => {
-                      const display = loc.district.district && loc.district.district.toLowerCase() !== 'all'
+                      const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
                         ? loc.district.district : loc.district.governorate;
+                      const display = byId(id);
                       return (
-                        <li key={display}>
-                          <span>{display}</span>
+                        <li key={id}>
+                          <span>{display ? display.name : '--'}</span>
                         </li>
                       );
                     })}

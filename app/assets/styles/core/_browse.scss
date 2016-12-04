@@ -1,3 +1,27 @@
+.project-browse {
+  .inpage__header {
+    padding-bottom: 0;
+  }
+  .map__container {
+    height: 550px;
+  }
+}
+
+.map__actions {
+  padding: $global-spacing 0;
+  box-shadow: inset 0 1px 0 0 $tertiary-color;
+}
+
+.map__search-input {
+  position: relative;
+  width: 250px;
+  .form__input-group-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
 .project-list {
 	.section__title {
 		float: left;
@@ -20,6 +44,9 @@
   @include col(12/12);
   @include media(small-down) {
   	margin-top: $global-spacing;
+  }
+  ul {
+    margin-bottom: 0;
   }
 }
 
