@@ -63,7 +63,7 @@ var Home = React.createClass({
             <h1 className='inpage__title heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
             <div className='inpage__introduction'>
               <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
-              <button type='button' className='button button--primary button--large'>Learn More</button>
+              <Link to={'/' + this.props.meta.lang + '/about'} type='button' className='button button--primary button--large'>Learn More</Link>
             </div>
           </div>
         </header>
