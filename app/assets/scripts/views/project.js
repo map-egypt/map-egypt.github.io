@@ -9,6 +9,7 @@ import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText } from '../utils/format';
 import { byId } from '../utils/governorates';
+import { hasValidToken } from '../utils/auth';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -34,8 +35,24 @@ var Project = React.createClass({
     meta: React.PropTypes.object
   },
 
+  getInitialState: function () {
+    return {
+      authenticated: hasValidToken()
+    };
+  },
+
   componentWillMount: function () {
+    if (hasValidToken()) {
+      this.setState({ authenticated: true });
+    }
     this.props.dispatch(getProject(this.props.params.id));
+  },
+
+  componentWillReceiveProps: function (props) {
+    if (props.api.authenticated && !this.props.api.authenticated && !this.state.authenticated) {
+      this.props.dispatch(getProject(this.props.params.id));
+      this.setState({ authenticated: true });
+    }
   },
 
   render: function () {
