@@ -3,6 +3,10 @@
   height: 380px;
 }
 
+.leaflet-overlay-pane svg {
+  pointer-events: all;
+}
+
 .leaflet-popup-close-button {
   top: 5px !important;
   right: 5px !important;
@@ -20,4 +24,76 @@
   font-size: 0.875rem !important;
 	font-family: $base-font-family;
   color: $base-color;
+}
+
+.map__outer {
+  position: relative;
+}
+
+.indicator__overlay {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  padding: 5px;
+  background-color: white;
+  box-shadow: 0 4px 16px 8px $base-alpha-color;
+  border-radius: $base-border-radius;
+  .heading--label {
+    font-family: $base-font-family;
+    font-size: 1rem;
+    margin: $global-spacing $global-spacing 0 $global-spacing;
+    text-transform: capitalize;
+    font-weight: $base-font-bold;
+  }
+  .indicator__overlay--list {
+    padding: 0 $global-spacing $global-spacing $global-spacing;
+  }
+  .indicator__overlay--item {
+     list-style: none;
+     color: $base-font-color;
+     font-size: 0.875rem;
+     padding: $global-spacing/2 0;
+     position: relative;
+     box-shadow: inset 0 -1px 0 0 $tertiary-color;
+     a {
+      padding-left: 20px;
+      color: $base-font-color;
+     }
+     &:last-child {
+      padding-bottom: 0;
+      box-shadow: none;
+     }
+     &:before {
+      position: absolute;
+      left: 0;
+      top: 12px;
+      margin-right: $global-spacing/2;
+      @extend %collecticon-eye;
+      font-size: 0.75rem;
+     };
+     &:hover {
+      color: $base-color;
+      a {
+        color: $base-color;
+        opacity: 1;
+      }
+     };
+  }
+  .indicator__overlay--selected {
+    font-weight: $base-font-bold;
+    color: $base-color;
+    a {
+      color: $base-color;
+    }
+  }
+  .indicator-close {
+    float: right;
+    margin-left: $global-spacing/2;
+    padding: 0 $global-spacing/2;
+    &:hover {
+      background-color: rgba($base-color, 0.1d);
+      border-radius: $global-spacing/4;
+      
+    }
+  }
 }
