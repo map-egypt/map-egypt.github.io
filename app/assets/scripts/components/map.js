@@ -27,7 +27,7 @@ const OVERLAY_STYLE = {
   weight: 2,
   opacity: 1,
   color: 'white',
-  fillOpacity: 0.9
+  fillOpacity: 0.5
 };
 
 function getLatLngBounds (bounds) {
