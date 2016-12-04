@@ -40,6 +40,7 @@ const Map = React.createClass({
   displayName: 'Map',
 
   propTypes: {
+    lang: React.PropTypes.string,
     location: React.PropTypes.object,
     markers: React.PropTypes.array,
     overlay: React.PropTypes.object
@@ -58,6 +59,7 @@ const Map = React.createClass({
   },
 
   addClusterMarkers: function (markers) {
+    const lang = this.props.lang || 'en';
     const markerLayer = this.markerLayer;
     markerLayer.clearLayers();
     markers.forEach(function (marker) {
@@ -66,7 +68,7 @@ const Map = React.createClass({
       });
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
-          `<h5 class='marker__title'>${marker.name}</h5>` +
+          `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link__deco'>${marker.name}</a></h5>` +
           `<dl class='card-meta'>` +
                 `<dt class='card-meta__label'>Status</dt>` +
                 `<dd class='card-meta__value card-meta__value--status'>Delayed</dd>` +

@@ -10,7 +10,9 @@ var VerticalBarChart = React.createClass({
   propTypes: {
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
-    yTitle: React.PropTypes.string
+    yTitle: React.PropTypes.string,
+    xFormat: React.PropTypes.func,
+    yFormat: React.PropTypes.func
   },
 
   getInitialState: function () {
@@ -70,6 +72,7 @@ var VerticalBarChart = React.createClass({
             height={height}
             width={width}
             margin={margin}
+            format={this.props.xFormat}
           />
           <Axis
             scale={yScale}
@@ -78,6 +81,7 @@ var VerticalBarChart = React.createClass({
             height={height}
             width={width}
             margin={margin}
+            format={this.props.yFormat}
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map(d => {

@@ -21,7 +21,7 @@ var Home = React.createClass({
   },
 
   render: function () {
-    const projects = this.props.api.projects;
+    const { projects } = this.props.api;
     const categories = {};
     const status = { ontime: 0, delayed: 0 };
     projects.forEach(function (project) {
@@ -63,13 +63,13 @@ var Home = React.createClass({
             <h1 className='inpage__title heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
             <div className='inpage__introduction'>
               <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
-              <button type='button' className='button button--primary button--large'>Learn More</button>
+              <Link to={'/' + this.props.meta.lang + '/about'} type='button' className='button button--primary button--large'>Learn More</Link>
             </div>
           </div>
         </header>
         <div className='inpage__body'>
           <div className='inner'>
-            <Map markers={markers}/>
+            <Map markers={markers} lang={this.props.meta.lang} />
             <section className='inpage__section'>
               <div className='overview-home'>
                 <h2 className='section__title'>Overview of Agricultural Projects</h2>

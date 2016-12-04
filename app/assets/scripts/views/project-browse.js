@@ -512,7 +512,7 @@ var ProjectBrowse = React.createClass({
         {this.state.listView
           ? <ProjectList projects={projects} meta={this.props.meta} />
           : (<div className='map__outer'>
-              <Map location={mapLocation} markers={markers} overlay={overlay}/>
+              <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
               {activeIndicators.length ? (<div className='indicator__overlay'>
                 <h1 className='heading--label'>Selected Indicator Overlays</h1>
                 <ul className='indicator__overlay--list'>

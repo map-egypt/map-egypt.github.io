@@ -28,9 +28,10 @@ module.exports.getProjectCentroids = function (projects, features) {
     if (centroid) {
       regions[id].forEach(function (project) {
         markers.push({
-          centroid,
+          centroid: [centroid[1], centroid[0]],
           region: meta.name,
-          name: project.name
+          name: project.name,
+          id: project.id
         });
       });
     }
