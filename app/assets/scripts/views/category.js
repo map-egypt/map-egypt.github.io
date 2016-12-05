@@ -123,9 +123,10 @@ var Category = React.createClass({
             </div>
           </div>
         </header>
-        <Map />
         <div className='inpage__body'>
+
           <div className='inner'>
+            <Map />
             <section className='inpage__section'>
               <h1 className='section__title heading--small'>Comparison</h1>
               <div className='chart-content chart__inline--labels'>

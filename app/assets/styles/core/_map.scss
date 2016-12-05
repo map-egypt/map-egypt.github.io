@@ -1,6 +1,14 @@
 .map__container {
   width: 100%;
-  height: 380px;
+/*  height: 380px;*/
+}
+
+.category {
+  .map__container {
+    height: 25rem;
+    margin-top: $global-spacing * 4;
+    box-shadow: 0 0 0 1px $tertiary-color;
+  }
 }
 
 .leaflet-overlay-pane svg {

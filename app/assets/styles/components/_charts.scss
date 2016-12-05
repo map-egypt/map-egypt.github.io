@@ -99,9 +99,6 @@ $timeline-inner: $base-color;
   @include media(medium-up) {
     margin-bottom: 0;
   }
-  &:last-child{
-    margin-top: 0.5rem;
-  }
   .heading-alt {
     font-size: 0.75rem;
   }
