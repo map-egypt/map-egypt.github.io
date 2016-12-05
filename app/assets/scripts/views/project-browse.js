@@ -121,8 +121,10 @@ var ProjectBrowse = React.createClass({
       }
     }
     const modal = nextState.modal;
-    if (modal !== this.state.modal) {
-      document.documentElement.classList.toggle('disable--page-scroll');
+    if (modal) {
+      document.documentElement.classList.add('disable--page-scroll');
+    } else {
+      document.documentElement.classList.remove('disable--page-scroll');
     }
   },
 
@@ -262,7 +264,8 @@ var ProjectBrowse = React.createClass({
     });
   },
 
-  closeModal: function () { this.setState({ modal: false, activeModal: null });
+  closeModal: function () { 
+    this.setState({ modal: false, activeModal: null });
  },
 
   selectListView: function () { this.setState({ listView: true }); },
