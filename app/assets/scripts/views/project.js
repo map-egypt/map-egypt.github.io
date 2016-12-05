@@ -271,6 +271,7 @@ var Project = React.createClass({
                 <table className='inpage__table'>
                   <thead>
                     <tr>
+                      <th className='row-status'>Status</th>
                       <th className='row-name'>Component</th>
                       <th className='row-kpi'>KPI</th>
                       <th className='row-target'>Target</th>
@@ -284,8 +285,9 @@ var Project = React.createClass({
                       return (
                         <tr key={d.kpi}>
                           <td className={'project--' + status}>
-                            <p className='card-meta__value--status activity-name'>{d.component}</p>
+                            <p className='card-meta__value--status activity-name'>{ontime ? 'On time' : 'Delayed'}</p>
                           </td>
+                          <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>
                           <td>{d.target}</td>
                           <td>{d.current}</td>

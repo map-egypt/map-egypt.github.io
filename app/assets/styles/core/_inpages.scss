@@ -108,45 +108,6 @@
       @include col(12/12);
     }
   }
-
-  td:nth-of-type(n):before {
-    @extend th;
-    left: 0;
-    position: absolute;
-  }
-
-  td:nth-of-type(1):before {
-    @include media(small-down){
-      content: "Name and Description";
-    }
-  }
-  td:nth-of-type(2):before {
-    @include media(small-down){
-      content: "KPI";
-    }
-  }
-  td:nth-of-type(3):before {
-    @include media(small-down){
-      content: "Target";
-    }
-  }
-  td:nth-of-type(4):before {
-    @include media(small-down){
-      content: "Progress";
-    }
-  }
-  td:nth-of-type(5):before {
-    @include media(small-down){
-      content: "Date";
-    }
-  }
-
-  .row-name {
-    width: 35%;
-  }
-  .row-target, .row-progress, .row-date {
-    width: 12%;
-  }
 }
 
 .section {
