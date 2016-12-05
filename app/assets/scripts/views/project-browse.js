@@ -262,8 +262,7 @@ var ProjectBrowse = React.createClass({
     });
   },
 
-  closeModal: function () { this.setState({ modal: false, activeModal: null }); 
-  document.documentElement.classList.remove('disable--page-scroll');
+  closeModal: function () { this.setState({ modal: false, activeModal: null });
  },
 
   selectListView: function () { this.setState({ listView: true }); },
