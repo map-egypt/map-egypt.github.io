@@ -199,25 +199,43 @@
   background-color: $background-color;
 }
 
-/*.inpage__section--overview {
-
+.inpage__section--overview {
+    padding: 0;
+  @include media(medium-up) {
+    @include display(flex);
+  }
+  .inpage__col--content {
+    @include col(12/12);
+    padding: 3rem;
+    @include media(medium-up) {
+      @include col(7/12);
+      padding: 3rem 3rem 3rem 1rem;
+      @include flex(1 1 auto);
+    }
+  }
   .inpage__col--map {
-      @include col(12/12);
-      margin-bottom: $global-spacing * 2;
+    @include col(12/12);
+    margin-bottom: $global-spacing * 2;
     @include media(medium-up) {
       @include col(5/12);
       margin-bottom: 0;
+      @include flex(1 1 auto);
+      position: relative;
+    }
+    .map__container {
+      position: relative;
+      height: 20rem;
+      @include media(medium-up){
+        height: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
     }
   }
-
-  .inpage__col--content {
-    @include col(12/12);
-    @include media(medium-up) {
-      @include col(7/12);
-    }
-  }*/
-/*}*/
-
+}
 
 .inpage-stats {
   color: $base-color;

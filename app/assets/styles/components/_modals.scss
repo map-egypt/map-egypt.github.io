@@ -19,6 +19,10 @@
   overflow-y: auto;
 }
 
+.disable-page-scroll {
+  overflow-y: hidden;
+}
+
 /**
   * The element to be centered, can also be of any width and height
   */
@@ -45,7 +49,9 @@
   .form__fieldset {
     @include col(12/12);
     @include media(medium-up) {
-      @include col(5/12);
+      width: auto;
+      height: 200px;
+      overflow: scroll;
     }
   }
 }

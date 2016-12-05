@@ -39,6 +39,17 @@
   } 
 }
 
+.drop__content--react {
+  position: relative;
+  opacity: 1;
+  visibility: visible;
+  transition: none;
+}
+
+.react-autosuggest__suggestions-list {
+  margin-bottom: 0; 
+}
+
 .inpage__actions {
   margin-top: $global-spacing * 2;
   @include col(12/12);
