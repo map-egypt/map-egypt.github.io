@@ -238,14 +238,19 @@ abbr[title] {
   font-size: 1.5rem;
   line-height: 2rem;
   @include media(small-down) {
-    font-size:1.25rem;
+    font-size: 1.25rem;
     line-height: 1.75rem;
   }
 }
 
 .heading--xsmall, 
 .heading--xxsmall {
-  @include heading(0.875rem, xlarge-up);
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  @include media(small-down) {
+    font-size: 1.15rem;
+    line-height: 1.55rem;
+  }
 }
 
 .heading-alt {
