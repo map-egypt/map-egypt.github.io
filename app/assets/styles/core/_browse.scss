@@ -87,8 +87,12 @@
 
 .filters {
 	oveflow: hidden;
+  margin-bottom: $global-spacing;
 	@include media(small-down) {
 		padding-bottom: $global-spacing * 2;
+  }
+  .button--tag {
+    margin-bottom: $global-spacing/2;
   }
 }
 

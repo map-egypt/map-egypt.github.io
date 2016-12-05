@@ -22,8 +22,6 @@
   }
 }
 
-
-
 .drop__content {
   position: absolute;
   z-index: 1000;
@@ -57,7 +55,6 @@
   left: 0;
 }
 
-
 .share--box {
   .form__group {
     margin: ($global-spacing/2) 0;
@@ -73,6 +70,10 @@
   opacity: 1;
   visibility: visible;
   transition: none;
+}
+
+.react-autosuggest__suggestions-list {
+  margin-bottom: 0; 
 }
 
 .tether-element {

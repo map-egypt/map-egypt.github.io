@@ -11,6 +11,10 @@
   }
 }
 
+.leaflet-container a {
+  color: $base-color !important;
+}
+
 .leaflet-overlay-pane svg {
   pointer-events: all;
 }
