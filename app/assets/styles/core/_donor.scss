@@ -1,8 +1,6 @@
 .donor {
-	.inpage__col--map {
-    .map__container {
-    height: 400px;
-    }
+  .inpage__section--overview {
+    min-height: 25rem;
   }
   .inpage__header {
     padding-bottom: 2rem;
@@ -21,22 +19,16 @@
       }
     }
     .inpage__col--content {
-      @include media(small-down){
+      @include media(small-down) {
         @include col(12/12);
       }
       @include col(4/12);
       .inpage-stats li {
+        @include col(12/12);
         box-shadow: 0px 1px 0 0 #E9E9E9;
         padding: $global-spacing 0 $global-spacing/2 0;
         &:first-child {
           padding-top: 0;
-        }
-        @include media(small-down) {
-          padding: 0;
-          &:first-child {
-            box-shadow: 1px 0 0 #E9E9E9;
-            padding-right: $global-spacing;
-          }
         }
       }
     }

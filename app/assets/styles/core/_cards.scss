@@ -157,7 +157,7 @@
     padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
     display: inline-block;
     @include col(4/12, $offset: 0/12);
-    max-width: 20rem;
+    max-width: 22rem;
     min-width: 18rem;
     @include media(small-down) {
       @include col(5.5/12);
@@ -166,8 +166,8 @@
       @include col(12/12);
     }
     @include media(medium-up) {
-      max-width: 25rem;
-      @include col(4/12);
+      max-width: 22rem;
+      @include col(3.5/12, $offset:1/36);
     }
   }
 }

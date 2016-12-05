@@ -53,8 +53,8 @@ var VerticalBarChart = React.createClass({
     const dataValues = data.map(a => a.value);
 
     const ordinalScale = scaleBand()
-    .paddingInner(0.7)
-    .paddingOuter(0.1);
+    .paddingInner(0.8)
+    .paddingOuter(0.4);
 
     let xScale = ordinalScale.rangeRound([0, innerWidth]).domain(dataNames);
     let xLabels = dataNames;

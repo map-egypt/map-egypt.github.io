@@ -24,7 +24,7 @@ const SEQUENTIAL = [
 ];
 
 const OVERLAY_STYLE = {
-  weight: 2,
+  weight: 1,
   opacity: 1,
   color: 'white',
   fillOpacity: 0.5
@@ -68,7 +68,7 @@ const Map = React.createClass({
       });
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
-          `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link__deco'>${marker.name}</a></h5>` +
+          `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
           `<dl class='card-meta'>` +
                 `<dt class='card-meta__label'>Status</dt>` +
                 `<dd class='card-meta__value card-meta__value--status'>Delayed</dd>` +

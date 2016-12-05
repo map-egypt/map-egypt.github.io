@@ -271,6 +271,7 @@ var Project = React.createClass({
                 <table className='inpage__table'>
                   <thead>
                     <tr>
+                      <th className='row-status'>Status</th>
                       <th className='row-name'>Component</th>
                       <th className='row-kpi'>KPI</th>
                       <th className='row-target'>Target</th>
@@ -284,8 +285,9 @@ var Project = React.createClass({
                       return (
                         <tr key={d.kpi}>
                           <td className={'project--' + status}>
-                            <p className='card-meta__value--status activity-name'>{d.component}</p>
+                            <p className='card-meta__value--status activity-name'>{ontime ? 'On time' : 'Delayed'}</p>
                           </td>
+                          <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>
                           <td>{d.target}</td>
                           <td>{d.current}</td>
@@ -299,7 +301,7 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
-              <div className='chart-content chart__block'>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Funding</h3>
                 <HorizontalBarChart
                   data={budgets}
@@ -309,7 +311,7 @@ var Project = React.createClass({
                   yFormat={shortText}
                 />
               </div>
-              <div className='chart-content chart__block'>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
@@ -320,7 +322,7 @@ var Project = React.createClass({
                 />
               </div>
               {authenticated ? (
-                <div className='chart-content chart__block'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Reach</h3>
                   <HorizontalBarChart
                     data={served}

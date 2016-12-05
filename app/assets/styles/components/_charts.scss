@@ -99,9 +99,6 @@ $timeline-inner: $base-color;
   @include media(medium-up) {
     margin-bottom: 0;
   }
-  &:last-child{
-    margin-top: 0.5rem;
-  }
   .heading-alt {
     font-size: 0.75rem;
   }
@@ -155,15 +152,10 @@ $timeline-inner: $base-color;
 }
 
 .chart__axis--line {
-  stroke: #AAA;
+  stroke: $tertiary-color;
   stroke-width: 1px;
 }
 
 .chart__inline {
   .axis__left .chart__axis-ticks { display: none; }
-}
-
-.chart__block {
-  width: 100%;
-  margin-right: 0;
 }

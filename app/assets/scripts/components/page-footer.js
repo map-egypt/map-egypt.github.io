@@ -31,7 +31,7 @@ var PageFooter = React.createClass({
             </div>
           </div>
           <div className='contact'>
-            <p className='contact__item'><a title='Contact Us' href=''>Contact Us</a></p>
+            <p className='contact__item'><a title='contact us' href='' className='link--primary'><span>Contact Us</span></a> with questions or comments.</p>
           </div>
         </div>
       </footer>
