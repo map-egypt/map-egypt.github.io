@@ -264,9 +264,9 @@ var ProjectBrowse = React.createClass({
     });
   },
 
-  closeModal: function () { 
+  closeModal: function () {
     this.setState({ modal: false, activeModal: null });
- },
+  },
 
   selectListView: function () { this.setState({ listView: true }); },
   selectMapView: function () { this.setState({ listView: false }); },
