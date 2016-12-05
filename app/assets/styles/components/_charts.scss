@@ -152,7 +152,7 @@ $timeline-inner: $base-color;
 }
 
 .chart__axis--line {
-  stroke: #AAA;
+  stroke: $tertiary-color;
   stroke-width: 1px;
 }
 
