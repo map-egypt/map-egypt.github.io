@@ -299,7 +299,7 @@ var Project = React.createClass({
             </section>
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
-              <div className='chart-content chart__block'>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Funding</h3>
                 <HorizontalBarChart
                   data={budgets}
@@ -309,7 +309,7 @@ var Project = React.createClass({
                   yFormat={shortText}
                 />
               </div>
-              <div className='chart-content chart__block'>
+              <div className='chart-content chart__inline--labels'>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
                   data={completion}
@@ -320,7 +320,7 @@ var Project = React.createClass({
                 />
               </div>
               {authenticated ? (
-                <div className='chart-content chart__block'>
+                <div className='chart-content chart__inline--labels'>
                   <h3>Reach</h3>
                   <HorizontalBarChart
                     data={served}
