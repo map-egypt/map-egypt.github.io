@@ -120,6 +120,10 @@ var ProjectBrowse = React.createClass({
         this.props.dispatch(getIndicator(meta.id));
       }
     }
+    const modal = nextState.modal;
+    if (modal !== this.state.modal) {
+      document.documentElement.classList.toggle('disable--page-scroll');
+    }
   },
 
   zoomToGovernorate: function (event, value) {
@@ -258,7 +262,9 @@ var ProjectBrowse = React.createClass({
     });
   },
 
-  closeModal: function () { this.setState({ modal: false, activeModal: null }); },
+  closeModal: function () { this.setState({ modal: false, activeModal: null }); 
+  document.documentElement.classList.remove('disable--page-scroll');
+ },
 
   selectListView: function () { this.setState({ listView: true }); },
   selectMapView: function () { this.setState({ listView: false }); },
