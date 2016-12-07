@@ -58,7 +58,7 @@
 
 .modal__indicators {
   padding: $global-spacing * 2;
-  p {
+  .modal__instructions {
     @include col(12/12);
   }
   .indicators__container {
@@ -81,8 +81,8 @@
       list-style: none;
       padding: 5%;
       border: solid 1px $tertiary-color;
-      border-top: 0;
-      border-left: 0;
+      border-top-width: 0;
+      border-left-width: 0;
       color: $base-color;
       &:last-child {
         border-bottom: 0

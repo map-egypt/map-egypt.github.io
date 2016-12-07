@@ -291,7 +291,7 @@ var ProjectBrowse = React.createClass({
         <div className='modal__inner modal__indicators'>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
           <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
-          <p>Add and compare development indicators listed below.</p>
+          <div className='modal__instructions'><p>Add and compare development indicators listed below.</p></div>
 
           <div className='indicators--selected'>
             <span className='heading--label'>Selected Indicators:&nbsp;</span>
@@ -529,8 +529,9 @@ var ProjectBrowse = React.createClass({
                       key={indicator}
                       onClick={() => true}
                       className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
-                      <a onClick={() => this.setActiveIndicator(indicator)}>{indicator}</a>
-                      <span className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}> X </span>
+                      <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator)}><span>toggle visibility</span></button>
+                      <span className='indicator-layer-name'>{indicator}</span>
+                      <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
                     </li>
                   ))}
                 </ul>

@@ -360,8 +360,17 @@
   .modal__indicators .indicators {
     float: right;
     li {
-      border-right: 0px;
-      border-left: 1px;
+      border-right-width: 0px;
+      border-left-width: 1px;
+      text-align: right;
+    }
+  }
+  .modal__instructions p{
+    float: right;
+  }
+  .indicators--selected {
+    .button--tag {
+      float: right;
     }
   }
   .share--box {
@@ -393,6 +402,7 @@
   }
   .heading--label {
     margin-left: $global-spacing/2;
+    float: right;
   }
 
   .button--download:after {
