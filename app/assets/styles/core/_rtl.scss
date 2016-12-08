@@ -27,8 +27,16 @@
       li {
         @include media(small-down){
           float: right;
+          &:last-child {
+            margin-right: $global-spacing/2;
+          };
         }
       }
+    }
+
+    &__title {
+      float: right;
+      margin-right: 0;
     }
 
     &-meta__value {
@@ -48,13 +56,15 @@
     &-stats li {
       float: right;
       box-shadow: -1px 0 0 #E9E9E9;
-      padding-left: 2rem;
-      margin-left: 2rem;
       margin-right: 0;
+      padding-left: 1rem;
+      margin-left: 1rem;
       padding-right: 0;
+      &:last-child {
+        box-shadow: none;
+      };
       @include media(medium-up) {
         padding-left: 4rem;
-        margin-left: 4rem;
         padding-right: 0;
         margin-right: 0;
       }
@@ -82,10 +92,23 @@
     &__col--content {
       float: right;
     }
+    &__body--alt p {
+      float: right;
+      margin-right: 0;
+    }
+    &__header-data{
+      .inpage-stats li {
+        padding-left: 2rem;
+        &:last-child {
+          padding-right: 2rem;
+        };
+      }
+    }
   }
   
   .inpage__table td:nth-of-type(n):before {
     right: 0;
+    text-align: right;
   }
   
   .inpage__section--overview {
@@ -93,17 +116,24 @@
       @include media(medium-up){
         float: right;
       }
+      @include media(small-down) {
+        padding: 2rem;
+      }
     }
   
     .inpage__col--map {
       @include media(medium-up){
         float: left;
+        margin-right: 0;
       }
     }
   
   }
   
   .heading--deco::after {
+    right: 0;
+  }
+  .heading--deco-small::after {
     right: 0;
   }
   
@@ -125,6 +155,7 @@
     .updates {
       @include media(medium-up) {
         float: right;
+        margin-right: 0;
       }
   
     .form__input-group {
@@ -151,6 +182,9 @@
         float: left;
       }
     }
+    .logos__list li  {
+      float: left;
+    }
   }
   
   /*CARDS*/
@@ -159,6 +193,11 @@
     p {
       float: right;
     }
+  }
+
+  .projects-list__card {
+    padding-right: 0;
+    padding-left: $global-spacing;
   }
   
   .card-meta__value--status {
@@ -187,11 +226,14 @@
   
   .card-stats li {
     float: right;
-    box-shadow: -1px 0 0 #9B9B9B;
+    box-shadow: -1px 0 0 $tertiary-color;
     padding-left: 1rem;
     margin-left: 1rem;
     padding-right: 0rem; 
     margin-right: 0rem; 
+    &:last-child {
+      box-shadow: none;
+    };
   }
   
   .inpage__section--related .related-projects-card {
@@ -229,13 +271,21 @@
   .actions-filters {
     float: right;
     margin-right: 0;
+    .button--list > li:first-child {
+      margin-right: 0;
+    }
   }
   
   .filters {
     float: right;
   }
   
+  .react-autosuggest__input {
+    padding-right: 7rem;
+  }
+
   .button--list li{ 
+    float: right;
     &:first-child {
       margin-left: $global-spacing;
       margin-right: 0;
@@ -270,5 +320,106 @@
       @extend %collecticon-xmark;
       margin-right: $global-spacing/2;
     }
+  }
+
+  /*general styles */
+  .drop__toggle--caret:after {
+    padding-right: $global-spacing/4;
+  }
+  .drop--align-right {
+    @include media(medium-up) {
+      right: auto; 
+      left: 0;
+    }
+  }
+  .modal__button-dismiss {
+    right: auto;
+    left: 1rem;
+    top: 1rem;
+  }
+  .modal {
+    .inpage__title {
+      width: auto;
+    }
+  }
+  .modal__filters .form__fieldset {
+    float: right;
+    padding-top: 2rem;
+    margin-right: 0;
+    margin-left: $global-spacing * 2;
+  }
+  .modal__filters--defaults {
+    .form__option--custom-checkbox {
+      float: right;
+    }
+    a {
+      float: right;
+    }
+
+  }
+  .modal__indicators .indicators {
+    float: right;
+    li {
+      border-right-width: 0px;
+      border-left-width: 1px;
+      text-align: right;
+    }
+  }
+  .modal__instructions p{
+    float: right;
+  }
+  .indicators--selected {
+    .button--tag {
+      float: right;
+    }
+  }
+  .share--box {
+    .form__label {
+      position: relative;
+    }
+  }
+  .form__label {
+    float: right;
+    position: absolute;
+    right: 0;
+    top: 0rem;
+  }
+  .form__option__ui {
+    right: 0;
+    left: auto;
+  }
+  .form__option__text {
+    padding-right: 1.5rem;
+  }
+  .form__input-group {
+    float: right;
+  }
+  .form__input-group-button:last-child > .button {
+    border-top-left-radius: $global-spacing/4;
+    border-bottom-left-radius: $global-spacing/4;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .heading--label {
+    margin-left: $global-spacing/2;
+    float: right;
+  }
+
+  .button--download:after {
+    margin-right: 0.5rem;
+    margin-left: 0;
+  }
+  /*project page */
+  .tags {
+    float: right;
+  }
+  .tags-group {
+    float: right;
+  }
+  .tags__label {
+    float: right;
+  }
+  .chart__axis-ticks {
+    direction: ltr;
   }
 }
