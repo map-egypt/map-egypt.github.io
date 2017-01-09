@@ -358,8 +358,14 @@ var ProjectBrowse = React.createClass({
           <div className='modal__filters'>
             <div className='modal__filters--defaults'>
               <label className='form__option form__option--custom-checkbox'>
-                <input type='checkbox' name='form-checkbox' id='form-checkbox-1' value='Checkbox 1' />
-                <span className='form__option__text'>Add All Projects</span>
+                <input
+                  checked={!selectedProjectFilters.length}
+                  type='checkbox'
+                  name='form-checkbox'
+                  id='form-checkbox-1'
+                  onChange={this.clearProjectFilters}
+                  value='All projects' />
+                <span className='form__option__text'>All Projects</span>
                 <span className='form__option__ui'></span>
               </label>
               <a onClick={this.resetProjectFilters} className='link--secondary'>reset filters</a>
