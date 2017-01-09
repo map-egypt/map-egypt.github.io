@@ -8,7 +8,8 @@ import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText } from '../utils/format';
-import { byId } from '../utils/governorates';
+import { byId as districtNames } from '../utils/districts';
+import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
 
 import Map from '../components/map';
@@ -112,6 +113,9 @@ var Project = React.createClass({
       value: d.value
     }));
 
+    // const locationLang = this.props.lang === 'en' ? 'name' : 'nameAr';
+    const locationLang = 'name';
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -177,12 +181,15 @@ var Project = React.createClass({
                   <h1 className='overview-item__title heading-alt'>Location</h1>
                   <ul className='link-list'>
                     {get(data, 'location', []).map((loc, i) => {
+                      console.log(loc.district.district);
+                      console.log(districtNames(loc.district.district));
                       const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
-                        ? loc.district.district : loc.district.governorate;
-                      const display = byId(id);
+                        ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
+                      const display = id[locationLang];
+                      console.log(display);
                       return (
-                        <li key={id}>
-                          <span>{display ? display.name : '--'}</span>
+                        <li key={loc.id}>
+                          <span>{display || '--'}</span>
                         </li>
                       );
                     })}
