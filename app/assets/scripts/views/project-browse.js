@@ -119,7 +119,7 @@ var ProjectBrowse = React.createClass({
       this.setState({
         modal: true,
         activeModal: INDICATORS,
-        activeIndicatorType,
+        activeIndicatorType
       });
     }
   },
