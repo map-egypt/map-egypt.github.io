@@ -51,6 +51,7 @@ var HorizontalBarChart = React.createClass({
 
     const dataNames = data.map(a => a.name);
     const dataValues = data.map(a => a.value);
+    const links = data.map(a => a.link).filter(Boolean);
 
     const ordinalScale = scaleBand()
     .paddingInner(0.8)
@@ -82,6 +83,7 @@ var HorizontalBarChart = React.createClass({
             width={width}
             margin={margin}
             format={this.props.yFormat}
+            links={links}
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d, i) => {
