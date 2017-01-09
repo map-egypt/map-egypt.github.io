@@ -279,9 +279,9 @@ var Project = React.createClass({
               </div>
 
             </section>
-            <section className='inpage__section inpage__section--indicators'>
-              <h1 className='section__title heading--small'>Monitoring Indicators</h1>
-              {Array.isArray(data.kmi) && (
+            {Array.isArray(data.kmi) && data.kmi.length && (
+              <section className='inpage__section inpage__section--indicators'>
+                <h1 className='section__title heading--small'>Monitoring Indicators</h1>
                 <table className='inpage__table'>
                   <thead>
                     <tr>
@@ -307,12 +307,12 @@ var Project = React.createClass({
                           <td>{d.current}</td>
                           <td>{formatSimpleDate(parseProjectDate(d.date))}</td>
                         </tr>
-                      );
+                        );
                     })}
                   </tbody>
                 </table>
-              )}
-            </section>
+              </section>
+            )}
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
               <div className='chart-content chart__inline--labels'>
