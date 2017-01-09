@@ -190,26 +190,32 @@ var Project = React.createClass({
                   </ul>
                 </div>
 
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Project Link</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Source</span></a></li>
-                  </ul>
-                </div>
+                {data.project_link && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Project Link</h2>
+                    <ul className='link-list'>
+                      <li><a href={data.project_link} className='link--primary'><span>Link</span></a></li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
-                  </ul>
-                </div>
+                {data.responsible_ministry && data.responsible_ministry.toLowerCase() !== 'select a ministry' && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Responsible Ministry</h2>
+                    <ul className='link-list'>
+                      <li><a href='' className='link--primary'><span>{data.responsible_ministry}</span></a></li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>{data.responsible_ministry}</span></a></li>
-                  </ul>
-                </div>
+                {data.responsible_party && data.responsible_party.toLowerCase() !== 'select a party' && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
+                    <ul className='link-list'>
+                      <li><a href='' className='link--primary'><span>{data.responsible_party}</span></a></li>
+                    </ul>
+                  </div>
+                )}
 
                 <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>KMI Components</h2>
