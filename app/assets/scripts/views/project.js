@@ -220,7 +220,7 @@ var Project = React.createClass({
                 <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>KMI Components</h2>
                   <ul className='link-list'>
-                    {uniq(get(data, 'kmi', []).map((kmi) => kmi.component)).map(component => {
+                    {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
                       return (
                         <li key={component}>
                           <span>{component}</span>
