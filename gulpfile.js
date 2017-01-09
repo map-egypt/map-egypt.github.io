@@ -58,7 +58,7 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('serve', ['vendorScripts', 'javascript', 'styles'], function () {
+gulp.task('serve', ['vendorScripts', 'javascript', 'styles', 'yaml'], function () {
   browserSync({
     port: 3000,
     server: {
@@ -257,7 +257,8 @@ gulp.task('yaml', function () {
   .pipe(jsoncombine('translations.js', function (data, meta) {
     return Buffer.from('window.t = ' + JSON.stringify(data) + ';')
   }))
-  .pipe(gulp.dest('dist/assets/scripts'))
+  .pipe(gulp.dest('.tmp/assets/scripts'))
+  .pipe(reload({stream: true}));
 })
 
 gulp.task('extras', function () {
