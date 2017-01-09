@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
-import { tally, shortTally, pct } from '../utils/format';
+import { tally, shortTally, pct, shortParagraph } from '../utils/format';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -84,7 +84,7 @@ var ProjectCard = React.createClass({
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{project.location.map((loc) => loc.district.governorate).join(', ')}</dd>
               </dl>
-              <p>{project.description}</p>
+              <p>{shortParagraph(project.description)}</p>
               <div className='card__categories'>
                 {project.categories.map((c) => {
                   return (

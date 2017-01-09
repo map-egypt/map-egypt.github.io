@@ -309,8 +309,8 @@ var Project = React.createClass({
                           </td>
                           <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>
-                          <td>{d.target}</td>
-                          <td>{d.current}</td>
+                          <td>{tally(d.target)}</td>
+                          <td>{tally(d.current)}</td>
                           <td>{formatSimpleDate(parseProjectDate(d.date))}</td>
                         </tr>
                         );
