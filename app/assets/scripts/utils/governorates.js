@@ -41,4 +41,9 @@ module.exports.byEgy = function (egy) {
   return result;
 };
 
+module.exports.byName = function (name) {
+  const result = governorates.find((d) => d.name === name);
+  return result;
+};
+
 module.exports.governorates = governorates;
