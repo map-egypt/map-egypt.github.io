@@ -4,12 +4,14 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import {shortText, tally} from '../utils/format';
 import { get } from 'object-path';
+import path from 'path';
+import { window } from 'global';
 import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import { isOntime } from '../components/project-card';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
-import { window } from 'global';
+import slugify from '../utils/slugify';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -42,8 +44,10 @@ var Home = React.createClass({
 
     const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
 
+    const basepath = '/' + this.props.meta.lang;
     const bars = Object.keys(categories).map((category) => ({
       name: category,
+      link: path.resolve(basepath, 'category', slugify(category)),
       value: categories[category]
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
@@ -65,7 +69,7 @@ var Home = React.createClass({
             <h1 className='inpage__title heading--deco heading--xxlarge'>{t.title}</h1>
             <div className='inpage__introduction'>
               <p className='inpage__description'>{t.description}</p>
-              <Link to={'/' + this.props.meta.lang + '/about'} type='button' className='button button--primary button--large'>{t.more}</Link>
+              <Link to={basepath + '/about'} type='button' className='button button--primary button--large'>{t.more}</Link>
             </div>
           </div>
         </header>
@@ -128,7 +132,7 @@ var Home = React.createClass({
                 </div>
               </div>
               <div className='section__footer'>
-                <Link to={'/' + this.props.meta.lang + '/projects'} type='button' className='button button--primary button--large'>View All Projects</Link>
+                <Link to={basepath + '/projects'} type='button' className='button button--primary button--large'>View All Projects</Link>
               </div>
             </section>
           </div>

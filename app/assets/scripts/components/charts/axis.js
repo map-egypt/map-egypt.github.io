@@ -52,7 +52,7 @@ const Axis = React.createClass({
             >
             {format(label)}
           </text>);
-          return hasLinks ? <Link to={this.props.links[i]} key={label}>{text}</Link> : text
+          return hasLinks ? <Link to={this.props.links[i]} key={label}>{text}</Link> : text;
         })}
         <line
           className='chart__axis--line'
