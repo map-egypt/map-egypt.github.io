@@ -6,6 +6,7 @@ import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
 import { tally, shortTally, pct } from '../utils/format';
+import { byId as governorateDetails } from '../utils/governorates';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -74,7 +75,7 @@ var ProjectCard = React.createClass({
                 <dt className='card-meta__label'>Status</dt>
                 <dd className='card-meta__value card-meta__value--status'>{ontime ? 'On Time' : 'Delayed'}</dd>
                 <dt className='card-meta__label'>Location</dt>
-                <dd className='card-meta__value card-meta__value--location'>{project.location.map((loc) => loc.district.governorate).join(', ')}</dd>
+                <dd className='card-meta__value card-meta__value--location'>{project.location.map((loc) => governorateDetails(loc.district.governorate).name).join(', ')}</dd>
               </dl>
               <p>{project.description}</p>
               <div className='card__categories'>
