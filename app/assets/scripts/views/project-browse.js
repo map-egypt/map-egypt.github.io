@@ -109,7 +109,19 @@ var ProjectBrowse = React.createClass({
     api: React.PropTypes.object,
     meta: React.PropTypes.object,
     location: React.PropTypes.object,
-    dispatch: React.PropTypes.func
+    dispatch: React.PropTypes.func,
+    route: React.PropTypes.object
+  },
+
+  componentWillMount: function () {
+    const activeIndicatorType = get(this.props, 'route.modal');
+    if (activeIndicatorType) {
+      this.setState({
+        modal: true,
+        activeModal: INDICATORS,
+        activeIndicatorType,
+      });
+    }
   },
 
   componentWillUpdate: function (nextProps, nextState) {
