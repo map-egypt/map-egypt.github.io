@@ -141,7 +141,8 @@ const Map = React.createClass({
   mountMap: function (el) {
     if (el) {
       this.map = L.mapbox.map(el, null, {
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        maxZoom: 11
       });
       L.tileLayer(tileLayer).addTo(this.map);
 
