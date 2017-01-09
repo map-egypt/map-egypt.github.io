@@ -9,6 +9,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import { isOntime } from '../components/project-card';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
+import { window } from 'global';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
 
@@ -54,16 +55,17 @@ var Home = React.createClass({
       value: status.delayed
     }];
 
+    const t = get(window.t, [this.props.meta.lang, 'homepage'], {});
     return (
       <div>
       <section className='inpage home'>
         <header className='inpage__header'>
           <div className='inner'>
-            <p className='inpage__subtitle--alt'>tracking egypt</p>
-            <h1 className='inpage__title heading--deco heading--xxlarge'>Agricultural Progress and Impact</h1>
+            <p className='inpage__subtitle--alt'>{t.subhead}</p>
+            <h1 className='inpage__title heading--deco heading--xxlarge'>{t.title}</h1>
             <div className='inpage__introduction'>
-              <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
-              <Link to={'/' + this.props.meta.lang + '/about'} type='button' className='button button--primary button--large'>Learn More</Link>
+              <p className='inpage__description'>{t.description}</p>
+              <Link to={'/' + this.props.meta.lang + '/about'} type='button' className='button button--primary button--large'>{t.more}</Link>
             </div>
           </div>
         </header>
@@ -134,8 +136,8 @@ var Home = React.createClass({
             <h2 className='section__title'>Other Progress Indicators</h2>
             <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
             <ul className='section__footer'>
-              <li><button type='button' className='button button--primary button--large'>SDS Indicators</button></li>
-              <li><button type='button' className='button button--primary button--large'>SDG Indicators</button></li>
+              <li><Link to={'/' + this.props.meta.lang + '/projects_sds'} type='button' className='button button--primary button--large'>SDS Indicators</Link></li>
+              <li><Link to={'/' + this.props.meta.lang + '/projects_sdg'} type='button' className='button button--primary button--large'>SDG Indicators</Link></li>
             </ul>
           </section>
         </div>

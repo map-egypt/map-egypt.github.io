@@ -18,6 +18,8 @@ var revReplace = require('gulp-rev-replace');
 var SassString = require('node-sass').types.String;
 var cp = require('child_process');
 var notifier = require('node-notifier');
+var yaml = require('gulp-yaml');
+var jsoncombine = require('gulp-jsoncombine');
 
 // /////////////////////////////////////////////////////////////////////////////
 // --------------------------- Variables -------------------------------------//
@@ -56,7 +58,7 @@ gulp.task('default', ['clean'], function () {
   gulp.start('build');
 });
 
-gulp.task('serve', ['vendorScripts', 'javascript', 'styles'], function () {
+gulp.task('serve', ['vendorScripts', 'javascript', 'styles', 'yaml'], function () {
   browserSync({
     port: 3000,
     server: {
@@ -76,6 +78,7 @@ gulp.task('serve', ['vendorScripts', 'javascript', 'styles'], function () {
   gulp.watch('app/assets/styles/**/*.scss', ['styles']);
   gulp.watch('package.json', ['vendorScripts']);
   gulp.watch('app/assets/graphics/collecticons/**', ['collecticons']);
+  gulp.watch('app/assets/translations/**', ['yaml']);
 });
 
 gulp.task('clean', function () {
@@ -185,7 +188,7 @@ gulp.task('collecticons', function (done) {
 // ----------------------------------------------------------------------------//
 
 gulp.task('build', ['vendorScripts', 'javascript', 'collecticons'], function () {
-  gulp.start(['html', 'images', 'extras'], function () {
+  gulp.start(['html', 'images', 'extras', 'yaml'], function () {
     return gulp.src('dist/**/*')
       .pipe($.size({title: 'build', gzip: true}))
       .pipe(exit());
@@ -246,6 +249,17 @@ gulp.task('images', function () {
     ])))
     .pipe(gulp.dest('dist/assets/graphics'));
 });
+
+gulp.task('yaml', function () {
+  // translate yaml to single json file
+  return gulp.src('app/assets/translations/*.yml')
+  .pipe(yaml())
+  .pipe(jsoncombine('translations.js', function (data, meta) {
+    return Buffer.from('window.t = ' + JSON.stringify(data) + ';')
+  }))
+  .pipe(gulp.dest('.tmp/assets/scripts'))
+  .pipe(reload({stream: true}));
+})
 
 gulp.task('extras', function () {
   return gulp.src([

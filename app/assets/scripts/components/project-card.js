@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
-import { tally, shortTally, pct } from '../utils/format';
+import { tally, shortTally, pct, shortParagraph } from '../utils/format';
 import { byId as governorateNames } from '../utils/governorates';
 
 function categoryLink (base, categoryName) {
@@ -15,6 +15,14 @@ function categoryLink (base, categoryName) {
 function isOntime (project) {
   let planned = parseProjectDate(project.planned_end_date);
   let actual = parseProjectDate(project.actual_end_date);
+
+  // if there's no actual date, and the planned date is still in the future,
+  // check if there are start dates to use instead.
+  if (!actual && planned && planned > new Date().getTime()) {
+    planned = parseProjectDate(project.planned_start_date);
+    actual = parseProjectDate(project.actual_start_date);
+  }
+
   if (!actual || !planned) {
     return null;
   } else if (actual > planned) {
@@ -78,7 +86,7 @@ var ProjectCard = React.createClass({
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{project.location.map((loc) => governorateNames(loc.district.governorate)[locationLang]).join(', ')}</dd>
               </dl>
-              <p>{project.description}</p>
+              <p>{shortParagraph(project.description)}</p>
               <div className='card__categories'>
                 {project.categories.map((c) => {
                   return (

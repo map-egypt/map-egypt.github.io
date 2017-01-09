@@ -27,3 +27,15 @@ function shortText (s, length) {
   return s.slice(0, length) + '...';
 }
 module.exports.shortText = shortText;
+
+function shortParagraph (s, wordCountTarget) {
+  wordCountTarget = wordCountTarget || 25;
+  let result = s.split(' ');
+  let suffix = '';
+  if (result.length > wordCountTarget) {
+    result = result.slice(0, wordCountTarget);
+    suffix = '...';
+  }
+  return result.join(' ') + suffix;
+}
+module.exports.shortParagraph = shortParagraph;
