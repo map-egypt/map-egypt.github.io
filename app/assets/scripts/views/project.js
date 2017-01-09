@@ -4,6 +4,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
@@ -211,9 +212,22 @@ var Project = React.createClass({
                 </div>
 
                 <div className='overview-item--alt'>
+                  <h2 className='overview-item__title heading-alt'>KMI Components</h2>
+                  <ul className='link-list'>
+                    {uniq(get(data, 'kmi', []).map((kmi) => kmi.component)).map(component => {
+                      return (
+                        <li key={component}>
+                          <span>{component}</span>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </div>
+
+                <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
                   <ul className='link-list'>
-                    {get(data, 'sdg_indicator', []).map((indicator, i) => {
+                    {get(data, 'sdg_indicator', []).map((indicator) => {
                       return (
                         <li key={indicator}>
                           <span>{indicator}</span>
@@ -226,7 +240,7 @@ var Project = React.createClass({
                 <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDS Indicator</h2>
                   <ul className='link-list'>
-                    {get(data, 'sds_indicator', []).map((indicator, i) => {
+                    {get(data, 'sds_indicator', []).map((indicator) => {
                       return (
                         <li key={indicator}>
                           <span>{indicator}</span>
