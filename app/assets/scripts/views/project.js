@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { get } from 'object-path';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
-import { formatDate, parseProjectDate } from '../utils/date';
+import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText } from '../utils/format';
 import { byId } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
@@ -291,7 +291,7 @@ var Project = React.createClass({
                           <td>{d.kpi}</td>
                           <td>{d.target}</td>
                           <td>{d.current}</td>
-                          <td>{formatDate(parseProjectDate(d.date))}</td>
+                          <td>{formatSimpleDate(parseProjectDate(d.date))}</td>
                         </tr>
                       );
                     })}
