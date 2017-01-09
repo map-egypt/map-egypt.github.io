@@ -33,7 +33,8 @@ var Project = React.createClass({
     dispatch: React.PropTypes.func,
     location: React.PropTypes.object,
     api: React.PropTypes.object,
-    meta: React.PropTypes.object
+    meta: React.PropTypes.object,
+    lang: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -113,8 +114,7 @@ var Project = React.createClass({
       value: d.value
     }));
 
-    // const locationLang = this.props.lang === 'en' ? 'name' : 'nameAr';
-    const locationLang = 'name';
+    const locationLang = this.props.meta.lang === 'en' ? 'name' : 'nameAr';
 
     return (
       <section className='inpage'>
@@ -181,17 +181,16 @@ var Project = React.createClass({
                   <h1 className='overview-item__title heading-alt'>Location</h1>
                   <ul className='link-list'>
                     {get(data, 'location', []).map((loc, i) => {
-                      console.log(loc.district.district);
-                      console.log(districtNames(loc.district.district));
                       const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
                         ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
-                      const display = id[locationLang];
-                      console.log(display);
-                      return (
-                        <li key={loc.id}>
-                          <span>{display || '--'}</span>
-                        </li>
-                      );
+                      if (id) {
+                        const display = id[locationLang];
+                        return (
+                          <li key={id.id}>
+                            <span>{display || '--'}</span>
+                          </li>
+                        );
+                      }
                     })}
                   </ul>
                 </div>
