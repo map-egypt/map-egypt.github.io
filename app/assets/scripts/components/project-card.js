@@ -14,6 +14,14 @@ function categoryLink (base, categoryName) {
 function isOntime (project) {
   let planned = parseProjectDate(project.planned_end_date);
   let actual = parseProjectDate(project.actual_end_date);
+
+  // if there's no actual date, and the planned date is still in the future,
+  // check if there are start dates to use instead.
+  if (!actual && planned && planned > new Date().getTime()) {
+    planned = parseProjectDate(project.planned_start_date);
+    actual = parseProjectDate(project.actual_start_date);
+  }
+
   if (!actual || !planned) {
     return null;
   } else if (actual > planned) {
