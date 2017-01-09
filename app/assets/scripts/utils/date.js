@@ -19,3 +19,12 @@ module.exports.formatDate = function (date) {
   const d = new Date(date);
   return d.toLocaleDateString();
 };
+
+// returns MONTH/YEAR
+module.exports.formatSimpleDate = function (date) {
+  if (!date) {
+    return false;
+  }
+  const d = new Date(date);
+  return (d.getMonth() + 1) + '/' + d.getFullYear();
+};

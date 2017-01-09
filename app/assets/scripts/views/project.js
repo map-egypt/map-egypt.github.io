@@ -4,9 +4,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
-import { formatDate, parseProjectDate } from '../utils/date';
+import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText } from '../utils/format';
 import { byId } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
@@ -189,31 +190,50 @@ var Project = React.createClass({
                   </ul>
                 </div>
 
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Project Link</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Source</span></a></li>
-                  </ul>
-                </div>
+                {data.project_link && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Project Link</h2>
+                    <ul className='link-list'>
+                      <li><a href={data.project_link} className='link--primary'><span>Link</span></a></li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
-                  </ul>
-                </div>
+                {data.responsible_ministry && data.responsible_ministry.toLowerCase() !== 'select a ministry' && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Responsible Ministry</h2>
+                    <ul className='link-list'>
+                      <li><a href='' className='link--primary'><span>{data.responsible_ministry}</span></a></li>
+                    </ul>
+                  </div>
+                )}
 
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
+                {data.local_manager && data.local_manager.toLowerCase() !== 'select a party' && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Local Manager</h2>
+                    <ul className='link-list'>
+                      <li><a href='' className='link--primary'><span>{data.local_manager}</span></a></li>
+                    </ul>
+                  </div>
+                )}
+
+                <div className='overview-item--alt'>
+                  <h2 className='overview-item__title heading-alt'>KMI Components</h2>
                   <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>{data.responsible_ministry}</span></a></li>
+                    {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
+                      return (
+                        <li key={component}>
+                          <span>{component}</span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
 
                 <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
                   <ul className='link-list'>
-                    {get(data, 'sdg_indicator', []).map((indicator, i) => {
+                    {get(data, 'sdg_indicator', []).map((indicator) => {
                       return (
                         <li key={indicator}>
                           <span>{indicator}</span>
@@ -226,7 +246,7 @@ var Project = React.createClass({
                 <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDS Indicator</h2>
                   <ul className='link-list'>
-                    {get(data, 'sds_indicator', []).map((indicator, i) => {
+                    {get(data, 'sds_indicator', []).map((indicator) => {
                       return (
                         <li key={indicator}>
                           <span>{indicator}</span>
@@ -265,9 +285,9 @@ var Project = React.createClass({
               </div>
 
             </section>
-            <section className='inpage__section inpage__section--indicators'>
-              <h1 className='section__title heading--small'>Monitoring Indicators</h1>
-              {Array.isArray(data.kmi) && (
+            {Array.isArray(data.kmi) && data.kmi.length && (
+              <section className='inpage__section inpage__section--indicators'>
+                <h1 className='section__title heading--small'>Monitoring Indicators</h1>
                 <table className='inpage__table'>
                   <thead>
                     <tr>
@@ -289,16 +309,16 @@ var Project = React.createClass({
                           </td>
                           <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>
-                          <td>{d.target}</td>
-                          <td>{d.current}</td>
-                          <td>{formatDate(parseProjectDate(d.date))}</td>
+                          <td>{tally(d.target)}</td>
+                          <td>{tally(d.current)}</td>
+                          <td>{formatSimpleDate(parseProjectDate(d.date))}</td>
                         </tr>
-                      );
+                        );
                     })}
                   </tbody>
                 </table>
-              )}
-            </section>
+              </section>
+            )}
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
               <div className='chart-content chart__inline--labels'>

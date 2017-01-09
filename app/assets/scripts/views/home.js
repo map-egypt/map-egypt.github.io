@@ -136,8 +136,8 @@ var Home = React.createClass({
             <h2 className='section__title'>Other Progress Indicators</h2>
             <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
             <ul className='section__footer'>
-              <li><button type='button' className='button button--primary button--large'>SDS Indicators</button></li>
-              <li><button type='button' className='button button--primary button--large'>SDG Indicators</button></li>
+              <li><Link to={'/' + this.props.meta.lang + '/projects_sds'} type='button' className='button button--primary button--large'>SDS Indicators</Link></li>
+              <li><Link to={'/' + this.props.meta.lang + '/projects_sdg'} type='button' className='button button--primary button--large'>SDG Indicators</Link></li>
             </ul>
           </section>
         </div>
