@@ -208,11 +208,11 @@ var Project = React.createClass({
                   </div>
                 )}
 
-                {data.responsible_party && data.responsible_party.toLowerCase() !== 'select a party' && (
+                {data.local_manager && data.local_manager.toLowerCase() !== 'select a party' && (
                   <div className='overview-item'>
-                    <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
+                    <h2 className='overview-item__title heading-alt'>Local Manager</h2>
                     <ul className='link-list'>
-                      <li><a href='' className='link--primary'><span>{data.responsible_party}</span></a></li>
+                      <li><a href='' className='link--primary'><span>{data.local_manager}</span></a></li>
                     </ul>
                   </div>
                 )}
