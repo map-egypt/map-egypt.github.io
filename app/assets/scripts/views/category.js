@@ -26,30 +26,28 @@ var Category = React.createClass({
     if (projects.length === 0) {
       return <div></div>; // TODO loading indicator
     }
-
+    const { lang } = this.props.meta;
+    // hold onto the mappings between category key (english name) and
+    // the object holding both english and arabic name strings.
+    const categoryNames = {};
     // Count number of projects per category
     const justCategories = projects.map((project) => {
       let budget = project.budget.reduce((cur, item) => cur + get(item, 'fund.amount', 0), 0);
       return get(project, 'categories', []).map((category) => {
-        return { category, budget };
+        let key = category.en;
+        categoryNames[key] = category;
+        return { key, budget };
       });
     }).reduce((a, b) => a.concat(b), []);
 
     let numProjectsPerCategory = {};
     let budgetPerCategory = {};
-    justCategories.forEach((categoryObj) => {
-      const {category, budget} = categoryObj;
-      if (category in numProjectsPerCategory) {
-        numProjectsPerCategory[category] += 1;
-      } else {
-        numProjectsPerCategory[category] = 1;
-      }
-
-      if (category in budgetPerCategory) {
-        budgetPerCategory[category] += budget;
-      } else {
-        budgetPerCategory[category] = budget;
-      }
+    justCategories.forEach((category) => {
+      let { key } = category;
+      numProjectsPerCategory[key] = numProjectsPerCategory[key] || 0;
+      numProjectsPerCategory[key] += 1;
+      budgetPerCategory[key] = budgetPerCategory[key] || 0;
+      budgetPerCategory[key] += category.budget;
     });
 
     const numProjectsChartData = Object.keys(numProjectsPerCategory).map((key) => {
@@ -69,13 +67,15 @@ var Category = React.createClass({
     const categoryName = this.props.params.name;
     let categoryDisplayName;
 
+    // find all projects with this particular category
     const categoryProjects = projects.filter((project) => {
-      return get(project, 'categories', []).some((item) => {
-        let sluggedName = slugify(item);
+      return get(project, 'categories', []).find((item) => {
+        let sluggedName = slugify(item.en);
         if (sluggedName === categoryName) {
-          categoryDisplayName = item;
+          categoryDisplayName = item[lang];
+          return true;
         }
-        return sluggedName === categoryName;
+        return false;
       });
     });
 
@@ -185,9 +185,6 @@ var Category = React.createClass({
     );
   }
 });
-
-// /////////////////////////////////////////////////////////////////// //
-// Connect functions
 
 function mapStateToProps (state) {
   return {
