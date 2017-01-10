@@ -17,7 +17,12 @@ var HorizontalBarChart = React.createClass({
 
   getInitialState: function () {
     return {
-      width: 0
+      width: 0,
+      tooltipX: 0,
+      tooltipY: 0,
+      tooltipTitle: null,
+      tooltipBody: null,
+      tooltip: null
     };
   },
 
@@ -26,11 +31,28 @@ var HorizontalBarChart = React.createClass({
     this.setState({ width: rect.width, height: rect.height });
   },
 
+  mouseover: function (x, y, data) {
+    this.setState({
+      tooltip: true,
+      tooltipX: x,
+      tooltipY: y,
+      tooltipTitle: data.name,
+      tooltipBody: this.props.xFormat(data.value)
+    });
+  },
+
+  mouseout: function () {
+    this.setState({
+      tooltip: false
+    });
+  },
+
   componentDidMount: function () {
     // Capture initial width (presumably set in css)
     this.onWindowResize();
     // Debounce event.
     this.onWindowResize = debounce(this.onWindowResize, 200);
+    this.mouseover = debounce(this.mouseover, 15);
     window.addEventListener('resize', this.onWindowResize);
   },
 
@@ -94,6 +116,8 @@ var HorizontalBarChart = React.createClass({
                 x={0}
                 height={rectHeight}
                 width={xScale(d.value)}
+                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, d)}
+                onMouseOut={this.mouseout}
               />;
             })}
           </g>
@@ -107,6 +131,17 @@ var HorizontalBarChart = React.createClass({
             >{yTitle}</text>
 
         </svg>
+
+        <div className='tooltip' style={{
+          position: 'fixed',
+          display: this.state.tooltip ? 'block' : 'none',
+          left: this.state.tooltipX,
+          top: this.state.tooltipY}}>
+          <div className='tooltip__inner'>
+            <h4 className='tooltip__title'>{this.state.tooltipTitle}</h4>
+            <p className='tooltip__body'>{this.state.tooltipBody}</p>
+          </div>
+        </div>
       </div>
     );
   }
