@@ -6,6 +6,7 @@ import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
 import { tally, shortTally, pct, shortParagraph } from '../utils/format';
+import { byId as governorateNames } from '../utils/governorates';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -59,6 +60,7 @@ var ProjectCard = React.createClass({
 
   render: function () {
     const { project, lang } = this.props;
+    const locationLang = this.props.lang === 'en' ? 'name' : 'nameAr';
     const ontime = isOntime(project);
     const basepath = '/' + lang;
     const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);
@@ -82,7 +84,7 @@ var ProjectCard = React.createClass({
                 <dt className='card-meta__label'>Status</dt>
                 <dd className='card-meta__value card-meta__value--status'>{ontime ? 'On Time' : 'Delayed'}</dd>
                 <dt className='card-meta__label'>Location</dt>
-                <dd className='card-meta__value card-meta__value--location'>{project.location.map((loc) => loc.district.governorate).join(', ')}</dd>
+                <dd className='card-meta__value card-meta__value--location'>{project.location.map((loc) => governorateNames(loc.district.governorate)[locationLang]).join(', ')}</dd>
               </dl>
               <p>{shortParagraph(project.description)}</p>
               <div className='card__categories'>
