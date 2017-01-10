@@ -33,7 +33,8 @@ const ProjectList = React.createClass({
     const {sortAccessor} = this.state;
     const data = projects.slice().sort((a, b) => sortAccessor(a) < sortAccessor(b) ? -1 : 1);
 
-    return <div className='inpage__body'>
+    return (
+    <div className='inpage__body'>
       <div className='inner'>
         <section className='inpage__section project-list'>
           <div className='section__header'>
@@ -70,7 +71,7 @@ const ProjectList = React.createClass({
           </div>
         </section>
       </div>
-    </div>;
+    </div>);
   }
 });
 

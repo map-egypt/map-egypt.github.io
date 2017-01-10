@@ -92,6 +92,11 @@
   }
 }
 
+// TODO better styles here
+.indicator-list .indicator__overlay {
+  position: relative;
+}
+
 .indicator-close, .indicator-toggle {
   top: $global-spacing - 0.125rem;
   @extend .button, .button--small, .button--base-unbounded, .button--text-hidden;
