@@ -43,7 +43,7 @@ const Axis = React.createClass({
       <g className={'axis axis__' + orientation} transform={transform}>
         {labels.map((label, i) => {
           let text = (<text
-            key={label}
+            key={label + i}
             className='chart__axis-ticks'
             x={orientation === 'left' ? margin.left - 5 : scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 2 : 0)}
             y={orientation === 'left' ? scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 1.5 : 0) : 5 }

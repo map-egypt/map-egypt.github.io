@@ -84,9 +84,9 @@ var VerticalBarChart = React.createClass({
             format={this.props.yFormat}
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
-            {data.map(d => {
+            {data.map((d, i) => {
               return <rect
-                key={d.name}
+                key={d.name + i}
                 className='chart__bar'
                 y={yScale(d.value)}
                 x={xScale(d.name)}

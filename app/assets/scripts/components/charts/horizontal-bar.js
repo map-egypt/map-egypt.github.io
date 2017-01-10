@@ -108,7 +108,7 @@ var HorizontalBarChart = React.createClass({
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d, i) => {
               return <rect
-                key={d.name}
+                key={d.name + i}
                 className='chart__bar'
                 y={yScale(d.name) + rectHeight / 3}
                 x={0}
