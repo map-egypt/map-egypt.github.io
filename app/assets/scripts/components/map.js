@@ -155,8 +155,8 @@ const Map = React.createClass({
 
       this.markerLayer = L.markerClusterGroup({
         polygonOptions: {
-         opacity: 0,
-         fillOpacity: 0
+          opacity: 0,
+          fillOpacity: 0
         }
       });
 
