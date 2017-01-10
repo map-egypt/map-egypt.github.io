@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { debounce, max } from 'lodash';
+import { debounce, throttle, max } from 'lodash';
 import Axis from './axis';
 
 var HorizontalBarChart = React.createClass({
@@ -42,9 +42,7 @@ var HorizontalBarChart = React.createClass({
   },
 
   mouseout: function () {
-    this.setState({
-      tooltip: false
-    });
+    this.setState({ tooltip: false });
   },
 
   componentDidMount: function () {
@@ -52,7 +50,7 @@ var HorizontalBarChart = React.createClass({
     this.onWindowResize();
     // Debounce event.
     this.onWindowResize = debounce(this.onWindowResize, 200);
-    this.mouseover = debounce(this.mouseover, 15);
+    this.mouseover = throttle(this.mouseover, 15);
     window.addEventListener('resize', this.onWindowResize);
   },
 
@@ -139,7 +137,7 @@ var HorizontalBarChart = React.createClass({
           top: this.state.tooltipY}}>
           <div className='tooltip__inner'>
             <h4 className='tooltip__title'>{this.state.tooltipTitle}</h4>
-            <p className='tooltip__body'>{this.state.tooltipBody}</p>
+            <p className='tooltip__body'>Value: {this.state.tooltipBody}</p>
           </div>
         </div>
       </div>
