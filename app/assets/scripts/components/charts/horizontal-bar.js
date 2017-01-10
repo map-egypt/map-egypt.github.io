@@ -37,7 +37,7 @@ var HorizontalBarChart = React.createClass({
       tooltipX: x,
       tooltipY: y,
       tooltipTitle: data.name,
-      tooltipBody: this.props.xFormat(data.value)
+      tooltipBody: this.props.xFormat ? this.props.xFormat(data.value) : data.value
     });
   },
 
