@@ -183,20 +183,20 @@ var Project = React.createClass({
 
                 <div className='overview-item'>
                   <h1 className='overview-item__title heading-alt'>Location</h1>
-                  <ul className='link-list'>
+                  <div className='link-list'>
                     {get(data, 'location', []).map((loc, i) => {
                       const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
                         ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
                       if (id) {
                         const display = id[locationLang];
                         return (
-                          <li key={id.id}>
-                            <span>{display || '--'}</span>
-                          </li>
+                          <span key={id.id}>
+                            <span>{display || '--'}{i === data.location.length - 1 ? '' : ', '}</span>
+                          </span>
                         );
                       }
                     })}
-                  </ul>
+                  </div>
                 </div>
 
                 {data.project_link && (
@@ -302,7 +302,7 @@ var Project = React.createClass({
                     <tr>
                       <th className='row-status'>Status</th>
                       <th className='row-name'>Component</th>
-                      <th className='row-kpi'>KPI</th>
+                      <th className='row-kpi'>Key Performance Indicator</th>
                       <th className='row-target'>Target</th>
                       <th className='row-progress'>Progress</th>
                       <th className='row-date'>Date</th>
@@ -352,7 +352,7 @@ var Project = React.createClass({
               </div>
               {authenticated ? (
                 <div className='chart-content chart__inline--labels'>
-                  <h3>Reach</h3>
+                  <h3>Beneficiaries Reached</h3>
                   <HorizontalBarChart
                     data={served}
                     margin={barChartMargin}

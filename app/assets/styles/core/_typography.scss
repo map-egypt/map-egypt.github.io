@@ -107,6 +107,12 @@ dd {
   }
 }
 
+.link-list {
+  span {
+    color: $base-color;
+  }
+}
+
 /* Prose specific */
 
 .prose--responsive {
@@ -194,7 +200,6 @@ mark, .mark {
 .italic {
   font-style: italic;
 }
-
 
 /* Abbreviation
    ========================================================================== */

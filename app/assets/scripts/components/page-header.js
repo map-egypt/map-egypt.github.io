@@ -53,7 +53,7 @@ var PageHeader = React.createClass({
               </ul>
               <ul className='utilities-menu'>
                 <li><Link to='/en' title='Switch to English' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>
-                <li><Link to='/ar' title='Switch to Arabic' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>Arabic</span></Link></li>
+                <li><Link to='/ar' title='Switch to Arabic' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>عربي</span></Link></li>
                 {!this.props.authenticated && <li><Link title='Log in' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLoginClick}><span>Log In</span></Link></li>}
                 {this.props.authenticated && <li><Link to={this.props.location.pathname} title='Log out' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLogoutClick}><span>Log Out</span></Link></li>}
 
