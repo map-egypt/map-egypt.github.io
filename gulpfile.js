@@ -255,7 +255,7 @@ gulp.task('yaml', function () {
   return gulp.src('app/assets/translations/*.yml')
   .pipe(yaml())
   .pipe(jsoncombine('translations.js', function (data, meta) {
-    return Buffer.from('window.t = ' + JSON.stringify(data) + ';')
+    return new Buffer('window.t = ' + JSON.stringify(data) + ';')
   }))
   .pipe(gulp.dest('.tmp/assets/scripts'))
   .pipe(reload({stream: true}));

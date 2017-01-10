@@ -4,11 +4,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
-import { formatDate, parseProjectDate } from '../utils/date';
+import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText } from '../utils/format';
-import { byId } from '../utils/governorates';
+import { byId as districtNames } from '../utils/districts';
+import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
 
 import Map from '../components/map';
@@ -32,7 +34,8 @@ var Project = React.createClass({
     dispatch: React.PropTypes.func,
     location: React.PropTypes.object,
     api: React.PropTypes.object,
-    meta: React.PropTypes.object
+    meta: React.PropTypes.object,
+    lang: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -62,7 +65,8 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
-    const basepath = '/' + this.props.meta.lang;
+    const { lang } = this.props.meta;
+    const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
@@ -116,6 +120,8 @@ var Project = React.createClass({
       value: d.value
     }));
 
+    const locationLang = this.props.meta.lang === 'en' ? 'name' : 'nameAr';
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -141,8 +147,8 @@ var Project = React.createClass({
               <div className='tags__group'>
                 <p className='tags__label'>Categories:</p>
                 <div className='inpage__subtitles'>
-                  {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
-                    <Link to={linkPath(basepath, 'category', category)} className='link--secondary' href=''>{category}</Link>&nbsp;
+                  {get(data, 'category', []).map((category) => <span key={category.en} className='inpage__subtitle'>
+                    <Link to={linkPath(basepath, 'category', category.en)} className='link--secondary' href=''>{category[lang]}</Link>&nbsp;
                   </span>)}
                 </div>
               </div>
@@ -182,45 +188,66 @@ var Project = React.createClass({
                   <ul className='link-list'>
                     {get(data, 'location', []).map((loc, i) => {
                       const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
-                        ? loc.district.district : loc.district.governorate;
-                      const display = byId(id);
+                        ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
+                      if (id) {
+                        const display = id[locationLang];
+                        return (
+                          <li key={id.id}>
+                            <span>{display || '--'}</span>
+                          </li>
+                        );
+                      }
+                    })}
+                  </ul>
+                </div>
+
+                {data.project_link && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Project Link</h2>
+                    <ul className='link-list'>
+                      <li><a href={data.project_link} className='link--primary'><span>Link</span></a></li>
+                    </ul>
+                  </div>
+                )}
+
+                {data.responsible_ministry && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Responsible Ministry</h2>
+                    <ul className='link-list'>
+                      <li><a href='' className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
+                    </ul>
+                  </div>
+                )}
+
+                {((lang === 'en' && data.local_manager) || lang === 'ar' && data.local_manager_ar) && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>Local Manager</h2>
+                    <ul className='link-list'>
+                      <li><a href='' className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
+                    </ul>
+                  </div>
+                )}
+
+                <div className='overview-item--alt'>
+                  <h2 className='overview-item__title heading-alt'>KMI Components</h2>
+                  <ul className='link-list'>
+                    {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
                       return (
-                        <li key={id}>
-                          <span>{display ? display.name : '--'}</span>
+                        <li key={component}>
+                          <span>{component}</span>
                         </li>
                       );
                     })}
                   </ul>
                 </div>
 
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Project Link</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Source</span></a></li>
-                  </ul>
-                </div>
-
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>Name of Responsible Party</span></a></li>
-                  </ul>
-                </div>
-
-                <div className='overview-item'>
-                  <h2 className='overview-item__title heading-alt'>Responsible Party</h2>
-                  <ul className='link-list'>
-                    <li><a href='' className='link--primary'><span>{data.responsible_ministry}</span></a></li>
-                  </ul>
-                </div>
-
                 <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
                   <ul className='link-list'>
-                    {get(data, 'sdg_indicator', []).map((indicator, i) => {
+                    {get(data, 'sdg_indicator', []).map((indicator) => {
                       return (
-                        <li key={indicator}>
-                          <span>{indicator}</span>
+                        <li key={indicator.en}>
+                          <span>{indicator[lang]}</span>
                         </li>
                       );
                     })}
@@ -230,10 +257,10 @@ var Project = React.createClass({
                 <div className='overview-item--alt'>
                   <h2 className='overview-item__title heading-alt'>SDS Indicator</h2>
                   <ul className='link-list'>
-                    {get(data, 'sds_indicator', []).map((indicator, i) => {
+                    {get(data, 'sds_indicator', []).map((indicator) => {
                       return (
-                        <li key={indicator}>
-                          <span>{indicator}</span>
+                        <li key={indicator.en}>
+                          <span>{indicator[lang]}</span>
                         </li>
                       );
                     })}
@@ -269,9 +296,9 @@ var Project = React.createClass({
               </div>
 
             </section>
-            <section className='inpage__section inpage__section--indicators'>
-              <h1 className='section__title heading--small'>Monitoring Indicators</h1>
-              {Array.isArray(data.kmi) && (
+            {Array.isArray(data.kmi) && data.kmi.length && (
+              <section className='inpage__section inpage__section--indicators'>
+                <h1 className='section__title heading--small'>Monitoring Indicators</h1>
                 <table className='inpage__table'>
                   <thead>
                     <tr>
@@ -285,24 +312,24 @@ var Project = React.createClass({
                   </thead>
                   <tbody>
                     {data.kmi.map((d) => {
-                      const status = d.status.toLowerCase() === 'implemented' ? 'ontime' : 'delayed';
+                      const key = slugify(d.status.en);
                       return (
                         <tr key={d.kpi}>
-                          <td className={'project--' + status}>
-                            <p className='card-meta__value--status activity-name'>{ontime ? 'On time' : 'Delayed'}</p>
+                          <td className={'project--' + key}>
+                            <p className='card-meta__value--status activity-name'>{d.status[lang]}</p>
                           </td>
                           <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>
-                          <td>{d.target}</td>
-                          <td>{d.current}</td>
-                          <td>{formatDate(parseProjectDate(d.date))}</td>
+                          <td>{tally(d.target)}</td>
+                          <td>{tally(d.current)}</td>
+                          <td>{formatSimpleDate(parseProjectDate(d.date))}</td>
                         </tr>
-                      );
+                        );
                     })}
                   </tbody>
                 </table>
-              )}
-            </section>
+              </section>
+            )}
             <section className='inpage__section inpage__section--comparison'>
               <h1 className='section__title heading--small'>Project Comparison By Category</h1>
               <div className='chart-content chart__inline--labels'>

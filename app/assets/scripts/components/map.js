@@ -5,7 +5,7 @@ import bbox from '@turf/bbox';
 import { scaleQuantile } from 'd3-scale';
 import { extend } from 'lodash';
 import { get } from 'object-path';
-import { byEgy } from '../utils/governorates';
+import { byEgy, byName } from '../utils/governorates';
 const L = window.L;
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
@@ -58,14 +58,16 @@ const Map = React.createClass({
     this.map.fitBounds(bounds);
   },
 
-  addClusterMarkers: function (markers) {
-    const lang = this.props.lang || 'en';
+  addClusterMarkers: function (markers, lang) {
+    lang = lang || 'en';
+    const locationLang = lang === 'en' ? 'name' : 'nameAr';
     const markerLayer = this.markerLayer;
     markerLayer.clearLayers();
     markers.forEach(function (marker) {
       const leafletMarker = L.marker(marker.centroid, {
         icon: L.mapbox.marker.icon({'marker-symbol': 'circle', 'marker-color': '2B2342'})
       });
+
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
           `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
@@ -73,7 +75,7 @@ const Map = React.createClass({
                 `<dt class='card-meta__label'>Status</dt>` +
                 `<dd class='card-meta__value card-meta__value--status'>Delayed</dd>` +
                 `<dt class='card-meta__label'>Location</dt>` +
-                `<dd class='card-meta__value card-meta__value--location'>${marker.region}</dd>` +
+                `<dd class='card-meta__value card-meta__value--location'>${byName(marker.region)[locationLang]}</dd>` +
               `</dl>` +
         `</div>`
       );
@@ -130,18 +132,21 @@ const Map = React.createClass({
 
     if (props.markers && (!this.props.markers || props.markers.length !== this.props.markers.length ||
         JSON.stringify(props.markers) !== JSON.stringify(this.props.markers))) {
-      this.addClusterMarkers(props.markers);
+      this.addClusterMarkers(props.markers, props.lang);
     }
 
     if ((props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) || (this.props.overlay && !props.overlay)) {
       this.renderOverlay(props.overlay);
     }
+
+    if (props.lang !== this.props.lang) this.addClusterMarkers(props.markers, props.lang);
   },
 
   mountMap: function (el) {
     if (el) {
       this.map = L.mapbox.map(el, null, {
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        maxZoom: 11
       });
       L.tileLayer(tileLayer).addTo(this.map);
 
@@ -153,9 +158,9 @@ const Map = React.createClass({
 
       this.fitMap(this.props);
 
-      const { markers, overlay } = this.props;
+      const { markers, overlay, lang } = this.props;
       if (markers) {
-        this.addClusterMarkers(markers);
+        this.addClusterMarkers(markers, lang);
       }
       if (overlay) {
         this.renderOverlay(overlay);

@@ -25,11 +25,12 @@ var Home = React.createClass({
 
   render: function () {
     const { projects } = this.props.api;
+    const { lang } = this.props.meta;
     const categories = {};
     const status = { ontime: 0, delayed: 0 };
     projects.forEach(function (project) {
       get(project, 'categories', []).forEach(function (category) {
-        categories[category] = categories[category] + 1 || 1;
+        categories[category[lang]] = categories[category[lang]] + 1 || 1;
       });
 
       const ontime = isOntime(project);
@@ -59,7 +60,7 @@ var Home = React.createClass({
       value: status.delayed
     }];
 
-    const t = get(window.t, [this.props.meta.lang, 'homepage'], {});
+    const t = get(window.t, [lang, 'homepage'], {});
     return (
       <div>
       <section className='inpage home'>
@@ -75,7 +76,7 @@ var Home = React.createClass({
         </header>
         <div className='inpage__body'>
           <div className='inner'>
-            <Map markers={markers} lang={this.props.meta.lang} />
+            <Map markers={markers} lang={lang} />
             <section className='inpage__section'>
               <div className='overview-home'>
                 <h2 className='section__title'>Overview of Agricultural Projects</h2>
@@ -140,8 +141,8 @@ var Home = React.createClass({
             <h2 className='section__title'>Other Progress Indicators</h2>
             <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
             <ul className='section__footer'>
-              <li><button type='button' className='button button--primary button--large'>SDS Indicators</button></li>
-              <li><button type='button' className='button button--primary button--large'>SDG Indicators</button></li>
+              <li><Link to={'/' + lang + '/projects_sds'} type='button' className='button button--primary button--large'>SDS Indicators</Link></li>
+              <li><Link to={'/' + lang + '/projects_sdg'} type='button' className='button button--primary button--large'>SDG Indicators</Link></li>
             </ul>
           </section>
         </div>

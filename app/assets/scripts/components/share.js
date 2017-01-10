@@ -2,6 +2,7 @@
 import React from 'react';
 import url from 'url';
 import { baseUrl } from '../config';
+import Clipboard from 'clipboard';
 
 const ShareButton = React.createClass({
   displayName: 'ShareButton',
@@ -22,6 +23,16 @@ const ShareButton = React.createClass({
     this.setState({ isOpen: false });
   },
 
+  componentDidMount: function () {
+    this.clipboard = new Clipboard('#share-url-button');
+  },
+
+  componentWillUnmount: function () {
+    if (this.clipboard && typeof this.clipboard.destroy === 'function') {
+      this.clipboard.destroy();
+    }
+  },
+
   render: function () {
     const openClass = this.state.isOpen ? ' drop__content--open' : '';
     return (
@@ -31,8 +42,8 @@ const ShareButton = React.createClass({
         <div className='form__group'>
           <label className="form__label">Copy URL to Share</label>
           <div className="form__input-group">
-            <input readOnly type="text" className="form__control form__control--medium" value={url.resolve(baseUrl, this.props.path)}/>
-            <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--copy-icon"><span>Button</span></button></span>
+            <input id="share-url-field" readOnly type="text" className="form__control form__control--medium" value={url.resolve(baseUrl, '#' + this.props.path)}/>
+            <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--copy-icon" data-clipboard-target="#share-url-field" id="share-url-button"><span>Button</span></button></span>
           </div>
           </div>
           <button className='modal__button-dismiss' title='close' onClick={this.close}></button>
