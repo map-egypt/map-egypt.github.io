@@ -302,12 +302,11 @@ var Project = React.createClass({
                   </thead>
                   <tbody>
                     {data.kmi.map((d) => {
-                      //const status = d.status.toLowerCase() === 'implemented' ? 'ontime' : 'delayed';
-                      const status = 'ontime';
+                      const key = slugify(d.status.en);
                       return (
                         <tr key={d.kpi}>
-                          <td className={'project--' + status}>
-                            <p className='card-meta__value--status activity-name'>{ontime ? 'On time' : 'Delayed'}</p>
+                          <td className={'project--' + key}>
+                            <p className='card-meta__value--status activity-name'>{d.status[lang]}</p>
                           </td>
                           <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>
