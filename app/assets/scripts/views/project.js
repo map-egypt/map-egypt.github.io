@@ -9,7 +9,8 @@ import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText } from '../utils/format';
-import { byId } from '../utils/governorates';
+import { byId as districtNames } from '../utils/districts';
+import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
 
 import Map from '../components/map';
@@ -33,7 +34,8 @@ var Project = React.createClass({
     dispatch: React.PropTypes.func,
     location: React.PropTypes.object,
     api: React.PropTypes.object,
-    meta: React.PropTypes.object
+    meta: React.PropTypes.object,
+    lang: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -113,6 +115,8 @@ var Project = React.createClass({
       value: d.value
     }));
 
+    const locationLang = this.props.meta.lang === 'en' ? 'name' : 'nameAr';
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -179,13 +183,15 @@ var Project = React.createClass({
                   <ul className='link-list'>
                     {get(data, 'location', []).map((loc, i) => {
                       const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
-                        ? loc.district.district : loc.district.governorate;
-                      const display = byId(id);
-                      return (
-                        <li key={id}>
-                          <span>{display ? display.name : '--'}</span>
-                        </li>
-                      );
+                        ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
+                      if (id) {
+                        const display = id[locationLang];
+                        return (
+                          <li key={id.id}>
+                            <span>{display || '--'}</span>
+                          </li>
+                        );
+                      }
                     })}
                   </ul>
                 </div>
