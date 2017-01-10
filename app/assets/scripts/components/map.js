@@ -153,7 +153,13 @@ const Map = React.createClass({
       this.overlayLayer = L.featureGroup();
       this.map.addLayer(this.overlayLayer);
 
-      this.markerLayer = L.markerClusterGroup();
+      this.markerLayer = L.markerClusterGroup({
+       polygonOptions: {
+        opacity: 0,
+       fillOpacity: 0
+        }
+      });
+
       this.map.addLayer(this.markerLayer);
 
       this.fitMap(this.props);
