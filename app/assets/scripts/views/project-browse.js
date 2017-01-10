@@ -285,6 +285,7 @@ var ProjectBrowse = React.createClass({
 
   renderIndicatorSelector: function () {
     const { selectedIndicators, activeIndicatorTheme, activeIndicatorType } = this.state;
+    const { lang } = this.props.meta;
     const indicatorProp = activeIndicatorType.toLowerCase();
     const indicators = get(this.props.api, 'indicators', []).filter((indicator) => {
       return indicator.type && indicator.type[indicatorProp];
@@ -292,8 +293,12 @@ var ProjectBrowse = React.createClass({
 
     const themes = {};
     indicators.forEach((indicator) => {
-      themes[indicator.theme] = themes[indicator.theme] || [];
-      themes[indicator.theme].push(indicator);
+      if (!indicator.theme) {
+        return;
+      }
+      let theme = indicator.theme[lang] || '--';
+      themes[theme] = themes[theme] || [];
+      themes[theme].push(indicator);
     });
     const themeNames = Object.keys(themes);
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
