@@ -49,7 +49,7 @@ var PageHeader = React.createClass({
             <div className='nav-block' id='nav-block-browse'>
               <ul className='browse-menu'>
                 <li><Link to={basepath + '/projects'} title='Visit projects and indicators page' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>Projects & Indicators</span></Link></li>
-                <li><Link to={basepath + '/about'} title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco' onClick={this.onRootMenuClick}><span>About</span></Link></li>
+                <li><Link to={basepath + '/about'} title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco-active' onClick={this.onRootMenuClick}><span>About</span></Link></li>
               </ul>
               <ul className='utilities-menu'>
                 <li><Link to='/en' title='Switch to English' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>
