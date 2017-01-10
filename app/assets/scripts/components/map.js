@@ -46,6 +46,13 @@ const Map = React.createClass({
     overlay: React.PropTypes.object
   },
 
+  getInitialState: function () {
+    return {
+      activeProject: true,
+      activeIndicator: false
+    };
+  },
+
   fitMap: function (props) {
     let bounds;
     if (props.location) {
@@ -168,8 +175,29 @@ const Map = React.createClass({
     }
   },
 
+  renderMarkerLegend: function () {
+    return (
+      <span className='legend__markers'>
+        <span className='legend__item legend__marker--cluster'>Cluster</span>
+        <span className='legend__item legend__marker--marker'>Marker</span>
+      </span>
+    );
+  },
+
+  renderOverlayLegend: function () {
+
+
+  },
+
   render: function () {
-    return (<div className='map__container' ref={this.mountMap}></div>);
+    return (
+      <div>
+        <div className='map__container' ref={this.mountMap}></div>
+        <div className='legend__container'>
+          {this.renderMarkerLegend()}
+        </div>
+      </div>
+    );
   }
 });
 
