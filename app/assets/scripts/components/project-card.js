@@ -58,9 +58,9 @@ var ProjectCard = React.createClass({
   },
 
   render: function () {
-    const project = this.props.project;
+    const { project, lang } = this.props;
     const ontime = isOntime(project);
-    const basepath = '/' + this.props.lang;
+    const basepath = '/' + lang;
     const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);
     let completion = pct(percentComplete(project));
 
@@ -86,10 +86,11 @@ var ProjectCard = React.createClass({
               </dl>
               <p>{shortParagraph(project.description)}</p>
               <div className='card__categories'>
-                {project.categories.map((c) => {
+                {project.categories.map((c, i) => {
+                  let key = c.en;
                   return (
-                    <span key={c} className='card__subtitle'>
-                      <Link to={categoryLink(basepath, c)} className='link--secondary' href=''>{c},</Link>
+                    <span key={key} className='card__subtitle'>
+                      <Link to={categoryLink(basepath, key)} className='link--secondary' href=''>{c[lang]}</Link>
                     </span>
                   );
                 })}
