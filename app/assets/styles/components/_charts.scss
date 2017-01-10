@@ -111,21 +111,21 @@ $timeline-inner: $base-color;
 .timeline__headline {
   @include col(12/12);
   margin-bottom: $global-spacing * 1.5;
+  line-height: 1rem;
   @include media(medium-up) {
     @include col(2/12);
   }
 }
 
 .timeline__row {
-  @include col(12/12);
+  @include col(11/12);
   @include media(medium-up) {
-    @include col(10/12);
+    @include col(9/12);
   }
   background-color: $timeline-outer;
   margin-top: $global-spacing/4;
   height: $timeline-height;
   position: relative;
-
   hr {
     background-color: $timeline-inner;
     bottom: -32px;
