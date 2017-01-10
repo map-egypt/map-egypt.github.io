@@ -215,11 +215,11 @@ var Project = React.createClass({
                   </div>
                 )}
 
-                {data.local_manager && (
+                {((lang === 'en' && data.local_manager) || lang === 'ar' && data.local_manager_ar) && (
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>Local Manager</h2>
                     <ul className='link-list'>
-                      <li><a href='' className='link--primary'><span>{data.local_manager[lang]}</span></a></li>
+                      <li><a href='' className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
                     </ul>
                   </div>
                 )}
