@@ -74,8 +74,8 @@ var HorizontalBarChart = React.createClass({
     const links = data.map(a => a.link).filter(Boolean);
 
     const ordinalScale = scaleBand()
-    .paddingInner(0.8)
-    .paddingOuter(0.4);
+    .paddingInner(0.6)
+    .paddingOuter(0.2);
 
     let xScale = scaleLinear().range([0, innerWidth]).domain([0, max(dataValues)]);
     let xLabels = xScale.ticks(3);
@@ -137,7 +137,7 @@ var HorizontalBarChart = React.createClass({
           top: this.state.tooltipY}}>
           <div className='tooltip__inner'>
             <h4 className='tooltip__title'>{this.state.tooltipTitle}</h4>
-            <p className='tooltip__body'>Value: {this.state.tooltipBody}</p>
+            <p className='tooltip__body'>{this.state.tooltipBody}</p>
           </div>
         </div>
       </div>
