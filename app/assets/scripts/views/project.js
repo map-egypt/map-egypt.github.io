@@ -63,7 +63,8 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
-    const basepath = '/' + this.props.meta.lang;
+    const { lang } = this.props.meta;
+    const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
@@ -138,8 +139,8 @@ var Project = React.createClass({
               <div className='tags__group'>
                 <p className='tags__label'>Categories:</p>
                 <div className='inpage__subtitles'>
-                  {get(data, 'category', []).map((category) => <span key={category} className='inpage__subtitle'>
-                    <Link to={linkPath(basepath, 'category', category)} className='link--secondary' href=''>{category}</Link>&nbsp;
+                  {get(data, 'category', []).map((category) => <span key={category.en} className='inpage__subtitle'>
+                    <Link to={linkPath(basepath, 'category', category.en)} className='link--secondary' href=''>{category[lang]}</Link>&nbsp;
                   </span>)}
                 </div>
               </div>
@@ -199,20 +200,20 @@ var Project = React.createClass({
                   </div>
                 )}
 
-                {data.responsible_ministry && data.responsible_ministry.toLowerCase() !== 'select a ministry' && (
+                {data.responsible_ministry && (
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>Responsible Ministry</h2>
                     <ul className='link-list'>
-                      <li><a href='' className='link--primary'><span>{data.responsible_ministry}</span></a></li>
+                      <li><a href='' className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
                     </ul>
                   </div>
                 )}
 
-                {data.local_manager && data.local_manager.toLowerCase() !== 'select a party' && (
+                {data.local_manager && (
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>Local Manager</h2>
                     <ul className='link-list'>
-                      <li><a href='' className='link--primary'><span>{data.local_manager}</span></a></li>
+                      <li><a href='' className='link--primary'><span>{data.local_manager[lang]}</span></a></li>
                     </ul>
                   </div>
                 )}
@@ -235,8 +236,8 @@ var Project = React.createClass({
                   <ul className='link-list'>
                     {get(data, 'sdg_indicator', []).map((indicator) => {
                       return (
-                        <li key={indicator}>
-                          <span>{indicator}</span>
+                        <li key={indicator.en}>
+                          <span>{indicator[lang]}</span>
                         </li>
                       );
                     })}
@@ -248,8 +249,8 @@ var Project = React.createClass({
                   <ul className='link-list'>
                     {get(data, 'sds_indicator', []).map((indicator) => {
                       return (
-                        <li key={indicator}>
-                          <span>{indicator}</span>
+                        <li key={indicator.en}>
+                          <span>{indicator[lang]}</span>
                         </li>
                       );
                     })}
@@ -301,7 +302,8 @@ var Project = React.createClass({
                   </thead>
                   <tbody>
                     {data.kmi.map((d) => {
-                      const status = d.status.toLowerCase() === 'implemented' ? 'ontime' : 'delayed';
+                      //const status = d.status.toLowerCase() === 'implemented' ? 'ontime' : 'delayed';
+                      const status = 'ontime';
                       return (
                         <tr key={d.kpi}>
                           <td className={'project--' + status}>
