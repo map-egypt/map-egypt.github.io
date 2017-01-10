@@ -55,6 +55,8 @@ var Project = React.createClass({
     if (props.api.authenticated && !this.props.api.authenticated && !this.state.authenticated) {
       this.props.dispatch(getProject(this.props.params.id));
       this.setState({ authenticated: true });
+    } else if (props.params.id !== this.props.params.id) {
+      this.props.dispatch(getProject(props.params.id));
     }
   },
 
@@ -109,7 +111,7 @@ var Project = React.createClass({
 
     const disbursement = get(data, 'disbursed', []).map((fund) => ({
       name: parseProjectDate(fund.date),
-      type: fund.type.split(' ')[0],
+      type: fund.type[lang],
       value: fund.fund.amount
     })).sort((a, b) => a.name > b.name ? 1 : -1).map((d) => ({
       name: formatDate(d.name) + ' (' + d.type + ')',
@@ -278,7 +280,7 @@ var Project = React.createClass({
                     xFormat={shortTally}
                   />
                 </div>
-                {authenticated ? (
+                {authenticated && disbursement.length ? (
                   <div className='chart-content chart__inline--labels'>
                     <h3>Disbursement vs. Reach</h3>
                     <VerticalBarChart
