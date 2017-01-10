@@ -91,21 +91,25 @@ var Project = React.createClass({
     const budgets = allProjects.map((project) => ({
       name: project.name,
       value: get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
+      link: path.resolve(basepath, 'projects', project.id),
       project: project
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const completion = budgets.map((d) => ({
       name: d.name,
+      link: d.link,
       value: ProjectCard.percentComplete(d.project)
     }));
 
     const served = budgets.map((d) => ({
       name: d.name,
+      link: d.link,
       value: +get(d.project, 'number_served.number_served', 0)
     }));
 
     const donors = get(data, 'budget', []).map((donor) => ({
       name: donor.donor_name,
+      link: path.resolve(basepath, 'donor', slugify(donor.donor_name)),
       value: donor.fund.amount
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 

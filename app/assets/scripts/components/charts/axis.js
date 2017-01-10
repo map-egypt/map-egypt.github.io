@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import { Link } from 'react-router';
 
 const defaultFormat = (x) => x;
 
@@ -12,7 +13,8 @@ const Axis = React.createClass({
     height: React.PropTypes.number,
     width: React.PropTypes.number,
     margin: React.PropTypes.object,
-    format: React.PropTypes.func
+    format: React.PropTypes.func,
+    links: React.PropTypes.array
   },
 
   render: function () {
@@ -35,11 +37,12 @@ const Axis = React.createClass({
 
     const format = this.props.format || defaultFormat;
     const domain = scale.domain();
+    const hasLinks = this.props.links && Array.isArray(this.props.links) && this.props.links.length;
 
     return (
       <g className={'axis axis__' + orientation} transform={transform}>
         {labels.map((label, i) => {
-          return <text
+          let text = (<text
             key={label + i}
             className='chart__axis-ticks'
             x={orientation === 'left' ? margin.left - 5 : scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 2 : 0)}
@@ -48,7 +51,8 @@ const Axis = React.createClass({
             textAnchor={orientation === 'left' ? 'end' : 'middle'}
             >
             {format(label)}
-          </text>;
+          </text>);
+          return hasLinks ? <Link to={this.props.links[i]} key={label}>{text}</Link> : text;
         })}
         <line
           className='chart__axis--line'

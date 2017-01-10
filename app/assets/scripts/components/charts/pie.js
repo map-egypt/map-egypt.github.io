@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import * as d3 from 'd3';
-import { debounce } from 'lodash';
+import { debounce, throttle } from 'lodash';
 import slugify from '../../utils/slugify';
 
 var PieChart = React.createClass({
@@ -14,7 +14,12 @@ var PieChart = React.createClass({
   getInitialState: function () {
     return {
       width: 0,
-      height: 0
+      height: 0,
+      tooltipX: 0,
+      tooltipY: 0,
+      tooltipTitle: null,
+      tooltipBody: null,
+      tooltip: null
     };
   },
 
@@ -23,9 +28,24 @@ var PieChart = React.createClass({
     this.setState({ width: rect.width, height: rect.height });
   },
 
+  mouseover: function (x, y, name, value) {
+    this.setState({
+      tooltip: true,
+      tooltipX: x,
+      tooltipY: y,
+      tooltipTitle: name,
+      tooltipBody: value
+    });
+  },
+
+  mouseout: function () {
+    this.setState({ tooltip: false });
+  },
+
   componentDidMount: function () {
     this.onWindowResize();
     this.onWindowResize = debounce(this.onWindowResize, 200);
+    this.mouseover = throttle(this.mouseover, 15);
     window.addEventListener('resize', this.onWindowResize);
   },
 
@@ -60,10 +80,24 @@ var PieChart = React.createClass({
               return <path
                 key={i}
                 d={arc(d)}
-                className={'pie__slice__' + slugify(dataNames[i])}/>;
+                className={'pie__slice__' + slugify(dataNames[i])}
+                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, dataNames[i], d.value)}
+                onMouseOut={this.mouseout}
+              />;
             })}
           </g>
         </svg>
+
+        <div className='tooltip' style={{
+          position: 'fixed',
+          display: this.state.tooltip ? 'block' : 'none',
+          left: this.state.tooltipX,
+          top: this.state.tooltipY}}>
+          <div className='tooltip__inner'>
+            <h4 className='tooltip__title'>{this.state.tooltipTitle}</h4>
+            <p className='tooltip__body'>{this.state.tooltipBody}</p>
+          </div>
+        </div>
       </div>
     );
   }

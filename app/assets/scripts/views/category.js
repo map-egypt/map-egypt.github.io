@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import path from 'path';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
@@ -27,6 +28,7 @@ var Category = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const { lang } = this.props.meta;
+    const basepath = '/' + lang;
     // hold onto the mappings between category key (english name) and
     // the object holding both english and arabic name strings.
     const categoryNames = {};
@@ -53,6 +55,7 @@ var Category = React.createClass({
     const numProjectsChartData = Object.keys(numProjectsPerCategory).map((key) => {
       return {
         name: key,
+        link: path.resolve(basepath, 'category', slugify(key)),
         value: numProjectsPerCategory[key]
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
@@ -60,6 +63,7 @@ var Category = React.createClass({
     const budgetPerCategoryChartData = Object.keys(budgetPerCategory).map((key) => {
       return {
         name: key,
+        link: path.resolve(basepath, 'category', slugify(key)),
         value: budgetPerCategory[key]
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
@@ -83,16 +87,16 @@ var Category = React.createClass({
       .map((project) => project.budget)
       .reduce((a, b) => a.concat(b), []);
 
-    const chartData = categoryProjects.map((project) => {
-      return {
-        name: project.name,
-        value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0),
-        project: project
-      };
-    }).sort((a, b) => b.value > a.value ? -1 : 1);
+    const chartData = categoryProjects.map((project) => ({
+      name: project.name,
+      link: path.resolve(basepath, 'projects', project.id),
+      value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0),
+      project
+    })).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const completion = chartData.map((d, i) => ({
       name: d.name,
+      link: d.link,
       value: ProjectCard.percentComplete(d.project)
     }));
 
@@ -151,7 +155,7 @@ var Category = React.createClass({
               <h1 className='section__title heading--small'>Projects</h1>
               <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>Funding</h3>)}
-                 {!singleProject && (<HorizontalBarChart
+                {!singleProject && (<HorizontalBarChart
                  data={chartData}
                  margin={chartMargin}
                  xFormat={shortTally}

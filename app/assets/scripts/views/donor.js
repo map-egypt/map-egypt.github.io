@@ -1,5 +1,6 @@
 'use strict';
 import React from 'react';
+import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
 import Share from '../components/share';
@@ -24,6 +25,7 @@ var Donor = React.createClass({
     if (projects.length === 0) {
       return <div></div>; // TODO loading indicator
     }
+    const basepath = '/' + this.props.meta.lang;
 
     const donorName = this.props.params.name;
     let donorDisplayName;
@@ -45,8 +47,8 @@ var Donor = React.createClass({
     const chartData = donorProjects.map((project) => {
       return {
         name: project.name,
-        value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0),
-        project: project
+        link: path.resolve(basepath, 'projects', project.id),
+        value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0)
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 

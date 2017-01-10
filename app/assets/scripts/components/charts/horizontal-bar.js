@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
-import { debounce, max } from 'lodash';
+import { debounce, throttle, max } from 'lodash';
 import Axis from './axis';
 
 var HorizontalBarChart = React.createClass({
@@ -17,7 +17,12 @@ var HorizontalBarChart = React.createClass({
 
   getInitialState: function () {
     return {
-      width: 0
+      width: 0,
+      tooltipX: 0,
+      tooltipY: 0,
+      tooltipTitle: null,
+      tooltipBody: null,
+      tooltip: null
     };
   },
 
@@ -26,11 +31,26 @@ var HorizontalBarChart = React.createClass({
     this.setState({ width: rect.width, height: rect.height });
   },
 
+  mouseover: function (x, y, data) {
+    this.setState({
+      tooltip: true,
+      tooltipX: x,
+      tooltipY: y,
+      tooltipTitle: data.name,
+      tooltipBody: this.props.xFormat ? this.props.xFormat(data.value) : data.value
+    });
+  },
+
+  mouseout: function () {
+    this.setState({ tooltip: false });
+  },
+
   componentDidMount: function () {
     // Capture initial width (presumably set in css)
     this.onWindowResize();
     // Debounce event.
     this.onWindowResize = debounce(this.onWindowResize, 200);
+    this.mouseover = throttle(this.mouseover, 15);
     window.addEventListener('resize', this.onWindowResize);
   },
 
@@ -51,10 +71,11 @@ var HorizontalBarChart = React.createClass({
 
     const dataNames = data.map(a => a.name);
     const dataValues = data.map(a => a.value);
+    const links = data.map(a => a.link).filter(Boolean);
 
     const ordinalScale = scaleBand()
-    .paddingInner(0.8)
-    .paddingOuter(0.4);
+    .paddingInner(0.6)
+    .paddingOuter(0.2);
 
     let xScale = scaleLinear().range([0, innerWidth]).domain([0, max(dataValues)]);
     let xLabels = xScale.ticks(3);
@@ -82,6 +103,7 @@ var HorizontalBarChart = React.createClass({
             width={width}
             margin={margin}
             format={this.props.yFormat}
+            links={links}
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d, i) => {
@@ -92,6 +114,8 @@ var HorizontalBarChart = React.createClass({
                 x={0}
                 height={rectHeight}
                 width={xScale(d.value)}
+                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, d)}
+                onMouseOut={this.mouseout}
               />;
             })}
           </g>
@@ -105,6 +129,17 @@ var HorizontalBarChart = React.createClass({
             >{yTitle}</text>
 
         </svg>
+
+        <div className='tooltip' style={{
+          position: 'fixed',
+          display: this.state.tooltip ? 'block' : 'none',
+          left: this.state.tooltipX,
+          top: this.state.tooltipY}}>
+          <div className='tooltip__inner'>
+            <h4 className='tooltip__title'>{this.state.tooltipTitle}</h4>
+            <p className='tooltip__body'>{this.state.tooltipBody}</p>
+          </div>
+        </div>
       </div>
     );
   }
