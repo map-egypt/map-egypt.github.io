@@ -17,7 +17,9 @@ var ProjectTimeline = React.createClass({
     const plannedEnd = parseProjectDate(project.planned_end_date);
 
     const actualStart = project.actual_start_date ? parseProjectDate(project.actual_start_date) : null;
-    const actualEnd = project.actual_end_date ? parseProjectDate(project.actual_end_date) : null;
+    const actualEnd = project.actual_end_date
+      ? parseProjectDate(project.actual_end_date)
+      : parseProjectDate(`${new Date().getFullYear()}/${new Date().getMonth() + 1}`) || null;
 
     const start = actualStart ? Math.min(plannedStart, actualStart) : plannedStart;
     const end = actualEnd ? Math.max(plannedEnd, actualEnd) : plannedEnd;
