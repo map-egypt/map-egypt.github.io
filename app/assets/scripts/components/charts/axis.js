@@ -18,7 +18,7 @@ const Axis = React.createClass({
   },
 
   render: function () {
-    const { scale, labels, orientation, height, margin } = this.props;
+    const { scale, labels, orientation, height, width, margin } = this.props;
     let transform, dy;
     switch (orientation) {
       case 'top':
@@ -36,7 +36,6 @@ const Axis = React.createClass({
     }
 
     const format = this.props.format || defaultFormat;
-    const domain = scale.domain();
     const hasLinks = this.props.links && Array.isArray(this.props.links) && this.props.links.length;
 
     return (
@@ -58,7 +57,7 @@ const Axis = React.createClass({
           className='chart__axis--line'
           x1={orientation === 'left' ? margin.left : 0 }
           y1='0'
-          x2={orientation === 'left' ? margin.left : scale(domain[1])}
+          x2={orientation === 'left' ? margin.left : width }
           y2={orientation === 'left' ? height - margin.bottom - margin.top : 0 }
         />
       </g>
