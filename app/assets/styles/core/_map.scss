@@ -92,6 +92,42 @@
   }
 }
 
+.indicator-list {
+  .section__title {
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+.indicator__overlay .indicator__overlay--list {
+  margin-bottom: $global-spacing * 2;
+  overflow: hidden;
+}
+
+.indicator-list .indicator__overlay {
+  @include col(12/12);
+  float: right;
+  position: relative;
+  box-shadow: none;
+  li {
+    display: block;
+    float: left;
+    box-shadow: inset -1px 0px 0 0 #E9E9E9;
+    padding: 1rem 1rem 1rem 2rem;
+    @include col(12/12);
+    @include media(small-up) {
+      @include col(6/12, $uncycle: 3);
+    }
+    @include media(medium-up) {
+      @include col(4/12, $cycle: 3);
+    }
+  }
+  .indicator-close {
+    margin-left: $global-spacing/4;
+    right: inherit;
+  }
+}
+
 .indicator-close, .indicator-toggle {
   top: $global-spacing - 0.125rem;
   @extend .button, .button--small, .button--base-unbounded, .button--text-hidden;

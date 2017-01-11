@@ -13,10 +13,12 @@ import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
+import VerticalBarChart from '../components/charts/vertical-bar';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
 const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
+const barChartMargin = { left: 50, right: 20, top: 10, bottom: 50 };
 
 function countByProp (array, property) {
   const result = {};
@@ -360,6 +362,26 @@ var ProjectBrowse = React.createClass({
     );
   },
 
+  renderActiveIndicators: function (activeIndicator, activeIndicators) {
+    return (
+      <div className='indicator__overlay'>
+        <h1 className='heading--label'>Selected Indicator Overlays</h1>
+        <ul className='indicator__overlay--list'>
+          {activeIndicators.map((indicator) => (
+            <li
+              key={indicator}
+              onClick={() => true}
+              className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
+              <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator)}><span>toggle visibility</span></button>
+              <span className='indicator-layer-name'>{indicator}</span>
+              <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  },
+
   renderProjectSelector: function () {
     let projects = this.props.api.projects;
     const { selectedProjectFilters } = this.state;
@@ -446,6 +468,7 @@ var ProjectBrowse = React.createClass({
     const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
 
     let overlay;
+    let indicatorChartData;
     if (activeIndicator) {
       const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
       const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
@@ -459,6 +482,13 @@ var ProjectBrowse = React.createClass({
           })),
           regions
         };
+
+        if (this.state.listView) {
+          indicatorChartData = indicatorData.data.data.map(d => ({
+            name: d.sub_nat_id,
+            value: +d.data_value
+          }));
+        }
       }
     }
 
@@ -536,24 +566,29 @@ var ProjectBrowse = React.createClass({
         </div>
 
         {this.state.listView
-          ? <ProjectList projects={projects} meta={this.props.meta} />
+          ? (<div>
+            {indicatorChartData && (
+              <div className='inpage__body'>
+                <div className='inner'>
+                  <section className='inpage__section indicator-list'>
+                    <div className='section__header'>
+                      <h1 className='section__title'>Indicators</h1>
+                      {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
+                      <VerticalBarChart
+                        data={indicatorChartData}
+                        margin={barChartMargin}
+                        yTitle=''
+                      />
+                    </div>
+                  </section>
+                </div>
+              </div>
+            )}
+            <ProjectList projects={projects} meta={this.props.meta} />
+            </div>)
           : (<div className='map__outer'>
               <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
-              {activeIndicators.length ? (<div className='indicator__overlay'>
-                <h1 className='heading--label'>Selected Indicator Overlays</h1>
-                <ul className='indicator__overlay--list'>
-                  {activeIndicators.map((indicator) => (
-                    <li
-                      key={indicator}
-                      onClick={() => true}
-                      className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
-                      <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator)}><span>toggle visibility</span></button>
-                      <span className='indicator-layer-name'>{indicator}</span>
-                      <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
-                    </li>
-                  ))}
-                </ul>
-              </div>) : null}
+              {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
             </div>)}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
