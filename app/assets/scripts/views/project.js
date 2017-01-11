@@ -216,7 +216,7 @@ var Project = React.createClass({
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>Responsible Ministry</h2>
                     <ul className='link-list'>
-                      <li><a href='' className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
+                      <li><a href={`#/${lang}/ministry/${slugify(data.responsible_ministry[lang])}`} className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
                     </ul>
                   </div>
                 )}
