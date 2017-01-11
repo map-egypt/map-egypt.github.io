@@ -264,9 +264,11 @@ const Map = React.createClass({
     return (
       <div>
         <div className='map__container' ref={this.mountMap}></div>
-        <div className='legend__container'>
-          {this.renderMarkerLegend()}
-          {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale)}
+        <div className='inner'>
+          <div className='legend__container'>
+            {this.renderMarkerLegend()}
+            {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale)}
+          </div>
         </div>
       </div>
     );

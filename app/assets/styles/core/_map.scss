@@ -128,13 +128,14 @@
 }
 
 .legend__item {
-  font-size: 1em;
-  line-height: 1em;
-  margin: 0 1.5em 0 0;
+  font-size: 0.875rem;
+  line-height: 1rem;
+  margin: 0 1rem 0 0;
+  color: $base-color;
 }
 
 .legend__image {
-  height: 1em;
+  height: 0.875rem;
 }
 
 .legend__image--marker img {
