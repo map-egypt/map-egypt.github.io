@@ -128,25 +128,25 @@ const Map = React.createClass({
         case 'sequential':
           domain = values.map(d => +d.value);
           scale = scaleQuantile().domain(domain).range(SEQUENTIAL.slice(0, 5));
-        break;
+          break;
 
         case 'diverging':
         case 'divergent':
           domain = values.map(d => +d.value);
           scale = scaleQuantile().domain(domain).range(DIVERGENT.slice(0, 5));
-        break;
+          break;
 
         case 'categorical':
         default:
           domain = uniq(values.map(d => d.value));
-          let l = DIVERGENT.length
+          let l = DIVERGENT.length;
           if (domain.length > l) {
             console.log('WARNING: categorical data for this indicator contains too many unique categories');
             console.log('Shortening the number of indicators to', l);
             domain = domain.slice(0, l);
           }
-          scale = scaleOrdinal().domain(domain).range(DIVERGENT.slice(0, domain.length))
-        break;
+          scale = scaleOrdinal().domain(domain).range(DIVERGENT.slice(0, domain.length));
+          break;
       }
     }
 
@@ -200,7 +200,7 @@ const Map = React.createClass({
       let overlayScale = this.renderOverlay(props.overlay);
       this.setState({overlayScale});
     }
- },
+  },
 
   mountMap: function (el) {
     if (el) {
@@ -257,7 +257,7 @@ const Map = React.createClass({
           );
         })}
       </span>
-    )
+    );
   },
 
   render: function () {
