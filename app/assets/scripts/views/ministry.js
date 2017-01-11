@@ -26,11 +26,15 @@ var Ministry = React.createClass({
     }
     const basepath = '/' + this.props.meta.lang;
 
-    const ministryName = this.props.params.name;
+    const ministryName = decodeURIComponent(this.props.params.name);
     let ministryDisplayName;
 
     const lang = this.props.meta.lang;
     const ministryProjects = projects.filter((project) => {
+      const name = project.responsible_ministry[lang];
+      if (ministryName === name) {
+        ministryDisplayName = name;
+      }
       return project.responsible_ministry[lang] === ministryName;
     });
 
