@@ -51,10 +51,10 @@ var Ministry = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
-    const singleProject = ministryProjects.length <= 1 ? ' ministry--single' : '';
+    const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
 
     return (
-      <section className='inpage ministry'>
+      <section className='inpage funding'>
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
@@ -68,7 +68,7 @@ var Ministry = React.createClass({
             </div>
           </div>
         </header>
-        <div className={'inpage__body ministry' + singleProject}>
+        <div className={'inpage__body funding' + singleProject}>
           <div className='inner'>
             <section className='inpage__section inpage__section--overview'>
 

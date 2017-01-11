@@ -1,4 +1,4 @@
-.donor {
+.funding {
   .inpage__section--overview {
     min-height: 25rem;
   }
@@ -6,7 +6,7 @@
     padding-bottom: 2rem;
   }
 
-  .donor--single {
+  .funding--single {
     .inpage__col--map {
       @include col(8/12);
       @include media(small-down){

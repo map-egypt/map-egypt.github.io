@@ -57,10 +57,10 @@ var Donor = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
-    const singleProject = donorProjects.length <= 1 ? ' donor--single' : '';
+    const singleProject = donorProjects.length <= 1 ? ' funding--single' : '';
 
     return (
-      <section className='inpage donor'>
+      <section className='inpage funding'>
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
@@ -74,7 +74,7 @@ var Donor = React.createClass({
             </div>
           </div>
         </header>
-        <div className={'inpage__body donor' + singleProject}>
+        <div className={'inpage__body funding' + singleProject}>
           <div className='inner'>
             <section className='inpage__section inpage__section--overview'>
 
