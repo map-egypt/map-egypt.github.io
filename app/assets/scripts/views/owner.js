@@ -8,6 +8,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally, tally, shortText } from '../utils/format';
+import slugify from '../utils/slugify';
 
 var Owner = React.createClass({
   displayName: 'Owner',
@@ -26,16 +27,17 @@ var Owner = React.createClass({
     }
     const basepath = '/' + this.props.meta.lang;
 
-    const ownerName = decodeURIComponent(this.props.params.name);
+    const ownerName = this.props.params.name;
     let ownerDisplayName;
 
     const lang = this.props.meta.lang;
     const ownerProjects = projects.filter((project) => {
       const name = project.local_manager[lang];
-      if (ownerName === name) {
+      const sluggedName = slugify(name);
+      if (sluggedName === ownerName) {
         ownerDisplayName = name;
       }
-      return project.local_manager[lang] === ownerName;
+      return sluggedName === ownerName;
     });
 
     const projectBudgets = ownerProjects

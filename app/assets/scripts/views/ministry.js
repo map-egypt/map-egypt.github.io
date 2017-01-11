@@ -8,6 +8,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally, tally, shortText } from '../utils/format';
+import slugify from '../utils/slugify';
 
 var Ministry = React.createClass({
   displayName: 'Ministry',
@@ -26,16 +27,17 @@ var Ministry = React.createClass({
     }
     const basepath = '/' + this.props.meta.lang;
 
-    const ministryName = decodeURIComponent(this.props.params.name);
+    const ministryName = this.props.params.name;
     let ministryDisplayName;
 
     const lang = this.props.meta.lang;
     const ministryProjects = projects.filter((project) => {
       const name = project.responsible_ministry[lang];
-      if (ministryName === name) {
+      const sluggedName = slugify(name);
+      if (sluggedName === ministryName) {
         ministryDisplayName = name;
       }
-      return project.responsible_ministry[lang] === ministryName;
+      return sluggedName === ministryName;
     });
 
     const projectBudgets = ministryProjects
