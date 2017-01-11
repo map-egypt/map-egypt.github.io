@@ -117,3 +117,51 @@
     opacity: 1;
   }
 }
+
+.legend__container {
+  position: relative;
+  padding: 1em 0;
+}
+
+.legend__markers {
+  display: inline-block;
+}
+
+.legend__item {
+  font-size: 1em;
+  line-height: 1em;
+  margin: 0 1.5em 0 0;
+}
+
+.legend__image {
+  height: 1em;
+}
+
+.legend__image--marker img {
+  width: 18px;
+  margin-bottom: -24px;
+}
+
+.legend__image--cluster {
+  position: relative;
+  margin-right: 0.25em;
+  display: inline-block;
+  width: 1em;
+}
+
+.legend__image--cluster--bg {
+  border-radius: 50%;
+  position: absolute;
+  height: 1.5em;
+  left: -0.25em;
+  top: -0.25em;
+  background-color: rgba(241, 211, 87, 0.6);
+  width: 1.5em;
+}
+
+.legend__image--cluster--text {
+  color: black;
+  font-size: 0.8em;
+  left: 0.3em;
+  position: absolute;
+}

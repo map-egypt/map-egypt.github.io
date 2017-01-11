@@ -178,8 +178,11 @@ const Map = React.createClass({
   renderMarkerLegend: function () {
     return (
       <span className='legend__markers'>
-        <span className='legend__item legend__marker--cluster'>Cluster</span>
-        <span className='legend__item legend__marker--marker'>Marker</span>
+        <span className='legend__item legend__marker--cluster'><span className='legend__image legend__image--cluster'>
+            <span className='legend__image--cluster--bg'></span>
+            <span className='legend__image--cluster--text'>8</span>
+        </span> Group of Projects</span>
+        <span className='legend__item legend__marker--project'><span className='legend__image legend__image--marker'><img src='assets/graphics/content/map-pin.png' alt='A marker indicates a single project'/></span> Project</span>
       </span>
     );
   },
