@@ -244,7 +244,7 @@ var Project = React.createClass({
                 </div>
 
                 <div className='overview-item--alt'>
-                  <h2 className='overview-item__title heading-alt'>SDG Indicator</h2>
+                  <h2 className='overview-item__title heading-alt'>SDG Goals</h2>
                   <ul className='link-list'>
                     {get(data, 'sdg_indicator', []).map((indicator) => {
                       return (
@@ -257,7 +257,7 @@ var Project = React.createClass({
                 </div>
 
                 <div className='overview-item--alt'>
-                  <h2 className='overview-item__title heading-alt'>SDS Indicator</h2>
+                  <h2 className='overview-item__title heading-alt'>SDS Pillars</h2>
                   <ul className='link-list'>
                     {get(data, 'sds_indicator', []).map((indicator) => {
                       return (
