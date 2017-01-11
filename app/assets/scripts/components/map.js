@@ -7,6 +7,7 @@ import { extend, uniq } from 'lodash';
 import { get } from 'object-path';
 import { byEgy, byName } from '../utils/governorates';
 import { isNumerical } from '../utils/is-numerical-overlay';
+import { roundedNumber } from '../utils/format';
 const L = window.L;
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
@@ -64,7 +65,8 @@ const Map = React.createClass({
   getInitialState: function () {
     return {
       activeProject: true,
-      activeIndicator: false
+      activeIndicator: false,
+      overlayScale: false
     };
   },
 
@@ -109,7 +111,7 @@ const Map = React.createClass({
     if (this.overlay) {
       this.overlay.remove();
     }
-    if (!overlay) { return; }
+    if (!overlay) { return false; }
     const { values, regions } = overlay;
 
     // normalize category
@@ -125,13 +127,13 @@ const Map = React.createClass({
       switch (category.toLowerCase()) {
         case 'sequential':
           domain = values.map(d => +d.value);
-          scale = scaleQuantile().domain(domain).range(SEQUENTIAL);
+          scale = scaleQuantile().domain(domain).range(SEQUENTIAL.slice(0, 5));
         break;
 
         case 'diverging':
         case 'divergent':
           domain = values.map(d => +d.value);
-          scale = scaleQuantile().domain(domain).range(DIVERGENT);
+          scale = scaleQuantile().domain(domain).range(DIVERGENT.slice(0, 5));
         break;
 
         case 'categorical':
@@ -176,6 +178,8 @@ const Map = React.createClass({
       </div>
       `;
     }).addTo(this.overlayLayer);
+
+    return scale;
   },
 
   componentWillUnmount: function () {
@@ -188,16 +192,15 @@ const Map = React.createClass({
     }
 
     if (props.markers && (!this.props.markers || props.markers.length !== this.props.markers.length ||
-        JSON.stringify(props.markers) !== JSON.stringify(this.props.markers))) {
+        JSON.stringify(props.markers) !== JSON.stringify(this.props.markers) || props.lang !== this.props.lang)) {
       this.addClusterMarkers(props.markers, props.lang);
     }
 
     if ((props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) || (this.props.overlay && !props.overlay)) {
-      this.renderOverlay(props.overlay);
+      let overlayScale = this.renderOverlay(props.overlay);
+      this.setState({overlayScale});
     }
-
-    if (props.lang !== this.props.lang) this.addClusterMarkers(props.markers, props.lang);
-  },
+ },
 
   mountMap: function (el) {
     if (el) {
@@ -220,7 +223,8 @@ const Map = React.createClass({
         this.addClusterMarkers(markers, lang);
       }
       if (overlay) {
-        this.renderOverlay(overlay);
+        let overlayScale = this.renderOverlay(overlay);
+        this.setState({overlayScale});
       }
     }
   },
@@ -237,11 +241,21 @@ const Map = React.createClass({
     );
   },
 
-  renderOverlayLegend: function (overlay) {
-
+  renderOverlayLegend: function (scale) {
+    const isQuantile = scale.hasOwnProperty('invertExtent');
+    const iterable = (isQuantile ? scale.range() : scale.domain()).sort();
     return (
       <span className='legend__overlay'>
-
+        {iterable.map((d) => {
+          let backgroundColor = isQuantile ? d : scale(d);
+          let text = isQuantile ? scale.invertExtent(d).map(roundedNumber).join(' - ') : d;
+          return (
+            <span key={d} className='legend__item legend__overlay--item'>
+              <span className='legend__item--overlay--bg' style={{backgroundColor}}></span>
+              <span className='legend__item--overlay-text'>{text}</span>
+            </span>
+          );
+        })}
       </span>
     )
   },
@@ -252,6 +266,7 @@ const Map = React.createClass({
         <div className='map__container' ref={this.mountMap}></div>
         <div className='legend__container'>
           {this.renderMarkerLegend()}
+          {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale)}
         </div>
       </div>
     );

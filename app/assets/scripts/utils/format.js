@@ -39,3 +39,10 @@ function shortParagraph (s, wordCountTarget) {
   return result.join(' ') + suffix;
 }
 module.exports.shortParagraph = shortParagraph;
+
+function roundedNumber (n, decimalPlaces = 1) {
+  let base = Math.pow(10, decimalPlaces);
+  let multipled = Math.round(n * base);
+  return multipled / base;
+}
+module.exports.roundedNumber = roundedNumber;
