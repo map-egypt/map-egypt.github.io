@@ -461,7 +461,8 @@ var ProjectBrowse = React.createClass({
           values: indicatorData.data.data.map((d) => ({
             id: d.sub_nat_id,
             value: d.data_value
-          })),
+          })).filter(d => typeof d.value !== 'undefined'),
+          category: indicatorData.data.category,
           regions
         };
       }

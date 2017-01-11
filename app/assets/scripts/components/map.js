@@ -2,10 +2,11 @@
 import React from 'react';
 import window from 'global/window';
 import bbox from '@turf/bbox';
-import { scaleQuantile } from 'd3-scale';
-import { extend } from 'lodash';
+import { scaleQuantile, scaleOrdinal } from 'd3-scale';
+import { extend, uniq } from 'lodash';
 import { get } from 'object-path';
 import { byEgy, byName } from '../utils/governorates';
+import { isNumerical } from '../utils/is-numerical-overlay';
 const L = window.L;
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
@@ -16,11 +17,25 @@ const BOUNDS = [
 ];
 
 const SEQUENTIAL = [
-  '#f1eef6',
-  '#bdc9e1',
-  '#74a9cf',
-  '#2b8cbe',
-  '#045a8d'
+  '#f7fbff',
+  '#deebf7',
+  '#c6dbef',
+  '#9ecae1',
+  '#6baed6',
+  '#4292c6',
+  '#2171b5',
+  '#084594'
+];
+
+const DIVERGENT = [
+  '#d73027',
+  '#f46d43',
+  '#fdae61',
+  '#fee090',
+  '#e0f3f8',
+  '#abd9e9',
+  '#74add1',
+  '#4575b4'
 ];
 
 const OVERLAY_STYLE = {
@@ -96,8 +111,43 @@ const Map = React.createClass({
     }
     if (!overlay) { return; }
     const { values, regions } = overlay;
-    const domain = values.map((d) => +d.value);
-    const scale = scaleQuantile().domain(domain).range(SEQUENTIAL);
+
+    // normalize category
+    let { category } = overlay;
+    if (!category) {
+      category = isNumerical(values) ? 'diverging' : 'categorical';
+    } else if (category !== 'categorical' && !isNumerical(values)) {
+      category = 'categorical';
+    }
+
+    let domain, scale;
+    if (category) {
+      switch (category.toLowerCase()) {
+        case 'sequential':
+          domain = values.map(d => +d.value);
+          scale = scaleQuantile().domain(domain).range(SEQUENTIAL);
+        break;
+
+        case 'diverging':
+        case 'divergent':
+          domain = values.map(d => +d.value);
+          scale = scaleQuantile().domain(domain).range(DIVERGENT);
+        break;
+
+        case 'categorical':
+        default:
+          domain = uniq(values.map(d => d.value));
+          let l = DIVERGENT.length
+          if (domain.length > l) {
+            console.log('WARNING: categorical data for this indicator contains too many unique categories');
+            console.log('Shortening the number of indicators to', l);
+            domain = domain.slice(0, l);
+          }
+          scale = scaleOrdinal().domain(domain).range(DIVERGENT.slice(0, domain.length))
+        break;
+      }
+    }
+
     const style = (feature) => {
       if (!feature.properties._value) {
         return OVERLAY_STYLE;
@@ -109,7 +159,7 @@ const Map = React.createClass({
 
     const idMap = {};
     values.forEach((value) => {
-      idMap[value.id] = +value.value;
+      idMap[value.id] = category === 'categorical' ? value.value : +value.value;
     });
 
     regions.features.forEach(function (feature) {
@@ -179,17 +229,21 @@ const Map = React.createClass({
     return (
       <span className='legend__markers'>
         <span className='legend__item legend__marker--cluster'><span className='legend__image legend__image--cluster'>
-            <span className='legend__image--cluster--bg'></span>
-            <span className='legend__image--cluster--text'>8</span>
+          <span className='legend__image--cluster--bg'></span>
+          <span className='legend__image--cluster--text'>8</span>
         </span> Group of Projects</span>
         <span className='legend__item legend__marker--project'><span className='legend__image legend__image--marker'><img src='assets/graphics/content/map-pin.png' alt='A marker indicates a single project'/></span> Project</span>
       </span>
     );
   },
 
-  renderOverlayLegend: function () {
+  renderOverlayLegend: function (overlay) {
 
+    return (
+      <span className='legend__overlay'>
 
+      </span>
+    )
   },
 
   render: function () {
