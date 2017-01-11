@@ -12,6 +12,7 @@ import { tally, shortTally, pct, shortText } from '../utils/format';
 import { byId as districtNames } from '../utils/districts';
 import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
+import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -85,6 +86,11 @@ var Project = React.createClass({
       }
       return false;
     });
+
+    // Create map markers for this project
+    const thisProject = allProjects.find(project => project.id === meta.id);
+    const markers = getProjectCentroids([thisProject], get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const mapLocation = getFeatureCollection(markers);
 
     // All three project comparison charts need to have the same ordering in the Y axis,
     // so don't do any more sorting after the budget map.
@@ -171,7 +177,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--overview'>
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map />
+                <Map markers={markers} location={mapLocation} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
