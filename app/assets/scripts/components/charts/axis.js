@@ -36,7 +36,6 @@ const Axis = React.createClass({
     }
 
     const format = this.props.format || defaultFormat;
-    const domain = scale.domain();
     const hasLinks = this.props.links && Array.isArray(this.props.links) && this.props.links.length;
 
     return (
