@@ -426,8 +426,8 @@ var ProjectBrowse = React.createClass({
 
               <fieldset key={filter.display}
                 className='form__fieldset'>
-                <div className='form__group'>
-                  <label className='form__label'>{filter.display}</label>
+                 <label className='form__label'>{filter.display}</label>
+                 <div className='form__group'>
                   {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang)).map((item) => (
                     <label key={item.display}
                       className='form__option form__option--custom-checkbox'>
@@ -587,16 +587,18 @@ var ProjectBrowse = React.createClass({
           ? (<div>
             {indicatorChartData && (
               <div className='inpage__body'>
-                <div className='inner'>
-                  <section className='inpage__section indicator-list'>
+                <div className='inner indicator-list'>
+                  <section className='inpage__section'>
                     <div className='section__header'>
                       <h1 className='section__title'>Indicators</h1>
-                      {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
-                      <VerticalBarChart
-                        data={indicatorChartData}
-                        margin={barChartMargin}
-                        yTitle=''
-                      />
+                      <div className='indicator-list-container'>
+                        {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
+                        <VerticalBarChart
+                          data={indicatorChartData}
+                          margin={barChartMargin}
+                          yTitle=''
+                        />
+                      </div>
                     </div>
                   </section>
                 </div>

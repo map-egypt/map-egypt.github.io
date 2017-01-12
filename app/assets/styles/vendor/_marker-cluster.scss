@@ -23,17 +23,21 @@
 	}
 
 .marker-cluster-medium {
-	background-color: rgba(241, 211, 87, 0.6);
+	background-color: rgba($base-color, 0.6);
 	}
 .marker-cluster-medium div {
-	background-color: rgba(240, 194, 12, 0.6);
+	background-color: rgba($base-color, 0.6);
+	color: #fff;
+	font-weight: $base-font-bold;
 	}
 
 .marker-cluster-large {
-	background-color: rgba(253, 156, 115, 0.6);
+	background-color: rgba($base-color, 0.6);
 	}
 .marker-cluster-large div {
-	background-color: rgba(241, 128, 23, 0.6);
+	background-color: rgba($base-color, 0.6);
+	color: #fff;
+	font-weight: $base-font-bold;
 	}
 
 	/* IE 6-8 fallback colors */
