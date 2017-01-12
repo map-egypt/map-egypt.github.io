@@ -156,18 +156,20 @@
     list-style: none;
     padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
     display: inline-block;
-    @include col(4/12, $offset: 0/12);
-    max-width: 22rem;
-    min-width: 18rem;
+    @include media(medium-up) {
+       @include col(4/12, $cycle: 3);
+        min-width: 10rem;
+    }
+    @include media(medium-list-down) {
+      @include col(6/12, $uncycle: 3, $cycle: 2);
+ /*     max-width: 20rem;*/
+    }
     @include media(small-down) {
-      @include col(5.5/12);
+      @include col(6/12, $cycle: 2);
     }
     @include media(xsmall-only) {
-      @include col(12/12);
-    }
-    @include media(medium-up) {
-      max-width: 22rem;
-      @include col(3.5/12, $offset:1/36);
+      @include col(12/12, $uncycle: 1);
+      max-width: 18rem;
     }
   }
 }

@@ -281,7 +281,7 @@
   }
   
   .react-autosuggest__input {
-    padding-right: 7rem;
+    padding-right: 3rem;
   }
 
   .button--list li{ 
@@ -395,14 +395,13 @@
     float: right;
   }
   .form__input-group-button:last-child > .button {
-    border-top-left-radius: $global-spacing/4;
-    border-bottom-left-radius: $global-spacing/4;
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    border-top-right-radius: $global-spacing/4;
+    border-bottom-right-radius: $global-spacing/4;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
   }
   .heading--label {
     margin-left: $global-spacing/2;
-    float: right;
   }
 
   .button--download:after {
@@ -422,4 +421,50 @@
   .chart__axis-ticks {
     direction: ltr;
   }
+  .marker-cluster div {
+    margin-left: 0;
+    margin-right: 5px
+  }
+  .timeline__headline, .timeline__row {
+    float: right;
+    margin-right: 0;
+  }
+  .legend__item {
+    float: right;
+  }
+  .legend__image--cluster {
+    margin-right: 0;
+    margin-left: 0.5em;
+  }
+  .legend__marker--cluster{
+    &:first-child {
+      margin-top: 0.2rem;
+    };
+  }
+
+  .indicator-list-container .chart-container:last-child {
+    margin-right: 5rem;
+  }
+
+  .indicator-list {
+    .section__title {
+      float: none;
+    }
+  }
+
+  .indicator-list-container { 
+  .chart-container {
+    @include media(medium-up) {
+      float: right;
+      margin-left: 0;
+      margin-top: 5rem;
+    }
+  }
+  .indicator__overlay {
+    left: 0;
+    @include media(medium-up) {
+      float: right;
+    }
+  }
+}
 }

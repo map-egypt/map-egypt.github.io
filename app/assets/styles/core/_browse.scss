@@ -3,7 +3,7 @@
     padding-bottom: 0;
   }
   .map__container {
-    height: 550px;
+    height: 650px;
   }
 }
 
@@ -19,6 +19,12 @@
     position: absolute;
     top: 0;
     right: 0;
+  }
+}
+
+.indicator-list {
+  .inpage__section:last-child {
+    margin-bottom: 0;
   }
 }
 

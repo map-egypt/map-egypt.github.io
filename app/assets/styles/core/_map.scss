@@ -58,6 +58,13 @@
     text-transform: capitalize;
     font-weight: $base-font-bold;
   }
+
+  .indicator-list-container {
+    .indicator__overlay {
+      @include col(4/12);
+
+    }
+  }
   .indicator__overlay--list {
     padding: 0 $global-spacing $global-spacing $global-spacing;
   }
@@ -105,11 +112,9 @@
 }
 
 .indicator-list .indicator__overlay {
-  @include col(12/12);
-  float: right;
   position: relative;
   box-shadow: none;
-  li {
+ /* li {
     display: block;
     float: left;
     box-shadow: inset -1px 0px 0 0 #E9E9E9;
@@ -125,7 +130,7 @@
   .indicator-close {
     margin-left: $global-spacing/4;
     right: inherit;
-  }
+  }*/
 }
 
 .indicator-close, .indicator-toggle {
@@ -159,7 +164,7 @@
   padding: 1em 0;
 }
 
-.home {
+.home, .category {
   .map__group {
     position: relative;
   }
@@ -216,15 +221,15 @@
   height: 1.5em;
   left: -0.25em;
   top: -0.25em;
-  background-color: rgba(241, 211, 87, 0.6);
+  background-color: rgba($base-color, 0.6);
   width: 1.5em;
 }
 
 .legend__image--cluster--text {
-  color: black;
   font-size: 0.8em;
   left: 0.4em;
   position: absolute;
+  color: #fff;
 }
 
 .legend__item--overlay--bg {

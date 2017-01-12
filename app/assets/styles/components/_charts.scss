@@ -1,3 +1,25 @@
+.indicator-list-container { 
+  .chart-container {
+    @include col(12/12);
+    @include media(medium-up) {
+      @include col(6/12);
+      margin-left: 5rem;
+      margin-top: 5rem;
+    }
+  }
+  .indicator__overlay {
+    @include col(12/12);
+    left: 0;
+    @include media(medium-up) {
+      @include col(4/12);
+    }
+  }
+}
+
+.indicator-list-container {
+ @include col(12/12);
+}
+
 .chart-container {
   height: 240px;
   width: 100%;
