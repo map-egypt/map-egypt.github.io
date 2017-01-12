@@ -268,7 +268,7 @@ const Map = React.createClass({
 
   render: function () {
     return (
-      <div>
+      <div className='map__group'>
         <div className='map__container' ref={this.mountMap}></div>
         <div className='inner'>
           <div className='legend__container'>

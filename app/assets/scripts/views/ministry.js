@@ -9,6 +9,7 @@ import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally, tally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
+import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
 var Ministry = React.createClass({
   displayName: 'Ministry',
@@ -39,6 +40,8 @@ var Ministry = React.createClass({
       }
       return sluggedName === ministryName;
     });
+    const markers = getProjectCentroids(ministryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const mapLocation = getFeatureCollection(markers);
 
     const projectBudgets = ministryProjects
       .map((project) => project.budget)
@@ -80,7 +83,7 @@ var Ministry = React.createClass({
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map />
+                <Map markers={markers} location={mapLocation} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>

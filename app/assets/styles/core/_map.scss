@@ -159,6 +159,30 @@
   padding: 1em 0;
 }
 
+.home {
+  .map__group {
+    position: relative;
+  }
+  .legend__container {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(255,255,255, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+  }
+}
+
+.inpage__col--map {
+  .legend__container {
+    position: absolute;
+    background-color: rgba(255,255,255, 0.6);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    margin-top: 0.75rem;
+  }
+}
+
 .legend__markers {
   display: inline-block;
 }
@@ -199,7 +223,7 @@
 .legend__image--cluster--text {
   color: black;
   font-size: 0.8em;
-  left: 0.3em;
+  left: 0.4em;
   position: absolute;
 }
 

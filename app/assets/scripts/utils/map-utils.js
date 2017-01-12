@@ -39,3 +39,18 @@ module.exports.getProjectCentroids = function (projects, features) {
 
   return markers;
 };
+
+// encodes an array of markers into a geojson feature collection
+module.exports.getFeatureCollection = function (markers) {
+  return {
+    type: 'FeatureCollection',
+    features: markers.map(m => ({
+      type: 'Feature',
+      properties: {},
+      geometry: {
+        type: 'Point',
+        coordinates: [m.centroid[1], m.centroid[0]]
+      }
+    }))
+  };
+};

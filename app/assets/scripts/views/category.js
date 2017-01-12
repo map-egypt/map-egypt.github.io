@@ -9,6 +9,7 @@ import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { tally, shortTally, pct, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
+import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
 const chartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
 
@@ -83,6 +84,9 @@ var Category = React.createClass({
       });
     });
 
+    const markers = getProjectCentroids(categoryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const mapLocation = getFeatureCollection(markers);
+
     const categoryBudgets = categoryProjects
       .map((project) => project.budget)
       .reduce((a, b) => a.concat(b), []);
@@ -130,7 +134,7 @@ var Category = React.createClass({
         <div className='inpage__body'>
 
           <div className='inner'>
-            <Map />
+            <Map markers={markers} location={mapLocation} />
             <section className='inpage__section'>
               <h1 className='section__title heading--small'>Comparison</h1>
               <div className='chart-content chart__inline--labels'>
