@@ -65,6 +65,11 @@ const SDS = {
   display: 'SDS Goals',
   items: (projects, lang) => {
     const goals = countByProp(projects.reduce((a, b) => a.concat(b.sds_indicators), []), lang);
+<<<<<<< HEAD
+    return Object.keys(goals).map((goal) => ({
+      display: `${goal} (${goals[goal]})`,
+      filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.map(d => d[lang]).indexOf(goal) >= 0
+=======
     return Object.keys(goals).map((goal) => ({
       display: `${goal} (${goals[goal]})`,
       filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.map(d => d[lang]).indexOf(goal) >= 0
@@ -79,10 +84,25 @@ const SDG = {
     return Object.keys(goals).map((goal) => ({
       display: `${goal} (${goals[goal]})`,
       filter: (p) => Array.isArray(p.sdg_indicators) && p.sdg_indicators.map(d => d[lang]).indexOf(goal) >= 0
+>>>>>>> develop
     }));
   }
 };
 
+<<<<<<< HEAD
+const SDG = {
+  display: 'SDG Goals',
+  items: (projects, lang) => {
+    const goals = countByProp(projects.reduce((a, b) => a.concat(b.sdg_indicators), []), lang);
+    return Object.keys(goals).map((goal) => ({
+      display: `${goal} (${goals[goal]})`,
+      filter: (p) => Array.isArray(p.sdg_indicators) && p.sdg_indicators.map(d => d[lang]).indexOf(goal) >= 0
+    }));
+  }
+};
+
+=======
+>>>>>>> develop
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
 
 var ProjectBrowse = React.createClass({
