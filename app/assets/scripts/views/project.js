@@ -185,13 +185,10 @@ var Project = React.createClass({
                 </ul>
 
                 <div className='inpage__overview-links'>
-                {data.description && (
-                  <div>
-                    <ul>
-                      <li>{data.description}</li>
-                    </ul>
-                  </div>
-                )}
+                <h2 className='overview-item__title heading-alt'>Objective</h2>
+                <ul>
+                  <li>{data.description}</li>
+                </ul>
                 {data.location && (
                   <div className='overview-item'>
                     <h1 className='overview-item__title heading-alt'>Location</h1>
