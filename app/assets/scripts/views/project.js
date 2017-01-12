@@ -324,7 +324,7 @@ var Project = React.createClass({
                       return (
                         <tr key={d.kpi}>
                           <td className={'project--' + key}>
-                            <p className='card-meta__value--status activity-name'>{d.status[lang]}</p>
+                            <p className='activity-name'>{d.status[lang]}</p>
                           </td>
                           <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>
