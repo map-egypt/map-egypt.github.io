@@ -20,10 +20,10 @@ const INDICATORS = 'indicators';
 const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
 const barChartMargin = { left: 50, right: 20, top: 10, bottom: 50 };
 
-function countByProp (array, property) {
+function countByProp (array, path) {
   const result = {};
   array.forEach((item) => {
-    const name = property ? item[property] : item;
+    const name = path ? get(item, path, '--') : item;
     result[name] = result[name] || 0;
     result[name] += 1;
   });
@@ -41,11 +41,11 @@ const STATUS = {
 
 const CATEGORY = {
   display: 'Category',
-  items: (projects) => {
-    const categories = countByProp(projects.reduce((a, b) => a.concat(b.categories), []));
+  items: (projects, lang) => {
+    const categories = countByProp(projects.reduce((a, b) => a.concat(b.categories), []), lang);
     return Object.keys(categories).map((category) => ({
       display: `${category} (${categories[category]})`,
-      filter: (p) => Array.isArray(p.categories) && p.categories.indexOf(category) >= 0
+      filter: (p) => Array.isArray(p.categories) && p.categories.map(d => d[lang]).indexOf(category) >= 0
     }));
   }
 };
@@ -63,16 +63,27 @@ const DONOR = {
 
 const SDS = {
   display: 'SDS Goals',
-  items: (projects) => {
-    const goals = countByProp(projects.reduce((a, b) => a.concat(b.sds_indicators), []));
+  items: (projects, lang) => {
+    const goals = countByProp(projects.reduce((a, b) => a.concat(b.sds_indicators), []), lang);
     return Object.keys(goals).map((goal) => ({
       display: `${goal} (${goals[goal]})`,
-      filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.indexOf(goal) >= 0
+      filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.map(d => d[lang]).indexOf(goal) >= 0
     }));
   }
 };
 
-const projectFilters = [STATUS, CATEGORY, DONOR, SDS];
+const SDG = {
+  display: 'SDG Goals',
+  items: (projects, lang) => {
+    const goals = countByProp(projects.reduce((a, b) => a.concat(b.sdg_indicators), []), lang);
+    return Object.keys(goals).map((goal) => ({
+      display: `${goal} (${goals[goal]})`,
+      filter: (p) => Array.isArray(p.sdg_indicators) && p.sdg_indicators.map(d => d[lang]).indexOf(goal) >= 0
+    }));
+  }
+};
+
+const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
 
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
@@ -389,6 +400,7 @@ var ProjectBrowse = React.createClass({
 
   renderProjectSelector: function () {
     let projects = this.props.api.projects;
+    let { lang } = this.props.meta;
     const { selectedProjectFilters } = this.state;
     return (
       <section className='modal modal--large'>
@@ -416,7 +428,7 @@ var ProjectBrowse = React.createClass({
                 className='form__fieldset'>
                 <div className='form__group'>
                   <label className='form__label'>{filter.display}</label>
-                  {(Array.isArray(filter.items) ? filter.items : filter.items(projects)).map((item) => (
+                  {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang)).map((item) => (
                     <label key={item.display}
                       className='form__option form__option--custom-checkbox'>
                       <input
@@ -594,7 +606,7 @@ var ProjectBrowse = React.createClass({
             </div>)
           : (<div className='map__outer'>
               <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
-              {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
+              {activeIndicators.length ? this.renderActiveIndicators(activeIndicator, activeIndicators) : null}
             </div>)}
 
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
