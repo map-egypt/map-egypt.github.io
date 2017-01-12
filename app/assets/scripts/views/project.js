@@ -239,7 +239,7 @@ var Project = React.createClass({
                   </div>
                 )}
 
-                {data.kmi.length && (
+                {data.kmi && (
                   <div className='overview-item--alt'>
                     <h2 className='overview-item__title heading-alt'>KMI Components</h2>
                     <ul className='link-list'>
@@ -254,7 +254,7 @@ var Project = React.createClass({
                   </div>
                 )}
 
-                {data.sdg_indicator.length && (
+                {data.sdg_indicator && (
                   <div className='overview-item--alt'>
                     <h2 className='overview-item__title heading-alt'>SDG Goals</h2>
                     <ul className='link-list'>
