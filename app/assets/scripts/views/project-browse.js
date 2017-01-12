@@ -13,7 +13,7 @@ import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
-import VerticalBarChart from '../components/charts/vertical-bar';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
@@ -592,7 +592,7 @@ var ProjectBrowse = React.createClass({
                     <div className='section__header'>
                       <h1 className='section__title'>Indicators</h1>
                       {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
-                      <VerticalBarChart
+                      <HorizontalBarChart
                         data={indicatorChartData}
                         margin={barChartMargin}
                         yTitle=''
