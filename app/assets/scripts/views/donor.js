@@ -91,12 +91,15 @@ var Donor = React.createClass({
                   <li> {tally(donorProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
-                  {!singleProject && (<HorizontalBarChart
-                    data={chartData}
-                    margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
-                    xFormat={shortTally}
-                    yFormat={shortText}
-                  />)}
+                  <div className='chart-content'>
+                    <h3>Amount Funded</h3>
+                    {!singleProject && (<HorizontalBarChart
+                      data={chartData}
+                      margin={{ left: 130, right: 50, top: 10, bottom: 50 }}
+                      xFormat={shortTally}
+                      yFormat={shortText}
+                    />)}
+                  </div>
                 </div>
               </div>
             </section>
@@ -104,7 +107,7 @@ var Donor = React.createClass({
 
           <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h1 className='section__title heading--small'>Projects Contributed To</h1>
+              <h1 className='section__title heading--small'>Projects Funded</h1>
               <ul className='projects-list'>
                 {donorProjects.map((p) => {
                   return (
