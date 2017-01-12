@@ -347,6 +347,7 @@ var Project = React.createClass({
                   yTitle=''
                   xFormat={shortTally}
                   yFormat={shortText}
+                  activeProject={meta.name}
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
@@ -357,6 +358,7 @@ var Project = React.createClass({
                   yTitle=''
                   xFormat={pct}
                   yFormat={shortText}
+                  activeProject={meta.name}
                 />
               </div>
               {authenticated ? (
@@ -368,6 +370,7 @@ var Project = React.createClass({
                     yTitle=''
                     xFormat={tally}
                     yFormat={shortText}
+                    activeProject={meta.name}
                   />
                 </div>
               ) : null}

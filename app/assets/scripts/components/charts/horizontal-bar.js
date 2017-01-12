@@ -12,7 +12,8 @@ var HorizontalBarChart = React.createClass({
     margin: React.PropTypes.object,
     yTitle: React.PropTypes.string,
     xFormat: React.PropTypes.func,
-    yFormat: React.PropTypes.func
+    yFormat: React.PropTypes.func,
+    activeProject: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -107,9 +108,10 @@ var HorizontalBarChart = React.createClass({
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d, i) => {
+              const active = d.name === this.props.activeProject ? ' active' : '';
               return <rect
                 key={d.name + i}
-                className='chart__bar'
+                className={'chart__bar' + active}
                 y={yScale(d.name) + rectHeight / 3}
                 x={0}
                 height={rectHeight}

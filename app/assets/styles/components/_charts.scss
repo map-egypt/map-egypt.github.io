@@ -45,6 +45,9 @@
 
 .chart__bar {
   fill: $base-color;
+  &.active {
+    fill: $primary-color;
+  }
 }
 
 .chart__axis-ticks {
