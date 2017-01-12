@@ -7,6 +7,7 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
+import ProjectTimeline from '../components/project-timeline';
 import { shortTally, tally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
@@ -75,6 +76,16 @@ var Ministry = React.createClass({
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{ministryDisplayName}</h1>
             </div>
+            {ministryProjects.map((project, i) => {
+              if (!project.actual_end_date) {
+                return (
+                  <div key ={'timeline-' + i}>
+                    <h5>{project.name}</h5>
+                    <ProjectTimeline project={project} />
+                  </div>
+                );
+              }
+            })}
           </div>
         </header>
         <div className={'inpage__body funding' + singleProject}>
