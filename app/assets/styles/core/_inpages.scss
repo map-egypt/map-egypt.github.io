@@ -336,7 +336,6 @@
 }
 
 .tags {
-  float: left;
   margin-top: $global-spacing * 1.5;
   &__group {
     @include col(12/12);

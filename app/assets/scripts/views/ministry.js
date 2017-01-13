@@ -102,12 +102,15 @@ var Ministry = React.createClass({
                   <li> {tally(ministryProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
-                  {!singleProject && (<HorizontalBarChart
-                    data={chartData}
-                    margin={{ left: 140, right: 50, top: 10, bottom: 50 }}
-                    xFormat={shortTally}
-                    yFormat={shortText}
-                  />)}
+                  <div className='chart-content'>
+                    <h3>Amount Funded</h3>
+                    {!singleProject && (<HorizontalBarChart
+                      data={chartData}
+                      margin={{ left: 140, right: 50, top: 10, bottom: 50 }}
+                      xFormat={shortTally}
+                      yFormat={shortText}
+                    />)}
+                  </div>
                 </div>
               </div>
             </section>

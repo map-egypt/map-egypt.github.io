@@ -213,7 +213,7 @@ var Project = React.createClass({
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>Project Link</h2>
                     <ul className='link-list'>
-                      <li><a href={data.project_link} className='link--primary'><span>Link</span></a></li>
+                      <li><a href={data.project_link} className='link--primary'><span> View Project Documentation</span></a></li>
                     </ul>
                   </div>
                 )}
@@ -330,7 +330,7 @@ var Project = React.createClass({
                       return (
                         <tr key={d.kpi}>
                           <td className={'project--' + key}>
-                            <p className='card-meta__value--status activity-name'>{d.status[lang]}</p>
+                            <p className='activity-name'>{d.status[lang]}</p>
                           </td>
                           <td className='cell-name'>{d.component}</td>
                           <td>{d.kpi}</td>

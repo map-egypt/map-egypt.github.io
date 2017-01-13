@@ -17,6 +17,11 @@
   }
 }
 
+.inpage__overview-chart {
+  border-top: solid 1px $tertiary-color;
+  padding-top: $global-spacing;
+}
+
 .indicator-list-container {
  @include col(12/12);
 }

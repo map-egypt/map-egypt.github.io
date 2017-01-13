@@ -129,10 +129,13 @@
     font-weight: $base-font-bold;
   }
   .row-name, .row-kpi {
-    width: 30%;
+    width: 25%;
   }
-  .row-status, .row-target, .row-progress, .row-date {
+  .row-target, .row-progress, .row-date {
     width: 10%;
+  }
+  .row-status {
+    width: 15%;
   }
 }
 
