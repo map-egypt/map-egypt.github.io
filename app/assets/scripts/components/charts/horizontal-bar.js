@@ -53,7 +53,7 @@ var HorizontalBarChart = React.createClass({
     this.onWindowResize();
     // Debounce event.
     this.onWindowResize = debounce(this.onWindowResize, 200);
-    this.mouseover = throttle(this.mouseover, 15);
+    this.mouseover = throttle(this.mouseover, 5);
     window.addEventListener('resize', this.onWindowResize);
   },
 
