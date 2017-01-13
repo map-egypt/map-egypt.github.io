@@ -596,6 +596,7 @@ var ProjectBrowse = React.createClass({
                         data={indicatorChartData}
                         margin={barChartMargin}
                         yTitle=''
+                        lang={this.props.meta.lang}
                       />
                     </div>
                   </section>

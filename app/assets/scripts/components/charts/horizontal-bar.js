@@ -14,7 +14,8 @@ var HorizontalBarChart = React.createClass({
     yTitle: React.PropTypes.string,
     xFormat: React.PropTypes.func,
     yFormat: React.PropTypes.func,
-    activeProject: React.PropTypes.string
+    activeProject: React.PropTypes.string,
+    lang: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -71,10 +72,11 @@ var HorizontalBarChart = React.createClass({
       return <div className='chart-container' ref='chartContainer' />;
     }
 
+    const langSelector = this.props.lang === 'en' ? 'name' : 'nameAr';
     data.map((a, i) => {
       let name = a.name;
-      if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name).name);
-      if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name).name;
+      if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name)[langSelector]);
+      if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name)[langSelector];
       data[i].name = name;
     });
 
