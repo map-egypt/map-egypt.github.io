@@ -67,7 +67,8 @@ const SDS = {
     const goals = countByProp(projects.reduce((a, b) => a.concat(b.sds_indicators), []), lang);
     return Object.keys(goals).map((goal) => ({
       display: `${goal} (${goals[goal]})`,
-      filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.map(d => d[lang]).indexOf(goal) >= 
+      filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.map(d => d[lang]).indexOf(goal) >= 0
+    }));
   }
 };
 
