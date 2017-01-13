@@ -568,7 +568,7 @@ var ProjectBrowse = React.createClass({
             </div>
           </div>
         </header>
-        <div className='map__actions'>
+        <div className={`map__actions ${this.state.listView ? 'hidden' : ''}`}>
           <div className='inner'>
             <div className='map__search-input'>
               <div className='autosuggest'>
