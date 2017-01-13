@@ -3,6 +3,7 @@ import React from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { debounce, throttle, max } from 'lodash';
 import Axis from './axis';
+import { byEgy } from '../../utils/governorates';
 
 var HorizontalBarChart = React.createClass({
   displayName: 'HorizontalBarChart',
@@ -70,8 +71,15 @@ var HorizontalBarChart = React.createClass({
       return <div className='chart-container' ref='chartContainer' />;
     }
 
-    const dataNames = data.map(a => a.name);
-    const dataValues = data.map(a => a.value);
+    data.map((a, i) => {
+      let name = a.name;
+      if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name).name);
+      if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name).name;
+      data[i].name = name;
+    });
+
+    const dataNames = data.map((a) => a.name);
+    const dataValues = data.map((a) => a.value);
     const links = data.map(a => a.link).filter(Boolean);
 
     const ordinalScale = scaleBand()
