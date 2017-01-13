@@ -143,6 +143,7 @@ var Category = React.createClass({
                   data={numProjectsChartData}
                   yFormat={shortText}
                   margin={chartMargin}
+                  activeProject={categoryDisplayName}
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
@@ -152,6 +153,7 @@ var Category = React.createClass({
                   margin={chartMargin}
                   yFormat={shortText}
                   xFormat={shortTally}
+                  activeProject={categoryDisplayName}
                 />
               </div>
             </section>

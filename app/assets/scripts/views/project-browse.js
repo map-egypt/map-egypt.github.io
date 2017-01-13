@@ -13,12 +13,12 @@ import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
-import VerticalBarChart from '../components/charts/vertical-bar';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
 const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
-const barChartMargin = { left: 50, right: 20, top: 10, bottom: 50 };
+const barChartMargin = { left: 75, right: 20, top: 10, bottom: 50 };
 
 function countByProp (array, path) {
   const result = {};
@@ -593,11 +593,12 @@ var ProjectBrowse = React.createClass({
                     <div className='section__header'>
                       <h1 className='section__title'>Indicators</h1>
                       <div className='indicator-list-container'>
-                        {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
-                        <VerticalBarChart
+                      {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
+                        <HorizontalBarChart
                           data={indicatorChartData}
                           margin={barChartMargin}
                           yTitle=''
+                          lang={this.props.meta.lang}
                         />
                       </div>
                     </div>

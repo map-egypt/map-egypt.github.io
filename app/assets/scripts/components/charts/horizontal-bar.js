@@ -3,6 +3,7 @@ import React from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { debounce, throttle, max } from 'lodash';
 import Axis from './axis';
+import { byEgy } from '../../utils/governorates';
 
 var HorizontalBarChart = React.createClass({
   displayName: 'HorizontalBarChart',
@@ -12,7 +13,9 @@ var HorizontalBarChart = React.createClass({
     margin: React.PropTypes.object,
     yTitle: React.PropTypes.string,
     xFormat: React.PropTypes.func,
-    yFormat: React.PropTypes.func
+    yFormat: React.PropTypes.func,
+    activeProject: React.PropTypes.string,
+    lang: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -50,7 +53,7 @@ var HorizontalBarChart = React.createClass({
     this.onWindowResize();
     // Debounce event.
     this.onWindowResize = debounce(this.onWindowResize, 200);
-    this.mouseover = throttle(this.mouseover, 15);
+    this.mouseover = throttle(this.mouseover, 5);
     window.addEventListener('resize', this.onWindowResize);
   },
 
@@ -69,8 +72,16 @@ var HorizontalBarChart = React.createClass({
       return <div className='chart-container' ref='chartContainer' />;
     }
 
-    const dataNames = data.map(a => a.name);
-    const dataValues = data.map(a => a.value);
+    const langSelector = this.props.lang === 'en' ? 'name' : 'nameAr';
+    data.map((a, i) => {
+      let name = a.name;
+      if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name)[langSelector]);
+      if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name)[langSelector];
+      data[i].name = name;
+    });
+
+    const dataNames = data.map((a) => a.name);
+    const dataValues = data.map((a) => a.value);
     const links = data.map(a => a.link).filter(Boolean);
 
     const ordinalScale = scaleBand()
@@ -107,9 +118,10 @@ var HorizontalBarChart = React.createClass({
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d, i) => {
+              const active = d.name === this.props.activeProject ? ' active' : '';
               return <rect
                 key={d.name + i}
-                className='chart__bar'
+                className={'chart__bar' + active}
                 y={yScale(d.name) + rectHeight / 3}
                 x={0}
                 height={rectHeight}

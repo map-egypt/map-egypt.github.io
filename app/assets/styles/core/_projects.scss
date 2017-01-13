@@ -10,13 +10,14 @@
   padding-top: 1rem;
 
   .overview-item {
+    float: left;
     @include col(6/12, $cycle:2);
     @include media(small-down) {
       @include col(12/12);
     }
   }
   .overview-item--alt {
-    @include col(12/12);  
+    @include col(12/12);
   }
 }
 
@@ -24,7 +25,7 @@
     display: block;
     margin-bottom: $global-spacing/2;
     margin-top: $global-spacing;
-  
+
   ul {
     margin: 0;
     overflow:hidden;

@@ -185,28 +185,29 @@ var Project = React.createClass({
                 </ul>
 
                 <div className='inpage__overview-links'>
-                  <h2 className='overview-item__title heading-alt'>Objective</h2>
-                  <ul>
-                    <li>{data.description}</li>
-                  </ul>
-
-                <div className='overview-item'>
-                  <h1 className='overview-item__title heading-alt'>Location</h1>
-                  <div className='link-list'>
-                    {get(data, 'location', []).map((loc, i) => {
-                      const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
-                        ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
-                      if (id) {
-                        const display = id[locationLang];
-                        return (
-                          <span key={id.id}>
-                            <span>{display || '--'}{i === data.location.length - 1 ? '' : ', '}</span>
-                          </span>
-                        );
-                      }
-                    })}
+                <h2 className='overview-item__title heading-alt'>Objective</h2>
+                <ul>
+                  <li>{data.description}</li>
+                </ul>
+                {data.location && (
+                  <div className='overview-item'>
+                    <h1 className='overview-item__title heading-alt'>Location</h1>
+                    <div className='link-list'>
+                       {get(data, 'location', []).map((loc, i) => {
+                         const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
+                           ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
+                         if (id) {
+                           const display = id[locationLang];
+                           return (
+                             <span key={id.id}>
+                               <span>{display || '--'}{i === data.location.length - 1 ? '' : ', '}</span>
+                             </span>
+                           );
+                         }
+                       })}
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {data.project_link && (
                   <div className='overview-item'>
@@ -235,44 +236,50 @@ var Project = React.createClass({
                   </div>
                 )}
 
-                <div className='overview-item--alt'>
-                  <h2 className='overview-item__title heading-alt'>KMI Components</h2>
-                  <ul className='link-list'>
-                    {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
-                      return (
-                        <li key={component}>
-                          <span>{component}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+                {data.kmi && (
+                  <div className='overview-item--alt'>
+                    <h2 className='overview-item__title heading-alt'>KMI Components</h2>
+                    <ul className='link-list'>
+                      {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
+                        return (
+                          <li key={component}>
+                            <span>{component}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
 
-                <div className='overview-item--alt'>
-                  <h2 className='overview-item__title heading-alt'>SDG Goals</h2>
-                  <ul className='link-list'>
-                    {get(data, 'sdg_indicator', []).map((indicator) => {
-                      return (
-                        <li key={indicator.en}>
-                          <span>{indicator[lang]}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+                {data.sdg_indicator && (
+                  <div className='overview-item--alt'>
+                    <h2 className='overview-item__title heading-alt'>SDG Goals</h2>
+                    <ul className='link-list'>
+                      {get(data, 'sdg_indicator', []).map((indicator) => {
+                        return (
+                          <li key={indicator.en}>
+                            <span>{indicator[lang]}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
 
-                <div className='overview-item--alt'>
-                  <h2 className='overview-item__title heading-alt'>SDS Pillars</h2>
-                  <ul className='link-list'>
-                    {get(data, 'sds_indicator', []).map((indicator) => {
-                      return (
-                        <li key={indicator.en}>
-                          <span>{indicator[lang]}</span>
-                        </li>
-                      );
-                    })}
-                  </ul>
-                </div>
+                {data.sds_indicator && (
+                  <div className='overview-item--alt'>
+                    <h2 className='overview-item__title heading-alt'>SDS Pillars</h2>
+                    <ul className='link-list'>
+                      {get(data, 'sds_indicator', []).map((indicator) => {
+                        return (
+                          <li key={indicator.en}>
+                            <span>{indicator[lang]}</span>
+                          </li>
+                        );
+                      })}
+                    </ul>
+                  </div>
+                )}
 
                 </div>
               </div>
@@ -347,6 +354,7 @@ var Project = React.createClass({
                   yTitle=''
                   xFormat={shortTally}
                   yFormat={shortText}
+                  activeProject={meta.name}
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
@@ -357,6 +365,7 @@ var Project = React.createClass({
                   yTitle=''
                   xFormat={pct}
                   yFormat={shortText}
+                  activeProject={meta.name}
                 />
               </div>
               {authenticated ? (
@@ -368,6 +377,7 @@ var Project = React.createClass({
                     yTitle=''
                     xFormat={tally}
                     yFormat={shortText}
+                    activeProject={meta.name}
                   />
                 </div>
               ) : null}
