@@ -81,7 +81,6 @@ const SDG = {
     }));
   }
 };
-
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
 
 var ProjectBrowse = React.createClass({
@@ -425,6 +424,7 @@ var ProjectBrowse = React.createClass({
 
               <fieldset key={filter.display}
                 className='form__fieldset'>
+
                  <label className='form__label'>{filter.display}</label>
                  <div className='form__group'>
                   {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang)).map((item) => (
