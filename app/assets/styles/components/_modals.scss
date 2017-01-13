@@ -46,7 +46,7 @@
 
 .modal__projects {
   padding: $global-spacing * 2;
-  .form__fieldset {
+  .form__group {
     @include col(12/12);
     @include media(medium-up) {
       width: auto;

@@ -104,7 +104,7 @@ var Ministry = React.createClass({
                 <div className='inpage__overview-chart'>
                   {!singleProject && (<HorizontalBarChart
                     data={chartData}
-                    margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
+                    margin={{ left: 140, right: 50, top: 10, bottom: 50 }}
                     xFormat={shortTally}
                     yFormat={shortText}
                   />)}
@@ -115,7 +115,7 @@ var Ministry = React.createClass({
 
           <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h1 className='section__title heading--small'>Projects Contributed To</h1>
+              <h1 className='section__title heading--small'>Projects Overseen</h1>
               <ul className='projects-list'>
                 {ministryProjects.map((p) => {
                   return (
