@@ -215,7 +215,8 @@ footer {
   .form__input-group .form__control,
   .form__input-group-button {
     display: table-cell;
-    border-radius: 0.25rem;
+     border-bottom-right-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
     background-color: #fff
   }
 }
