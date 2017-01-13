@@ -158,7 +158,7 @@ var Category = React.createClass({
               </div>
             </section>
             <section className='inpage__section'>
-              <h1 className='section__title heading--small'>Projects</h1>
+              <h1 className='section__title heading--small'>{categoryDisplayName} Projects</h1>
               <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>Funding</h3>)}
                 {!singleProject && (<HorizontalBarChart
