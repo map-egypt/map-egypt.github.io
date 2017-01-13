@@ -69,7 +69,8 @@ const SDS = {
       display: `${goal} (${goals[goal]})`,
       filter: (p) => Array.isArray(p.sds_indicators) && p.sds_indicators.map(d => d[lang]).indexOf(goal) >= 0
     }));
-  };
+  }
+};
 
 const SDG = {
   display: 'SDG Goals',
@@ -81,6 +82,7 @@ const SDG = {
     }));
   }
 };
+
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
 
 var ProjectBrowse = React.createClass({
