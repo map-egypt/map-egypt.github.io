@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import {shortText, tally} from '../utils/format';
+import {shortText, tally, shorterTally } from '../utils/format';
 import { get } from 'object-path';
 import path from 'path';
 import { window } from 'global';
@@ -11,7 +11,6 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import { isOntime } from '../components/project-card';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
-import { shorterTally } from '../utils/format';
 import slugify from '../utils/slugify';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
