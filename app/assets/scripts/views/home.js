@@ -52,6 +52,19 @@ var Home = React.createClass({
       value: categories[category]
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
+    const totalProjects = projects.length;
+    let totalDonors = {};
+    let totalFunding = 0;
+    projects.forEach((project) => {
+      project.budget.forEach((budget) => {
+        totalDonors[budget.donor_name] = '';
+        totalFunding += budget.fund.amount;
+      });
+    });
+    totalDonors = Object.keys(totalDonors).length;
+
+    console.log('totalProjects: ', totalProjects, 'totalDonors: ', totalDonors, 'totalFunding: ', totalFunding);
+
     const pie = [{
       name: 'On Time',
       value: status.ontime
