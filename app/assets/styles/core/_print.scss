@@ -1,0 +1,59 @@
+@media print {
+  .page__header {
+    display: none;
+  }
+
+  .page__footer {
+    display: none;
+  }
+
+  .map__group, .inpage__col--map, section {
+    float: none !important;
+    page-break-after: always;
+  }
+
+  .inpage__headline-actions {
+    display: none;
+  }
+
+  .inpage__body {
+    background-color: #fff;
+  }
+
+  .inpage__header {
+    padding-bottom: 0;
+  }
+
+  .inpage__table td:last-child {
+    box-shadow: none;
+    border-bottom: solid 1px $tertiary-color;
+  }
+
+  .tags {
+    margin-top: 0.5rem;
+  }
+
+  .inpage__section {
+    box-shadow: 0 0 0 0px #E0E0E0;
+    margin-bottom: 1rem;
+  }
+
+  .inpage__section:first-child{
+    margin-top: 1rem;
+  }
+
+  .inpage__section--bleed {
+    display: none;
+  }
+
+  .projects-list {
+    float: none !important;
+    page-break-before: always;
+  }
+
+  .projects-list__card {
+    width: 85% !important;
+    margin-left: none !important;
+    float: left !important;
+  }
+}
