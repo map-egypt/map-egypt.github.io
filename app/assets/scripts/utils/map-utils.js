@@ -15,12 +15,15 @@ module.exports.getProjectCentroids = function (projects, features) {
 
   const regions = {};
   projects.forEach(function (project) {
-    get(project, 'location', []).forEach(function (location) {
-      // TODO look at district or marker to see if there's more granular data
-      const region = location.district.governorate;
-      regions[region] = regions[region] || [];
-      regions[region].push(project);
-    });
+    let locations = get(project, 'location');
+    if (locations && Array.isArray(locations)) {
+      locations.forEach(function (location) {
+        // TODO look at district or marker to see if there's more granular data
+        const region = location.district.governorate;
+        regions[region] = regions[region] || [];
+        regions[region].push(project);
+      });
+    }
   });
 
   Object.keys(regions).forEach(function (id) {

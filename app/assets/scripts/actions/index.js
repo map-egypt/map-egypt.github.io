@@ -4,7 +4,7 @@ import * as topojson from 'topojson-client';
 import url from 'url';
 import { api, baseUrl } from '../config';
 import auth from '../utils/auth';
-import { GOVERNORATE, DISTRICT } from '../utils/map-utils';
+import { GOVERNORATE } from '../utils/map-utils';
 
 export const ACTION = 'ACTION';
 export const AUTHENTICATED = 'AUTHENTICATED';
