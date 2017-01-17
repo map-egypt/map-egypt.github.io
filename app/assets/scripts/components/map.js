@@ -248,7 +248,6 @@ const Map = React.createClass({
   },
 
   renderOverlayLegend: function (scale) {
-    console.log(scale);
     const isQuantile = scale.hasOwnProperty('invertExtent');
     let iterable = (isQuantile ? scale.range() : scale.domain()).sort();
     const category = this.props.overlay.category.toLowerCase();
