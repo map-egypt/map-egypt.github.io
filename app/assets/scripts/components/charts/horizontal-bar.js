@@ -109,14 +109,14 @@ var HorizontalBarChart = React.createClass({
           <Axis
             scale={yScale}
             labels={yLabels}
-            orientation='left'
+            orientation='right'
             height={height}
             width={width}
             margin={margin}
             format={this.props.yFormat}
             links={links}
           />
-          <g transform={`translate(${margin.left}, ${margin.top})`}>
+          {/* <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d, i) => {
               const active = d.name === this.props.activeProject ? ' active' : '';
               return <rect
@@ -130,7 +130,32 @@ var HorizontalBarChart = React.createClass({
                 onMouseOut={this.mouseout}
               />;
             })}
+          </g> */}
+          <g transform={`translate(${margin.left}, ${margin.top})`}>
+            {data.map((d, i) => {
+              const active = d.name === this.props.activeProject ? ' active' : '';
+              console.log(xScale.range());
+              return <rect
+                key={d.name + i}
+                className={'chart__bar' + active}
+                y={yScale(d.name) + rectHeight / 3}
+                x={xScale.range()[1] - xScale(d.value)}
+                height={rectHeight}
+                width={xScale(d.value)}
+                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, d)}
+                onMouseOut={this.mouseout}
+              />;
+            })}
           </g>
+          {/* <text
+            x={-(height / 2) + 24}
+            y={4}
+            dy={'1em'}
+            transform={'rotate(-90)'}
+            textAnchor={'middle'}
+            className={'chart__axis-title'}
+            >{yTitle}
+          </text> */}
           <text
             x={-(height / 2) + 24}
             y={4}
@@ -138,7 +163,8 @@ var HorizontalBarChart = React.createClass({
             transform={'rotate(-90)'}
             textAnchor={'middle'}
             className={'chart__axis-title'}
-            >{yTitle}</text>
+            >{yTitle}
+          </text>
 
         </svg>
 
