@@ -11,6 +11,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import { isOntime } from '../components/project-card';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
+import { shortTally } from '../utils/format';
 import slugify from '../utils/slugify';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
@@ -61,6 +62,7 @@ var Home = React.createClass({
         totalFunding += budget.fund.amount;
       });
     });
+    totalFunding = shortTally(totalFunding);
     totalDonors = Object.keys(totalDonors).length;
 
     console.log('totalProjects: ', totalProjects, 'totalDonors: ', totalDonors, 'totalFunding: ', totalFunding);
