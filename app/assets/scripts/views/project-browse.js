@@ -11,7 +11,7 @@ import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
 import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
-import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
+import { GOVERNORATE, DISTRICT, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 
@@ -490,8 +490,13 @@ var ProjectBrowse = React.createClass({
     if (activeIndicator) {
       const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
       const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
-      const regions = get(this.props.api, 'geography.' + GOVERNORATE);
       if (indicatorData) {
+        // Indicators have a data_geography property, type boolean.
+        // true = governorate, false = district.
+        // Default to governorates if no property exists.
+        let adminLevel = (!indicatorData.data.hasOwnProperty('data_geography') ||
+                          indicatorData.data.data_geography) ? GOVERNORATE : DISTRICT;
+        const regions = get(this.props.api, 'geography.' + adminLevel);
         overlay = {
           id: indicatorData.id,
           values: indicatorData.data.data.map((d) => ({
