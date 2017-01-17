@@ -497,15 +497,17 @@ var ProjectBrowse = React.createClass({
         let adminLevel = (!indicatorData.data.hasOwnProperty('data_geography') ||
                           indicatorData.data.data_geography) ? GOVERNORATE : DISTRICT;
         const regions = get(this.props.api, 'geography.' + adminLevel);
-        overlay = {
-          id: indicatorData.id,
-          values: indicatorData.data.data.map((d) => ({
-            id: d.sub_nat_id,
-            value: d.data_value
-          })).filter(d => typeof d.value !== 'undefined'),
-          category: indicatorData.data.category,
-          regions
-        };
+        if (regions) {
+          overlay = {
+            id: indicatorData.id,
+            values: indicatorData.data.data.map((d) => ({
+              id: d.sub_nat_id,
+              value: d.data_value
+            })).filter(d => typeof d.value !== 'undefined'),
+            category: indicatorData.data.category,
+            regions
+          };
+        }
 
         if (this.state.listView) {
           indicatorChartData = indicatorData.data.data.map(d => ({
