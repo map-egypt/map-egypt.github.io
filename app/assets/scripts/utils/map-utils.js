@@ -2,6 +2,7 @@
 import { get } from 'object-path';
 import getCentroid from '@turf/centroid';
 import * as governorates from './governorates';
+import { isOntime } from '../components/project-card';
 
 module.exports.GOVERNORATE = 'egy2';
 
@@ -29,6 +30,7 @@ module.exports.getProjectCentroids = function (projects, features) {
       regions[id].forEach(function (project) {
         markers.push({
           centroid: [centroid[1], centroid[0]],
+          ontime: isOntime(project),
           region: meta.name,
           name: project.name,
           id: project.id
