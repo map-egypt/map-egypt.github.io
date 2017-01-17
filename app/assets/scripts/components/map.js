@@ -140,7 +140,7 @@ const Map = React.createClass({
 
         case 'categorical':
         default:
-          domain = uniq(values.map(d => d.value));
+          domain = uniq(values.map(d => d.value)).sort((a, b) => a < b ? 1 : -1);
           let l = DIVERGENT.length;
           if (domain.length > l) {
             console.log('WARNING: categorical data for this indicator contains too many unique categories');
