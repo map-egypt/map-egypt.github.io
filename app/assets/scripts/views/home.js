@@ -98,7 +98,7 @@ var Home = React.createClass({
                 <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>20%<small>reduction in poverty</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{totalProjects}<small>total projects</small></h3>
                     <ul className='link-list'>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
@@ -108,7 +108,7 @@ var Home = React.createClass({
                 </ul>
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>20%<small>reduction in poverty</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{totalFunding}<small>in funding</small></h3>
                     <ul className='link-list'>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
@@ -118,7 +118,7 @@ var Home = React.createClass({
                 </ul>
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>20%<small>reduction in poverty</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{totalDonors}<small>total donors</small></h3>
                     <ul className='link-list'>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
