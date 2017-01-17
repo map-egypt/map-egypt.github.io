@@ -92,12 +92,14 @@ const Map = React.createClass({
         icon: L.mapbox.marker.icon({'marker-symbol': 'circle', 'marker-color': '2B2342'})
       });
 
+      let status = marker.ontime ? 'On Time' : 'Delayed';
+
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
           `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
           `<dl class='card-meta'>` +
                 `<dt class='card-meta__label'>Status</dt>` +
-                `<dd class='card-meta__value card-meta__value--status'>Delayed</dd>` +
+                `<dd class='card-meta__value card-meta__value--status'>${status}</dd>` +
                 `<dt class='card-meta__label'>Location</dt>` +
                 `<dd class='card-meta__value card-meta__value--location'>${byName(marker.region)[locationLang]}</dd>` +
               `</dl>` +
