@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import {shortText, tally, shorterTally } from '../utils/format';
+import { shortText, tally, shorterTally } from '../utils/format';
 import { get } from 'object-path';
 import path from 'path';
 import { window } from 'global';
