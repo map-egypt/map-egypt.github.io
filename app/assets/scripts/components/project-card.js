@@ -7,6 +7,7 @@ import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
 import { tally, shortTally, pct, shortParagraph } from '../utils/format';
 import { byId as governorateNames } from '../utils/governorates';
+import { byId as districtNames } from '../utils/districts';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -65,6 +66,14 @@ var ProjectCard = React.createClass({
     const basepath = '/' + lang;
     const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);
     let completion = pct(percentComplete(project));
+    let projects = [];
+    get(project, 'location', []).map((loc, i) => {
+      const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
+        ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
+      if (id) {
+        projects.push(id[locationLang]);
+      }
+    });
 
     return (
       <div className='project'>
@@ -84,7 +93,7 @@ var ProjectCard = React.createClass({
                 <dt className='card-meta__label'>Status</dt>
                 <dd className='card-meta__value card-meta__value--status'>{ontime ? 'On Time' : 'Delayed'}</dd>
                 <dt className='card-meta__label'>Location</dt>
-                <dd className='card-meta__value card-meta__value--location'>{project.location.map((loc) => governorateNames(loc.district.governorate)[locationLang]).join(', ')}</dd>
+                <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>
               <p>{shortParagraph(project.description)}</p>
               <div className='card__categories'>
