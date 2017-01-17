@@ -55,7 +55,18 @@ project-pages:
   sdg-goals-title: SDG Goals
   sds-pillars-title: SDG Pillars
 
+  monitoring-indicators-title: Monitoring Indicators
   funding-by-donor-title: Funding by Donor
+  status-title: Status
+  component-title: Component 
+  kpi-title: Key Performance Indicator
+  target-title: Target
+  progress-title: Progress
+  date-title: Date
+
+  kpi-status-implemented: Implemented
+  kpi-status-partially: Partially Implemented
+  kpi-status-not: Not Implemented
 
   project-comparison-title: Project Comparison By Category
   comparison-chart-title1: Funding
@@ -64,9 +75,18 @@ project-pages:
   related-sds-projects-title: Related Projects By SDS Goal
 
 category-pages:
+  stat-one: Total Funds
+  stat-two: Projects Funded
+
+  comparison-title: Comparison
+  comparison-chart-title1: Number of Projects per Category
+  comparison-chart-title2: Funding of Projects per Category
+
+  category-funding-chart-title: Funding
+  category-complete-chart-title: Percentage Complete
 
 donor-pages:
-
+  
 
 
 general-buttons:
