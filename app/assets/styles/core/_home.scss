@@ -44,7 +44,7 @@
   padding-bottom: $global-spacing;
   @include media(medium-up) {
     margin-top: $global-spacing * 2;
-    @include col(3/12, $offset: 0.8/12);
+    @include col(3/12, $offset: 1/12);
     box-shadow: inset -1px 0 0 $tertiary-color;
   }
   &:last-child {
