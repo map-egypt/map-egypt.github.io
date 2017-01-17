@@ -8,6 +8,9 @@
   The current solution relies on javascript to remove the class if the screen
   size grows past the breaking point. Should be fixed eventually.
  */
+.page__header {
+  margin-bottom: $global-spacing * 1.5;
+}
 
 .page__headline {
   float: left;
@@ -178,7 +181,7 @@
 }
 
 .browse-menu {
-  margin: 2.75rem $global-spacing 0 $global-spacing;
+  margin: 3rem $global-spacing 0 $global-spacing;
   @include media(medium-up) {
     float: left;
 
@@ -200,7 +203,7 @@
 }
 
 .utilities-menu {
-  margin: 2.75rem 0 0 0;
+  margin: 3rem 0 0 0;
   @include media(medium-up) {
     float: right;
 
@@ -233,8 +236,8 @@
 
 .browse-menu__item {
   position: relative;
-  line-height: 0.75rem;
-  font-size: 0.75rem;
+  line-height: 1rem;
+  font-size: 0.875rem;
   display: inline-block;
   list-style: none;
   font-weight: $base-font-light;

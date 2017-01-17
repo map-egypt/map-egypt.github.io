@@ -63,6 +63,7 @@ var ProjectCard = React.createClass({
     const { project, lang } = this.props;
     const locationLang = this.props.lang === 'en' ? 'name' : 'nameAr';
     const ontime = isOntime(project);
+    const statusClass = ontime ? 'project--ontime' : 'project--delayed';
     const basepath = '/' + lang;
     const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);
     let completion = pct(percentComplete(project));
@@ -77,7 +78,7 @@ var ProjectCard = React.createClass({
 
     return (
       <div className='project'>
-        <article className={'card project--' + (ontime ? 'ontime' : 'delayed')}>
+        <article className={statusClass}>
           <div className='card__contents'>
             <header className='card__header'>
               <h1 className='card__title heading--xsmall'><Link to={path.resolve(basepath, 'projects', project.id)} className='link--deco' href=''>{project.name}</Link></h1>
@@ -91,7 +92,7 @@ var ProjectCard = React.createClass({
             <div className='card__body'>
               <dl className='card-meta'>
                 <dt className='card-meta__label'>Status</dt>
-                <dd className='card-meta__value card-meta__value--status'>{ontime ? 'On Time' : 'Delayed'}</dd>
+                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{ontime ? 'On Time' : 'Delayed'}</dd>
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>

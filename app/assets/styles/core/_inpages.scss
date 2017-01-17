@@ -238,6 +238,10 @@
   }
 }
 
+.category-stats__item .link-list {
+  display: none;
+}
+
 .inpage-stats {
   color: $base-color;
   list-style: none;

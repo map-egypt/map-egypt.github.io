@@ -1,7 +1,7 @@
 .indicator-list-container {
   .chart-container {
     @include col(12/12);
-    height: 300px;
+    height: 450px;
     @include media(medium-up) {
       @include col(6/12);
       margin-left: 5rem;
