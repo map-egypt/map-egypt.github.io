@@ -491,7 +491,7 @@ var ProjectBrowse = React.createClass({
     let projects = [];
     let markers = [];
     if (!this.state.projectsHidden) {
-      let { projects } = this.props.api;
+      projects = this.props.api.projects;
       if (activeProjectFilters.length) {
         activeProjectFilters.forEach((filter) => {
           projects = this.state.projectsHidden ? [] : projects.filter(filter.filter);
