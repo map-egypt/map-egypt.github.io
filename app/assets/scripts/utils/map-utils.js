@@ -5,6 +5,7 @@ import * as governorates from './governorates';
 import { isOntime } from '../components/project-card';
 
 module.exports.GOVERNORATE = 'egy2';
+module.exports.DISTRICT = 'districts';
 
 module.exports.getProjectCentroids = function (projects, features) {
   const markers = [];

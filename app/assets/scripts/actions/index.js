@@ -4,6 +4,7 @@ import * as topojson from 'topojson-client';
 import url from 'url';
 import { api, baseUrl } from '../config';
 import auth from '../utils/auth';
+import { GOVERNORATE, DISTRICT } from '../utils/map-utils';
 
 export const ACTION = 'ACTION';
 export const AUTHENTICATED = 'AUTHENTICATED';
@@ -95,11 +96,15 @@ export function getIndicator (id) {
   };
 }
 
+const governorateUrl = 'assets/data/topojson/a2-withluxor.json';
+const districtUrl = 'assets/data/topojson/districts.json';
+
 export function getGeography (name) {
+  let path = name === GOVERNORATE ? governorateUrl : districtUrl;
   return function (dispatch) {
     // a2-withluxor.json = governorate boundaries post 2009.
     // if we need pre-2009 governorate boundaries, we can generate them in /tool.
-    reqwest(url.resolve(baseUrl, 'assets/data/topojson/a2-withluxor.json'), function (resp) {
+    reqwest(url.resolve(baseUrl, path), function (resp) {
       try {
         var features = topojson.feature(resp, resp.objects[name]);
       } catch (e) {
