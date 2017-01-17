@@ -1,5 +1,79 @@
+main-navigation:
+  projects-navitem: Projects & Indicators
+  about-navitem: About
+  login-navitem: Log In
+
 homepage:
   subhead: tracking egypt
   title: Arabic title goes here
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
   more: Learn More
+
+  map-key-circle: Group of Projects
+  map-key-marker: Project
+
+  stats-overview: Overview of Agricultural Projects
+  overview-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  all-projects-btn: View All Projects
+  chart-title-one: Number of Projects by Category
+  chart-title-two: Status
+  chart-two-label: On Time
+  chart-two-label2: Delayed
+
+  other-indicators-title: Other Progress Indicators
+  other-indicators-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  sds-button: SDS Indicators
+  sdg-button: SDG Indicators
+
+projects-indicators:
+  projects-title: Projects and Indicators
+  projects-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  filter-projects-btn: Add & Filter Projects
+  indicator-overlays-btn: Add Indicator Overlays
+  search-text: Zoom to Governorate
+  map-toggle-btn: Map
+  list-toggle-btn: List
+  
+projects-list-view:
+  projects-title: Projects
+  sort-by-title: Sort by
+  sort-option1: Alphabetical
+
+project-pages:
+  status-ontime: On Time
+  status-delayed: Delayed
+  last-update-title: Last Update
+  current-progress-title: Current Progress
+  proposed-timeline-title: Proposed Timeline
+  categories-title: Categories
+  donors-title: Donors
+  
+  funding-title: Funding
+  objective-title: Objective
+  location-title: Location
+  responsible-ministry-title: Responsible Ministry
+  sdg-goals-title: SDG Goals
+  sds-pillars-title: SDG Pillars
+
+  funding-by-donor-title: Funding by Donor
+
+  project-comparison-title: Project Comparison By Category
+  comparison-chart-title1: Funding
+  comparison-chart-title2: Percentage Complete
+
+  related-sds-projects-title: Related Projects By SDS Goal
+
+category-pages:
+
+donor-pages:
+
+
+
+general-buttons:
+  share: Share
+
+footer:
+  subscription-title: Want Updates?
+  subscription-subtitle: Get notifications when we update projects quarterly.
+  contact-link: Contact Us
+  contact-sentence: with questions or comments.
