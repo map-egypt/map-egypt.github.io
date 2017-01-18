@@ -14,6 +14,7 @@ import { governorates } from '../utils/governorates';
 import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
+import { window } from 'global';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
@@ -316,7 +317,6 @@ var ProjectBrowse = React.createClass({
     const themeNames = Object.keys(themes);
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
-    const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
@@ -400,6 +400,7 @@ var ProjectBrowse = React.createClass({
   },
 
   renderProjectSelector: function () {
+    console.log(this.props.meta)
     let projects = this.props.api.projects;
     let { lang } = this.props.meta;
     const { selectedProjectFilters } = this.state;
@@ -511,7 +512,9 @@ var ProjectBrowse = React.createClass({
         }
       }
     }
-
+    
+    const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
+    console.log (t.filter_projects_btn)
     return (
       <section className='inpage project-browse'>
         <header className='inpage__header'>
@@ -519,20 +522,20 @@ var ProjectBrowse = React.createClass({
             <div className='inpage__headline'>
              <div className='inpage__headline-actions'>
                 <ul>
-                  <li><Share path={this.props.location.pathname}/></li>
+                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
-                <h1 className='inpage__title heading--deco heading--large'>Projects and Indicators</h1>
-                <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+                <h1 className='inpage__title heading--deco heading--large'>{t.projects_title}</h1>
+                <p className='inpage__description'>{t.projects_description}</p>
             </div>
             <div className='inpage__actions'>
             <div className='actions-filters'>
                 <ul className='button--list'>
-                  <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>Add &amp; Filter Projects</button></li>
+                  <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>{t.filter_projects_btn}</button></li>
                   <li>
                     <span className='dropdown__container'>
                       <button type='button' onClick={this.toggleIndicatorDropdown}
-                        className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button>
+                        className='button button--medium button--secondary drop__toggle--caret'>{t.indicator_overlays_btn}</button>
                       {this.state.indicatorToggle &&
                         <ul className='drop__menu drop--align-left button--secondary'>
                           {indicatorTypes.map((d) => {
@@ -562,8 +565,8 @@ var ProjectBrowse = React.createClass({
               </div>
               <div className='actions-toggle'>
                 <div className='button-group button-group--horizontal button--toggle'>
-                  <button onClick={this.selectMapView} className={this.state.listView ? deselectedClassNames : selectedClassNames}>Map</button>
-                  <button onClick={this.selectListView} className={this.state.listView ? selectedClassNames : deselectedClassNames}>List</button>
+                  <button onClick={this.selectMapView} className={this.state.listView ? deselectedClassNames : selectedClassNames}>{t.map_toggle_btn}</button>
+                  <button onClick={this.selectListView} className={this.state.listView ? selectedClassNames : deselectedClassNames}>{t.list_toggle_btn}</button>
                 </div>
               </div>
             </div>
@@ -576,7 +579,7 @@ var ProjectBrowse = React.createClass({
                   <AutoSuggest
                   suggestions={governorates}
                   getDisplayName={(d) => d.name}
-                  placeholder='Zoom to Governorate'
+                  placeholder={t.search_text}
                   onSelect={this.zoomToGovernorate}
                   />
               </div>

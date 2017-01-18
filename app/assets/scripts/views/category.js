@@ -118,7 +118,7 @@ var Category = React.createClass({
               <div className='inpage__headline-actions'>
                 <ul>
                   <li><button className='button button--medium button--primary button--download'>{t.print_pdf}</button></li>
-                  <li><Share path={this.props.location.pathname}/></li>
+                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{categoryDisplayName}</h1>
@@ -126,7 +126,7 @@ var Category = React.createClass({
             <div className='inpage__header-data'>
               <ul className='inpage-stats'>
                 <li> {shortTally(totalBudget)} <small>{t.stat_one}</small></li>
-                <li> {tally(categoryProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
+                <li> {tally(categoryProjects.length)} <small>{singleProject ? t.cat_stats_funded_1 : t.cat_stats_funded_2} {t.cat_stats_funded_3}</small></li>
               </ul>
             </div>
           </div>
@@ -158,9 +158,9 @@ var Category = React.createClass({
               </div>
             </section>
             <section className='inpage__section'>
-              <h1 className='section__title heading--small'>{categoryDisplayName} Projects</h1>
+              <h1 className='section__title heading--small'>{categoryDisplayName} {t.projects_parttitle}</h1>
               <div className='chart-content chart__inline--labels'>
-                {!singleProject && (<h3>Funding</h3>)}
+                {!singleProject && (<h3>{t.category_funding_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
                  data={chartData}
                  margin={chartMargin}
@@ -169,7 +169,7 @@ var Category = React.createClass({
                 />)}
                </div>
                <div className='chart-content chart__inline--labels'>
-                {!singleProject && (<h3>Percentage Complete</h3>)}
+                {!singleProject && (<h3>{t.category_complete_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
                   data={completion}
                   margin={chartMargin}

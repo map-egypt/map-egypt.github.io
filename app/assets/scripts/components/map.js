@@ -239,13 +239,14 @@ const Map = React.createClass({
   },
 
   renderMarkerLegend: function () {
+    const t = get(window.t, [this.props.lang, 'map_labels'], {});
     return (
       <span className='legend__markers'>
         <span className='legend__item legend__marker--cluster'><span className='legend__image legend__image--cluster'>
           <span className='legend__image--cluster--bg'></span>
           <span className='legend__image--cluster--text'>8</span>
-        </span> Group of Projects</span>
-        <span className='legend__item legend__marker--project'><span className='legend__image legend__image--marker'><img src='assets/graphics/content/map-pin.png' alt='A marker indicates a single project'/></span> Project</span>
+        </span>{t.map_group_label}</span>
+        <span className='legend__item legend__marker--project'><span className='legend__image legend__image--marker'><img src='assets/graphics/content/map-pin.png' alt='A marker indicates a single project'/></span> {t.map_project_label}</span>
       </span>
     );
   },

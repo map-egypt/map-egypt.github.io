@@ -78,7 +78,7 @@ var App = React.createClass({
         <main className='page__body' role='main'>
           {this.props.children}
         </main>
-      <PageFooter />
+      <PageFooter lang={this.props.meta.lang} />
       </div>
     );
   }

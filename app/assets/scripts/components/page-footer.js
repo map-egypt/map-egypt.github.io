@@ -21,7 +21,9 @@ var PageFooter = React.createClass({
   },
 
   render: function () {
+    const { lang } = this.props;
     const t = get(window.t, [this.props.lang, 'footer'], {});
+    console.log ('footer:', this.props)
     return (
       <footer className='page__footer' role='contentinfo'>
         <div className='inner'>
@@ -29,10 +31,10 @@ var PageFooter = React.createClass({
             <div className='updates'>
               <div className='form__group'>
                 <h1 className='updates__title heading--xsmall'>{t.subscription_title}</h1>
-                <p className='updates__description'>{t.subscription_subtitle}<span className='italic'>quarterly</span>.</p>
+                <p className='updates__description'>{t.subscription_subtitle} <span className='italic'>{t.subscription_subtitle_timeframe}</span>.</p>
                 <div id="mc_embed_signup">
                   <form action="//github.us14.list-manage.com/subscribe/post?u=7a02eb473bd111aa85bfb7ffc&amp;id=120d44b3d2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate form__input-group" target="_blank" noValidate>
-                        <input type="email" value={this.state.email} placeholder="Enter email address" name="EMAIL" className="required email form__control form__control--large" id="form-input-6" onChange={this.onChange.bind(this)}/>
+                        <input type="email" value={this.state.email} placeholder={t.email_field} name="EMAIL" className="required email form__control form__control--large" id="form-input-6" onChange={this.onChange.bind(this)}/>
                       <div id="mce-responses" className="clear">
                         <div className="response" id="mce-error-response" style={{'display': 'none'}}></div>
                         <div className="response" id="mce-success-response" style={{'display': 'none'}}></div>
@@ -53,7 +55,7 @@ var PageFooter = React.createClass({
             </div>
       </div>
       <div className='contact'>
-        <p className='contact__item'><a title='contact us' href='' className='link--primary'><span>Contact Us</span></a> with questions or comments.</p>
+        <p className='contact__item'><a title='contact us' href='' className='link--primary'><span>{t.contact_link}</span></a> {t.contact_sentence}.</p>
       </div>
     </div>
   </footer>

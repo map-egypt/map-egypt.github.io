@@ -33,7 +33,7 @@ projects_indicators:
   indicator_overlays_btn: Add Indicator Overlays
   search_text: Zoom to Governorate
   map_toggle_btn: Map
-  list_toggle_btn: List
+  list_toggle_btn: List/Chart
   
 projects_list_view:
   projects_title: Projects
@@ -41,6 +41,7 @@ projects_list_view:
   sort_option1: Alphabetical
 
 project_pages:
+  print_pdf: Print to PDF
   status_ontime: On Time
   status_delayed: Delayed
   last_update_title: Last Update
@@ -56,7 +57,7 @@ project_pages:
   view_documentation_title: View Project Documentation
   responsible_ministry_title: Responsible Ministry
   local_manager_title: Local Manager
-  kmi_components: KMI Components
+  kmi_components: Project Components
   sdg_goals_title: SDG Goals
   sds_pillars_title: SDG Pillars
 
@@ -79,20 +80,30 @@ project_pages:
 category_pages:
   print_pdf: Print to PDF
   stat_one: Total Funds
-  stat_two: Projects Funded
+  cat_stats_funded_1: Project
+  cat_stats_funded_2: Projects
+  cat_stats_funded_3: Funded
 
   comparison_title: Comparison
   comparison_chart_title1: Number of Projects per Category
   comparison_chart_title2: Funding of Projects per Category
 
+  projects_parttitle: Projects
   category_funding_chart_title: Funding
   category_complete_chart_title: Percentage Complete
 
 donor_pages:
+  print_pdf: Print to PDF
   donor_stats_funds: Total Funds
-  donor_stats_funded: Projects Funded
+  donor_stats_funded_1: Project
+  donor_stats_funded_2: Projects
+  donor_stats_funded_3: Funded
   donor_chart_title: Amount Funded
   funded_title: Projects Funded
+
+map_labels:
+  map_group_label: Group of Projects
+  map_project_label: Project
 
 general_buttons:
   share: Share
@@ -103,4 +114,4 @@ footer:
   subscription_subtitle_timeframe: quarterly
   email_field: Enter Your Email Address
   contact_link: Contact Us
-  contact_sentence: with questions or comments.
+  contact_sentence: with questions or comments

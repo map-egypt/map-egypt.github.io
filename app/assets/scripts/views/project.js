@@ -137,13 +137,13 @@ var Project = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
-                  <li><button className='button button--medium button--primary button--download'>Download</button></li>
-                  <li><Share path={this.props.location.pathname}/></li>
+                  <li><button className='button button--medium button--primary button--download'>{t.print_pdf}</button></li>
+                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
               <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
-                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On Time' : 'Delayed'}</dd>
+                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? t.status_ontime : t.status_delayed}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>

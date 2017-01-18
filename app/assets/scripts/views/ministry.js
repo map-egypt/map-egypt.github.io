@@ -71,7 +71,7 @@ var Ministry = React.createClass({
               <div className='inpage__headline-actions'>
                 <ul>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
-                  <li><Share path={this.props.location.pathname}/></li>
+                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{ministryDisplayName}</h1>
