@@ -1,5 +1,5 @@
 'use strict';
-import { set } from 'object-path';
+import { get, set } from 'object-path';
 import {
   AUTHENTICATED,
   PROJECTS,
@@ -16,6 +16,8 @@ export const initialState = {
   indicators: [],
   geography: {}
 };
+
+import { DISTRICT } from '../utils/map-utils';
 
 export default function reducer (state = initialState, action) {
   state = Object.assign({}, state);
@@ -36,6 +38,13 @@ export default function reducer (state = initialState, action) {
       set(state, ['indicatorDetail', action.data.id], action.data);
       break;
     case GEOGRAPHY:
+      // normalize district admin properties
+      if (action.data.name === DISTRICT) {
+        get(action.data.features, 'features', []).forEach((feature) => {
+          let id = feature.properties.Qism_Mar_1;
+          feature.properties.admin_id = 'EGY' + id;
+        });
+      }
       set(state, ['geography', action.data.name], action.data.features);
       break;
   }

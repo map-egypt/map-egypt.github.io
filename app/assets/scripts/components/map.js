@@ -171,12 +171,21 @@ const Map = React.createClass({
       feature.properties._value = get(idMap, feature.properties.admin_id);
     });
 
+    // for district features, use the geojson to determine district name
+    const isDistrict = regions.features.length > 300;
+    const districtNameMap = {};
+    if (isDistrict) {
+      regions.features.forEach(function (feature) {
+        districtNameMap[feature.properties.admin_id] = feature.properties.District;
+      });
+    }
+
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
       const id = feature.properties.admin_id;
-      const meta = byEgy(id);
+      const name = isDistrict ? districtNameMap[id] : get(byEgy(id), 'name');
       return `
       <div class='marker__internal'>
-        <h5 class='marker__title'>${meta.name}</h5>
+        <h5 class='marker__title'>${name}</h5>
         <p class='marker__description'>Value: <strong>${get(feature, 'properties._value', '--')}</strong></p>
       </div>
       `;
