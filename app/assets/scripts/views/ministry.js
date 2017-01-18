@@ -98,7 +98,7 @@ var Ministry = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> {shortTally(totalBudget)} <small>Total Funds</small></li>
+                  <li> ${shortTally(totalBudget)} <small>Total Funds</small></li>
                   <li> {tally(ministryProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
