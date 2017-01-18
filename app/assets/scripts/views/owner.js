@@ -1,10 +1,13 @@
 'use strict';
 import React from 'react';
+import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
+import { shortTally, tally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 
 var Owner = React.createClass({
@@ -22,6 +25,7 @@ var Owner = React.createClass({
     if (projects.length === 0) {
       return <div></div>; // TODO loading indicator
     }
+    const basepath = '/' + this.props.meta.lang;
 
     const ownerName = this.props.params.name;
     let ownerDisplayName;
@@ -35,6 +39,14 @@ var Owner = React.createClass({
       }
       return sluggedName === ownerName;
     });
+
+    const chartData = ownerProjects.map((project) => {
+      return {
+        name: project.name,
+        link: path.resolve(basepath, 'projects', project.id),
+        value: project.number_served.number_served
+      };
+    }).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const singleProject = ownerProjects.length <= 1 ? ' funding--single' : '';
     const activeProjects = ownerProjects.filter((project) => project.actual_end_date).length;
@@ -64,9 +76,20 @@ var Owner = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                <li> {activeProjects} <small>Active {activeProjects > 1 ? 'Projects' : 'Project'}</small></li>
-                <li> {ownerProjects.length} <small>Total {ownerProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
+                  <li> {activeProjects} <small>Active {activeProjects > 1 ? 'Projects' : 'Project'}</small></li>
+                  <li> {ownerProjects.length} <small>Total {ownerProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
+                <div className='inpage__overview-chart'>
+                  <div className='chart-content'>
+                    <h3>Number Served</h3>
+                    {!singleProject && (<HorizontalBarChart
+                      data={chartData}
+                      margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
+                      xFormat={shortTally}
+                      yFormat={shortText}
+                    />)}
+                  </div>
+                </div>
               </div>
             </section>
           </div>

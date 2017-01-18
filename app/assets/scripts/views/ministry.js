@@ -1,11 +1,14 @@
 'use strict';
 import React from 'react';
+import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
+import HorizontalBarChart from '../components/charts/horizontal-bar';
 import ProjectTimeline from '../components/project-timeline';
+import { shortTally, tally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
@@ -24,6 +27,7 @@ var Ministry = React.createClass({
     if (projects.length === 0) {
       return <div></div>; // TODO loading indicator
     }
+    const basepath = '/' + this.props.meta.lang;
 
     const ministryName = this.props.params.name;
     let ministryDisplayName;
@@ -40,10 +44,16 @@ var Ministry = React.createClass({
     const markers = getProjectCentroids(ministryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
     const mapLocation = getFeatureCollection(markers);
 
+    const chartData = ministryProjects.map((project) => {
+      return {
+        name: project.name,
+        link: path.resolve(basepath, 'projects', project.id),
+        value: project.number_served.number_served
+      };
+    }).sort((a, b) => b.value > a.value ? -1 : 1);
+
     const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
     const activeProjects = ministryProjects.filter((project) => project.actual_end_date).length;
-    console.log(this.props.api)
-
 
     return (
       <section className='inpage funding'>
@@ -83,6 +93,17 @@ var Ministry = React.createClass({
                   <li> {activeProjects} <small>Active {activeProjects > 1 ? 'Projects' : 'Project'}</small></li>
                   <li> {ministryProjects.length} <small>Total {ministryProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
+                <div className='inpage__overview-chart'>
+                  <div className='chart-content'>
+                    <h3>Number Served</h3>
+                    {!singleProject && (<HorizontalBarChart
+                      data={chartData}
+                      margin={{ left: 140, right: 50, top: 10, bottom: 50 }}
+                      xFormat={shortTally}
+                      yFormat={shortText}
+                    />)}
+                  </div>
+                </div>
               </div>
             </section>
           </div>
