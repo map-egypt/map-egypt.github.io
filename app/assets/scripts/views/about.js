@@ -8,7 +8,7 @@ var About = React.createClass({
   displayName: 'About',
 
   propTypes: {
-    meta: React.PropTypes.object,
+    meta: React.PropTypes.object
   },
 
   render: function () {
