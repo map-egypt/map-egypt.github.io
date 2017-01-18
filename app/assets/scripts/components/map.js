@@ -11,6 +11,7 @@ import { roundedNumber } from '../utils/format';
 const L = window.L;
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
+const satelliteLayer = 'mapbox.satellite';
 
 const BOUNDS = [
   [22.278144, 25.127830],
@@ -220,7 +221,14 @@ const Map = React.createClass({
         scrollWheelZoom: false,
         maxZoom: 11
       });
-      L.tileLayer(tileLayer).addTo(this.map);
+
+      const layers = {
+        Basic: L.tileLayer(tileLayer),
+        Satellite: L.mapbox.tileLayer(satelliteLayer)
+      };
+
+      layers.Basic.addTo(this.map);
+      L.control.layers(layers).addTo(this.map);
 
       this.overlayLayer = L.featureGroup();
       this.map.addLayer(this.overlayLayer);
