@@ -25,7 +25,7 @@ var ProjectTimeline = React.createClass({
     const end = actualEnd ? Math.max(plannedEnd, actualEnd) : plannedEnd;
 
     const scale = scaleTime().domain([new Date(start), new Date(end)]).range([0, 100]);
-
+    
     return (
       <div className='timeline'>
         <div className='timeline__unit'>

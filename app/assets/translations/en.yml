@@ -52,7 +52,11 @@ project_pages:
   funding_title: Funding
   objective_title: Objective
   location_title: Location
+  project_link: Project Link
+  view_documentation_title: View Project Documentation
   responsible_ministry_title: Responsible Ministry
+  local_manager_title: Local Manager
+  kmi_components: KMI Components
   sdg_goals_title: SDG Goals
   sds_pillars_title: SDG Pillars
 
@@ -65,13 +69,10 @@ project_pages:
   progress_title: Progress
   date_title: Date
 
-  kpi_status_implemented: Implemented
-  kpi_status_partially: Partially Implemented
-  kpi_status_not: Not Implemented
-
   project_comparison_title: Project Comparison By Category
   comparison_chart_title1: Funding
   comparison_chart_title2: Percentage Complete
+  comparision_chart_title3: Beneficiaries Reached
 
   related_sds_projects_title: Related Projects By SDS Goal
 

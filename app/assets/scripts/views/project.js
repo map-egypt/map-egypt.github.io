@@ -143,7 +143,7 @@ var Project = React.createClass({
               </div>
               <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
-                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? '{t.status_ontime}' : '{t.status_delayed}'}</dd>
+                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On Time' : 'Delayed'}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
@@ -289,7 +289,7 @@ var Project = React.createClass({
 
               <div className='overview-charts'>
                 <div className={'chart-content chart__inline--labels' + (!authenticated ? ' chart__block' : '')}>
-                  <h3>Funding by Donor</h3>
+                  <h3>{t.funding_by_donor_title}</h3>
                   <HorizontalBarChart
                     data={donors}
                     margin={barChartMargin}
@@ -313,16 +313,16 @@ var Project = React.createClass({
             </section>
             {Array.isArray(data.kmi) && data.kmi.length && (
               <section className='inpage__section inpage__section--indicators'>
-                <h1 className='section__title heading--small'>Monitoring Indicators</h1>
+                <h1 className='section__title heading--small'>{t.monitoring_indicators_title}</h1>
                 <table className='inpage__table'>
                   <thead>
                     <tr>
-                      <th className='row-status'>Status</th>
-                      <th className='row-name'>Component</th>
-                      <th className='row-kpi'>Key Performance Indicator</th>
-                      <th className='row-target'>Target</th>
-                      <th className='row-progress'>Progress</th>
-                      <th className='row-date'>Date</th>
+                      <th className='row-status'>{t.status_title}</th>
+                      <th className='row-name'>{t.component_title}</th>
+                      <th className='row-kpi'>{t.kpi_title}</th>
+                      <th className='row-target'>{t.target_title}</th>
+                      <th className='row-progress'>{t.progress_title}</th>
+                      <th className='row-date'>{t.date_title}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -346,9 +346,9 @@ var Project = React.createClass({
               </section>
             )}
             <section className='inpage__section inpage__section--comparison'>
-              <h1 className='section__title heading--small'>Project Comparison By Category</h1>
+              <h1 className='section__title heading--small'>{t.project_comparison_title}</h1>
               <div className='chart-content chart__inline--labels'>
-                <h3>Funding</h3>
+                <h3>{t.comparison_chart_title1}</h3>
                 <HorizontalBarChart
                   data={budgets}
                   margin={barChartMargin}
@@ -359,7 +359,7 @@ var Project = React.createClass({
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
-                <h3>Percentage Complete</h3>
+                <h3>{t.comparison_chart_title2}</h3>
                 <HorizontalBarChart
                   data={completion}
                   margin={barChartMargin}
@@ -371,7 +371,7 @@ var Project = React.createClass({
               </div>
               {authenticated ? (
                 <div className='chart-content chart__inline--labels'>
-                  <h3>Beneficiaries Reached</h3>
+                  <h3>{t.comparision_chart_title3}</h3>
                   <HorizontalBarChart
                     data={served}
                     margin={barChartMargin}
@@ -386,7 +386,7 @@ var Project = React.createClass({
           </div>
           <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h1 className='section__title heading--small'>Related Projects By SDS Goal</h1>
+              <h1 className='section__title heading--small'>{t.related_sds_projects_title}</h1>
               <ul className='projects-list'>
                 {relatedProjects.map((p) => {
                   return (
