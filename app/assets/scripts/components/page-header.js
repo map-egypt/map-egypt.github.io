@@ -40,8 +40,8 @@ var PageHeader = React.createClass({
     const splitPath = this.props.location.pathname.split('/');
     const langIndex = splitPath.indexOf(this.props.lang);
 
-    const pathAr = replaceAtIndex(splitPath, langIndex, 'ar').join('/');
-    const pathEn = replaceAtIndex(splitPath, langIndex, 'en').join('/');
+    const pathAr = langIndex >= 0 ? replaceAtIndex(splitPath, langIndex, 'ar').join('/') : '/ar';
+    const pathEn = langIndex >= 0 ? replaceAtIndex(splitPath, langIndex, 'en').join('/') : '/en';
 
     return (
       <header className='page__header' role='banner'>
