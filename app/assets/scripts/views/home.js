@@ -64,8 +64,6 @@ var Home = React.createClass({
     totalFunding = shorterTally(totalFunding);
     totalDonors = Object.keys(totalDonors).length;
 
-    console.log('totalProjects: ', totalProjects, 'totalDonors: ', totalDonors, 'totalFunding: ', totalFunding);
-
     const pie = [{
       name: 'On Time',
       value: status.ontime

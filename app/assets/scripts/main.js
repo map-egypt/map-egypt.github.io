@@ -18,7 +18,7 @@ window.L.mapbox.accessToken = 'pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2
 
 import config from './config';
 import reducer from './reducers';
-import { GOVERNORATE } from './utils/map-utils';
+import { GOVERNORATE, DISTRICT } from './utils/map-utils';
 
 const logger = createLogger({
   level: 'info',
@@ -44,6 +44,7 @@ store.dispatch(getAuthStatus(function () {
 store.dispatch(getProjects());
 store.dispatch(getIndicators());
 store.dispatch(getGeography(GOVERNORATE)); // fetch governorates
+store.dispatch(getGeography(DISTRICT)); // fetch districts
 
 const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
   return prevRouterProps &&
