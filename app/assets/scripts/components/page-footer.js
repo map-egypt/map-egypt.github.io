@@ -21,9 +21,7 @@ var PageFooter = React.createClass({
   },
 
   render: function () {
-    const { lang } = this.props;
     const t = get(window.t, [this.props.lang, 'footer'], {});
-    console.log ('footer:', this.props)
     return (
       <footer className='page__footer' role='contentinfo'>
         <div className='inner'>
@@ -32,14 +30,14 @@ var PageFooter = React.createClass({
               <div className='form__group'>
                 <h1 className='updates__title heading--xsmall'>{t.subscription_title}</h1>
                 <p className='updates__description'>{t.subscription_subtitle} <span className='italic'>{t.subscription_subtitle_timeframe}</span>.</p>
-                <div id="mc_embed_signup">
-                  <form action="//github.us14.list-manage.com/subscribe/post?u=7a02eb473bd111aa85bfb7ffc&amp;id=120d44b3d2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate form__input-group" target="_blank" noValidate>
-                    <input type="email" value={this.state.email} placeholder={t.email_field} name="EMAIL" className="required email form__control form__control--large" id="form-input-6" onChange={this.onChange}/>
-                    <div id="mce-responses" className="clear">
-                      <div className="response" id="mce-error-response" style={{'display': 'none'}}></div>
-                      <div className="response" id="mce-success-response" style={{'display': 'none'}}></div>
+                <div id='mc_embed_signup'>
+                  <form action='//github.us14.list-manage.com/subscribe/post?u=7a02eb473bd111aa85bfb7ffc&amp;id=120d44b3d2' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' className='validate form__input-group' target='_blank' noValidate>
+                    <input type='email' value={this.state.email} placeholder={t.email_field} name='EMAIL' className='required email form__control form__control--large' id='form-input-6' onChange={this.onChange}/>
+                    <div id='mce-responses' className='clear'>
+                      <div className='response' id='mce-error-response' style={{'display': 'none'}}></div>
+                      <div className='response' id='mce-success-response' style={{'display': 'none'}}></div>
                     </div>
-                    <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--large button--newsletter-icon"><span>Button</span></button></span>
+                    <span className='form__input-group-button'><button type='submit' className='button button--primary button--text-hidden button--large button--newsletter-icon'><span>Button</span></button></span>
                   </form>
                 </div>
 

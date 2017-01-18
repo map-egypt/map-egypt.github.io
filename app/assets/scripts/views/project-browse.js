@@ -400,7 +400,6 @@ var ProjectBrowse = React.createClass({
   },
 
   renderProjectSelector: function () {
-    console.log(this.props.meta)
     let projects = this.props.api.projects;
     let { lang } = this.props.meta;
     const { selectedProjectFilters } = this.state;
@@ -519,9 +518,8 @@ var ProjectBrowse = React.createClass({
         }
       }
     }
-    
+
     const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
-    console.log (t.filter_projects_btn)
     return (
       <section className='inpage project-browse'>
         <header className='inpage__header'>

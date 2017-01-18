@@ -9,7 +9,8 @@ const ProjectList = React.createClass({
 
   propTypes: {
     projects: React.PropTypes.array,
-    meta: React.PropTypes.object
+    meta: React.PropTypes.object,
+    lang: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -80,4 +81,3 @@ const ProjectList = React.createClass({
 });
 
 module.exports = ProjectList;
-

@@ -10,7 +10,8 @@ var ProjectTimeline = React.createClass({
 
   propTypes: {
     project: React.PropTypes.object,
-    meta: React.PropTypes.object
+    meta: React.PropTypes.object,
+    lang: React.PropTypes.string
   },
 
   render: function () {
@@ -29,10 +30,9 @@ var ProjectTimeline = React.createClass({
 
     const scale = scaleTime().domain([new Date(start), new Date(end)]).range([0, 100]);
 
-    console.log('timeline:',this.props)
     const { lang } = this.props;
-
     const t = get(window.t, [lang, 'project_pages'], {});
+
     return (
       <div className='timeline'>
         <div className='timeline__unit'>

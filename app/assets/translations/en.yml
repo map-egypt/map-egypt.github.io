@@ -34,7 +34,7 @@ projects_indicators:
   search_text: Zoom to Governorate
   map_toggle_btn: Map
   list_toggle_btn: List/Chart
-  
+
 projects_list_view:
   projects_title: Projects
   sort_by_title: Sort by
@@ -49,7 +49,7 @@ project_pages:
   proposed_timeline_title: Proposed Timeline
   categories_title: Categories
   donors_title: Donors
-  
+
   funding_title: Funding
   objective_title: Objective
   location_title: Location
@@ -64,7 +64,7 @@ project_pages:
   monitoring_indicators_title: Monitoring Indicators
   funding_by_donor_title: Funding by Donor
   status_title: Status
-  component_title: Component 
+  component_title: Component
   kpi_title: Key Performance Indicator
   target_title: Target
   progress_title: Progress
@@ -107,7 +107,7 @@ map_labels:
 
 general_buttons:
   share: Share
-  share-text: Copy URL to Share
+  share_text: Copy URL to Share
 
 footer:
   subscription_title: Want Updates?
