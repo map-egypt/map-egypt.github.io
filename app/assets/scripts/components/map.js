@@ -262,10 +262,13 @@ const Map = React.createClass({
   renderOverlayLegend: function (scale) {
     const isQuantile = scale.hasOwnProperty('invertExtent');
     let iterable = (isQuantile ? scale.range() : scale.domain()).sort();
-    const category = this.props.overlay.category.toLowerCase();
     const lookup = {'very low': 5, 'low': 4, 'medium': 3, 'high': 2, 'very high': 1, 5: 'very low', 4: 'low', 3: 'medium', 2: 'high', 1: 'very high'};
-    if (category === 'categorical') {
-      iterable = iterable.map((cat) => lookup[cat]).sort();
+    let category = get(this.props, 'overlay.category');
+    if (category) {
+      category = category.toLowerCase();
+      if (category === 'categorical') {
+        iterable = iterable.map((cat) => lookup[cat] || cat).sort();
+      }
     }
 
     return (
@@ -276,7 +279,7 @@ const Map = React.createClass({
           return (
             <span key={d} className='legend__item legend__overlay--item'>
               <span className='legend__item--overlay--bg' style={{backgroundColor}}></span>
-              <span className='legend__item--overlay-text'>{category === 'categorical' ? lookup[text] : text}</span>
+              <span className='legend__item--overlay-text'>{category === 'categorical' ? lookup[text] || text : text}</span>
             </span>
           );
         })}
