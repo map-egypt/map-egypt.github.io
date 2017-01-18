@@ -290,6 +290,7 @@ var Project = React.createClass({
                 <div className={'chart-content chart__inline--labels' + (!authenticated ? ' chart__block' : '')}>
                   <h3>Funding by Donor</h3>
                   <HorizontalBarChart
+                    lang={this.props.meta.lang}
                     data={donors}
                     margin={barChartMargin}
                     yTitle=''
@@ -349,6 +350,7 @@ var Project = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 <h3>Funding</h3>
                 <HorizontalBarChart
+                  lang={this.props.meta.lang}
                   data={budgets}
                   margin={barChartMargin}
                   yTitle=''
@@ -360,6 +362,7 @@ var Project = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 <h3>Percentage Complete</h3>
                 <HorizontalBarChart
+                  lang={this.props.meta.lang}
                   data={completion}
                   margin={barChartMargin}
                   yTitle=''
@@ -372,6 +375,7 @@ var Project = React.createClass({
                 <div className='chart-content chart__inline--labels'>
                   <h3>Beneficiaries Reached</h3>
                   <HorizontalBarChart
+                    lang={this.props.meta.lang}
                     data={served}
                     margin={barChartMargin}
                     yTitle=''
