@@ -19,35 +19,53 @@ const Axis = React.createClass({
 
   render: function () {
     const { scale, labels, orientation, height, width, margin } = this.props;
-    let transform, dy;
+    let transform, dy, dx, textAnchor;
     switch (orientation) {
-      case 'top':
-        transform = `translate(${margin.left},${margin.top})`;
-        dy = '-0.5em';
-        break;
       case 'left':
-        transform = `translate(0,${margin.top})`;
+        transform = `translate(${margin.left},${margin.top})`;
         dy = '0.5em';
+        dx = -5;
+        textAnchor = 'end';
+        break;
+      case 'right':
+        transform = `translate(${margin.left + width},${margin.top})`;
+        dy = '0.5em';
+        dx = 5;
+        textAnchor = 'start';
         break;
       case 'bottom':
       default:
-        transform = `translate(${margin.left},${height - margin.bottom})`;
+        transform = `translate(${margin.left},${height + margin.top})`;
         dy = '1em';
+        dx = 0;
+        textAnchor = 'middle';
+        break;
     }
 
     const format = this.props.format || defaultFormat;
     const hasLinks = this.props.links && Array.isArray(this.props.links) && this.props.links.length;
+    const horizontal = orientation === 'left' || orientation === 'right';
 
     return (
       <g className={'axis axis__' + orientation} transform={transform}>
         {labels.map((label, i) => {
+          let x, y;
+          if (horizontal) {
+            x = 0;
+            y = scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 1.5 : 0);
+          } else {
+            x = scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 2 : 0);
+            y = 5;
+          }
+
           let text = (<text
             key={label + i}
             className='chart__axis-ticks'
-            x={orientation === 'left' ? margin.left - 5 : scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 2 : 0)}
-            y={orientation === 'left' ? scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 1.5 : 0) : 5 }
+            x={x}
+            y={y}
             dy={dy}
-            textAnchor={orientation === 'left' ? 'end' : 'middle'}
+            dx={dx}
+            textAnchor={textAnchor}
             >
             {format(label)}
           </text>);
@@ -55,10 +73,10 @@ const Axis = React.createClass({
         })}
         <line
           className='chart__axis--line'
-          x1={orientation === 'left' ? margin.left : 0 }
+          x1='0'
           y1='0'
-          x2={orientation === 'left' ? margin.left : width }
-          y2={orientation === 'left' ? height - margin.bottom - margin.top : 0 }
+          x2={horizontal ? 0 : width }
+          y2={horizontal ? height : 0 }
         />
       </g>
     );

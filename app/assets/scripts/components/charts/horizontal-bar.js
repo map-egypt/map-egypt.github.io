@@ -63,7 +63,16 @@ var HorizontalBarChart = React.createClass({
 
   render: function () {
     const { width, height } = this.state;
-    const { data, margin, yTitle } = this.props;
+    const { lang, data, yTitle } = this.props;
+    const rtl = lang === 'ar';
+    let margin = Object.assign({}, this.props.margin);
+    if (rtl) {
+      // reverse margins when arabic
+      margin = Object.assign(margin, {
+        left: margin.right,
+        right: margin.left
+      });
+    }
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -72,7 +81,7 @@ var HorizontalBarChart = React.createClass({
       return <div className='chart-container' ref='chartContainer' />;
     }
 
-    const langSelector = this.props.lang === 'en' ? 'name' : 'nameAr';
+    const langSelector = rtl ? 'nameAr' : 'name';
     data.map((a, i) => {
       let name = a.name;
       if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name)[langSelector]);
@@ -88,7 +97,9 @@ var HorizontalBarChart = React.createClass({
     .paddingInner(0.6)
     .paddingOuter(0.2);
 
+    let xRange = [0, innerWidth];
     let xScale = scaleLinear().range([0, innerWidth]).domain([0, max(dataValues)]);
+    let axisScale = rtl ? scaleLinear().range([innerWidth, 0]).domain([0, max(dataValues)]) : xScale;
     let xLabels = xScale.ticks(3);
     let yScale = ordinalScale.rangeRound([innerHeight, 0]).domain(dataNames);
     let yLabels = dataNames;
@@ -98,32 +109,34 @@ var HorizontalBarChart = React.createClass({
       <div className='chart-container' ref='chartContainer'>
         <svg className='chart' width={width} height={height} ref='svg'>
           <Axis
-            scale={xScale}
+            scale={axisScale}
             labels={xLabels}
             orientation='bottom'
-            height={height}
-            width={width}
+            height={innerHeight}
+            width={innerWidth}
             margin={margin}
             format={this.props.xFormat}
           />
           <Axis
             scale={yScale}
             labels={yLabels}
-            orientation='left'
-            height={height}
-            width={width}
+            orientation={rtl ? 'right' : 'left'}
+            height={innerHeight}
+            width={innerWidth}
             margin={margin}
             format={this.props.yFormat}
             links={links}
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
             {data.map((d, i) => {
-              const active = d.name === this.props.activeProject ? ' active' : '';
+              let active = d.name === this.props.activeProject ? ' active' : '';
+              let rectWidth = xScale(d.value);
+              let x = rtl ? xRange[1] - rectWidth : 0;
               return <rect
                 key={d.name + i}
                 className={'chart__bar' + active}
                 y={yScale(d.name) + rectHeight / 3}
-                x={0}
+                x={x}
                 height={rectHeight}
                 width={xScale(d.value)}
                 onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, d)}

@@ -140,6 +140,7 @@ var Category = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 <h3>{t.comparison_chart_title1}</h3>
                 <HorizontalBarChart
+                  lang={this.props.meta.lang}
                   data={numProjectsChartData}
                   yFormat={shortText}
                   margin={chartMargin}
