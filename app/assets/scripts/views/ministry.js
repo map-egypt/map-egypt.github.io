@@ -105,6 +105,7 @@ var Ministry = React.createClass({
                   <div className='chart-content'>
                     <h3>Amount Funded</h3>
                     {!singleProject && (<HorizontalBarChart
+                      lang={this.props.meta.lang}
                       data={chartData}
                       margin={{ left: 140, right: 50, top: 10, bottom: 50 }}
                       xFormat={shortTally}

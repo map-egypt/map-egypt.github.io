@@ -89,6 +89,7 @@ var Owner = React.createClass({
                 </ul>
                 <div className='inpage__overview-chart'>
                   {!singleProject && (<HorizontalBarChart
+                    lang={this.props.meta.lang}
                     data={chartData}
                     margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
                     xFormat={shortTally}

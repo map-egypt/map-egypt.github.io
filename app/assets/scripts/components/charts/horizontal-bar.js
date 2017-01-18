@@ -9,6 +9,7 @@ var HorizontalBarChart = React.createClass({
   displayName: 'HorizontalBarChart',
 
   propTypes: {
+    lang: React.PropTypes.string,
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
     yTitle: React.PropTypes.string,
@@ -63,9 +64,10 @@ var HorizontalBarChart = React.createClass({
 
   render: function () {
     const { width, height } = this.state;
-    const { data, margin, yTitle } = this.props;
+    const { lang, data, margin, yTitle } = this.props;
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
+    const rtl = lang === 'ar';
 
     // short circut if we have too small an area
     if (innerWidth <= 0) {

@@ -129,6 +129,7 @@ var Home = React.createClass({
                 <div className='chart-content chart__inline--labels'>
                   <h3>Number of Projects By Category</h3>
                   <HorizontalBarChart
+                    lang={lang}
                     data={bars}
                     margin={barChartMargin}
                     yFormat={shortText}
