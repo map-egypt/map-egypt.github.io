@@ -149,7 +149,7 @@ var Project = React.createClass({
               </dl>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
             </div>
-            <ProjectTimeline project={data} />
+            <ProjectTimeline project={data} lang={this.props.meta.lang}/>
 
             <div className='tags'>
               <div className='tags__group'>

@@ -107,6 +107,7 @@ map_labels:
 
 general_buttons:
   share: Share
+  share-text: Copy URL to Share
 
 footer:
   subscription_title: Want Updates?

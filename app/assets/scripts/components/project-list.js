@@ -1,6 +1,8 @@
 'use strict';
 import React from 'react';
+import { get } from 'object-path';
 import ProjectCard from './project-card';
+import { window } from 'global';
 
 const ProjectList = React.createClass({
   displayName: 'ProjectList',
@@ -29,18 +31,20 @@ const ProjectList = React.createClass({
   },
 
   render: function () {
+    const { lang } = this.props;
     const {projects, meta} = this.props;
     const {sortAccessor} = this.state;
     const data = projects.slice().sort((a, b) => sortAccessor(a) < sortAccessor(b) ? -1 : 1);
 
+    const t = get(window.t, [lang, 'projects_list_view'], {});
     return (
     <div className='inpage__body'>
       <div className='inner'>
         <section className='inpage__section project-list'>
           <div className='section__header'>
-            <h1 className='section__title'>Projects</h1>
+            <h1 className='section__title'>{t.projects_title}</h1>
             <div className='sort'>
-              <label className='heading--label'>Sort By:</label>
+              <label className='heading--label'>{t.sort_by_title}:</label>
               <span className='dropdown__container'>
                 <button className='button button--medium button--secondary drop__toggle--caret'
                 onClick={this.toggleSort}>Alphabetical</button>
@@ -48,7 +52,7 @@ const ProjectList = React.createClass({
                   <ul className='drop__menu drop--align-left button--secondary'>
                     <li className='drop__menu-item'
                       onClick={() => this.setSortAccessor((d) => d.name)}
-                      >Alphabetical</li>
+                      >{t.sort_option1}</li>
                   </ul>
                 }
               </span>

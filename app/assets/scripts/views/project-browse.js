@@ -617,7 +617,7 @@ var ProjectBrowse = React.createClass({
                 </div>
               </div>
             )}
-            <ProjectList projects={projects} meta={this.props.meta} />
+            <ProjectList projects={projects} meta={this.props.meta} lang={this.props.meta.lang}/>
             </div>)
           : (<div className='map__outer'>
               <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>

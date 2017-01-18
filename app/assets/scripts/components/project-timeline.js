@@ -1,13 +1,16 @@
 'use strict';
 import React from 'react';
 import { scaleTime } from 'd3';
+import { get } from 'object-path';
 import { parseProjectDate, formatDate } from '../utils/date';
+import { window } from 'global';
 
 var ProjectTimeline = React.createClass({
   displayName: 'ProjectTimeline',
 
   propTypes: {
-    project: React.PropTypes.object
+    project: React.PropTypes.object,
+    meta: React.PropTypes.object
   },
 
   render: function () {
@@ -25,15 +28,19 @@ var ProjectTimeline = React.createClass({
     const end = actualEnd ? Math.max(plannedEnd, actualEnd) : plannedEnd;
 
     const scale = scaleTime().domain([new Date(start), new Date(end)]).range([0, 100]);
-    
+
+    console.log('timeline:',this.props)
+    const { lang } = this.props;
+
+    const t = get(window.t, [lang, 'project_pages'], {});
     return (
       <div className='timeline'>
         <div className='timeline__unit'>
-          <h5 className='timeline__headline heading-alt'>Current Progress</h5>
+          <h5 className='timeline__headline heading-alt'>{t.current_progress_title}</h5>
           {actualStart && actualEnd && timeline(actualStart, actualEnd, scale)}
         </div>
         <div className='timeline__unit'>
-          <h5 className='timeline__headline heading-alt'>Proposed Timeline</h5>
+          <h5 className='timeline__headline heading-alt'>{t.proposed_timeline_title}</h5>
           {timeline(plannedStart, plannedEnd, scale)}
         </div>
       </div>

@@ -47,7 +47,7 @@ const ShareButton = React.createClass({
         <button className='button button--medium button--primary' onClick={this.show}>{t.share}</button>
         {this.state.isOpen && <div className={'share--box drop__content drop--align-right' + openClass}>
         <div className='form__group'>
-          <label className="form__label">Copy URL to Share</label>
+          <label className="form__label">{t.share-text}</label>
           <div className="form__input-group">
             <input id="share-url-field" readOnly type="text" className="form__control form__control--medium" value={url.resolve(baseUrl, '#' + this.props.path)}/>
             <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--copy-icon" data-clipboard-target="#share-url-field" id="share-url-button"><span>Button</span></button></span>

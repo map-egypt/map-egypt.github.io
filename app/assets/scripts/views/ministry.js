@@ -81,7 +81,7 @@ var Ministry = React.createClass({
                 return (
                   <div key ={'timeline-' + i}>
                     <h5>{project.name}</h5>
-                    <ProjectTimeline project={project} />
+                    <ProjectTimeline project={project} lang={this.props.meta.lang}/>
                   </div>
                 );
               }
