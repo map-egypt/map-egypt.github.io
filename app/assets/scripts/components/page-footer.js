@@ -28,12 +28,11 @@ var PageFooter = React.createClass({
                 <p className='updates__description'>Get notifications when we update projects <span className='italic'>quarterly</span>.</p>
                 <div id="mc_embed_signup">
                   <form action="//github.us14.list-manage.com/subscribe/post?u=7a02eb473bd111aa85bfb7ffc&amp;id=120d44b3d2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate form__input-group" target="_blank" noValidate>
-                      <input type="email" value={this.state.email} placeholder="Enter email address" name="EMAIL" className="required email form__control form__control--large" id="form-input-6" onChange={(e) => this.onChange(e)}/>
-                      <div id="mce-responses" className="clear">
-                        <div className="response" id="mce-error-response" style={{'display': 'none'}}></div>
-                        <div className="response" id="mce-success-response" style={{'display': 'none'}}></div>
-                      </div>
-                    <div style={{'position': 'absolute', 'left': '-5000px'}} aria-hidden="true"><input type="text" name="b_7a02eb473bd111aa85bfb7ffc_120d44b3d2" tabIndex="-1" value="" /></div>
+                    <input type="email" value={this.state.email} placeholder="Enter email address" name="EMAIL" className="required email form__control form__control--large" id="form-input-6" onChange={this.onChange}/>
+                    <div id="mce-responses" className="clear">
+                      <div className="response" id="mce-error-response" style={{'display': 'none'}}></div>
+                      <div className="response" id="mce-success-response" style={{'display': 'none'}}></div>
+                    </div>
                     <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--large button--newsletter-icon"><span>Button</span></button></span>
                   </form>
                 </div>
