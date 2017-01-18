@@ -1,99 +1,101 @@
-main-navigation:
-  projects-navitem: Projects & Indicators
-  about-navitem: About
-  login-navitem: Log In
+main_navigation:
+  projects_navitem: Projects & Indicators
+  about_navitem: About
+  login_navitem: Log In
 
 homepage:
   subhead: tracking egypt
-  title: Arabic title goes here
+  title: Agricultural Progress and Impact
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
   more: Learn More
 
-  map-key-circle: Group of Projects
-  map-key-marker: Project
+  map_key_circle: Group of Projects
+  map_key_marker: Project
 
-  stats-overview: Overview of Agricultural Projects
-  overview-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  all-projects-btn: View All Projects
-  chart-title-one: Number of Projects by Category
-  chart-title-two: Status
-  chart-two-label: On Time
-  chart-two-label2: Delayed
+  stats_overview: Overview of Agricultural Projects
+  overview_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  all_projects_btn: View All Projects
+  chart_title_one: Number of Projects by Category
+  chart_title_two: Status
+  chart_two_label: On Time
+  chart_two_label2: Delayed
 
-  other-indicators-title: Other Progress Indicators
-  other-indicators-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  sds-button: SDS Indicators
-  sdg-button: SDG Indicators
+  other_indicators_title: Other Progress Indicators
+  other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  sds_button: SDS Indicators
+  sdg_button: SDG Indicators
 
-projects-indicators:
-  projects-title: Projects and Indicators
-  projects-description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  filter-projects-btn: Add & Filter Projects
-  indicator-overlays-btn: Add Indicator Overlays
-  search-text: Zoom to Governorate
-  map-toggle-btn: Map
-  list-toggle-btn: List
+projects_indicators:
+  projects_title: Projects and Indicators
+  projects_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  filter_projects_btn: Add & Filter Projects
+  indicator_overlays_btn: Add Indicator Overlays
+  search_text: Zoom to Governorate
+  map_toggle_btn: Map
+  list_toggle_btn: List
   
-projects-list-view:
-  projects-title: Projects
-  sort-by-title: Sort by
-  sort-option1: Alphabetical
+projects_list_view:
+  projects_title: Projects
+  sort_by_title: Sort by
+  sort_option1: Alphabetical
 
-project-pages:
-  status-ontime: On Time
-  status-delayed: Delayed
-  last-update-title: Last Update
-  current-progress-title: Current Progress
-  proposed-timeline-title: Proposed Timeline
-  categories-title: Categories
-  donors-title: Donors
+project_pages:
+  status_ontime: On Time
+  status_delayed: Delayed
+  last_update_title: Last Update
+  current_progress_title: Current Progress
+  proposed_timeline_title: Proposed Timeline
+  categories_title: Categories
+  donors_title: Donors
   
-  funding-title: Funding
-  objective-title: Objective
-  location-title: Location
-  responsible-ministry-title: Responsible Ministry
-  sdg-goals-title: SDG Goals
-  sds-pillars-title: SDG Pillars
+  funding_title: Funding
+  objective_title: Objective
+  location_title: Location
+  responsible_ministry_title: Responsible Ministry
+  sdg_goals_title: SDG Goals
+  sds_pillars_title: SDG Pillars
 
-  monitoring-indicators-title: Monitoring Indicators
-  funding-by-donor-title: Funding by Donor
-  status-title: Status
-  component-title: Component 
-  kpi-title: Key Performance Indicator
-  target-title: Target
-  progress-title: Progress
-  date-title: Date
+  monitoring_indicators_title: Monitoring Indicators
+  funding_by_donor_title: Funding by Donor
+  status_title: Status
+  component_title: Component 
+  kpi_title: Key Performance Indicator
+  target_title: Target
+  progress_title: Progress
+  date_title: Date
 
-  kpi-status-implemented: Implemented
-  kpi-status-partially: Partially Implemented
-  kpi-status-not: Not Implemented
+  kpi_status_implemented: Implemented
+  kpi_status_partially: Partially Implemented
+  kpi_status_not: Not Implemented
 
-  project-comparison-title: Project Comparison By Category
-  comparison-chart-title1: Funding
-  comparison-chart-title2: Percentage Complete
+  project_comparison_title: Project Comparison By Category
+  comparison_chart_title1: Funding
+  comparison_chart_title2: Percentage Complete
 
-  related-sds-projects-title: Related Projects By SDS Goal
+  related_sds_projects_title: Related Projects By SDS Goal
 
-category-pages:
-  stat-one: Total Funds
-  stat-two: Projects Funded
+category_pages:
+  stat_one: Total Funds
+  stat_two: Projects Funded
 
-  comparison-title: Comparison
-  comparison-chart-title1: Number of Projects per Category
-  comparison-chart-title2: Funding of Projects per Category
+  comparison_title: Comparison
+  comparison_chart_title1: Number of Projects per Category
+  comparison_chart_title2: Funding of Projects per Category
 
-  category-funding-chart-title: Funding
-  category-complete-chart-title: Percentage Complete
+  category_funding_chart_title: Funding
+  category_complete_chart_title: Percentage Complete
 
-donor-pages:
-  
+donor_pages:
+  donor_stats_funds: Total Funds
+  donor_stats_funded: Projects Funded
+  donor_chart_title: Amount Funded
+  funded_title: Projects Funded
 
-
-general-buttons:
+general_buttons:
   share: Share
 
 footer:
-  subscription-title: Want Updates?
-  subscription-subtitle: Get notifications when we update projects quarterly.
-  contact-link: Contact Us
-  contact-sentence: with questions or comments.
+  subscription_title: Want Updates?
+  subscription_subtitle: Get notifications when we update projects quarterly.
+  contact_link: Contact Us
+  contact_sentence: with questions or comments.

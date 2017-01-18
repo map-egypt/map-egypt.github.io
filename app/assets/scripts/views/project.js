@@ -128,6 +128,7 @@ var Project = React.createClass({
     }));
 
     const locationLang = this.props.meta.lang === 'en' ? 'name' : 'nameAr';
+    const t = get(window.t, [this.props.meta.lang, 'project_pages'], {});
 
     return (
       <section className='inpage'>
@@ -142,8 +143,8 @@ var Project = React.createClass({
               </div>
               <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
-                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? 'On time' : 'Delayed'}</dd>
-                <dt className='inpage-meta__label'>Last Update: </dt>
+                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? '{t.status_ontime}' : '{t.status_delayed}'}</dd>
+                <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
@@ -152,7 +153,7 @@ var Project = React.createClass({
 
             <div className='tags'>
               <div className='tags__group'>
-                <p className='tags__label'>Categories:</p>
+                <p className='tags__label'>{t.categories_title}:</p>
                 <div className='inpage__subtitles'>
                   {get(data, 'category', []).map((category) => <span key={category.en} className='inpage__subtitle'>
                     <Link to={linkPath(basepath, 'category', category.en)} className='link--secondary' href=''>{category[lang]}</Link>&nbsp;
@@ -160,7 +161,7 @@ var Project = React.createClass({
                 </div>
               </div>
               <div className='tags__group'>
-                <p className='tags__label'>Donors:</p>
+                <p className='tags__label'>{t.donors_title}:</p>
                 <div className='inpage__subtitles'>
                   {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
                       <Link to={linkPath(basepath, 'donor', donor.name)} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
@@ -180,18 +181,18 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>${shortTally(budget)} <small>Funding</small></li>
+                  <li>${shortTally(budget)} <small>{t.funding_title}</small></li>
                   <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
 
                 <div className='inpage__overview-links'>
-                <h2 className='overview-item__title heading-alt'>Objective</h2>
+                <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>
                   <li>{data.description}</li>
                 </ul>
                 {data.location && (
                   <div className='overview-item'>
-                    <h1 className='overview-item__title heading-alt'>Location</h1>
+                    <h1 className='overview-item__title heading-alt'>{t.location_title}</h1>
                     <div className='link-list'>
                        {get(data, 'location', []).map((loc, i) => {
                          const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
@@ -211,16 +212,16 @@ var Project = React.createClass({
 
                 {data.project_link && (
                   <div className='overview-item'>
-                    <h2 className='overview-item__title heading-alt'>Project Link</h2>
+                    <h2 className='overview-item__title heading-alt'>{t.project_link}</h2>
                     <ul className='link-list'>
-                      <li><a href={data.project_link} className='link--primary'><span> View Project Documentation</span></a></li>
+                      <li><a href={data.project_link} className='link--primary'><span>{t.view_documentation_title}</span></a></li>
                     </ul>
                   </div>
                 )}
 
                 {data.responsible_ministry && (
                   <div className='overview-item'>
-                    <h2 className='overview-item__title heading-alt'>Responsible Ministry</h2>
+                    <h2 className='overview-item__title heading-alt'>{t.responsible_ministry_title}</h2>
                     <ul className='link-list'>
                       <li><a href={`#/${lang}/ministry/${slugify(data.responsible_ministry[lang])}`} className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
                     </ul>
@@ -229,7 +230,7 @@ var Project = React.createClass({
 
                 {((lang === 'en' && data.local_manager) || lang === 'ar' && data.local_manager_ar) && (
                   <div className='overview-item'>
-                    <h2 className='overview-item__title heading-alt'>Local Manager</h2>
+                    <h2 className='overview-item__title heading-alt'>{t.local_manager_title}</h2>
                     <ul className='link-list'>
                       <li><a href='' className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
                     </ul>
@@ -238,7 +239,7 @@ var Project = React.createClass({
 
                 {data.kmi && (
                   <div className='overview-item--alt'>
-                    <h2 className='overview-item__title heading-alt'>KMI Components</h2>
+                    <h2 className='overview-item__title heading-alt'>{t.kmi_components}</h2>
                     <ul className='link-list'>
                       {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
                         return (
@@ -253,7 +254,7 @@ var Project = React.createClass({
 
                 {data.sdg_indicator && (
                   <div className='overview-item--alt'>
-                    <h2 className='overview-item__title heading-alt'>SDG Goals</h2>
+                    <h2 className='overview-item__title heading-alt'>{t.sdg_goals_title}</h2>
                     <ul className='link-list'>
                       {get(data, 'sdg_indicator', []).map((indicator) => {
                         return (
@@ -268,7 +269,7 @@ var Project = React.createClass({
 
                 {data.sds_indicator && (
                   <div className='overview-item--alt'>
-                    <h2 className='overview-item__title heading-alt'>SDS Pillars</h2>
+                    <h2 className='overview-item__title heading-alt'>{t.sds_pillars_title}</h2>
                     <ul className='link-list'>
                       {get(data, 'sds_indicator', []).map((indicator) => {
                         return (

@@ -1,5 +1,7 @@
 'use strict';
 import React from 'react';
+import { get } from 'object-path';
+import { window } from 'global';
 
 var PageFooter = React.createClass({
   displayName: 'PageFooter',
@@ -9,6 +11,7 @@ var PageFooter = React.createClass({
   },
 
   propTypes: {
+    lang: React.PropTypes.string
   },
 
   onChange: function (e) {
@@ -18,14 +21,15 @@ var PageFooter = React.createClass({
   },
 
   render: function () {
+    const t = get(window.t, [this.props.lang, 'footer'], {});
     return (
       <footer className='page__footer' role='contentinfo'>
         <div className='inner'>
           <div>
             <div className='updates'>
               <div className='form__group'>
-                <h1 className='updates__title heading--xsmall'> Want Updates? </h1>
-                <p className='updates__description'>Get notifications when we update projects <span className='italic'>quarterly</span>.</p>
+                <h1 className='updates__title heading--xsmall'>{t.subscription_title}</h1>
+                <p className='updates__description'>{t.subscription_subtitle}<span className='italic'>quarterly</span>.</p>
                 <div id="mc_embed_signup">
                   <form action="//github.us14.list-manage.com/subscribe/post?u=7a02eb473bd111aa85bfb7ffc&amp;id=120d44b3d2" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" className="validate form__input-group" target="_blank" noValidate>
                         <input type="email" value={this.state.email} placeholder="Enter email address" name="EMAIL" className="required email form__control form__control--large" id="form-input-6" onChange={this.onChange.bind(this)}/>

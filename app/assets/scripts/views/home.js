@@ -93,8 +93,8 @@ var Home = React.createClass({
             <Map markers={markers} lang={lang} />
             <section className='inpage__section'>
               <div className='overview-home'>
-                <h2 className='section__title'>Overview of Agricultural Projects</h2>
-                <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+                <h2 className='section__title'>{t.stats_overview}</h2>
+                <p className='section__description'>{t.overview_description}</p>
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{totalProjects}<small>total projects</small></h3>
@@ -129,7 +129,7 @@ var Home = React.createClass({
 
               <div className='overview-home-charts'>
                 <div className='chart-content chart__inline--labels'>
-                  <h3>Number of Projects By Category</h3>
+                  <h3>{t.chart_title_one}</h3>
                   <HorizontalBarChart
                     data={bars}
                     margin={barChartMargin}
@@ -138,25 +138,25 @@ var Home = React.createClass({
                     yTitle='' />
                 </div>
                 <div className='chart-content chart__inline--labels'>
-                  <h3> Status </h3>
+                  <h3>{t.chart_title_two}</h3>
                   <PieChart data={pie} />
                   <div className='status-key'>
-                    <p className='status-key__label status-ontime'>On Time</p>
-                    <p className='status-key__label status-delayed'>Delayed</p>
+                    <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
+                    <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
                   </div>
                 </div>
               </div>
               <div className='section__footer'>
-                <Link to={basepath + '/projects'} type='button' className='button button--primary button--large'>View All Projects</Link>
+                <Link to={basepath + '/projects'} type='button' className='button button--primary button--large'>{t.all_projects_btn}</Link>
               </div>
             </section>
           </div>
           <section className='inpage__section--bleed'>
-            <h2 className='section__title'>Other Progress Indicators</h2>
-            <p className='section__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+            <h2 className='section__title'>{t.other_indicators_title}</h2>
+            <p className='section__description'>{t.other_indicators_description}</p>
             <ul className='section__footer'>
-              <li><Link to={'/' + lang + '/projects_sds'} type='button' className='button button--primary button--large'>SDS Indicators</Link></li>
-              <li><Link to={'/' + lang + '/projects_sdg'} type='button' className='button button--primary button--large'>SDG Indicators</Link></li>
+              <li><Link to={'/' + lang + '/projects_sds'} type='button' className='button button--primary button--large'>{t.sds_button}</Link></li>
+              <li><Link to={'/' + lang + '/projects_sdg'} type='button' className='button button--primary button--large'>{t.sdg_button}</Link></li>
             </ul>
           </section>
         </div>

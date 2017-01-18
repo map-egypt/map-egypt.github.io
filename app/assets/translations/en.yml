@@ -1,5 +1,104 @@
+main_navigation:
+  projects_navitem: Projects & Indicators
+  about_navitem: About
+  login_navitem: Log In
+  logout_navitem: Log Out
+
 homepage:
   subhead: tracking egypt
   title: Agricultural Progress and Impact
   description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
   more: Learn More
+
+  map_key_circle: Group of Projects
+  map_key_marker: Project
+
+  stats_overview: Overview of Agricultural Projects
+  overview_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  all_projects_btn: View All Projects
+  chart_title_one: Number of Projects by Category
+  chart_title_two: Status
+  chart_two_label: On Time
+  chart_two_label2: Delayed
+
+  other_indicators_title: Other Progress Indicators
+  other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  sds_button: SDS Indicators
+  sdg_button: SDG Indicators
+
+projects_indicators:
+  projects_title: Projects and Indicators
+  projects_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  filter_projects_btn: Add & Filter Projects
+  indicator_overlays_btn: Add Indicator Overlays
+  search_text: Zoom to Governorate
+  map_toggle_btn: Map
+  list_toggle_btn: List
+  
+projects_list_view:
+  projects_title: Projects
+  sort_by_title: Sort by
+  sort_option1: Alphabetical
+
+project_pages:
+  status_ontime: On Time
+  status_delayed: Delayed
+  last_update_title: Last Update
+  current_progress_title: Current Progress
+  proposed_timeline_title: Proposed Timeline
+  categories_title: Categories
+  donors_title: Donors
+  
+  funding_title: Funding
+  objective_title: Objective
+  location_title: Location
+  responsible_ministry_title: Responsible Ministry
+  sdg_goals_title: SDG Goals
+  sds_pillars_title: SDG Pillars
+
+  monitoring_indicators_title: Monitoring Indicators
+  funding_by_donor_title: Funding by Donor
+  status_title: Status
+  component_title: Component 
+  kpi_title: Key Performance Indicator
+  target_title: Target
+  progress_title: Progress
+  date_title: Date
+
+  kpi_status_implemented: Implemented
+  kpi_status_partially: Partially Implemented
+  kpi_status_not: Not Implemented
+
+  project_comparison_title: Project Comparison By Category
+  comparison_chart_title1: Funding
+  comparison_chart_title2: Percentage Complete
+
+  related_sds_projects_title: Related Projects By SDS Goal
+
+category_pages:
+  stat_one: Total Funds
+  stat_two: Projects Funded
+
+  comparison_title: Comparison
+  comparison_chart_title1: Number of Projects per Category
+  comparison_chart_title2: Funding of Projects per Category
+
+  category_funding_chart_title: Funding
+  category_complete_chart_title: Percentage Complete
+
+donor_pages:
+  donor_stats_funds: Total Funds
+  donor_stats_funded: Projects Funded
+  donor_chart_title: Amount Funded
+  funded_title: Projects Funded
+
+general_buttons:
+  share: Share
+
+footer:
+  subscription_title: Want Updates?
+  subscription_subtitle: Get notifications when we update projects
+  subscription_subtitle_timeframe: quarterly
+  email_field: Enter Your Email Address
+  contact_link: Contact Us
+  contact_sentence: with questions or comments.

@@ -316,6 +316,7 @@ var ProjectBrowse = React.createClass({
     const themeNames = Object.keys(themes);
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
+    const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
