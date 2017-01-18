@@ -36,6 +36,13 @@ var PageHeader = React.createClass({
 
   render: function () {
     const basepath = '/' + this.props.lang;
+
+    const splitPath = this.props.location.pathname.split('/');
+    const langIndex = splitPath.indexOf(this.props.lang);
+
+    const pathAr = replaceAtIndex(splitPath, langIndex, 'ar').join('/');
+    const pathEn = replaceAtIndex(splitPath, langIndex, 'en').join('/');
+
     return (
       <header className='page__header' role='banner'>
         <div className='inner'>
@@ -52,8 +59,8 @@ var PageHeader = React.createClass({
                 <li><Link to={basepath + '/about'} title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco-active' onClick={this.onRootMenuClick}><span>About</span></Link></li>
               </ul>
               <ul className='utilities-menu'>
-                <li><Link to='/en' title='Switch to English' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>
-                <li><Link to='/ar' title='Switch to Arabic' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>عربي</span></Link></li>
+                <li><Link to={pathEn} title='Switch to English' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>English</span></Link></li>
+                <li><Link to={pathAr} title='Switch to Arabic' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>عربي</span></Link></li>
                 {!this.props.authenticated && <li><Link title='Log in' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLoginClick}><span>Log In</span></Link></li>}
                 {this.props.authenticated && <li><Link to={this.props.location.pathname} title='Log out' className='browse-menu__item link--deco' activeClassName='browse-menu__item' onClick={this.onLogoutClick}><span>Log Out</span></Link></li>}
 
@@ -65,5 +72,11 @@ var PageHeader = React.createClass({
     );
   }
 });
+
+function replaceAtIndex (array, index, item) {
+  let copy = array.slice();
+  copy[index] = item;
+  return copy;
+}
 
 module.exports = PageHeader;
