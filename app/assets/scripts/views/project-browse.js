@@ -494,7 +494,7 @@ var ProjectBrowse = React.createClass({
       projects = this.props.api.projects;
       if (activeProjectFilters.length) {
         activeProjectFilters.forEach((filter) => {
-          projects = this.state.projectsHidden ? [] : projects.filter(filter.filter);
+          projects = projects.filter(filter.filter);
         });
       }
       markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
