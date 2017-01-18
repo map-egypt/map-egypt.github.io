@@ -29,10 +29,6 @@ const Axis = React.createClass({
         transform = `translate(0,${margin.top})`;
         dy = '0.5em';
         break;
-      case 'right':
-        transform = `translate(${scale.range()[1]},${margin.top})`;
-        dy = '0.5em';
-        break;
       case 'bottom':
       default:
         transform = `translate(${margin.left},${height - margin.bottom})`;
@@ -48,14 +44,8 @@ const Axis = React.createClass({
           let text = (<text
             key={label + i}
             className='chart__axis-ticks'
-            x={orientation === 'left'
-              ? margin.left - 5
-              : orientation === 'right'
-                ? margin.right + 5
-                : scale(label) + (typeof scale.bandwidth === 'function'
-                  ? scale.bandwidth() / 2
-                  : 0)}
-            y={orientation === 'left' || 'right' ? scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 1.5 : 0) : 5 }
+            x={orientation === 'left' ? margin.left - 5 : scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 2 : 0)}
+            y={orientation === 'left' ? scale(label) + (typeof scale.bandwidth === 'function' ? scale.bandwidth() / 1.5 : 0) : 5 }
             dy={dy}
             textAnchor={orientation === 'left' ? 'end' : 'middle'}
             >
@@ -65,18 +55,10 @@ const Axis = React.createClass({
         })}
         <line
           className='chart__axis--line'
-          x1={orientation === 'left'
-            ? margin.left
-            : orientation === 'right'
-              ? margin.right
-              : 0}
+          x1={orientation === 'left' ? margin.left : 0 }
           y1='0'
-          x2={orientation === 'left'
-            ? margin.left
-            : orientation === 'right'
-              ? margin.right
-              : width}
-          y2={orientation === 'left' || 'right' ? height - margin.bottom - margin.top : 0 }
+          x2={orientation === 'left' ? margin.left : width }
+          y2={orientation === 'left' ? height - margin.bottom - margin.top : 0 }
         />
       </g>
     );
