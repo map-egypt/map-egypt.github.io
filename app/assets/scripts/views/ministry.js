@@ -8,7 +8,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import ProjectTimeline from '../components/project-timeline';
-import { shortTally, tally, shortText } from '../utils/format';
+import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 

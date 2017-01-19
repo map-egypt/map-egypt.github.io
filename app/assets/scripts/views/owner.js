@@ -7,7 +7,7 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
-import { shortTally, tally, shortText } from '../utils/format';
+import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 
 var Owner = React.createClass({
