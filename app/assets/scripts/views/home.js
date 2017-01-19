@@ -105,7 +105,7 @@ var Home = React.createClass({
                 </ul>
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>{totalFunding}<small>in funding</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>${totalFunding}<small>in funding</small></h3>
                     <ul className='link-list'>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
@@ -156,6 +156,7 @@ var Home = React.createClass({
             <ul className='section__footer'>
               <li><Link to={'/' + lang + '/projects_sds'} type='button' className='button button--primary button--large'>{t.sds_button}</Link></li>
               <li><Link to={'/' + lang + '/projects_sdg'} type='button' className='button button--primary button--large'>{t.sdg_button}</Link></li>
+              <li><Link to={'/' + lang + '/projects_other'} type='button' className='button button--primary button--large'>{t.other_button}</Link></li>
             </ul>
           </section>
         </div>
