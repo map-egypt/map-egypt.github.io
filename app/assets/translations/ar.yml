@@ -1,39 +1,39 @@
 main_navigation:
-  projects_navitem: Projects & Indicators
+  projects_navitem: 'المشروعات و المؤشرات'
   about_navitem: 'عن الموقع'
   login_navitem: 'تسجيل الدخول'
   logout_navitem: 'تسجيل الخروج'
 
 homepage:
   subhead: tracking egypt
-  title: Agricultural Progress and Impact
+  title: 'أثر و تقدم المجال الزراعي'
   description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها و المستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك الوشروعات على المستويين الوطنى والمحلى.'
-  more: Learn More
+  more: 'اقرأ المزيد'
 
-  map_key_circle: Group of Projects
-  map_key_marker: Project
+  map_key_circle: 'مجموعة مشروعات'
+  map_key_marker: 'مشروع'
 
-  stats_overview: Overview of Agricultural Projects
+  stats_overview: 'نظرة عامة عن المشروعات الزراعية'
   overview_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  all_projects_btn: View All Projects
-  chart_title_one: Number of Projects by Category
-  chart_title_two: Status
-  chart_two_label: On Time
-  chart_two_label2: Delayed
+  all_projects_btn: 'تصفح جميع المشروعات'
+  chart_title_one: 'عدد المشروعات في كل قطاع فرعي'
+  chart_title_two: 'الحالة'
+  chart_two_label: 'في الميعاد'
+  chart_two_label2: 'متأخر'
 
-  other_indicators_title: Other Progress Indicators
+  other_indicators_title: 'مؤشرات الأخرى'
   other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  sds_button: SDS Indicators
-  sdg_button: SDG Indicators
+  sds_button: 'مؤشرات استراتيجية التنمية المُستدامة'
+  sdg_button: 'مؤشرات أهداف التنمية المُستدامة'
 
 projects_indicators:
-  projects_title: Projects and Indicators
+  projects_title: 'المشروعات و المؤشرات'
   projects_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  filter_projects_btn: Add & Filter Projects
-  indicator_overlays_btn: Add Indicator Overlays
-  search_text: Zoom to Governorate
-  map_toggle_btn: Map
-  list_toggle_btn: List/Chart
+  filter_projects_btn: 'اضافة و تصفية المشروعات'
+  indicator_overlays_btn: 'اضافة مؤشرات'
+  search_text: 'اسم المحافظة'
+  map_toggle_btn: 'خريطة'
+  list_toggle_btn: 'قائمة \رسم بياني'
 
 projects_list_view:
   projects_title: Projects
