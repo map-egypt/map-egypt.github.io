@@ -72,6 +72,7 @@ var Project = React.createClass({
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
+    const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
@@ -142,9 +143,9 @@ var Project = React.createClass({
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
-              <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
+              <dl className={'inpage-meta project--' + ontime}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
-                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? t.status_ontime : t.status_delayed}</dd>
+                <dd className='inpage-meta__value inpage-meta__value--status'>{ontimeLookup[ontime]}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>

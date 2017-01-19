@@ -14,22 +14,33 @@ function categoryLink (base, categoryName) {
 }
 
 function isOntime (project) {
-  let planned = parseProjectDate(project.planned_end_date);
-  let actual = parseProjectDate(project.actual_end_date);
+  let plannedEnd = parseProjectDate(project.planned_end_date);
+  let actualEnd = parseProjectDate(project.actual_end_date);
+  let plannedStart = parseProjectDate(project.planned_start_date);
+  let actualStart = parseProjectDate(project.actual_start_date);
 
-  // if there's no actual date, and the planned date is still in the future,
-  // check if there are start dates to use instead.
-  if (!actual && planned && planned > new Date().getTime()) {
-    planned = parseProjectDate(project.planned_start_date);
-    actual = parseProjectDate(project.actual_start_date);
-  }
-
-  if (!actual || !planned) {
+  if (!actualStart || !plannedStart) {
     return null;
-  } else if (actual > planned) {
-    return false;
+    // project incomplete and late
+  } else if ((actualStart <= plannedStart) && (!actualEnd && plannedEnd && plannedEnd < new Date().getTime())) {
+    return 'extended';
+    // project completed late
+  } else if ((actualStart <= plannedStart) && (actualEnd > plannedEnd)) {
+    return 'extended';
+    // project in progress, started late
+  } else if (((actualStart > plannedStart) && (!actualEnd && plannedEnd && plannedEnd > new Date().getTime()))) {
+    return 'delayed';
+    // project completed, started late
+  } else if (((actualStart > plannedStart) && (actualEnd <= plannedEnd))) {
+    return 'delayed';
+    // project both delayed and completed late
+  } else if (((actualStart > plannedStart) && (actualEnd > plannedEnd))) {
+    return 'delayed';
+    // project in progress, both delayed and late
+  } else if (((actualStart > plannedStart) && (!actualEnd && plannedEnd && plannedEnd < new Date().getTime()))) {
+    return 'delayed';
   } else {
-    return true;
+    return 'ontime';
   }
 }
 
@@ -63,7 +74,8 @@ var ProjectCard = React.createClass({
     const { project, lang } = this.props;
     const locationLang = this.props.lang === 'en' ? 'name' : 'nameAr';
     const ontime = isOntime(project);
-    const statusClass = ontime ? 'project--ontime' : 'project--delayed';
+    const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
+    const statusClass = 'project--' + ontime;
     const basepath = '/' + lang;
     const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);
     let completion = pct(percentComplete(project));
@@ -92,7 +104,7 @@ var ProjectCard = React.createClass({
             <div className='card__body'>
               <dl className='card-meta'>
                 <dt className='card-meta__label'>Status</dt>
-                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{ontime ? 'On Time' : 'Delayed'}</dd>
+                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{ontimeLookup[ontime]}</dd>
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>
