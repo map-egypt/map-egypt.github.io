@@ -14,7 +14,7 @@ homepage:
   map_key_marker: Project
 
   stats_overview: Overview of Agricultural Projects
-  overview_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  overview_description: View consolidated project information and compare investments in different subsectors.
   all_projects_btn: View All Projects
   chart_title_one: Number of Projects by Category
   chart_title_two: Status
@@ -22,13 +22,13 @@ homepage:
   chart_two_label2: Delayed
 
   other_indicators_title: Other Progress Indicators
-  other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Egypt. Overlay agriculture and rural development projects in areas of interest.
   sds_button: SDS Indicators
   sdg_button: SDG Indicators
 
 projects_indicators:
   projects_title: Projects and Indicators
-  projects_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add context.
   filter_projects_btn: Add & Filter Projects
   indicator_overlays_btn: Add Indicator Overlays
   search_text: Zoom to Governorate
