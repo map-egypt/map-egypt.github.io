@@ -8,7 +8,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import ProjectTimeline from '../components/project-timeline';
-import { shortTally, tally, shortText } from '../utils/format';
+import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
@@ -33,7 +33,7 @@ var Ministry = React.createClass({
     let ministryDisplayName;
 
     const lang = this.props.meta.lang;
-    const ministryProjects = projects.filter((project) => {
+    let ministryProjects = projects.filter((project) => {
       const name = project.responsible_ministry[lang];
       const sluggedName = slugify(name);
       if (sluggedName === ministryName) {
@@ -44,24 +44,16 @@ var Ministry = React.createClass({
     const markers = getProjectCentroids(ministryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
     const mapLocation = getFeatureCollection(markers);
 
-    const projectBudgets = ministryProjects
-      .map((project) => project.budget)
-      .reduce((a, b) => a.concat(b), []);
-
     const chartData = ministryProjects.map((project) => {
       return {
         name: project.name,
         link: path.resolve(basepath, 'projects', project.id),
-        value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0)
+        value: project.number_served.number_served
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
-    // TODO change this to 2 amounts dispursed and remaining
-    const totalBudget = projectBudgets.reduce((currentValue, budget) => {
-      return budget.fund.amount + currentValue;
-    }, 0);
-
     const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
+    const activeProjects = ministryProjects.filter((project) => project.actual_end_date).length;
 
     return (
       <section className='inpage funding'>
@@ -98,12 +90,12 @@ var Ministry = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> {shortTally(totalBudget)} <small>Total Funds</small></li>
-                  <li> {tally(ministryProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
+                  <li> {activeProjects} <small>Active {activeProjects > 1 ? 'Projects' : 'Project'}</small></li>
+                  <li> {ministryProjects.length} <small>Total {ministryProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
                   <div className='chart-content'>
-                    <h3>Amount Funded</h3>
+                    <h3>Number Served</h3>
                     {!singleProject && (<HorizontalBarChart
                       lang={this.props.meta.lang}
                       data={chartData}

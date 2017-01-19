@@ -91,18 +91,18 @@ var Donor = React.createClass({
                   <li> ${shortTally(totalBudget)} <small>{t.donor_stats_funds}</small></li>
                   <li> {tally(donorProjects.length)} <small>{singleProject ? t.donor_stats_funded_1 : t.donor_stats_funded_2} {t.donor_stats_funded_3}</small></li>
                 </ul>
-                <div className='inpage__overview-chart'>
-                  <div className='chart-content'>
-                    <h3>{t.donor_chart_title}</h3>
-                    {!singleProject && (<HorizontalBarChart
+                {!singleProject && (
+                  <div className='inpage__overview-chart'>
+                    <div className='chart-content'>
+                    <HorizontalBarChart
                       lang={this.props.meta.lang}
                       data={chartData}
                       margin={{ left: 130, right: 50, top: 10, bottom: 50 }}
                       xFormat={shortTally}
                       yFormat={shortText}
-                    />)}
+                    />
                   </div>
-                </div>
+                </div>)}
               </div>
             </section>
           </div>
