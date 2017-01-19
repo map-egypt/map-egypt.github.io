@@ -79,7 +79,7 @@
 }
 
 .chart__axis-ticks {
-  fill: $base-font-color;
+  fill: darken($base-font-color, 15%);
   font-size: 0.75rem;
   font-weight: $base-font-light;
 }
