@@ -312,17 +312,18 @@ var ProjectBrowse = React.createClass({
     const { lang } = this.props.meta;
     const indicatorProp = activeIndicatorType.toLowerCase();
     const indicators = get(this.props.api, 'indicators', []).filter((indicator) => {
-      return indicator.type && indicator.type[indicatorProp];
+      return indicator.theme.length && indicator.theme.find(d => d.type === indicatorProp);
     });
 
     const themes = {};
     indicators.forEach((indicator) => {
-      if (!indicator.theme) {
-        return;
-      }
-      let theme = indicator.theme[lang] || '--';
-      themes[theme] = themes[theme] || [];
-      themes[theme].push(indicator);
+      indicator.theme.forEach((theme) => {
+        if (theme.type === indicatorProp) {
+          let themeName = theme[lang];
+          themes[themeName] = themes[themeName] || [];
+          themes[themeName].push(indicator);
+        }
+      });
     });
     const themeNames = Object.keys(themes);
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
