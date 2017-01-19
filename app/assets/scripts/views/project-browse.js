@@ -85,6 +85,7 @@ const SDG = {
 };
 
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
+const digit = new RegExp(/[0-9]+/);
 
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
@@ -325,7 +326,19 @@ var ProjectBrowse = React.createClass({
         }
       });
     });
-    const themeNames = Object.keys(themes);
+
+    const themeNames = Object.keys(themes).sort((a, b) => {
+      let digitA = a.match(digit);
+      if (digitA) {
+        let digitB = b.match(digit);
+        if (digitB) {
+          return Number(digitA[0]) > Number(digitB[0]) ? 1 : -1;
+        }
+      } else {
+        return a > b ? -1 : 1;
+      }
+    });
+
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
     return (
