@@ -7,6 +7,7 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
+import Print from '../components/print-btn';
 import { shortTally, tally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
@@ -61,7 +62,7 @@ var Donor = React.createClass({
     }, 0);
 
     const singleProject = donorProjects.length <= 1 ? ' funding--single' : '';
-
+    const t = get(window.t, [this.props.meta.lang, 'donor_pages'], {});
     return (
       <section className='inpage funding'>
         <header className='inpage__header'>
@@ -69,8 +70,8 @@ var Donor = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
-                  <li><button className='button button--medium button--primary button--download'>Download</button></li>
-                  <li><Share path={this.props.location.pathname}/></li>
+                  <li><Print lang={this.props.meta.lang} /></li>
+                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{donorDisplayName}</h1>
@@ -87,13 +88,14 @@ var Donor = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> ${shortTally(totalBudget)} <small>Total Funds</small></li>
-                  <li> {tally(donorProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
+                  <li> {shortTally(totalBudget)} <small>{t.donor_stats_funds}</small></li>
+                  <li> {tally(donorProjects.length)} <small>{singleProject ? t.donor_stats_funded_1 : t.donor_stats_funded_2} {t.donor_stats_funded_3}</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
                   <div className='chart-content'>
-                    <h3>Amount Funded</h3>
+                    <h3>{t.donor_chart_title}</h3>
                     {!singleProject && (<HorizontalBarChart
+                      lang={this.props.meta.lang}
                       data={chartData}
                       margin={{ left: 130, right: 50, top: 10, bottom: 50 }}
                       xFormat={shortTally}
@@ -107,7 +109,7 @@ var Donor = React.createClass({
 
           <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h1 className='section__title heading--small'>Projects Funded</h1>
+              <h1 className='section__title heading--small'>{t.funded_title}</h1>
               <ul className='projects-list'>
                 {donorProjects.map((p) => {
                   return (

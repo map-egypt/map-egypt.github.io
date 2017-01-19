@@ -1,5 +1,118 @@
+main_navigation:
+  projects_navitem: Projects & Indicators
+  about_navitem: 'عن الموقع'
+  login_navitem: 'تسجيل الدخول'
+  logout_navitem: 'تسجيل الخروج'
+
 homepage:
   subhead: tracking egypt
-  title: Arabic title goes here
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  title: Agricultural Progress and Impact
+  description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها و المستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك الوشروعات على المستويين الوطنى والمحلى.'
   more: Learn More
+
+  map_key_circle: Group of Projects
+  map_key_marker: Project
+
+  stats_overview: Overview of Agricultural Projects
+  overview_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  all_projects_btn: View All Projects
+  chart_title_one: Number of Projects by Category
+  chart_title_two: Status
+  chart_two_label: On Time
+  chart_two_label2: Delayed
+
+  other_indicators_title: Other Progress Indicators
+  other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  sds_button: SDS Indicators
+  sdg_button: SDG Indicators
+
+projects_indicators:
+  projects_title: Projects and Indicators
+  projects_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  filter_projects_btn: Add & Filter Projects
+  indicator_overlays_btn: Add Indicator Overlays
+  search_text: Zoom to Governorate
+  map_toggle_btn: Map
+  list_toggle_btn: List/Chart
+
+projects_list_view:
+  projects_title: Projects
+  sort_by_title: Sort by
+  sort_option1: Alphabetical
+
+project_pages:
+  print_pdf: Print to PDF
+  status_ontime: On Time
+  status_delayed: Delayed
+  last_update_title: Last Update
+  current_progress_title: Current Progress
+  proposed_timeline_title: Proposed Timeline
+  categories_title: Categories
+  donors_title: Donors
+
+  funding_title: Funding
+  objective_title: Objective
+  location_title: Location
+  project_link: Project Link
+  view_documentation_title: View Project Documentation
+  responsible_ministry_title: Responsible Ministry
+  local_manager_title: Local Manager
+  kmi_components: Project Components
+  sdg_goals_title: SDG Goals
+  sds_pillars_title: SDG Pillars
+
+  monitoring_indicators_title: Monitoring Indicators
+  funding_by_donor_title: Funding by Donor
+  status_title: Status
+  component_title: Component
+  kpi_title: Key Performance Indicator
+  target_title: Target
+  progress_title: Progress
+  date_title: Date
+
+  project_comparison_title: Project Comparison By Category
+  comparison_chart_title1: Funding
+  comparison_chart_title2: Percentage Complete
+  comparision_chart_title3: Beneficiaries Reached
+
+  related_sds_projects_title: Related Projects By SDS Goal
+
+category_pages:
+  print_pdf: Print to PDF
+  stat_one: Total Funds
+  cat_stats_funded_1: Project
+  cat_stats_funded_2: Projects
+  cat_stats_funded_3: Funded
+
+  comparison_title: Comparison
+  comparison_chart_title1: Number of Projects per Category
+  comparison_chart_title2: Funding of Projects per Category
+
+  projects_parttitle: Projects
+  category_funding_chart_title: Funding
+  category_complete_chart_title: Percentage Complete
+
+donor_pages:
+  print_pdf: Print to PDF
+  donor_stats_funds: Total Funds
+  donor_stats_funded_1: Project
+  donor_stats_funded_2: Projects
+  donor_stats_funded_3: Funded
+  donor_chart_title: Amount Funded
+  funded_title: Projects Funded
+
+map_labels:
+  map_group_label: Group of Projects
+  map_project_label: Project
+
+general_buttons:
+  share: Share
+  share_text: Copy URL to Share
+
+footer:
+  subscription_title: Want Updates?
+  subscription_subtitle: Get notifications when we update projects
+  subscription_subtitle_timeframe: quarterly
+  email_field: Enter Your Email Address
+  contact_link: Contact Us
+  contact_sentence: with questions or comments

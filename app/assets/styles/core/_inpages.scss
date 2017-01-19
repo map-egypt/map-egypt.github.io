@@ -10,7 +10,7 @@
 
   &__body--alt {
     padding: $global-spacing 0 ($global-spacing * 4) 0;
-    p {
+    section {
       @include col(10/12);
     }
   }

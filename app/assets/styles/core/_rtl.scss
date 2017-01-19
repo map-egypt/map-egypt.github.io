@@ -4,6 +4,13 @@
     direction: rtl;
     text-align: right;
   }
+
+  .browse-menu > li {
+    @include media(medium-up) {
+      float: right;
+      margin: 0 0 0 1.5rem;
+    }
+  }
   
   .page__headline {
     float: right;

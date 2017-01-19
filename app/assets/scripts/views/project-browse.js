@@ -14,6 +14,7 @@ import { governorates } from '../utils/governorates';
 import { GOVERNORATE, DISTRICT, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
+import { window } from 'global';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
@@ -84,6 +85,7 @@ const SDG = {
 };
 
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
+const digit = new RegExp(/[0-9]+/);
 
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
@@ -114,7 +116,9 @@ var ProjectBrowse = React.createClass({
       activeGovernorate: null,
 
       selectedProjectFilters: [],
-      activeProjectFilters: []
+      activeProjectFilters: [],
+
+      projectsHidden: false
     };
   },
 
@@ -289,6 +293,14 @@ var ProjectBrowse = React.createClass({
     });
   },
 
+  toggleProjects: function () {
+    this.setState({
+      projectsHidden: !this.state.projectsHidden,
+      selectedProjectFilters: [],
+      activeProjectFilters: []
+    });
+  },
+
   closeModal: function () {
     this.setState({ modal: false, activeModal: null });
   },
@@ -301,19 +313,32 @@ var ProjectBrowse = React.createClass({
     const { lang } = this.props.meta;
     const indicatorProp = activeIndicatorType.toLowerCase();
     const indicators = get(this.props.api, 'indicators', []).filter((indicator) => {
-      return indicator.type && indicator.type[indicatorProp];
+      return indicator.theme.length && indicator.theme.find(d => d.type === indicatorProp);
     });
 
     const themes = {};
     indicators.forEach((indicator) => {
-      if (!indicator.theme) {
-        return;
-      }
-      let theme = indicator.theme[lang] || '--';
-      themes[theme] = themes[theme] || [];
-      themes[theme].push(indicator);
+      indicator.theme.forEach((theme) => {
+        if (theme.type === indicatorProp) {
+          let themeName = theme[lang];
+          themes[themeName] = themes[themeName] || [];
+          themes[themeName].push(indicator);
+        }
+      });
     });
-    const themeNames = Object.keys(themes);
+
+    const themeNames = Object.keys(themes).sort((a, b) => {
+      let digitA = a.match(digit);
+      if (digitA) {
+        let digitB = b.match(digit);
+        if (digitB) {
+          return Number(digitA[0]) > Number(digitB[0]) ? 1 : -1;
+        }
+      } else {
+        return a > b ? -1 : 1;
+      }
+    });
+
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
     return (
@@ -402,6 +427,7 @@ var ProjectBrowse = React.createClass({
     let projects = this.props.api.projects;
     let { lang } = this.props.meta;
     const { selectedProjectFilters } = this.state;
+
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
@@ -410,11 +436,11 @@ var ProjectBrowse = React.createClass({
             <div className='modal__filters--defaults'>
               <label className='form__option form__option--custom-checkbox'>
                 <input
-                  checked={!selectedProjectFilters.length}
+                  checked={!this.state.projectsHidden}
                   type='checkbox'
                   name='form-checkbox'
                   id='form-checkbox-1'
-                  onChange={this.clearProjectFilters}
+                  onChange={this.toggleProjects}
                   value='All projects' />
                 <span className='form__option__text'>All Projects</span>
                 <span className='form__option__ui'></span>
@@ -431,7 +457,7 @@ var ProjectBrowse = React.createClass({
                  <div className='form__group'>
                   {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang)).map((item) => (
                     <label key={item.display}
-                      className='form__option form__option--custom-checkbox'>
+                      className={`form__option form__option--custom-checkbox ${this.state.projectsHidden ? 'disabled' : ''}`}>
                       <input
                         checked={!!selectedProjectFilters.find((f) => f.display === item.display)}
                         type='checkbox'
@@ -477,13 +503,17 @@ var ProjectBrowse = React.createClass({
 
     const { activeProjectFilters, activeIndicators, activeIndicator } = this.state;
 
-    let { projects } = this.props.api;
-    if (activeProjectFilters.length) {
-      activeProjectFilters.forEach((filter) => {
-        projects = projects.filter(filter.filter);
-      });
+    let projects = [];
+    let markers = [];
+    if (!this.state.projectsHidden) {
+      projects = this.props.api.projects;
+      if (activeProjectFilters.length) {
+        activeProjectFilters.forEach((filter) => {
+          projects = projects.filter(filter.filter);
+        });
+      }
+      markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
     }
-    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
 
     let overlay;
     let indicatorChartData;
@@ -518,6 +548,7 @@ var ProjectBrowse = React.createClass({
       }
     }
 
+    const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
     return (
       <section className='inpage project-browse'>
         <header className='inpage__header'>
@@ -525,20 +556,20 @@ var ProjectBrowse = React.createClass({
             <div className='inpage__headline'>
              <div className='inpage__headline-actions'>
                 <ul>
-                  <li><Share path={this.props.location.pathname}/></li>
+                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
-                <h1 className='inpage__title heading--deco heading--large'>Projects and Indicators</h1>
-                <p className='inpage__description'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit. </p>
+                <h1 className='inpage__title heading--deco heading--large'>{t.projects_title}</h1>
+                <p className='inpage__description'>{t.projects_description}</p>
             </div>
             <div className='inpage__actions'>
             <div className='actions-filters'>
                 <ul className='button--list'>
-                  <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>Add &amp; Filter Projects</button></li>
+                  <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>{t.filter_projects_btn}</button></li>
                   <li>
                     <span className='dropdown__container'>
                       <button type='button' onClick={this.toggleIndicatorDropdown}
-                        className='button button--medium button--secondary drop__toggle--caret'>Add Indicator Overlays</button>
+                        className='button button--medium button--secondary drop__toggle--caret'>{t.indicator_overlays_btn}</button>
                       {this.state.indicatorToggle &&
                         <ul className='drop__menu drop--align-left button--secondary'>
                           {indicatorTypes.map((d) => {
@@ -568,8 +599,8 @@ var ProjectBrowse = React.createClass({
               </div>
               <div className='actions-toggle'>
                 <div className='button-group button-group--horizontal button--toggle'>
-                  <button onClick={this.selectMapView} className={this.state.listView ? deselectedClassNames : selectedClassNames}>Map</button>
-                  <button onClick={this.selectListView} className={this.state.listView ? selectedClassNames : deselectedClassNames}>List</button>
+                  <button onClick={this.selectMapView} className={this.state.listView ? deselectedClassNames : selectedClassNames}>{t.map_toggle_btn}</button>
+                  <button onClick={this.selectListView} className={this.state.listView ? selectedClassNames : deselectedClassNames}>{t.list_toggle_btn}</button>
                 </div>
               </div>
             </div>
@@ -582,7 +613,7 @@ var ProjectBrowse = React.createClass({
                   <AutoSuggest
                   suggestions={governorates}
                   getDisplayName={(d) => d.name}
-                  placeholder='Zoom to Governorate'
+                  placeholder={t.search_text}
                   onSelect={this.zoomToGovernorate}
                   />
               </div>
@@ -613,7 +644,7 @@ var ProjectBrowse = React.createClass({
                 </div>
               </div>
             )}
-            <ProjectList projects={projects} meta={this.props.meta} />
+            <ProjectList projects={projects} meta={this.props.meta} lang={this.props.meta.lang}/>
             </div>)
           : (<div className='map__outer'>
               <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
