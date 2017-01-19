@@ -74,12 +74,12 @@
 
   &__item {
     display: block;
-    height: 4rem;
+    height: 5rem;
     text-align: center;
-    line-height: 4rem;
+    line-height: 4.5rem;
 
     img {
-      max-height: 4rem;
+      max-height: 5rem;
       vertical-align: middle;
       @include media(xsmall-only) {
         max-height: 3rem;

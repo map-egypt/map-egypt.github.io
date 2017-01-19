@@ -21,7 +21,7 @@
     width: 100%;
     span {
       margin-right: $global-spacing/2;
-      font-size: 0.75rem;
+      font-size: 0.875rem;
     }
   }
 
@@ -130,9 +130,14 @@
     width: 100%;
       li {
         display: inline-block;
-        &:first-child {
-          margin-right: $global-spacing;
+        margin-right: $global-spacing;
+        &:last-child {
+          margin-right: 0;
         };
+        @include media(small-down) {
+          @include col(12/12);
+          margin-top: $global-spacing;
+        }
       }
     }
   &__header {
@@ -350,7 +355,7 @@
 
   &__label {
     float: left;
-    font-size: 0.75rem;
+    font-size: 0.875rem;
     line-height: 1.75rem;
     margin-right: $global-spacing/2;
     margin-bottom: 0;

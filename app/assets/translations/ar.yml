@@ -25,6 +25,7 @@ homepage:
   other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
   sds_button: 'مؤشرات استراتيجية التنمية المُستدامة'
   sdg_button: 'مؤشرات أهداف التنمية المُستدامة'
+  other_button: Other Indicators
 
 projects_indicators:
   projects_title: 'المشروعات و المؤشرات'
