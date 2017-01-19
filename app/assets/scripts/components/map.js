@@ -47,6 +47,9 @@ const OVERLAY_STYLE = {
   fillOpacity: 0.5
 };
 
+const categoryLookup = {'very low': 5, 'low': 4, 'medium': 3, 'high': 2, 'very high': 1};
+const idLookup = {5: 'very low', 4: 'low', 3: 'medium', 2: 'high', 1: 'very high'};
+
 function getLatLngBounds (bounds) {
   let b = bbox(bounds);
   let result = [[b[1], b[0]], [b[3], b[2]]];
@@ -270,7 +273,16 @@ const Map = React.createClass({
 
   renderOverlayLegend: function (scale) {
     const isQuantile = scale.hasOwnProperty('invertExtent');
-    const iterable = (isQuantile ? scale.range() : scale.domain()).sort();
+    let iterable = (isQuantile ? scale.range() : scale.domain()).sort();
+
+    let convertId = false;
+    let category = get(this.props, 'overlay.category');
+    if (category && category.toLowerCase() === 'categorical') {
+      let converted = iterable.map((category) => categoryLookup[category]).sort();
+      convertId = converted.filter(Boolean).length === iterable.length;
+      iterable = convertId ? converted : iterable;
+    }
+
     return (
       <span className='legend__overlay'>
         {iterable.map((d) => {
@@ -279,7 +291,7 @@ const Map = React.createClass({
           return (
             <span key={d} className='legend__item legend__overlay--item'>
               <span className='legend__item--overlay--bg' style={{backgroundColor}}></span>
-              <span className='legend__item--overlay-text'>{text}</span>
+              <span className='legend__item--overlay-text'>{convertId && !isQuantile ? idLookup[text] : text}</span>
             </span>
           );
         })}

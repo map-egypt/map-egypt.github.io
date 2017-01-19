@@ -50,12 +50,12 @@ var PageFooter = React.createClass({
                 <li><a title='Visit sponsor webpage' className='logos__item' target='_blank' href='https://www.usaid.gov/'><img width='150px' src='assets/graphics/content/usaid.png' alt='View sponsor website'/></a></li>
               </ul>
             </div>
-      </div>
-      <div className='contact'>
-        <p className='contact__item'><a title='contact us' href='' className='link--primary'><span>{t.contact_link}</span></a> {t.contact_sentence}.</p>
-      </div>
-    </div>
-  </footer>
+          </div>
+          <div className='contact'>
+            <p className='contact__item'><a title='contact us' href='mailto:H.Eldidi@cgiar.org' className='link--primary'><span>{t.contact_link}</span></a> {t.contact_sentence}.</p>
+          </div>
+        </div>
+      </footer>
     );
   }
 });

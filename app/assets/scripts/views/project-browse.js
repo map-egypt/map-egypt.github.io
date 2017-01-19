@@ -115,7 +115,9 @@ var ProjectBrowse = React.createClass({
       activeGovernorate: null,
 
       selectedProjectFilters: [],
-      activeProjectFilters: []
+      activeProjectFilters: [],
+
+      projectsHidden: false
     };
   },
 
@@ -290,6 +292,14 @@ var ProjectBrowse = React.createClass({
     });
   },
 
+  toggleProjects: function () {
+    this.setState({
+      projectsHidden: !this.state.projectsHidden,
+      selectedProjectFilters: [],
+      activeProjectFilters: []
+    });
+  },
+
   closeModal: function () {
     this.setState({ modal: false, activeModal: null });
   },
@@ -403,6 +413,7 @@ var ProjectBrowse = React.createClass({
     let projects = this.props.api.projects;
     let { lang } = this.props.meta;
     const { selectedProjectFilters } = this.state;
+
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
@@ -411,11 +422,11 @@ var ProjectBrowse = React.createClass({
             <div className='modal__filters--defaults'>
               <label className='form__option form__option--custom-checkbox'>
                 <input
-                  checked={!selectedProjectFilters.length}
+                  checked={!this.state.projectsHidden}
                   type='checkbox'
                   name='form-checkbox'
                   id='form-checkbox-1'
-                  onChange={this.clearProjectFilters}
+                  onChange={this.toggleProjects}
                   value='All projects' />
                 <span className='form__option__text'>All Projects</span>
                 <span className='form__option__ui'></span>
@@ -432,7 +443,7 @@ var ProjectBrowse = React.createClass({
                  <div className='form__group'>
                   {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang)).map((item) => (
                     <label key={item.display}
-                      className='form__option form__option--custom-checkbox'>
+                      className={`form__option form__option--custom-checkbox ${this.state.projectsHidden ? 'disabled' : ''}`}>
                       <input
                         checked={!!selectedProjectFilters.find((f) => f.display === item.display)}
                         type='checkbox'
@@ -478,13 +489,17 @@ var ProjectBrowse = React.createClass({
 
     const { activeProjectFilters, activeIndicators, activeIndicator } = this.state;
 
-    let { projects } = this.props.api;
-    if (activeProjectFilters.length) {
-      activeProjectFilters.forEach((filter) => {
-        projects = projects.filter(filter.filter);
-      });
+    let projects = [];
+    let markers = [];
+    if (!this.state.projectsHidden) {
+      projects = this.props.api.projects;
+      if (activeProjectFilters.length) {
+        activeProjectFilters.forEach((filter) => {
+          projects = projects.filter(filter.filter);
+        });
+      }
+      markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
     }
-    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
 
     let overlay;
     let indicatorChartData;
