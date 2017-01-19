@@ -1,13 +1,13 @@
 main_navigation:
   projects_navitem: Projects & Indicators
-  about_navitem: About
-  login_navitem: Log In
-  logout_navitem: Log Out
+  about_navitem: 'عن الموقع'
+  login_navitem: 'تسجيل الدخول'
+  logout_navitem: 'تسجيل الخروج'
 
 homepage:
   subhead: tracking egypt
   title: Agricultural Progress and Impact
-  description: 'من خلال هذه الاداة يمكنك الان تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها و المستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق المشروع على المستويين الوطنى والمحلى.'
+  description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها و المستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك الوشروعات على المستويين الوطنى والمحلى.'
   more: Learn More
 
   map_key_circle: Group of Projects
