@@ -63,7 +63,7 @@ project_pages:
   sds_pillars_title: SDG Pillars
 
   monitoring_indicators_title: Monitoring Indicators
-  funding_by_donor_title: Funding by Donor
+  funding_by_donor_title: Funding by Donor (US dollars)
   status_title: Status
   component_title: Component
   kpi_title: Key Performance Indicator
@@ -80,26 +80,26 @@ project_pages:
 
 category_pages:
   print_pdf: Print to PDF
-  stat_one: Total Funds
+  stat_one: Total Funds (US dollars)
   cat_stats_funded_1: Project
   cat_stats_funded_2: Projects
   cat_stats_funded_3: Funded
 
   comparison_title: Comparison
   comparison_chart_title1: Number of Projects per Category
-  comparison_chart_title2: Funding of Projects per Category
+  comparison_chart_title2: Funding of Projects per Category (US dollars)
 
   projects_parttitle: Projects
-  category_funding_chart_title: Funding
+  category_funding_chart_title: Funding (US dollars)
   category_complete_chart_title: Percentage Complete
 
 donor_pages:
   print_pdf: Print to PDF
-  donor_stats_funds: Total Funds
+  donor_stats_funds: Total Funds (US dollars)
   donor_stats_funded_1: Project
   donor_stats_funded_2: Projects
   donor_stats_funded_3: Funded
-  donor_chart_title: Amount Funded
+  donor_chart_title: Amount Funded (US dollars)
   funded_title: Projects Funded
 
 map_labels:

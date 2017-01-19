@@ -127,7 +127,7 @@ var Category = React.createClass({
             </div>
             <div className='inpage__header-data'>
               <ul className='inpage-stats'>
-                <li> {shortTally(totalBudget)} <small>{t.stat_one}</small></li>
+                <li> ${shortTally(totalBudget)} <small>{t.stat_one}</small></li>
                 <li> {tally(categoryProjects.length)} <small>{singleProject ? t.cat_stats_funded_1 : t.cat_stats_funded_2} {t.cat_stats_funded_3}</small></li>
               </ul>
             </div>

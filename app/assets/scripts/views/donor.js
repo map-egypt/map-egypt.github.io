@@ -88,7 +88,7 @@ var Donor = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> {shortTally(totalBudget)} <small>{t.donor_stats_funds}</small></li>
+                  <li> ${shortTally(totalBudget)} <small>{t.donor_stats_funds}</small></li>
                   <li> {tally(donorProjects.length)} <small>{singleProject ? t.donor_stats_funded_1 : t.donor_stats_funded_2} {t.donor_stats_funded_3}</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
