@@ -7,8 +7,7 @@ main_navigation:
 homepage:
   subhead: tracking egypt
   title: Agricultural Progress and Impact
-  description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  more: Learn More
+  description: Keep track of agricultural development projects in Egypt, map their locations, compare their objectives and reach, and match the socioeconomic status of project areas on the subnational level.
 
   map_key_circle: Group of Projects
   map_key_marker: Project
