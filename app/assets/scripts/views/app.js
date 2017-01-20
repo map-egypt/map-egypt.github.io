@@ -4,10 +4,17 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 import _ from 'lodash';
 import c from 'classnames';
+import { window } from 'global';
 
 import { isValidLanguage, setLanguage, isLtr } from '../utils/i18n';
 import PageFooter from '../components/page-footer';
 import PageHeader from '../components/page-header';
+
+let canReload;
+
+if (window && window.location && window.location.reload && typeof window.location.reload === 'function') {
+  canReload = true;
+}
 
 var App = React.createClass({
   displayName: 'App',
@@ -60,6 +67,11 @@ var App = React.createClass({
   componentWillReceiveProps: function (nextProps) {
     this.validateLanguage(nextProps.params.lang);
     this.updateLangClass(nextProps.params.lang);
+
+    // received a logout event
+    if (this.props.api.authenticated && !nextProps.api.authenticated && canReload) {
+      window.location.reload();
+    }
   },
 
   //
