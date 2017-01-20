@@ -79,18 +79,19 @@ var Owner = React.createClass({
                   <li> {activeProjects} <small>Active {activeProjects > 1 ? 'Projects' : 'Project'}</small></li>
                   <li> {ownerProjects.length} <small>Total {ownerProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
+                {!singleProject && (
                 <div className='inpage__overview-chart'>
                   <div className='chart-content'>
-                    <h3>Number Served</h3>
-                    {!singleProject && (<HorizontalBarChart
-                      lang={this.props.meta.lang}
-                      data={chartData}
-                      margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
-                      xFormat={shortTally}
-                      yFormat={shortText}
-                    />)}
+                  <h3>Number Served</h3>
+                  <HorizontalBarChart
+                    lang={this.props.meta.lang}
+                    data={chartData}
+                    margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
+                    xFormat={shortTally}
+                    yFormat={shortText}
+                  />
                   </div>
-                </div>
+                </div>)}
               </div>
             </section>
           </div>
