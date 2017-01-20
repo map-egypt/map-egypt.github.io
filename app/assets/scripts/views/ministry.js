@@ -32,9 +32,8 @@ var Ministry = React.createClass({
     const ministryName = this.props.params.name;
     let ministryDisplayName;
 
-    const lang = this.props.meta.lang;
     let ministryProjects = projects.filter((project) => {
-      const name = project.responsible_ministry[lang];
+      const name = project.responsible_ministry.en;
       const sluggedName = slugify(name);
       if (sluggedName === ministryName) {
         ministryDisplayName = name;
