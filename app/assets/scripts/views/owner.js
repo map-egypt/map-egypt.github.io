@@ -49,7 +49,7 @@ var Owner = React.createClass({
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const singleProject = ownerProjects.length <= 1 ? ' funding--single' : '';
-    const activeProjects = ownerProjects.filter((project) => project.actual_end_date).length;
+    const numActiveProjects = ownerProjects.filter((project) => project.actual_end_date).length;
 
     return (
       <section className='inpage funding'>
@@ -76,7 +76,7 @@ var Owner = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> {activeProjects} <small>Active {activeProjects > 1 ? 'Projects' : 'Project'}</small></li>
+                  <li> {numActiveProjects} <small>Active {numActiveProjects > 1 ? 'Projects' : 'Project'}</small></li>
                   <li> {ownerProjects.length} <small>Total {ownerProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
                 {!singleProject && (

@@ -59,3 +59,6 @@ module.exports.roundedNumber = roundedNumber;
 
 const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
 module.exports.ontimeLookup = ontimeLookup;
+
+const currency = (value) => '$' + value.toString();
+module.exports.currency = currency;
