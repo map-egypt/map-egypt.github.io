@@ -27,7 +27,7 @@ var Home = React.createClass({
     const { projects } = this.props.api;
     const { lang } = this.props.meta;
     const categories = {};
-    const status = { ontime: 0, delayed: 0 };
+    const status = { ontime: 0, delayed: 0, extended: 0 };
     projects.forEach(function (project) {
       get(project, 'categories', []).forEach(function (category) {
         categories[category[lang]] = categories[category[lang]] + 1 || 1;
@@ -36,10 +36,12 @@ var Home = React.createClass({
       const ontime = isOntime(project);
       if (ontime === null) {
         return;
-      } else if (ontime) {
-        status.ontime += 1;
-      } else {
+      } else if (ontime === 'delayed') {
         status.delayed += 1;
+      } else if (ontime === 'extended') {
+        status.extended += 1;
+      } else {
+        status.ontime += 1;
       }
     });
 
@@ -70,6 +72,9 @@ var Home = React.createClass({
     }, {
       name: 'Delayed',
       value: status.delayed
+    }, {
+      name: 'Extended',
+      value: status.extended
     }];
 
     const t = get(window.t, [lang, 'homepage'], {});
@@ -142,6 +147,7 @@ var Home = React.createClass({
                   <div className='status-key'>
                     <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
                     <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
+                    <p className='status-key__label status-extended'>{t.chart_two_label3}</p>
                   </div>
                 </div>
               </div>
