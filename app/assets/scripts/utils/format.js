@@ -56,3 +56,6 @@ function roundedNumber (n, decimalPlaces = 1) {
   return multipled / base;
 }
 module.exports.roundedNumber = roundedNumber;
+
+const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
+module.exports.ontimeLookup = ontimeLookup;

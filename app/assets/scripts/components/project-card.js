@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
-import { tally, shortTally, pct, shortParagraph } from '../utils/format';
+import { tally, shortTally, pct, shortParagraph, ontimeLookup } from '../utils/format';
 import { byId as governorateNames } from '../utils/governorates';
 import { byId as districtNames } from '../utils/districts';
 
@@ -74,7 +74,6 @@ var ProjectCard = React.createClass({
     const { project, lang } = this.props;
     const locationLang = this.props.lang === 'en' ? 'name' : 'nameAr';
     const ontime = isOntime(project);
-    const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
     const statusClass = 'project--' + ontime;
     const basepath = '/' + lang;
     const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);

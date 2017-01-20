@@ -8,7 +8,7 @@ import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct, shortText } from '../utils/format';
+import { tally, shortTally, pct, shortText, ontimeLookup } from '../utils/format';
 import { byId as districtNames } from '../utils/districts';
 import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
@@ -72,7 +72,6 @@ var Project = React.createClass({
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
-    const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
