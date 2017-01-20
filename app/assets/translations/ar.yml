@@ -20,6 +20,8 @@ homepage:
   chart_title_two: 'الحالة'
   chart_two_label: 'في الميعاد'
   chart_two_label2: 'متأخر'
+  chart_two_label3: 'Extended'
+
 
   other_indicators_title: 'مؤشرات الأخرى'
   other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.

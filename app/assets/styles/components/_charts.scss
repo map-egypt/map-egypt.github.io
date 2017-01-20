@@ -64,11 +64,15 @@
 }
 
 .pie__slice__on-time {
-  fill: $base-color;
+  fill: $success-color;
 }
 
 .pie__slice__delayed {
-  fill: rgba(43, 35, 66, 0.55);
+  fill: $warning-color;
+}
+
+.pie__slice__extended {
+  fill: $partial-success-color;
 }
 
 .chart__bar {
@@ -105,10 +109,13 @@
     border-radius: .15rem;
   }
   .status-ontime:before {
-    background: $base-color;
+    background: $success-color;
   }
   .status-delayed:before {
-    background: rgba(43, 35, 66, 0.55);
+    background: $warning-color;
+  }
+  .status-extended:before {
+    background: $partial-success-color;
   }
 }
 

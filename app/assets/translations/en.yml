@@ -20,6 +20,7 @@ homepage:
   chart_title_two: Status
   chart_two_label: On Time
   chart_two_label2: Delayed
+  chart_two_label3: 'Extended'
 
   other_indicators_title: Other Progress Indicators
   other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Egypt. Overlay agriculture and rural development projects in areas of interest.
