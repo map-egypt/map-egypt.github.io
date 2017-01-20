@@ -33,17 +33,6 @@ function isOntime (project) {
   }
 }
 
-//   if (!plannedStart) {
-//     return null;
-//   } else if (((projectDelayed && projectExtended) || (projectDelayed && projectNotExtended)) && plannedEnd < new Date().getTime()) {
-//     return 'delayed';
-//   } else if (projectNotDelayed && projectExtended) {
-//     return 'extended';
-//   } else {
-//     return 'ontime';
-//   }
-// }
-
 function percentComplete (project) {
   const end = project.actual_end_date || project.planned_end_date;
   const start = project.actual_start_date;
