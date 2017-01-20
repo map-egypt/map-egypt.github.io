@@ -8,7 +8,7 @@ import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct, shortText } from '../utils/format';
+import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../utils/format';
 import { byId as districtNames } from '../utils/districts';
 import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
@@ -142,9 +142,9 @@ var Project = React.createClass({
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
-              <dl className={'inpage-meta project--' + (ontime ? 'ontime' : 'delayed')}>
+              <dl className={'inpage-meta project--' + ontime}>
                 <dt className='inpage-meta__label visually-hidden'>Status</dt>
-                <dd className='inpage-meta__value inpage-meta__value--status'>{ontime ? t.status_ontime : t.status_delayed}</dd>
+                <dd className='inpage-meta__value inpage-meta__value--status'>{ontimeLookup[ontime]}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
@@ -182,7 +182,7 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>${shortTally(budget)} <small>{t.funding_title}</small></li>
+                  <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
                   <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
 

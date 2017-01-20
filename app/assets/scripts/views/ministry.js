@@ -32,9 +32,8 @@ var Ministry = React.createClass({
     const ministryName = this.props.params.name;
     let ministryDisplayName;
 
-    const lang = this.props.meta.lang;
     let ministryProjects = projects.filter((project) => {
-      const name = project.responsible_ministry[lang];
+      const name = project.responsible_ministry.en;
       const sluggedName = slugify(name);
       if (sluggedName === ministryName) {
         ministryDisplayName = name;
@@ -53,7 +52,7 @@ var Ministry = React.createClass({
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
-    const activeProjects = ministryProjects.filter((project) => project.actual_end_date).length;
+    const numActiveProjects = ministryProjects.filter((project) => project.actual_end_date).length;
 
     return (
       <section className='inpage funding'>
@@ -90,7 +89,7 @@ var Ministry = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> {activeProjects} <small>Active {activeProjects > 1 ? 'Projects' : 'Project'}</small></li>
+                  <li> {numActiveProjects} <small>Active {numActiveProjects > 1 ? 'Projects' : 'Project'}</small></li>
                   <li> {ministryProjects.length} <small>Total {ministryProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>

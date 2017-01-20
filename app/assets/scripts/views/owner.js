@@ -7,7 +7,7 @@ import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
-import { shortTally, tally, shortText } from '../utils/format';
+import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 
 var Owner = React.createClass({
@@ -40,24 +40,16 @@ var Owner = React.createClass({
       return sluggedName === ownerName;
     });
 
-    const projectBudgets = ownerProjects
-      .map((project) => project.budget)
-      .reduce((a, b) => a.concat(b), []);
-
     const chartData = ownerProjects.map((project) => {
       return {
         name: project.name,
         link: path.resolve(basepath, 'projects', project.id),
-        value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0)
+        value: project.number_served.number_served
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
-    // TODO change this to 2 amounts dispursed and remaining
-    const totalBudget = projectBudgets.reduce((currentValue, budget) => {
-      return budget.fund.amount + currentValue;
-    }, 0);
-
     const singleProject = ownerProjects.length <= 1 ? ' funding--single' : '';
+    const numActiveProjects = ownerProjects.filter((project) => project.actual_end_date).length;
 
     return (
       <section className='inpage funding'>
@@ -84,18 +76,22 @@ var Owner = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> {shortTally(totalBudget)} <small>Total Funds</small></li>
-                  <li> {tally(ownerProjects.length)} <small>{singleProject ? 'Project' : 'Projects'} Funded</small></li>
+                  <li> {numActiveProjects} <small>Active {numActiveProjects > 1 ? 'Projects' : 'Project'}</small></li>
+                  <li> {ownerProjects.length} <small>Total {ownerProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
+                {!singleProject && (
                 <div className='inpage__overview-chart'>
-                  {!singleProject && (<HorizontalBarChart
+                  <div className='chart-content'>
+                  <h3>Number Served</h3>
+                  <HorizontalBarChart
                     lang={this.props.meta.lang}
                     data={chartData}
                     margin={{ left: 300, right: 50, top: 10, bottom: 50 }}
                     xFormat={shortTally}
                     yFormat={shortText}
-                  />)}
-                </div>
+                  />
+                  </div>
+                </div>)}
               </div>
             </section>
           </div>

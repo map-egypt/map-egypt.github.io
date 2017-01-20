@@ -106,6 +106,9 @@
         .project--delayed & {
           background: $warning-color;
         }
+        .project--extended & {
+          background: $partial-success-color;
+        }
       }
     }
     &--location {
