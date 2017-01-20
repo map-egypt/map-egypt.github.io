@@ -10,8 +10,11 @@ import { isValidLanguage, setLanguage, isLtr } from '../utils/i18n';
 import PageFooter from '../components/page-footer';
 import PageHeader from '../components/page-header';
 
-const canReload = window.location && window.location.reload &&
-  typeof window.location.reload === 'function';
+let canReload;
+
+if (window && window.location && window.location.reload && typeof window.location.reload === 'function') {
+  canReload = true;
+}
 
 var App = React.createClass({
   displayName: 'App',
