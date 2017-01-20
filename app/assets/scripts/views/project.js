@@ -8,7 +8,7 @@ import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct, shortText, ontimeLookup } from '../utils/format';
+import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../utils/format';
 import { byId as districtNames } from '../utils/districts';
 import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
@@ -182,7 +182,7 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>${shortTally(budget)} <small>{t.funding_title}</small></li>
+                  <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
                   <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
 

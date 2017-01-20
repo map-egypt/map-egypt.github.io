@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
-import { tally, shortTally, pct, shortParagraph, ontimeLookup } from '../utils/format';
+import { tally, shortTally, pct, shortParagraph, ontimeLookup, currency } from '../utils/format';
 import { byId as governorateNames } from '../utils/governorates';
 import { byId as districtNames } from '../utils/districts';
 
@@ -108,7 +108,7 @@ var ProjectCard = React.createClass({
                 })}
               </div>
               <ul className='card-stats'>
-                <li>${shortTally(funding)} <small>funding</small></li>
+                <li>{currency(shortTally(funding))} <small>funding</small></li>
                 <li>{tally(project.number_served.number_served)} <small>{project.number_served.number_served_unit.toLowerCase()}</small></li>
               </ul>
             </div>

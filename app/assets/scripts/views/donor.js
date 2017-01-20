@@ -8,7 +8,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
-import { shortTally, tally, shortText } from '../utils/format';
+import { shortTally, tally, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
@@ -88,7 +88,7 @@ var Donor = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li> ${shortTally(totalBudget)} <small>{t.donor_stats_funds}</small></li>
+                  <li> {currency(shortTally(totalBudget))} <small>{t.donor_stats_funds}</small></li>
                   <li> {tally(donorProjects.length)} <small>{singleProject ? t.donor_stats_funded_1 : t.donor_stats_funded_2} {t.donor_stats_funded_3}</small></li>
                 </ul>
                 {!singleProject && (

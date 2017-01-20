@@ -8,7 +8,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
-import { tally, shortTally, pct, shortText } from '../utils/format';
+import { tally, shortTally, pct, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import { window } from 'global';
@@ -127,7 +127,7 @@ var Category = React.createClass({
             </div>
             <div className='inpage__header-data'>
               <ul className='inpage-stats'>
-                <li> ${shortTally(totalBudget)} <small>{t.stat_one}</small></li>
+                <li> {currency(shortTally(totalBudget))} <small>{t.stat_one}</small></li>
                 <li> {tally(categoryProjects.length)} <small>{singleProject ? t.cat_stats_funded_1 : t.cat_stats_funded_2} {t.cat_stats_funded_3}</small></li>
               </ul>
             </div>
