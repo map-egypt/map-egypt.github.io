@@ -52,7 +52,7 @@ var Ministry = React.createClass({
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
     const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
-    const activeProjects = ministryProjects.filter((project) => project.actual_end_date).length;
+    const numActiveProjects = ministryProjects.filter((project) => project.actual_end_date).length;
 
     return (
       <section className='inpage funding'>
