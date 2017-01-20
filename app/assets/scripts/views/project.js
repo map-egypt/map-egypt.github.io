@@ -18,7 +18,6 @@ import Map from '../components/map';
 import Share from '../components/share';
 import ProjectCard from '../components/project-card';
 import ProjectTimeline from '../components/project-timeline';
-import VerticalBarChart from '../components/charts/vertical-bar';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
 
@@ -121,10 +120,11 @@ var Project = React.createClass({
 
     const disbursement = get(data, 'disbursed', []).map((fund) => ({
       name: parseProjectDate(fund.date),
+      donor: fund.donor_name,
       type: fund.type[lang],
       value: fund.fund.amount
-    })).sort((a, b) => a.name > b.name ? 1 : -1).map((d) => ({
-      name: formatDate(d.name) + ' (' + d.type + ')',
+    })).sort((a, b) => a.name > b.name ? 1 : -1).map((d, i) => ({
+      name: `${d.donor} - ${formatDate(d.name)} (${d.type})`,
       value: d.value
     }));
 
@@ -302,11 +302,12 @@ var Project = React.createClass({
                 {authenticated && disbursement.length ? (
                   <div className='chart-content chart__inline--labels'>
                     <h3>Disbursement vs. Reach</h3>
-                    <VerticalBarChart
+                    <HorizontalBarChart
                       data={disbursement}
                       margin={barChartMargin}
                       yTitle=''
-                      yFormat={shortTally}
+                      xFormat={shortTally}
+                      lang={this.props.meta.lang}
                     />
                   </div>
                 ) : null}

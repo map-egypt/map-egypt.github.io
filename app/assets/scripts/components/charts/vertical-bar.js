@@ -8,6 +8,7 @@ var VerticalBarChart = React.createClass({
   displayName: 'VerticalBarChart',
 
   propTypes: {
+    lang: React.PropTypes.string,
     data: React.PropTypes.array,
     margin: React.PropTypes.object,
     yTitle: React.PropTypes.string,
@@ -89,8 +90,8 @@ var VerticalBarChart = React.createClass({
             scale={xScale}
             labels={xLabels}
             orientation='bottom'
-            height={height}
-            width={width}
+            height={innerHeight}
+            width={innerWidth}
             margin={margin}
             format={this.props.xFormat}
           />
@@ -98,8 +99,8 @@ var VerticalBarChart = React.createClass({
             scale={yScale}
             labels={yLabels}
             orientation='left'
-            height={height}
-            width={width}
+            height={innerHeight}
+            width={innerWidth}
             margin={margin}
             format={this.props.yFormat}
           />
