@@ -19,30 +19,30 @@ function isOntime (project) {
   let plannedStart = parseProjectDate(project.planned_start_date);
   let actualStart = parseProjectDate(project.actual_start_date);
 
-  if (!actualStart || !plannedStart) {
+  const projectDelayed = actualStart > plannedStart || (!actualStart && plannedStart && plannedStart < new Date().getTime());
+  const projectExtended = (!actualEnd && plannedEnd && plannedEnd < new Date().getTime()) || (actualEnd > plannedEnd);
+  // if projects are both delayed and extended, they should be classed as delayed
+  if (!plannedStart) {
     return null;
-    // project incomplete and late
-  } else if ((actualStart <= plannedStart) && (!actualEnd && plannedEnd && plannedEnd < new Date().getTime())) {
+  } else if (projectDelayed) {
+    return 'delayed';
+  } else if (projectExtended) {
     return 'extended';
-    // project completed late
-  } else if ((actualStart <= plannedStart) && (actualEnd > plannedEnd)) {
-    return 'extended';
-    // project in progress, started late
-  } else if (((actualStart > plannedStart) && (!actualEnd && plannedEnd && plannedEnd > new Date().getTime()))) {
-    return 'delayed';
-    // project completed, started late
-  } else if (((actualStart > plannedStart) && (actualEnd <= plannedEnd))) {
-    return 'delayed';
-    // project both delayed and completed late
-  } else if (((actualStart > plannedStart) && (actualEnd > plannedEnd))) {
-    return 'delayed';
-    // project in progress, both delayed and late
-  } else if (((actualStart > plannedStart) && (!actualEnd && plannedEnd && plannedEnd < new Date().getTime()))) {
-    return 'delayed';
   } else {
     return 'ontime';
   }
 }
+
+//   if (!plannedStart) {
+//     return null;
+//   } else if (((projectDelayed && projectExtended) || (projectDelayed && projectNotExtended)) && plannedEnd < new Date().getTime()) {
+//     return 'delayed';
+//   } else if (projectNotDelayed && projectExtended) {
+//     return 'extended';
+//   } else {
+//     return 'ontime';
+//   }
+// }
 
 function percentComplete (project) {
   const end = project.actual_end_date || project.planned_end_date;
