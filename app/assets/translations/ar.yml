@@ -105,7 +105,7 @@ donor_pages:
   funded_title: 'المشروعات المُمولة'
 
 map_labels:
-  map_group_label: 'مجموعات مشروعات'
+  map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
 
 general_buttons:
@@ -113,9 +113,8 @@ general_buttons:
   share_text: 'انسخ الرابط الالكتروني للمشاركة'
 
 footer:
-  subscription_title: Want Updates?
-  subscription_subtitle: Get notifications when we update projects
-  subscription_subtitle_timeframe: quarterly
+  subscription_title: 'إشترك الآن'
+  subscription_subtitle: 'ليصلك اي جديد عن المشروعات'
   email_field: 'أدخل بريدك الالكتروني'
   contact_link: 'تواصل معنا'
   contact_sentence: 'بأسئلتك أو مقترحاتك'
