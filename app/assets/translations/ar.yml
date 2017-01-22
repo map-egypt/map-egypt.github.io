@@ -1,121 +1,121 @@
 main_navigation:
-  projects_navitem: 'المشروعات و المؤشرات'
+  projects_navitem: 'المشروعات والمؤشرات'
   about_navitem: 'عن الموقع'
   login_navitem: 'تسجيل الدخول'
   logout_navitem: 'تسجيل الخروج'
 
 homepage:
-  subhead: tracking egypt
-  title: 'أثر و تقدم المجال الزراعي'
-  description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها و المستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك الوشروعات على المستويين الوطنى والمحلى.'
+  subhead: 'تتبع المشروعات في مصر'
+  title: 'أثر وتقدم المجال الزراعي'
+  description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها والمستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك الوشروعات على المستويين الوطنى والمحلى.'
   more: 'اقرأ المزيد'
 
   map_key_circle: 'مجموعة مشروعات'
   map_key_marker: 'مشروع'
 
   stats_overview: 'نظرة عامة عن المشروعات الزراعية'
-  overview_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
+  overview_description: 'عرض معلومات مجمعة عن المشروعات ومقارنة الاستثمارات في القطاعات الفرعية المختلفة'
   all_projects_btn: 'تصفح جميع المشروعات'
   chart_title_one: 'عدد المشروعات في كل قطاع فرعي'
   chart_title_two: 'الحالة'
   chart_two_label: 'في الميعاد'
   chart_two_label2: 'متأخر'
-  chart_two_label3: 'Extended'
+  chart_two_label3: 'ممتد'
 
 
-  other_indicators_title: 'مؤشرات الأخرى'
-  other_indicators_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  sds_button: 'مؤشرات استراتيجية التنمية المُستدامة'
+  other_indicators_title: 'مؤشرات التنمية'
+  other_indicators_description: 'إضافة ومقارنة مؤشرات التنمية'
+  sds_button: 'مؤشرات استراتيجية التنمية المستدامة'
   sdg_button: 'مؤشرات أهداف التنمية المُستدامة'
-  other_button: Other Indicators
+  other_button: 'مؤشرات تنمية أخرى'
 
 projects_indicators:
-  projects_title: 'المشروعات و المؤشرات'
-  projects_description: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ut augue aliquet ligula aliquam. Lorem ipsum dolor sit amet, consectetur elit.
-  filter_projects_btn: 'اضافة و تصفية المشروعات'
+  projects_title: 'المشروعات والمؤشرات'
+  projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
+  filter_projects_btn: 'اضافة وتصفية المشروعات'
   indicator_overlays_btn: 'اضافة مؤشرات'
   search_text: 'اسم المحافظة'
   map_toggle_btn: 'خريطة'
   list_toggle_btn: 'قائمة \رسم بياني'
 
 projects_list_view:
-  projects_title: Projects
-  sort_by_title: Sort by
-  sort_option1: Alphabetical
+  projects_title: 'المشروعات'
+  sort_by_title: 'تصنيف'
+  sort_option1: 'أبجدي'
 
 project_pages:
-  print_pdf: Print to PDF
-  status_ontime: On Time
-  status_delayed: Delayed
-  last_update_title: Last Update
-  current_progress_title: Current Progress
-  proposed_timeline_title: Proposed Timeline
-  categories_title: Categories
-  donors_title: Donors
+  print_pdf: 'طباعة pdf'
+  status_ontime: 'في الميعاد'
+  status_delayed: 'متأخر'
+  last_update_title: 'التحديث الأخير'
+  current_progress_title: 'التقدم الحالي'
+  proposed_timeline_title: 'الجدول الزمني المقترح'
+  categories_title: 'القطاعات الفرعية'
+  donors_title: 'الجهات المانحة'
 
-  funding_title: Funding
-  objective_title: Objective
-  location_title: Location
-  project_link: Project Link
-  view_documentation_title: View Project Documentation
-  responsible_ministry_title: Responsible Ministry
-  local_manager_title: Local Manager
-  kmi_components: Project Components
-  sdg_goals_title: SDG Goals
-  sds_pillars_title: SDG Pillars
+  funding_title: 'التمويل'
+  objective_title: 'الهدف'
+  location_title: 'النطاق الجغرافي'
+  project_link: 'الرابط الالكتروني للمشروع'
+  view_documentation_title: 'عرض ملفات المشروع'
+  responsible_ministry_title: 'الوزارة المسؤولة'
+  local_manager_title: 'المدير المحلي للمشروع'
+  kmi_components: 'مكونات وأنشطة المشروع'
+  sdg_goals_title: 'أهداف التنمية المُستدامة'
+  sds_pillars_title: 'أهداف استراتيجية التنمية المستدامة'
 
-  monitoring_indicators_title: Monitoring Indicators
-  funding_by_donor_title: Funding by Donor (US dollars)
-  status_title: Status
-  component_title: Component
-  kpi_title: Key Performance Indicator
-  target_title: Target
-  progress_title: Progress
-  date_title: Date
+  monitoring_indicators_title: 'مؤشرات الرصد الرئيسية'
+  funding_by_donor_title: 'التمويل من الجهات المانحة - بالدولار الأمريكي'
+  status_title: 'الحالة'
+  component_title: 'المكون\النشاط'
+  kpi_title: 'مؤشر الأداء'
+  target_title: 'الهدف'
+  progress_title: 'التقدم الحالي'
+  date_title: 'تاريخ الرصد'
 
-  project_comparison_title: Project Comparison By Category
-  comparison_chart_title1: Funding
-  comparison_chart_title2: Percentage Complete
-  comparision_chart_title3: Beneficiaries Reached
+  project_comparison_title: 'مقارنة المشروعات حسب القطاع الفرعي'
+  comparison_chart_title1: 'التمويل'
+  comparison_chart_title2: 'نسبة الانتهاء'
+  comparision_chart_title3: 'عدد المستفيدين'
 
-  related_sds_projects_title: Related Projects By SDS Goal
+  related_sds_projects_title: ' مشروعات ذات صلة - حسب أهداف استراتيجية التنمية المُستدامة '
 
 category_pages:
-  print_pdf: Print to PDF
-  stat_one: Total Funds (US dollars)
-  cat_stats_funded_1: Project
-  cat_stats_funded_2: Projects
-  cat_stats_funded_3: Funded
+  print_pdf: 'طباعة pdf'
+  stat_one: 'جُملة التمويل - بالدولار الأمريكي'
+  cat_stats_funded_1: 'المشروع'
+  cat_stats_funded_2: 'المشروعات'
+  cat_stats_funded_3: 'المدفوع'
 
-  comparison_title: Comparison
-  comparison_chart_title1: Number of Projects per Category
-  comparison_chart_title2: Funding of Projects per Category (US dollars)
+  comparison_title: 'مقارنة'
+  comparison_chart_title1: 'عدد المشروعات حسب القطاع الفرعي'
+  comparison_chart_title2: 'التمويل من الجهات المانحة حسب القطاع الفرعي - بالدولار الأمريكي'
 
-  projects_parttitle: Projects
-  category_funding_chart_title: Funding (US dollars)
-  category_complete_chart_title: Percentage Complete
+  projects_parttitle: 'المشروعات'
+  category_funding_chart_title: 'التمويل - بالدولار الأمريكي'
+  category_complete_chart_title: 'نسبة الانتهاء'
 
 donor_pages:
-  print_pdf: Print to PDF
-  donor_stats_funds: Total Funds (US dollars)
-  donor_stats_funded_1: Project
-  donor_stats_funded_2: Projects
-  donor_stats_funded_3: Funded
-  donor_chart_title: Amount Funded (US dollars)
-  funded_title: Projects Funded
+  print_pdf: 'طباعة pdf'
+  donor_stats_funds: 'جُملة التمويل - بالدولار الأمريكي'
+  donor_stats_funded_1: 'المشروع'
+  donor_stats_funded_2: 'المشروعات'
+  donor_stats_funded_3: 'المدفوع'
+  donor_chart_title: 'التمويل - بالدولار الأمريكي'
+  funded_title: 'المشروعات المُمولة'
 
 map_labels:
-  map_group_label: Group of Projects
-  map_project_label: Project
+  map_group_label: 'مجموعات مشروعات'
+  map_project_label: 'مشروع'
 
 general_buttons:
-  share: Share
-  share_text: Copy URL to Share
+  share: 'شارك'
+  share_text: 'انسخ الرابط الالكتروني للمشاركة'
 
 footer:
   subscription_title: Want Updates?
   subscription_subtitle: Get notifications when we update projects
   subscription_subtitle_timeframe: quarterly
-  email_field: Enter Your Email Address
-  contact_link: Contact Us
-  contact_sentence: with questions or comments
+  email_field: 'أدخل بريدك الالكتروني'
+  contact_link: 'تواصل معنا'
+  contact_sentence: 'بأسئلتك أو مقترحاتك'
