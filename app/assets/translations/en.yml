@@ -10,7 +10,7 @@ homepage:
   description: Keep track of agricultural development projects, map their locations, compare their objectives and reach, and match the socioeconomic status of project areas on the subnational level.
   more: Learn More
 
-  map_key_circle: Group of Projects
+  map_key_circle: Number of Project Locations
   map_key_marker: Project
 
   stats_overview: Overview of Agricultural Projects
