@@ -104,7 +104,7 @@ donor_pages:
   funded_title: Projects Funded
 
 map_labels:
-  map_group_label: Group of Projects
+  map_group_label: Number of Project Locations
   map_project_label: Project
 
 general_buttons:
