@@ -4,6 +4,6 @@ module.exports = {
   environment: 'production',
   api: 'https://ifpri-egypt-silo.herokuapp.com/',
   baseUrl: 'https://map-egypt.github.io/',
-  authDomain: 'granary.auth0.com',
-  authClientId: 'VBkhLuju6YcCsMNkF5I1lXa1Ft7BF9VP'
+  authDomain: 'map-egypt.auth0.com',
+  authClientId: 'ZCoeGvXrh2Ex0x2UtCnnZ89wgUEMURRA'
 };
