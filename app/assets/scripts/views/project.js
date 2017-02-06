@@ -324,7 +324,7 @@ var Project = React.createClass({
                       <th className='row-name'>{t.component_title}</th>
                       <th className='row-kpi'>{t.kpi_title}</th>
                       <th className='row-target'>{t.target_title}</th>
-                      <th className='row-progress'>{t.progress_title}</th>
+                      <th className='row-progress'>{t.rate_title}</th>
                       <th className='row-date'>{t.date_title}</th>
                     </tr>
                   </thead>
