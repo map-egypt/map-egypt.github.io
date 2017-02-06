@@ -69,7 +69,7 @@ project_pages:
   component_title: Component
   kpi_title: Key Performance Indicator
   target_title: Target
-  progress_title: Progress
+  rate_title: Rate of Implementation
   date_title: Date
 
   project_comparison_title: Project Comparison By Category

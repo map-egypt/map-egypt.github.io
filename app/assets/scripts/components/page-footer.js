@@ -52,7 +52,7 @@ var PageFooter = React.createClass({
             </div>
           </div>
           <div className='contact'>
-            <p className='contact__item'><a title='contact us' href='mailto:H.Eldidi@cgiar.org' className='link--primary'><span>{t.contact_link}</span></a> {t.contact_sentence}.</p>
+            <p className='contact__item'><a title='contact us' href='mailto:fpri-egypt@cgiar.org' className='link--primary'><span>{t.contact_link}</span></a> {t.contact_sentence}.</p>
           </div>
         </div>
       </footer>

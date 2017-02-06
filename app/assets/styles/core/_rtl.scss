@@ -112,6 +112,16 @@
       }
     }
   }
+
+  .overview-charts {
+    .chart__inline--labels {
+      float: right;
+    }
+  }
+
+  .inpage__body--alt section {
+    float: right;
+  }
   
   .inpage__table td:nth-of-type(n):before {
     right: 0;
@@ -202,9 +212,53 @@
     }
   }
 
-  .projects-list__card {
-    padding-right: 0;
-    padding-left: $global-spacing;
+  .inpage__section--bleed {
+    .projects-list__card {
+      @include media(medium-up) {
+        float: right;
+        padding: ($global-spacing * 2) 0 ($global-spacing * 2) ($global-spacing * 2);
+        margin-left: 3%;
+        margin-right: 0%;
+        &:nth-of-type(3) {
+          margin-left: 0;
+        } 
+      }
+      @include media(medium-list-down) {
+        float: right;
+        margin-left: 1.5%;
+        margin-right: 0%;
+      }
+      @include media(small-down) {
+        float: right;
+      }
+      @include media(xsmall-only) {
+        float: right;
+      }
+    }
+  }
+
+  .inpage__section .projects-list__card {
+
+    @include media(medium-up) {
+      float: right;
+      padding: ($global-spacing * 2) 0 ($global-spacing * 2) ($global-spacing * 2);
+      margin-left: 2%;
+      margin-right: 0%;
+      &:nth-of-type(3) {
+        margin-left: 0;
+      } 
+    }
+    @include media(medium-list-down) {
+      float: right;
+      margin-left: 1.5%;
+      margin-right: 0%;
+    }
+    @include media(small-down) {
+      float: right;
+    }
+    @include media(xsmall-only) {
+      float: right;
+    }
   }
   
   .card-meta__value--status {
@@ -270,8 +324,12 @@
     }
   }
   
-  .section__footer li:first-child {
+  .section__footer li {
     margin-left: 1rem;
+    margin-right: 0;
+    &:last-child {
+      margin-left: 0;
+    }
   }
   
   /*project browse*/
