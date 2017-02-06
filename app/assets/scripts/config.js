@@ -1,5 +1,5 @@
 'use strict';
-import { defaultsDeep } from 'lodash';
+import { clone, defaultsDeep } from 'lodash';
 
 /*
  * App configuration.
@@ -20,16 +20,13 @@ import { defaultsDeep } from 'lodash';
  *      polluting the repo.
  */
 
-import local from './config/local';
-import staging from './config/staging';
+import base from './config/base';
 import develop from './config/develop';
 import production from './config/production';
 
-var config = local || {};
+const config = clone(base);
 
-if (process.env.DS_ENV === 'staging') {
-  defaultsDeep(config, staging);
-} else if (process.env.DS_ENV === 'development') {
+if (process.env.DS_ENV === 'development') {
   defaultsDeep(config, develop);
 } else {
   defaultsDeep(config, production);
