@@ -62,6 +62,7 @@ var Project = React.createClass({
   },
 
   render: function () {
+    console.log(this.props)
     const authenticated = this.props.api.authenticated;
     const meta = get(this.props.api, ['projectDetail', this.props.params.id]);
     if (!meta) {
