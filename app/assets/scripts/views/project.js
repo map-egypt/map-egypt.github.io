@@ -62,7 +62,7 @@ var Project = React.createClass({
   },
 
   render: function () {
-    console.log(this.props)
+    // console.log(this.props)
     const authenticated = this.props.api.authenticated;
     const meta = get(this.props.api, ['projectDetail', this.props.params.id]);
     if (!meta) {
@@ -74,6 +74,11 @@ var Project = React.createClass({
     const ontime = ProjectCard.isOntime(data);
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
+
+    const disbursedFunds = {loan: 0, grant: 0};
+    get(data, 'disbursed', []).forEach((fund) => {
+      disbursedFunds[fund.type.en.toLowerCase()] += fund.fund.amount;
+    });
 
     const allProjects = get(this.props.api, 'projects', []);
 
@@ -186,7 +191,16 @@ var Project = React.createClass({
                   <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
                   <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
-
+                {disbursedFunds.loan || disbursedFunds.grant
+                  ? <ul className='inpage-stats'>
+                      {disbursedFunds.loan
+                        ? <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
+                        : ''}
+                      {disbursedFunds.grant
+                        ? <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
+                        : ''}
+                    </ul>
+                  : ''}
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>

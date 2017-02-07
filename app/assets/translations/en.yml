@@ -53,6 +53,8 @@ project_pages:
   donors_title: Donors
 
   funding_title: Funding
+  funding_loans_title: Loans
+  funding_grants_title: Grants
   objective_title: Objective
   location_title: Location
   project_link: Project Link

@@ -54,6 +54,8 @@ project_pages:
   donors_title: 'الجهات المانحة'
 
   funding_title: 'التمويل'
+  funding_loans_title: Loans
+  funding_grants_title: Grants
   objective_title: 'الهدف'
   location_title: 'النطاق الجغرافي'
   project_link: 'الرابط الالكتروني للمشروع'
