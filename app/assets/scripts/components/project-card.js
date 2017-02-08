@@ -6,8 +6,7 @@ import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
 import { tally, shortTally, pct, shortParagraph, ontimeLookup, currency } from '../utils/format';
-import { byId as governorateNames } from '../utils/governorates';
-import { byId as districtNames } from '../utils/districts';
+import getLocation from '../utils/location';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -61,7 +60,6 @@ var ProjectCard = React.createClass({
 
   render: function () {
     const { project, lang } = this.props;
-    const locationLang = this.props.lang === 'en' ? 'name' : 'nameAr';
     const ontime = isOntime(project);
     const statusClass = 'project--' + ontime;
     const basepath = '/' + lang;
@@ -69,10 +67,9 @@ var ProjectCard = React.createClass({
     let completion = pct(percentComplete(project));
     let projects = [];
     get(project, 'location', []).map((loc, i) => {
-      const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
-        ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
-      if (id) {
-        projects.push(id[locationLang]);
+      const location = getLocation(loc, lang);
+      if (location) {
+        projects.push(location.display);
       }
     });
 
