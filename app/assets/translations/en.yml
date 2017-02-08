@@ -110,6 +110,7 @@ map_labels:
 general_buttons:
   share: Share
   share_text: Copy URL to Share
+  csv: Download CSV
 
 footer:
   subscription_title: Want Updates?
