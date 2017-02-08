@@ -61,7 +61,7 @@ project_pages:
   local_manager_title: Local Manager
   kmi_components: Project Components
   sdg_goals_title: SDG Goals
-  sds_pillars_title: SDG Pillars
+  sds_pillars_title: SDS Pillars
 
   monitoring_indicators_title: Monitoring Indicators
   funding_by_donor_title: Funding by Donor (US dollars)
