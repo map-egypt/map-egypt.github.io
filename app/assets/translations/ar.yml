@@ -45,6 +45,7 @@ projects_list_view:
 
 project_pages:
   print_pdf: 'طباعة pdf'
+  status_label: Status
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
   last_update_title: 'التحديث الأخير'

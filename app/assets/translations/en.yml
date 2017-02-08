@@ -44,6 +44,7 @@ projects_list_view:
 
 project_pages:
   print_pdf: Print to PDF
+  status_label: "Status:"
   status_ontime: On Time
   status_delayed: Delayed
   last_update_title: Last Update
