@@ -68,6 +68,9 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
+
+    // put id on project data object since it's missing from the project detail endpoint.
+    data.id = meta.id;
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
@@ -137,7 +140,11 @@ var Project = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
-                  <li><CSVBtn relatedProjects={relatedProjects} lang={this.props.meta.lang} /></li>
+                  <li><CSVBtn
+                      title={data.name}
+                      relatedProjects={relatedProjects}
+                      project={data}
+                      lang={this.props.meta.lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
