@@ -46,10 +46,7 @@ module.exports.getProjectCentroids = function (projects, features) {
       console.log(id)
       meta = districtsMeta.byId(id);
       console.log('district meta: ', meta.id);
-      feature = districts.find((f) => {
-        console.log(f.properties.Qism_Mar_1)
-        return f.properties.Qism_Mar_1 === meta.id.toString();
-      })
+      feature = districts.find((f) => f.properties.Qism_Mar_1 === meta.id.toString())
     } else if (type === 'governorate') {
       meta = governoratesMeta.byId(id);
       // console.log('governorate meta: ', meta);
