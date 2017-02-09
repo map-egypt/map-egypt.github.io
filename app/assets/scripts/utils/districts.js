@@ -333,7 +333,6 @@ const districts = [
 ];
 
 module.exports.byId = function (id) {
-  id = +id;
   const result = districts.find((d) => d.id === id);
   return result;
 };
