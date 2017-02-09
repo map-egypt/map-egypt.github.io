@@ -5,7 +5,8 @@ import bbox from '@turf/bbox';
 import { scaleQuantile, scaleOrdinal } from 'd3-scale';
 import { extend, uniq } from 'lodash';
 import { get } from 'object-path';
-import { byEgy, byName } from '../utils/governorates';
+import { byId as byIdDist, byName as byNameDist } from '../utils/districts';
+import { byEgy as byEgyGove, byName as byNameGove } from '../utils/governorates';
 import { isNumerical } from '../utils/is-numerical-overlay';
 import { roundedNumber } from '../utils/format';
 const L = window.L;
@@ -99,6 +100,8 @@ const Map = React.createClass({
       let status = marker.ontime ? 'On Time' : 'Delayed';
       let statusClass = marker.ontime ? 'project--ontime' : 'project--delayed';
 
+      console.log(byNameDist(marker.region))
+
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
           `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
@@ -106,7 +109,7 @@ const Map = React.createClass({
                 `<dt class='card-meta__label'>Status</dt>` +
                 `<dd class='card-meta__value card-meta__value--status'>${status}</dd>` +
                 `<dt class='card-meta__label'>Location</dt>` +
-                `<dd class='card-meta__value card-meta__value--location'>${byName(marker.region)[locationLang]}</dd>` +
+                `<dd class='card-meta__value card-meta__value--location'>${marker.type === 'district' ? byNameDist(marker.region)[locationLang] : byNameGove(marker.region)[locationLang]}</dd>` +
               `</dl>` +
         `</div>`
       );
@@ -176,17 +179,19 @@ const Map = React.createClass({
     });
 
     // for district features, use the geojson to determine district name
-    const isDistrict = regions.features.length > 300;
-    const districtNameMap = {};
-    if (isDistrict) {
-      regions.features.forEach(function (feature) {
-        districtNameMap[feature.properties.admin_id] = feature.properties.District;
-      });
-    }
+    // const isDistrict = regions.features.length > 300;
+    //
+    // const districtNameMap = {};
+    // if (isDistrict) {
+    //   regions.features.forEach(function (feature) {
+    //     districtNameMap[feature.properties.admin_id] = feature.properties.District;
+    //   });
+    // }
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
       const id = feature.properties.admin_id;
-      const name = isDistrict ? districtNameMap[id] : get(byEgy(id), 'name');
+      const name = isDistrict ? get(byIdDist()) : get(byEgyGove(id), 'name');
+
       return `
       <div class='marker__internal'>
         <h5 class='marker__title'>${name}</h5>

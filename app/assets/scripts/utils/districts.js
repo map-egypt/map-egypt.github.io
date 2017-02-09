@@ -337,4 +337,9 @@ module.exports.byId = function (id) {
   return result;
 };
 
+module.exports.byName = function (name) {
+  const result = districts.find((d) => d.name === name);
+  return result;
+};
+
 module.exports.districts = districts;

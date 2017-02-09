@@ -512,7 +512,7 @@ var ProjectBrowse = React.createClass({
           projects = projects.filter(filter.filter);
         });
       }
-      markers = markers.concat(getProjectCentroids(projects, this.props.api.geography));
+      markers = getProjectCentroids(projects, this.props.api.geography);
     }
 
     let overlay;

@@ -67,9 +67,10 @@ module.exports.getProjectCentroids = function (projects, features) {
         markers.push({
           centroid: [centroid[1], centroid[0]],
           ontime: isOntime(project),
-          region: meta.region,
-          name: meta.name,
-          id: project.id
+          region: meta.name,
+          name: project.name,
+          id: project.id,
+          type: type
         });
       });
     }
