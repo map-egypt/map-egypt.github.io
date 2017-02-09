@@ -512,7 +512,7 @@ var ProjectBrowse = React.createClass({
           projects = projects.filter(filter.filter);
         });
       }
-      markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+      markers.concat(getProjectCentroids(projects, this.props.api.geography));
     }
 
     let overlay;
@@ -549,6 +549,7 @@ var ProjectBrowse = React.createClass({
     }
 
     const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
+
     return (
       <section className='inpage project-browse'>
         <header className='inpage__header'>
