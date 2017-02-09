@@ -41,9 +41,6 @@ module.exports.getProjectCentroids = function (projects, features) {
     let feature;
     let type = regions[id].type;
 
-    console.log('type: ', type);
-    console.log('id: ', id);
-
     if (type === 'district') {
       meta = districtsMeta.byId(id);
       if (meta) {
@@ -52,7 +49,6 @@ module.exports.getProjectCentroids = function (projects, features) {
         console.warn('Error- District metadata not found; falling back to governorate in map');
         type = 'governorate';
         id = regions[id].fallback;
-        console.log('fallback id: ', id);
       }
     }
 

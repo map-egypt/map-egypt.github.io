@@ -100,8 +100,6 @@ const Map = React.createClass({
       let status = marker.ontime ? 'On Time' : 'Delayed';
       let statusClass = marker.ontime ? 'project--ontime' : 'project--delayed';
 
-      console.log(byNameDist(marker.region))
-
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
           `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
