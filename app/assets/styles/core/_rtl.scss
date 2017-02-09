@@ -212,6 +212,10 @@
     }
   }
 
+  .card__subtitle {
+    font-size: 1.05em;
+  }
+
   .inpage__section--bleed {
     .projects-list__card {
       @include media(medium-up) {
@@ -219,7 +223,7 @@
         padding: ($global-spacing * 2) 0 ($global-spacing * 2) ($global-spacing * 2);
         margin-left: 3%;
         margin-right: 0%;
-        &:nth-of-type(3) {
+        &:nth-of-type(3n) {
           margin-left: 0;
         } 
       }
@@ -244,7 +248,7 @@
       padding: ($global-spacing * 2) 0 ($global-spacing * 2) ($global-spacing * 2);
       margin-left: 2%;
       margin-right: 0%;
-      &:nth-of-type(3) {
+      &:nth-of-type(3n) {
         margin-left: 0;
       } 
     }
@@ -379,6 +383,10 @@
       float: right;
     }
   }
+
+  .react-autosuggest__input {
+    font-size: 1rem;
+  }
   
   .button--tag {
     &:after {
@@ -467,6 +475,7 @@
   }
   .heading--label {
     margin-left: $global-spacing/2;
+    font-size: .65em;
   }
 
   .button--download:after {
@@ -482,6 +491,18 @@
   }
   .chart__axis-ticks {
     direction: ltr;
+    font-size: .9em;
+  }
+  .status-key {
+    transform: translate(-40%, 0);
+    .status-key__label {
+      font-size: 1em;
+      &:before {
+        left: 0;
+        right: -1.3rem;
+
+      }
+    }
   }
   .marker-cluster div {
     margin-left: 0;
