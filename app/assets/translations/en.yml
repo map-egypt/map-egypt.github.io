@@ -44,6 +44,7 @@ projects_list_view:
 
 project_pages:
   print_pdf: Print to PDF
+  status_label: "Status:"
   status_ontime: On Time
   status_delayed: Delayed
   last_update_title: Last Update
@@ -53,6 +54,8 @@ project_pages:
   donors_title: Donors
 
   funding_title: Funding
+  funding_loans_title: Loans
+  funding_grants_title: Grants
   objective_title: Objective
   location_title: Location
   project_link: Project Link

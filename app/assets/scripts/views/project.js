@@ -74,6 +74,11 @@ var Project = React.createClass({
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
+    const disbursedFunds = {loan: 0, grant: 0};
+    get(data, 'disbursed', []).forEach((fund) => {
+      disbursedFunds[fund.type.en.toLowerCase()] += fund.fund.amount;
+    });
+
     const allProjects = get(this.props.api, 'projects', []);
 
     const sdsGoals = get(data, 'sds_indicator').join(',');
@@ -143,7 +148,7 @@ var Project = React.createClass({
                 </ul>
               </div>
               <dl className={'inpage-meta project--' + ontime}>
-                <dt className='inpage-meta__label visually-hidden'>Status</dt>
+                <dt className='inpage-meta__label'>{t.status_label} <span className='inpage-meta__label--light'>{data.status[lang]}</span></dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontimeLookup[ontime]}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
@@ -185,7 +190,16 @@ var Project = React.createClass({
                   <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
                   <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
-
+                {disbursedFunds.loan || disbursedFunds.grant
+                  ? <ul className='inpage-stats'>
+                      {disbursedFunds.loan
+                        ? <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
+                        : ''}
+                      {disbursedFunds.grant
+                        ? <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
+                        : ''}
+                    </ul>
+                  : ''}
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>
