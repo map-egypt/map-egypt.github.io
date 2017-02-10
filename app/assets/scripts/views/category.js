@@ -166,6 +166,7 @@ var Category = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>{t.category_funding_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
+                 lang={this.props.meta.lang}
                  data={chartData}
                  margin={chartMargin}
                  xFormat={shortTally}
@@ -175,6 +176,7 @@ var Category = React.createClass({
                <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>{t.category_complete_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
+                  lang={this.props.meta.lang}
                   data={completion}
                   margin={chartMargin}
                   yTitle=''

@@ -141,7 +141,7 @@ var Home = React.createClass({
                     xFormat={tally}
                     yTitle='' />
                 </div>
-                <div className='chart-content chart__inline--labels'>
+                <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_two}</h3>
                   <PieChart data={pie} />
                   <div className='status-key'>

@@ -88,10 +88,16 @@
   font-weight: $base-font-light;
 }
 
+.chart-content--status {
+  position: relative;
+  padding-bottom: 2.5em;
+}
+
 .status-key {
   float:left;
-  margin-left: calc(50% + 2rem);
-  transform: translate(-50%, 0);
+  position: absolute;
+  bottom: 0;
+  transform: translate(40%, 0);
   .status-key__label {
     float: left;
     font-size: 0.875rem;
