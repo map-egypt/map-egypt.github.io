@@ -79,13 +79,13 @@ var CSVBtn = React.createClass({
 
     if (this.props.categoryFunds && this.props.categoryFunds.length) {
       let categoryFunds = serialize.chartData(this.props.categoryFunds);
-      csv += '\n\nFunding for Projects (US dollars)\n\n';
+      csv += '\n\nCategory Funding for Projects (US dollars)\n\n';
       csv = csv.concat(serialize.serialize(categoryFunds));
     }
 
     if (this.props.categoryCompletion && this.props.categoryCompletion.length) {
       let categoryCompletion = serialize.chartData(this.props.categoryCompletion);
-      csv += '\n\nPercentage Complete By Project\n\n';
+      csv += '\n\nCategory Percentage Complete By Project\n\n';
       csv = csv.concat(serialize.serialize(categoryCompletion));
     }
 

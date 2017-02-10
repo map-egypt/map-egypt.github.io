@@ -127,6 +127,7 @@ var Category = React.createClass({
                 <ul>
                 <li><CSVBtn
                     title={categoryDisplayName}
+                    relatedProjects={categoryProjects}
                     categoryData={csvCategorySummary}
                     categoryFunds={chartData}
                     categoryCompletion={completion}
