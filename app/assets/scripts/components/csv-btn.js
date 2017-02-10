@@ -18,7 +18,12 @@ var CSVBtn = React.createClass({
     disbursement: React.PropTypes.array,
     budgets: React.PropTypes.array,
     completion: React.PropTypes.array,
-    beneficiaries: React.PropTypes.array
+    beneficiaries: React.PropTypes.array,
+    categorySummary: React.PropTypes.object,
+    categoryFunds: React.PropTypes.array,
+    categoryCompletion: React.PropTypes.array,
+    categoryProjectCountCompare: React.PropTypes.array,
+    categoryProjectFundsCompare: React.PropTypes.array
   },
 
   serialize: function () {
@@ -49,22 +54,51 @@ var CSVBtn = React.createClass({
     }
 
     if (this.props.budgets && this.props.budgets.length) {
-      let budgets = serialize.fundingByCat(this.props.budgets, this.props.lang);
+      let budgets = serialize.chartData(this.props.budgets, this.props.lang);
       csv += '\n\nFunding By Category\n\n';
       csv = csv.concat(serialize.serialize(budgets));
     }
 
     if (this.props.completion && this.props.completion.length) {
-      let completion = serialize.fundingByCat(this.props.completion, this.props.lang);
+      let completion = serialize.chartData(this.props.completion, this.props.lang);
       csv += '\n\nPercentage Complete By Category\n\n';
       csv = csv.concat(serialize.serialize(completion));
     }
 
     if (this.props.beneficiaries && this.props.beneficiaries.length) {
-      let beneficiaries = serialize.beneficiariesByCat(this.props.beneficiaries, this.props.lang);
-      console.log(beneficiaries)
+      let beneficiaries = serialize.chartData(this.props.beneficiaries, this.props.lang);
       csv += '\n\nBeneficiaries Reached By Category\n\n';
       csv = csv.concat(serialize.serialize(beneficiaries));
+    }
+
+    if (this.props.categorySummary) {
+      let categorySummary = serialize.categorySummary(this.props.categorySummary);
+      csv += '\n\nCategory Summary\n\n';
+      csv = csv.concat(serialize.serialize(categorySummary));
+    }
+
+    if (this.props.categoryFunds && this.props.categoryFunds.length) {
+      let categoryFunds = serialize.chartData(this.props.categoryFunds);
+      csv += '\n\nFunding for Projects (US dollars)\n\n';
+      csv = csv.concat(serialize.serialize(categoryFunds));
+    }
+
+    if (this.props.categoryCompletion && this.props.categoryCompletion.length) {
+      let categoryCompletion = serialize.chartData(this.props.categoryCompletion);
+      csv += '\n\nPercentage Complete By Project\n\n';
+      csv = csv.concat(serialize.serialize(categoryCompletion));
+    }
+
+    if (this.props.categoryProjectCountCompare && this.props.categoryProjectCountCompare.length) {
+      let categoryProjectCounts = serialize.chartData(this.props.categoryProjectCountCompare);
+      csv += '\n\nComparison of Number of Projects per Category\n\n';
+      csv = csv.concat(serialize.serialize(categoryProjectCounts));
+    }
+
+    if (this.props.categoryProjectFundsCompare && this.props.categoryProjectFundsCompare.length) {
+      let categoryProjectFunds = serialize.chartData(this.props.categoryProjectFundsCompare);
+      csv += '\n\nComparison of Project Funding per Category (US dollars)\n\n';
+      csv = csv.concat(serialize.serialize(categoryProjectFunds));
     }
 
     if (window.encodeURI && typeof window.encodeURI === 'function') {

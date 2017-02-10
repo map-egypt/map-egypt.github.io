@@ -13,9 +13,7 @@ function location (location, lang) {
 
 const relatedProjectHeaders = [['name', 'id', 'status', 'location', 'budget',
   'households', 'categories', 'description']];
-
 export function relatedProjects (projects, lang) {
-  console.log(projects)
   return relatedProjectHeaders.concat(projects.map(p => [
     p.name,
     p.id,
@@ -31,7 +29,6 @@ export function relatedProjects (projects, lang) {
 const projectHeaders = [['name', 'id', 'status', 'location', 'budget',
   'households', 'categories', 'donors', 'link', 'responsible ministry',
   'local manager', 'sdg goals', 'sds pillars', 'objective']];
-
 export function project (p, lang) {
   return projectHeaders.concat([[
     p.name,
@@ -52,7 +49,6 @@ export function project (p, lang) {
 }
 
 const donorHeaders = [['donor', 'value']];
-
 export function donors (donors) {
   return donorHeaders.concat(donors.map(d => [
     d.name,
@@ -61,7 +57,6 @@ export function donors (donors) {
 }
 
 const disbursementHeaders = [['name', 'donor', 'type', 'value']];
-
 export function disbursement (disbursement) {
   return disbursementHeaders.concat(disbursement.map(d => [
     d.name,
@@ -71,34 +66,21 @@ export function disbursement (disbursement) {
   ]));
 }
 
-const fundingByCatHeaders = [['name', 'value', 'link']];
-
-export function fundingByCat (budgets) {
-  return fundingByCatHeaders.concat(budgets.map(b => [
-    b.name,
-    b.value,
-    'https://map-egypt.github.io/#' + b.link
+const chartDataHeaders = [['name', 'value', 'link']];
+export function chartData (data) {
+  return chartDataHeaders.concat(data.map(d => [
+    d.name,
+    d.value,
+    'https://map-egypt.github.io/#' + d.link
   ]));
 }
 
-const percentCompleteByCatHeaders = [['name', 'value', 'link']];
-
-export function percentCompleteByCat (completion) {
-  return percentCompleteByCatHeaders.concat(completion.map(c => [
-    c.name,
-    c.value,
-    'https://map-egypt.github.io/#' + c.link
-  ]));
-}
-
-const beneficiariesByCatHeaders = [['name', 'value', 'link']];
-
-export function beneficiariesByCat (beneficiaries) {
-  return beneficiariesByCatHeaders.concat(beneficiaries.map(b => [
-    b.name,
-    b.value,
-    'https://map-egypt.github.io/#' + b.link
-  ]));
+const categorySummaryHeaders = [['budget', 'projects_funded']];
+export function categorySummary (c) {
+  return categorySummaryHeaders.concat([[
+    c.budget,
+    c.projects_funded
+  ]]);
 }
 
 export function serialize (list) {

@@ -8,6 +8,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
+import CSVBtn from '../components/csv-btn';
 import { tally, shortTally, pct, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
@@ -110,6 +111,11 @@ var Category = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
+    const csvCategorySummary = {
+      budget: totalBudget,
+      projects_funded: categoryProjects.length
+    };
+
     const singleProject = categoryProjects.length <= 1 ? ' category--single' : '';
     const t = get(window.t, [this.props.meta.lang, 'category_pages'], {});
     return (
@@ -119,6 +125,14 @@ var Category = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                <li><CSVBtn
+                    title={categoryDisplayName}
+                    categoryData={csvCategorySummary}
+                    categoryFunds={chartData}
+                    categoryCompletion={completion}
+                    categoryProjectFundsCompare={budgetPerCategoryChartData}
+                    categoryProjectCountCompare={numProjectsChartData}
+                    lang={lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
