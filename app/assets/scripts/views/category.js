@@ -128,7 +128,7 @@ var Category = React.createClass({
                 <li><CSVBtn
                     title={categoryDisplayName}
                     relatedProjects={categoryProjects}
-                    categoryData={csvCategorySummary}
+                    categorySummary={csvCategorySummary}
                     categoryFunds={chartData}
                     categoryCompletion={completion}
                     categoryProjectFundsCompare={budgetPerCategoryChartData}

@@ -23,7 +23,9 @@ var CSVBtn = React.createClass({
     categoryFunds: React.PropTypes.array,
     categoryCompletion: React.PropTypes.array,
     categoryProjectCountCompare: React.PropTypes.array,
-    categoryProjectFundsCompare: React.PropTypes.array
+    categoryProjectFundsCompare: React.PropTypes.array,
+    donorSummary: React.PropTypes.object,
+    donorProjectFunding: React.PropTypes.array
   },
 
   serialize: function () {
@@ -72,7 +74,7 @@ var CSVBtn = React.createClass({
     }
 
     if (this.props.categorySummary) {
-      let categorySummary = serialize.categorySummary(this.props.categorySummary);
+      let categorySummary = serialize.summary(this.props.categorySummary);
       csv += '\n\nCategory Summary\n\n';
       csv = csv.concat(serialize.serialize(categorySummary));
     }
@@ -99,6 +101,18 @@ var CSVBtn = React.createClass({
       let categoryProjectFunds = serialize.chartData(this.props.categoryProjectFundsCompare);
       csv += '\n\nComparison of Project Funding per Category (US dollars)\n\n';
       csv = csv.concat(serialize.serialize(categoryProjectFunds));
+    }
+
+    if (this.props.donorSummary) {
+      let donorSummary = serialize.summary(this.props.donorSummary);
+      csv += '\n\nDonor Summary\n\n';
+      csv = csv.concat(serialize.serialize(donorSummary));
+    }
+
+    if (this.props.donorProjectFunding) {
+      let donorProjectFunding = serialize.chartData(this.props.donorProjectFunding);
+      csv += '\n\nDonor Project Funding\n\n';
+      csv = csv.concat(serialize.serialize(donorProjectFunding));
     }
 
     if (window.encodeURI && typeof window.encodeURI === 'function') {

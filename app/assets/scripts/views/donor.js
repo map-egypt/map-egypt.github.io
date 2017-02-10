@@ -3,6 +3,7 @@ import React from 'react';
 import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import CSVBtn from '../components/csv-btn';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
@@ -62,6 +63,13 @@ var Donor = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
+    const { lang } = this.props.meta;
+
+    const csvDonorSummary = {
+      budget: totalBudget,
+      projects_funded: donorProjects.length
+    };
+
     const singleProject = donorProjects.length <= 1 ? ' funding--single' : '';
     const t = get(window.t, [this.props.meta.lang, 'donor_pages'], {});
     return (
@@ -71,6 +79,12 @@ var Donor = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                <li><CSVBtn
+                    title={donorDisplayName}
+                    relatedProjects={donorProjects}
+                    donorSummary={csvDonorSummary}
+                    donorProjectFunding={chartData}
+                    lang={lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>

@@ -75,9 +75,9 @@ export function chartData (data) {
   ]));
 }
 
-const categorySummaryHeaders = [['budget', 'projects_funded']];
-export function categorySummary (c) {
-  return categorySummaryHeaders.concat([[
+const summaryHeaders = [['budget', 'projects_funded']];
+export function summary (c) {
+  return summaryHeaders.concat([[
     c.budget,
     c.projects_funded
   ]]);
