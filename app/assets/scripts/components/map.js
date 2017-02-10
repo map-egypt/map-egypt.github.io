@@ -99,6 +99,7 @@ const Map = React.createClass({
 
       let status = marker.ontime ? 'On Time' : 'Delayed';
       let statusClass = marker.ontime ? 'project--ontime' : 'project--delayed';
+      const location = marker.type === 'district' ? byNameDist(get(marker, 'region'))[locationLang] : byNameGove(get(marker, 'region'))[locationLang];
 
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
@@ -107,7 +108,7 @@ const Map = React.createClass({
                 `<dt class='card-meta__label'>Status</dt>` +
                 `<dd class='card-meta__value card-meta__value--status'>${status}</dd>` +
                 `<dt class='card-meta__label'>Location</dt>` +
-                `<dd class='card-meta__value card-meta__value--location'>${marker.type === 'district' ? byNameDist(marker.region)[locationLang] : byNameGove(marker.region)[locationLang]}</dd>` +
+                `<dd class='card-meta__value card-meta__value--location'>${location}</dd>` +
               `</dl>` +
         `</div>`
       );
