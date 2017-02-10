@@ -63,7 +63,7 @@ module.exports.getProjectCentroids = function (projects, features) {
     if (type === 'district') {
       meta = districtsMeta.byId(id);
       if (meta) {
-        feature = districts.find((f) => f.properties.Qism_Mar_1 === meta.id);
+        feature = districts.find((f) => f.properties.id === meta.id);
       } else {
         badId = id;
         id = regions[id].fallback;
