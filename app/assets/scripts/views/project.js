@@ -149,6 +149,11 @@ var Project = React.createClass({
                       title={data.name}
                       relatedProjects={relatedProjects}
                       project={data}
+                      donors={donors}
+                      disbursement={disbursement}
+                      budgets={budgets}
+                      completion={completion}
+                      beneficiaries={served}
                       lang={this.props.meta.lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>

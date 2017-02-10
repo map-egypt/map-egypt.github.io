@@ -15,6 +15,7 @@ const relatedProjectHeaders = [['name', 'id', 'status', 'location', 'budget',
   'households', 'categories', 'description']];
 
 export function relatedProjects (projects, lang) {
+  console.log(projects)
   return relatedProjectHeaders.concat(projects.map(p => [
     p.name,
     p.id,
@@ -48,6 +49,56 @@ export function project (p, lang) {
     get(p, 'sds_indicator', []).map(d => d[lang] || d['en']).join(', '),
     p.description
   ]]);
+}
+
+const donorHeaders = [['donor', 'value']];
+
+export function donors (donors) {
+  return donorHeaders.concat(donors.map(d => [
+    d.name,
+    d.value
+  ]));
+}
+
+const disbursementHeaders = [['name', 'donor', 'type', 'value']];
+
+export function disbursement (disbursement) {
+  return disbursementHeaders.concat(disbursement.map(d => [
+    d.name,
+    d.donor,
+    d.type,
+    d.value
+  ]));
+}
+
+const fundingByCatHeaders = [['name', 'value', 'link']];
+
+export function fundingByCat (budgets) {
+  return fundingByCatHeaders.concat(budgets.map(b => [
+    b.name,
+    b.value,
+    'https://map-egypt.github.io/#' + b.link
+  ]));
+}
+
+const percentCompleteByCatHeaders = [['name', 'value', 'link']];
+
+export function percentCompleteByCat (completion) {
+  return percentCompleteByCatHeaders.concat(completion.map(c => [
+    c.name,
+    c.value,
+    'https://map-egypt.github.io/#' + c.link
+  ]));
+}
+
+const beneficiariesByCatHeaders = [['name', 'value', 'link']];
+
+export function beneficiariesByCat (beneficiaries) {
+  return beneficiariesByCatHeaders.concat(beneficiaries.map(b => [
+    b.name,
+    b.value,
+    'https://map-egypt.github.io/#' + b.link
+  ]));
 }
 
 export function serialize (list) {
