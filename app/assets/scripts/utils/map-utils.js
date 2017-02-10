@@ -40,10 +40,9 @@ module.exports.getProjectCentroids = function (projects, features) {
     if (locations && Array.isArray(locations)) {
       locations.forEach(function (location) {
         const region = location.district;
-        let metadata;
-        region.district.length && region.district.toLowerCase() !== 'all'
-          ? metadata = {type: 'district', fallback: region.governorate}
-          : metadata = {type: 'governorate', fallback: false};
+        const metadata = region.district.length && region.district.toLowerCase() !== 'all'
+          ? {type: 'district', fallback: region.governorate}
+          : {type: 'governorate', fallback: false};
         const regionId = region[metadata.type];
         regions[regionId] = regions[regionId] || Object.assign(metadata, {regions: []});
         regions[regionId].regions.push(project);
@@ -51,9 +50,8 @@ module.exports.getProjectCentroids = function (projects, features) {
     }
   });
 
-  let {districts, egy2} = features;
-  districts = districts.features;
-  egy2 = egy2.features;
+  const districts = features[DISTRICT].features;
+  const egy2 = features[GOVERNORATE].features;
   Object.keys(regions).forEach(function (id) {
     let meta;
     let feature;
@@ -79,7 +77,7 @@ module.exports.getProjectCentroids = function (projects, features) {
 
     const centroid = get(getCentroid(feature), 'geometry.coordinates');
     if (centroid) {
-      const region = regions[id] || findFallback(regions, id);
+      const region = regions[id] || regions[badId];
       region.regions.forEach(function (project) {
         markers.push({
           centroid: [centroid[1], centroid[0]],
