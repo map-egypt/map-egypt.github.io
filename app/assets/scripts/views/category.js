@@ -10,7 +10,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
 import { tally, shortTally, pct, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import { window } from 'global';
 
 const chartMargin = { left: 150, right: 20, top: 10, bottom: 50 };

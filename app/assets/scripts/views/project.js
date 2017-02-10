@@ -10,7 +10,7 @@ import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../utils/format';
 import { hasValidToken } from '../utils/auth';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
 
 import Map from '../components/map';

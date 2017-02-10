@@ -10,7 +10,7 @@ import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import { isOntime } from '../components/project-card';
-import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
+import { getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };

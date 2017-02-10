@@ -10,7 +10,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import ProjectTimeline from '../components/project-timeline';
 import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
 var Ministry = React.createClass({
   displayName: 'Ministry',
