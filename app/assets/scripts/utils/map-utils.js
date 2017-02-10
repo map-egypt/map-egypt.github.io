@@ -30,7 +30,7 @@ function findFallback (o, fallbackId) {
 
 module.exports.getProjectCentroids = function (projects, features) {
   const markers = [];
-  if ((!features[GOVERNORATE] || !features[DISTRICT]) || !projects.length) {
+  if (!features[GOVERNORATE] || !features[DISTRICT] || !projects.length) {
     return markers;
   }
 
