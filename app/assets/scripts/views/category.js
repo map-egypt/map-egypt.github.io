@@ -86,7 +86,7 @@ var Category = React.createClass({
       });
     });
 
-    const markers = getProjectCentroids(categoryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const markers = getProjectCentroids(categoryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const categoryBudgets = categoryProjects

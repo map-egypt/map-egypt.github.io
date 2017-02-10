@@ -40,7 +40,8 @@ var Ministry = React.createClass({
       }
       return sluggedName === ministryName;
     });
-    const markers = getProjectCentroids(ministryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    const markers = getProjectCentroids(ministryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const chartData = ministryProjects.map((project) => {

@@ -41,7 +41,8 @@ var Donor = React.createClass({
         return sluggedName === donorName;
       });
     });
-    const markers = getProjectCentroids(donorProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    const markers = getProjectCentroids(donorProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const projectBudgets = donorProjects
