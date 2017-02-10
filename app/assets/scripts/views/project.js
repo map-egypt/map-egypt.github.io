@@ -91,7 +91,7 @@ var Project = React.createClass({
     });
 
     // Create map markers for this project
-    const markers = getProjectCentroids([data], get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const markers = getProjectCentroids([data], this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     // All three project comparison charts need to have the same ordering in the Y axis,

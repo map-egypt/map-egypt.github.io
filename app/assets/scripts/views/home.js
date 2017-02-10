@@ -45,7 +45,7 @@ var Home = React.createClass({
       }
     });
 
-    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const markers = getProjectCentroids(projects, this.props.api.geography);
 
     const basepath = '/' + this.props.meta.lang;
     const bars = Object.keys(categories).map((category) => ({
