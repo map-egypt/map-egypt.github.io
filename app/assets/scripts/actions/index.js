@@ -111,7 +111,6 @@ export function getGeography (name) {
         console.log('Topojson.feature() failed');
         return;
       }
-      console.log(features, name)
       return dispatch(updateGeography({ features, name }));
     });
   };
