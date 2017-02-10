@@ -10,24 +10,6 @@ const DISTRICT = 'districts';
 module.exports.GOVERNORATE = GOVERNORATE;
 module.exports.DISTRICT = DISTRICT;
 
-// helps to find fallback governorate when district included but missing from spatial data
-// http://codereview.stackexchange.com/questions/73714/find-a-nested-property-in-an-object
-function findFallback (o, fallbackId) {
-  if (o.fallback === fallbackId) {
-    return o;
-  }
-  var result, p;
-  for (p in o) {
-    if (o.hasOwnProperty(p) && typeof o[p] === 'object') {
-      result = findFallback(o[p], fallbackId);
-      if (result) {
-        return result;
-      }
-    }
-  }
-  return result;
-}
-
 module.exports.getProjectCentroids = function (projects, features) {
   const markers = [];
   if (!features[GOVERNORATE] || !features[DISTRICT] || !projects.length) {
@@ -55,7 +37,7 @@ module.exports.getProjectCentroids = function (projects, features) {
   Object.keys(regions).forEach(function (id) {
     let meta;
     let feature;
-    let badId;
+    let districtId;
     let type = regions[id].type;
 
     if (type === 'district') {
@@ -63,10 +45,10 @@ module.exports.getProjectCentroids = function (projects, features) {
       if (meta) {
         feature = districts.find((f) => f.properties.id === meta.id);
       } else {
-        badId = id;
+        districtId = id;
         id = regions[id].fallback;
         type = 'governorate';
-        console.warn(`Error- District ID ${badId} metadata not found; falling back to governorate ID ${id} in map`);
+        console.warn(`Error- District ID ${districtId} metadata not found; falling back to governorate ID ${id} in map`);
       }
     }
 
@@ -77,7 +59,7 @@ module.exports.getProjectCentroids = function (projects, features) {
 
     const centroid = get(getCentroid(feature), 'geometry.coordinates');
     if (centroid) {
-      const region = regions[id] || regions[badId];
+      const region = regions[id] || regions[districtId];
       region.regions.forEach(function (project) {
         markers.push({
           centroid: [centroid[1], centroid[0]],
