@@ -10,7 +10,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import ProjectTimeline from '../components/project-timeline';
 import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
 var Ministry = React.createClass({
   displayName: 'Ministry',
@@ -40,7 +40,8 @@ var Ministry = React.createClass({
       }
       return sluggedName === ministryName;
     });
-    const markers = getProjectCentroids(ministryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    const markers = getProjectCentroids(ministryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const chartData = ministryProjects.map((project) => {

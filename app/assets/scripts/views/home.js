@@ -10,7 +10,7 @@ import Map from '../components/map';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import PieChart from '../components/charts/pie';
 import { isOntime } from '../components/project-card';
-import { GOVERNORATE, getProjectCentroids } from '../utils/map-utils';
+import { getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 
 const barChartMargin = { left: 200, right: 10, top: 10, bottom: 50 };
@@ -45,7 +45,7 @@ var Home = React.createClass({
       }
     });
 
-    const markers = getProjectCentroids(projects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const markers = getProjectCentroids(projects, this.props.api.geography);
 
     const basepath = '/' + this.props.meta.lang;
     const bars = Object.keys(categories).map((category) => ({
@@ -141,7 +141,7 @@ var Home = React.createClass({
                     xFormat={tally}
                     yTitle='' />
                 </div>
-                <div className='chart-content chart__inline--labels'>
+                <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_two}</h3>
                   <PieChart data={pie} />
                   <div className='status-key'>

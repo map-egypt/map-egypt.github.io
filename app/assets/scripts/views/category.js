@@ -10,7 +10,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
 import { tally, shortTally, pct, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import { window } from 'global';
 
 const chartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
@@ -86,7 +86,7 @@ var Category = React.createClass({
       });
     });
 
-    const markers = getProjectCentroids(categoryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const markers = getProjectCentroids(categoryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const categoryBudgets = categoryProjects
@@ -166,6 +166,7 @@ var Category = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>{t.category_funding_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
+                 lang={this.props.meta.lang}
                  data={chartData}
                  margin={chartMargin}
                  xFormat={shortTally}
@@ -175,6 +176,7 @@ var Category = React.createClass({
                <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>{t.category_complete_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
+                  lang={this.props.meta.lang}
                   data={completion}
                   margin={chartMargin}
                   yTitle=''

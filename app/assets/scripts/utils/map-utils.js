@@ -1,15 +1,18 @@
 'use strict';
 import { get } from 'object-path';
 import getCentroid from '@turf/centroid';
-import * as governorates from './governorates';
+import * as governoratesMeta from './governorates';
+import * as districtsMeta from './districts';
 import { isOntime } from '../components/project-card';
 
-module.exports.GOVERNORATE = 'egy2';
-module.exports.DISTRICT = 'districts';
+const GOVERNORATE = 'egy2';
+const DISTRICT = 'districts';
+module.exports.GOVERNORATE = GOVERNORATE;
+module.exports.DISTRICT = DISTRICT;
 
 module.exports.getProjectCentroids = function (projects, features) {
   const markers = [];
-  if (!features || !projects.length) {
+  if (!features[GOVERNORATE] || !features[DISTRICT] || !projects.length) {
     return markers;
   }
 
@@ -18,26 +21,53 @@ module.exports.getProjectCentroids = function (projects, features) {
     let locations = get(project, 'location');
     if (locations && Array.isArray(locations)) {
       locations.forEach(function (location) {
-        // TODO look at district or marker to see if there's more granular data
-        const region = location.district.governorate;
-        regions[region] = regions[region] || [];
-        regions[region].push(project);
+        const region = location.district;
+        const metadata = region.district.length && region.district.toLowerCase() !== 'all'
+          ? {type: 'district', fallback: region.governorate}
+          : {type: 'governorate', fallback: false};
+        const regionId = region[metadata.type];
+        regions[regionId] = regions[regionId] || Object.assign(metadata, {regions: []});
+        regions[regionId].regions.push(project);
       });
     }
   });
 
+  const districts = features[DISTRICT].features;
+  const egy2 = features[GOVERNORATE].features;
   Object.keys(regions).forEach(function (id) {
-    const meta = governorates.byId(id);
-    const feature = features.find((f) => f.properties.admin_id === meta.egy);
+    let meta;
+    let feature;
+    let districtId;
+    let type = regions[id].type;
+
+    if (type === 'district') {
+      meta = districtsMeta.byId(id);
+      if (meta) {
+        feature = districts.find((f) => f.properties.id === meta.id);
+      } else {
+        districtId = id;
+        id = regions[id].fallback;
+        type = 'governorate';
+        console.warn(`Error- District ID ${districtId} metadata not found; falling back to governorate ID ${id} in map`);
+      }
+    }
+
+    if (type === 'governorate') {
+      meta = governoratesMeta.byId(id);
+      feature = egy2.find((f) => f.properties.admin_id === meta.egy);
+    }
+
     const centroid = get(getCentroid(feature), 'geometry.coordinates');
     if (centroid) {
-      regions[id].forEach(function (project) {
+      const region = regions[id] || regions[districtId];
+      region.regions.forEach(function (project) {
         markers.push({
           centroid: [centroid[1], centroid[0]],
           ontime: isOntime(project),
           region: meta.name,
           name: project.name,
-          id: project.id
+          id: project.id,
+          type: type
         });
       });
     }
