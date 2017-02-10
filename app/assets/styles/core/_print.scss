@@ -9,7 +9,54 @@
 
   .map__group, .inpage__col--map, section {
     float: none !important;
+    /*page-break-after: always;*/
+  }
+
+  .inner {
+    width: 100%;
+    height: 100%;
+  }
+
+  .inpage__section--overview {
+    width: 100%;
+    height: 100%;
     page-break-after: always;
+  }
+
+  .inpage__section--overview .inpage__col--map {
+    width: 100%;
+    height: 100%;
+    margin-right: 0;
+    padding-right: 0;
+    .map__container {
+      min-height: 890px;
+    }
+    .legend__container {
+      background-color: none;
+    }
+  }
+
+  .inpage__col--content {
+    padding-left: 0;
+    float: none;
+    text-align: left;
+    display: block;
+  }
+
+  .inpage__section--comparison {
+    display: visible;
+  }
+
+  .leaflet-control-layers {
+    display: none;
+  }
+
+  .leaflet-control-attribution {
+    display: none;
+  }
+
+  .leaflet-control-zoom {
+    display: none;
   }
 
   .inpage__headline-actions {
@@ -22,6 +69,8 @@
 
   .inpage__header {
     padding-bottom: 0;
+    page-break-after: always;
+    margin-top: 12em;
   }
 
   .inpage__table td:last-child {
