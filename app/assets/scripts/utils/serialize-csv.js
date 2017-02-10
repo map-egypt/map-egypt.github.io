@@ -83,6 +83,24 @@ export function summary (c) {
   ]]);
 }
 
+const ministrySummaryHeaders = [['active_projects', 'total_projects']];
+export function ministrySummary (c) {
+  return ministrySummaryHeaders.concat([[
+    c.active_projects,
+    c.total_projects
+  ]]);
+}
+
+const ministryActiveProjectsHeader = [['name', 'planned_start_date', 'actual_start_date', 'planned_end_date']];
+export function ministryActiveProjects (activeProjects) {
+  return ministryActiveProjectsHeader.concat(activeProjects.map(p => [
+    p.name,
+    p.planned_start_date,
+    p.actual_start_date,
+    p.planned_end_date
+  ]));
+}
+
 export function serialize (list) {
   return list.map(row => {
     return row.map(item => {

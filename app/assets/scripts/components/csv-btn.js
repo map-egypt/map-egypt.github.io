@@ -25,7 +25,10 @@ var CSVBtn = React.createClass({
     categoryProjectCountCompare: React.PropTypes.array,
     categoryProjectFundsCompare: React.PropTypes.array,
     donorSummary: React.PropTypes.object,
-    donorProjectFunding: React.PropTypes.array
+    donorProjectFunding: React.PropTypes.array,
+    ministrySummary: React.PropTypes.object,
+    ministryActiveProjects: React.PropTypes.array,
+    ministryServedByProject: React.PropTypes.array
   },
 
   serialize: function () {
@@ -113,6 +116,24 @@ var CSVBtn = React.createClass({
       let donorProjectFunding = serialize.chartData(this.props.donorProjectFunding);
       csv += '\n\nDonor Project Funding\n\n';
       csv = csv.concat(serialize.serialize(donorProjectFunding));
+    }
+
+    if (this.props.ministrySummary) {
+      let ministrySummary = serialize.summary(this.props.ministrySummary);
+      csv += '\n\nMinistry Summary\n\n';
+      csv = csv.concat(serialize.serialize(ministrySummary));
+    }
+
+    if (this.props.ministryActiveProjects) {
+      let ministryActiveProjects = serialize.ministryActiveProjects(this.props.ministryActiveProjects);
+      csv += '\n\nActive Project Status\n\n';
+      csv = csv.concat(serialize.serialize(ministryActiveProjects));
+    }
+
+    if (this.props.ministryServedByProject) {
+      let ministryServedByProject = serialize.chartData(this.props.ministryServedByProject);
+      csv += '\n\nNumber Served Per Project\n\n';
+      csv = csv.concat(serialize.serialize(ministryServedByProject));
     }
 
     if (window.encodeURI && typeof window.encodeURI === 'function') {
