@@ -1,6 +1,6 @@
 'use strict';
 
-const districts = [
+export const districts = [
   {id: '0101', name: 'Al Tbeen', nameAr: 'التبين'},
   {id: '0102', name: 'Helwan', nameAr: 'حلوان'},
   {id: '0103', name: '15th of May', nameAr: 'مدينة ١٥ مايو'},
@@ -332,14 +332,15 @@ const districts = [
   {id: '3599', name: 'Abo Redis Desert', nameAr: 'صحراء أبو رديس'}
 ];
 
-module.exports.byId = function (id) {
+export const byId = function (id) {
   const result = districts.find((d) => d.id === id);
   return result;
 };
 
-module.exports.byName = function (name) {
+export const byName = function (name) {
   const result = districts.find((d) => d.name === name);
   return result;
 };
 
-module.exports.districts = districts;
+const districtIds = districts.map(d => d.id);
+export const ids = districtIds;
