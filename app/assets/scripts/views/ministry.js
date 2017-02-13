@@ -55,14 +55,16 @@ var Ministry = React.createClass({
 
     const { lang } = this.props.meta;
 
+    const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
+    const activeProjects = ministryProjects.filter((project) => project.actual_end_date);
+    const numActiveProjects = activeProjects.length;
+
     const csvMinistrySummary = {
       active_projects: numActiveProjects,
       total_projects: ministryProjects.length
     };
 
-    const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
-    const activeProjects = ministryProjects.filter((project) => project.actual_end_date);
-    const numActiveProjects = activeProjects.length;
+    console.log(csvMinistrySummary);
 
     return (
       <section className='inpage funding'>

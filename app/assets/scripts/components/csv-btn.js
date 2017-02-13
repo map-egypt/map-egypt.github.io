@@ -119,7 +119,7 @@ var CSVBtn = React.createClass({
     }
 
     if (this.props.ministrySummary) {
-      let ministrySummary = serialize.summary(this.props.ministrySummary);
+      let ministrySummary = serialize.ministrySummary(this.props.ministrySummary);
       csv += '\n\nMinistry Summary\n\n';
       csv = csv.concat(serialize.serialize(ministrySummary));
     }
