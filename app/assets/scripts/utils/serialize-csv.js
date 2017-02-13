@@ -83,9 +83,9 @@ export function summary (c) {
   ]]);
 }
 
-const ministrySummaryHeaders = [['active_projects', 'total_projects']];
-export function ministrySummary (c) {
-  return ministrySummaryHeaders.concat([[
+const ministryOwnerSummaryHeaders = [['active_projects', 'total_projects']];
+export function ministryOwnerSummary (c) {
+  return ministryOwnerSummaryHeaders.concat([[
     c.active_projects,
     c.total_projects
   ]]);

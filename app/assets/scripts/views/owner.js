@@ -3,6 +3,7 @@ import React from 'react';
 import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import CSVBtn from '../components/csv-btn';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
@@ -53,6 +54,11 @@ var Owner = React.createClass({
     const singleProject = ownerProjects.length <= 1 ? ' funding--single' : '';
     const numActiveProjects = ownerProjects.filter((project) => project.actual_end_date).length;
 
+    const csvOwnerSummary = {
+      active_projects: numActiveProjects,
+      total_projects: ownerProjects.length
+    };
+
     return (
       <section className='inpage funding'>
         <header className='inpage__header'>
@@ -60,6 +66,12 @@ var Owner = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                  <li><CSVBtn
+                      title={ownerDisplayName}
+                      relatedProjects={ownerProjects}
+                      ownerSummary={csvOwnerSummary}
+                      servedByProject={chartData}
+                      lang={lang} /></li>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>

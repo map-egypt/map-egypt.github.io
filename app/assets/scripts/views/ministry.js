@@ -64,8 +64,6 @@ var Ministry = React.createClass({
       total_projects: ministryProjects.length
     };
 
-    console.log(csvMinistrySummary);
-
     return (
       <section className='inpage funding'>
         <header className='inpage__header'>
@@ -78,7 +76,7 @@ var Ministry = React.createClass({
                     relatedProjects={ministryProjects}
                     ministrySummary={csvMinistrySummary}
                     ministryActiveProjects={activeProjects}
-                    ministryServedByProject={chartData}
+                    servedByProject={chartData}
                     lang={lang} /></li>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>

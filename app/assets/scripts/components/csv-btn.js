@@ -28,7 +28,8 @@ var CSVBtn = React.createClass({
     donorProjectFunding: React.PropTypes.array,
     ministrySummary: React.PropTypes.object,
     ministryActiveProjects: React.PropTypes.array,
-    ministryServedByProject: React.PropTypes.array
+    servedByProject: React.PropTypes.array,
+    ownerSummary: React.PropTypes.object
   },
 
   serialize: function () {
@@ -119,7 +120,7 @@ var CSVBtn = React.createClass({
     }
 
     if (this.props.ministrySummary) {
-      let ministrySummary = serialize.ministrySummary(this.props.ministrySummary);
+      let ministrySummary = serialize.ministryOwnerSummary(this.props.ministrySummary);
       csv += '\n\nMinistry Summary\n\n';
       csv = csv.concat(serialize.serialize(ministrySummary));
     }
@@ -130,10 +131,16 @@ var CSVBtn = React.createClass({
       csv = csv.concat(serialize.serialize(ministryActiveProjects));
     }
 
-    if (this.props.ministryServedByProject) {
-      let ministryServedByProject = serialize.chartData(this.props.ministryServedByProject);
+    if (this.props.servedByProject) {
+      let servedByProject = serialize.chartData(this.props.servedByProject);
       csv += '\n\nNumber Served Per Project\n\n';
-      csv = csv.concat(serialize.serialize(ministryServedByProject));
+      csv = csv.concat(serialize.serialize(servedByProject));
+    }
+
+    if (this.props.ownerSummary) {
+      let ownerSummary = serialize.ministryOwnerSummary(this.props.ownerSummary);
+      csv += '\n\nOwner Summary\n\n';
+      csv = csv.concat(serialize.serialize(ownerSummary));
     }
 
     if (window.encodeURI && typeof window.encodeURI === 'function') {
