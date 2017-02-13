@@ -59,10 +59,20 @@ var Ministry = React.createClass({
     const activeProjects = ministryProjects.filter((project) => project.actual_end_date);
     const numActiveProjects = activeProjects.length;
 
-    const csvMinistrySummary = {
-      active_projects: numActiveProjects,
-      total_projects: ministryProjects.length
+    const csvSummary = {
+      title: 'Ministry Summary',
+      data: {
+        active_projects: numActiveProjects,
+        total_projects: ministryProjects.length
+      }
     };
+
+    const csvChartData = [
+      {
+        title: 'Number Served Per Project',
+        data: chartData
+      }
+    ];
 
     return (
       <section className='inpage funding'>
@@ -74,9 +84,9 @@ var Ministry = React.createClass({
                 <li><CSVBtn
                     title={ministryDisplayName}
                     relatedProjects={ministryProjects}
-                    ministrySummary={csvMinistrySummary}
+                    summary={csvSummary}
                     ministryActiveProjects={activeProjects}
-                    servedByProject={chartData}
+                    chartData={csvChartData}
                     lang={lang} /></li>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>

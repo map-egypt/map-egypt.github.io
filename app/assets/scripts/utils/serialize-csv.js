@@ -2,6 +2,7 @@
 import { get } from 'object-path';
 import { isOntime } from '../components/project-card';
 import getLocation from './location';
+import config from '../config';
 
 function location (location, lang) {
   const l = location.map(l => {
@@ -48,11 +49,15 @@ export function project (p, lang) {
   ]]);
 }
 
-const donorHeaders = [['donor', 'value']];
-export function donors (donors) {
-  return donorHeaders.concat(donors.map(d => [
-    d.name,
-    d.value
+export function summary (data, headers) {
+  return [headers].concat([headers.map((item) => data[item])]);
+}
+
+const chartDataHeaders = [['name', 'value', 'link']];
+export function chartData (data) {
+  return chartDataHeaders.concat(data.map(d => [
+    d.value,
+    `${config.baseUrl}#/${d.link}`
   ]));
 }
 
@@ -64,31 +69,6 @@ export function disbursement (disbursement) {
     d.type,
     d.value
   ]));
-}
-
-const chartDataHeaders = [['name', 'value', 'link']];
-export function chartData (data) {
-  return chartDataHeaders.concat(data.map(d => [
-    d.name,
-    d.value,
-    'https://map-egypt.github.io/#' + d.link
-  ]));
-}
-
-const summaryHeaders = [['budget', 'projects_funded']];
-export function summary (c) {
-  return summaryHeaders.concat([[
-    c.budget,
-    c.projects_funded
-  ]]);
-}
-
-const ministryOwnerSummaryHeaders = [['active_projects', 'total_projects']];
-export function ministryOwnerSummary (c) {
-  return ministryOwnerSummaryHeaders.concat([[
-    c.active_projects,
-    c.total_projects
-  ]]);
 }
 
 const ministryActiveProjectsHeader = [['name', 'planned_start_date', 'actual_start_date', 'planned_end_date']];

@@ -54,10 +54,20 @@ var Owner = React.createClass({
     const singleProject = ownerProjects.length <= 1 ? ' funding--single' : '';
     const numActiveProjects = ownerProjects.filter((project) => project.actual_end_date).length;
 
-    const csvOwnerSummary = {
-      active_projects: numActiveProjects,
-      total_projects: ownerProjects.length
+    const csvSummary = {
+      title: 'Owner Summary',
+      data: {
+        active_projects: numActiveProjects,
+        total_projects: ownerProjects.length
+      }
     };
+
+    const csvChartData = [
+      {
+        title: 'Number Served Per Project',
+        data: chartData
+      }
+    ];
 
     return (
       <section className='inpage funding'>
@@ -69,8 +79,8 @@ var Owner = React.createClass({
                   <li><CSVBtn
                       title={ownerDisplayName}
                       relatedProjects={ownerProjects}
-                      ownerSummary={csvOwnerSummary}
-                      servedByProject={chartData}
+                      summary={csvSummary}
+                      chartData={csvChartData}
                       lang={lang} /></li>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>

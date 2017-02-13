@@ -138,6 +138,32 @@ var Project = React.createClass({
 
     const t = get(window.t, [this.props.meta.lang, 'project_pages'], {});
 
+    const csvChartData = [
+      {
+        title: 'Funding By Donor (US Dollars)',
+        data: donors
+      },
+      {
+        title: 'Funding By Category',
+        data: budgets
+      },
+      {
+        title: 'Percentage Complete By Category',
+        data: completion
+      },
+      {
+        title: 'Beneficiaries Reached By Category',
+        data: served
+      }
+    ];
+
+    if (authenticated && disbursement.length) {
+      csvChartData.push({
+        title: 'Disbursement vs. Reach',
+        data: disbursement
+      });
+    }
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -149,11 +175,7 @@ var Project = React.createClass({
                       title={data.name}
                       relatedProjects={relatedProjects}
                       project={data}
-                      donors={donors}
-                      disbursement={disbursement}
-                      budgets={budgets}
-                      completion={completion}
-                      beneficiaries={served}
+                      chartData={csvChartData}
                       lang={this.props.meta.lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>

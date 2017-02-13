@@ -111,10 +111,32 @@ var Category = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
-    const csvCategorySummary = {
-      budget: totalBudget,
-      projects_funded: categoryProjects.length
+    const csvSummary = {
+      title: 'Category Summary',
+      data: {
+        budget: totalBudget,
+        projects_funded: categoryProjects.length
+      }
     };
+
+    const csvChartData = [
+      {
+        title: 'Comparison of Number of Projects per Category',
+        data: numProjectsChartData
+      },
+      {
+        title: 'Comparison of Project Funding per Category (US dollars)',
+        data: budgetPerCategoryChartData
+      },
+      {
+        title: 'Category Funding for Projects (US dollars)',
+        data: chartData
+      },
+      {
+        title: 'Category Percentage Complete By Project',
+        data: completion
+      }
+    ];
 
     const singleProject = categoryProjects.length <= 1 ? ' category--single' : '';
     const t = get(window.t, [this.props.meta.lang, 'category_pages'], {});
@@ -128,11 +150,8 @@ var Category = React.createClass({
                 <li><CSVBtn
                     title={categoryDisplayName}
                     relatedProjects={categoryProjects}
-                    categorySummary={csvCategorySummary}
-                    categoryFunds={chartData}
-                    categoryCompletion={completion}
-                    categoryProjectFundsCompare={budgetPerCategoryChartData}
-                    categoryProjectCountCompare={numProjectsChartData}
+                    summary={csvSummary}
+                    chartData={csvChartData}
                     lang={lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
