@@ -9,10 +9,9 @@ import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../utils/format';
-import { byId as districtNames } from '../utils/districts';
-import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
 import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import getLocation from '../utils/location';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -20,6 +19,7 @@ import ProjectCard from '../components/project-card';
 import ProjectTimeline from '../components/project-timeline';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
+import CSVBtn from '../components/csv-btn';
 
 const barChartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
 
@@ -68,6 +68,9 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
+
+    // put id on project data object since it's missing from the project detail endpoint.
+    data.id = meta.id;
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
@@ -133,7 +136,6 @@ var Project = React.createClass({
       value: d.value
     }));
 
-    const locationLang = this.props.meta.lang === 'en' ? 'name' : 'nameAr';
     const t = get(window.t, [this.props.meta.lang, 'project_pages'], {});
 
     return (
@@ -143,6 +145,11 @@ var Project = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                  <li><CSVBtn
+                      title={data.name}
+                      relatedProjects={relatedProjects}
+                      project={data}
+                      lang={this.props.meta.lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
@@ -210,12 +217,11 @@ var Project = React.createClass({
                     <h1 className='overview-item__title heading-alt'>{t.location_title}</h1>
                     <div className='link-list'>
                        {get(data, 'location', []).map((loc, i) => {
-                         const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
-                           ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
-                         if (id) {
-                           const display = id[locationLang];
+                         const location = getLocation(loc, lang);
+                         if (location) {
+                           const display = location.display;
                            return (
-                             <span key={id.id}>
+                             <span key={location.id}>
                                <span>{display || '--'}{i === data.location.length - 1 ? '' : ', '}</span>
                              </span>
                            );
