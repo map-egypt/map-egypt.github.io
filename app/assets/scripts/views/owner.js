@@ -33,7 +33,7 @@ var Owner = React.createClass({
 
     const lang = this.props.meta.lang;
     const ownerProjects = projects.filter((project) => {
-      let name = lang === 'en' ? project.local_manager : project.local_manager_ar || project.local_manager;
+      let name = project.local_manager;
       if (name) {
         const sluggedName = slugify(name);
         if (sluggedName === ownerName) {
