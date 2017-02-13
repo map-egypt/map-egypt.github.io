@@ -258,7 +258,7 @@ var Project = React.createClass({
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>{t.local_manager_title}</h2>
                     <ul className='link-list'>
-                      <li><a href='' className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
+                      <li><a href={`#/${lang}/owner/${slugify(data.local_manager)}`} className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
                     </ul>
                   </div>
                 )}

@@ -32,12 +32,14 @@ var Owner = React.createClass({
 
     const lang = this.props.meta.lang;
     const ownerProjects = projects.filter((project) => {
-      const name = project.local_manager[lang];
-      const sluggedName = slugify(name);
-      if (sluggedName === ownerName) {
-        ownerDisplayName = name;
+      let name = lang === 'en' ? project.local_manager : project.local_manager_ar || project.local_manager;
+      if (name) {
+        const sluggedName = slugify(name);
+        if (sluggedName === ownerName) {
+          ownerDisplayName = name;
+        }
+        return sluggedName === ownerName;
       }
-      return sluggedName === ownerName;
     });
 
     const chartData = ownerProjects.map((project) => {
