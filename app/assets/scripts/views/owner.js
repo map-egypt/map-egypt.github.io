@@ -52,7 +52,7 @@ var Owner = React.createClass({
     const numActiveProjects = ownerProjects.filter((project) => project.actual_end_date).length;
 
     return (
-      <section className='inpage funding'>
+      <section className='inpage owner'>
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
@@ -96,7 +96,7 @@ var Owner = React.createClass({
             </section>
           </div>
 
-          <section className='inpage__section--bleed'>
+          <section className='inpage__section--bleed inpage__section--print'>
             <div className='inner'>
               <h1 className='section__title heading--small'>Projects Contributed To</h1>
               <ul className='projects-list'>

@@ -33,6 +33,7 @@ html {
 }
 
 body {
+  -webkit-print-color-adjust: exact;
   background: #FFF;
   color: $base-font-color;
   font-size: $base-font-size;

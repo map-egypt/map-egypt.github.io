@@ -55,7 +55,7 @@ var Ministry = React.createClass({
     const numActiveProjects = ministryProjects.filter((project) => project.actual_end_date).length;
 
     return (
-      <section className='inpage funding'>
+      <section className='inpage owner'>
         <header className='inpage__header'>
           <div className='inner'>
             <div className='inpage__headline'>
@@ -108,7 +108,7 @@ var Ministry = React.createClass({
             </section>
           </div>
 
-          <section className='inpage__section--bleed'>
+          <section className='inpage__section--bleed inpage__section--print'>
             <div className='inner'>
               <h1 className='section__title heading--small'>Projects Overseen</h1>
               <ul className='projects-list'>

@@ -7,44 +7,52 @@
     display: none;
   }
 
-  .map__group, .inpage__col--map, section {
-    float: none !important;
-    /*page-break-after: always;*/
+  a.link--primary { 
+    background-image: none;
   }
 
-  .inner {
-    width: 100%;
-    height: 100%;
+  .map__group, .inpage__col--map, section {
+    float: none !important;
   }
 
   .inpage__section--overview {
-    width: 100%;
-    height: 100%;
     page-break-after: always;
   }
 
-  .inpage__section--overview .inpage__col--map {
-    width: 100%;
-    height: 100%;
-    margin-right: 0;
-    padding-right: 0;
-    .map__container {
-      min-height: 890px;
-    }
-    .legend__container {
-      background-color: none;
-    }
-  }
-
-  .inpage__col--content {
-    padding-left: 0;
-    float: none;
-    text-align: left;
+  .inpage__section--overview {
     display: block;
+    .inpage__col--map {
+      float: none !important;
+      margin-right: 0;
+      padding-right: 0;
+      flex: none;
+      height: 890px;
+      width: 100% !important;
+      position: relative;
+      overflow: hidden;
+      .map__group {
+        width: 100% !important;
+      }
+      .map__container {
+        position: static;
+        height: 890px;
+        width: 100% !important;
+      }
+      .legend__container {
+        background-color: none;
+      }
+    }
+    .inpage__col--content {
+      padding-left: 0;
+      float: none !important;
+      display: block;
+      width: 100% !important;
+      flex: none;
+    }
   }
 
-  .inpage__section--comparison {
-    display: visible;
+  .chart__inline--labels {
+    float: none !important;
   }
 
   .leaflet-control-layers {
@@ -71,6 +79,53 @@
     padding-bottom: 0;
     page-break-after: always;
     margin-top: 12em;
+    .inpage__title {
+      width: 100%;
+    }
+  }
+
+  .funding {
+    .inpage__header {
+      page-break-after: avoid;
+      margin-top: 0;
+    }
+    .inpage__section--overview {
+      page-break-after: avoid;
+      min-height: 0;
+      .inpage__col--map {
+        page-break-after: always;
+        height: 500px;
+        .map__container {
+          height: 500px;
+        }
+      }
+    }
+  }
+
+  .category {
+    .inpage__header {
+      page-break-after: avoid;
+      margin-top: 0;
+    }
+    .map__group {
+      page-break-after: always;
+    }
+    .inpage__section--compare {
+      page-break-after: always;
+    }
+  }
+
+  .owner {
+    .inpage__section--overview {
+      page-break-after: avoid;
+      .inpage__col--map {
+        page-break-after: avoid;
+        height: 500px;
+        .map__container {
+          height: 500px;
+        }
+      }
+    }
   }
 
   .inpage__table td:last-child {
@@ -83,7 +138,7 @@
   }
 
   .inpage__section {
-    box-shadow: 0 0 0 0px #E0E0E0;
+    box-shadow: none;
     margin-bottom: 1rem;
   }
 
@@ -95,14 +150,82 @@
     display: none;
   }
 
+  .inpage__section--print {
+    display: block;
+    padding: 0;
+  }
+
   .projects-list {
     float: none !important;
-    page-break-before: always;
   }
 
   .projects-list__card {
     width: 85% !important;
+    float: none !important;
     margin-left: none !important;
-    float: left !important;
+  }
+
+  .inpage {
+    &__table {
+      display: block; 
+    }
+
+    tbody {
+      display: block;
+    }
+
+    thead {
+      display: block;
+      tr {
+        display: block; 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+    }
+
+    th {
+      display: block; 
+    }
+
+    td {
+      display: block; 
+      border: none;
+      &:last-child {
+        margin-bottom: $global-spacing;
+      };
+    }
+
+    .activity-name {
+      position: relative !important;
+      top: 0;
+    }
+
+    td:before { 
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+    }
+  }
+  td:nth-of-type(1):before { 
+    content: "Status"; 
+  }
+  td:nth-of-type(2):before { 
+    content: "Name and Description"; 
+  }
+  td:nth-of-type(3):before { 
+    content: "KPI"; 
+  }
+  td:nth-of-type(4):before { 
+    content: "Target"; 
+  }
+  td:nth-of-type(5):before { 
+    content: "Progress"; 
+  }
+  td:nth-of-type(6):before { 
+    content: "Date"; 
   }
 }

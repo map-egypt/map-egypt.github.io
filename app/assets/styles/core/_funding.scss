@@ -9,6 +9,7 @@
   .funding--single {
     .inpage__col--map {
       @include col(8/12);
+      margin-right: 0;
       @include media(small-down){
         @include col(12/12);
       }
