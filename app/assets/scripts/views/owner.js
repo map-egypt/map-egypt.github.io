@@ -9,6 +9,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally, shortText } from '../utils/format';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 
 var Owner = React.createClass({
@@ -43,6 +44,9 @@ var Owner = React.createClass({
       }
     });
 
+    const markers = getProjectCentroids(ownerProjects, this.props.api.geography);
+    const mapLocation = getFeatureCollection(markers);
+
     const chartData = ownerProjects.map((project) => {
       return {
         name: project.name,
@@ -54,10 +58,20 @@ var Owner = React.createClass({
     const singleProject = ownerProjects.length <= 1 ? ' funding--single' : '';
     const numActiveProjects = ownerProjects.filter((project) => project.actual_end_date).length;
 
-    const csvOwnerSummary = {
-      active_projects: numActiveProjects,
-      total_projects: ownerProjects.length
+    const csvSummary = {
+      title: 'Owner Summary',
+      data: {
+        active_projects: numActiveProjects,
+        total_projects: ownerProjects.length
+      }
     };
+
+    const csvChartData = [
+      {
+        title: 'Number Served Per Project',
+        data: chartData
+      }
+    ];
 
     return (
       <section className='inpage funding'>
@@ -69,8 +83,8 @@ var Owner = React.createClass({
                   <li><CSVBtn
                       title={ownerDisplayName}
                       relatedProjects={ownerProjects}
-                      ownerSummary={csvOwnerSummary}
-                      servedByProject={chartData}
+                      summary={csvSummary}
+                      chartData={csvChartData}
                       lang={lang} /></li>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
@@ -86,7 +100,7 @@ var Owner = React.createClass({
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>

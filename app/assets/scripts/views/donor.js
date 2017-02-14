@@ -65,10 +65,20 @@ var Donor = React.createClass({
 
     const { lang } = this.props.meta;
 
-    const csvDonorSummary = {
-      budget: totalBudget,
-      projects_funded: donorProjects.length
+    const csvSummary = {
+      title: 'Donor Summary',
+      data: {
+        budget: totalBudget,
+        projects_funded: donorProjects.length
+      }
     };
+
+    const csvChartData = [
+      {
+        title: 'Donor Project Funding',
+        data: chartData
+      }
+    ];
 
     const singleProject = donorProjects.length <= 1 ? ' funding--single' : '';
     const t = get(window.t, [this.props.meta.lang, 'donor_pages'], {});
@@ -82,8 +92,8 @@ var Donor = React.createClass({
                 <li><CSVBtn
                     title={donorDisplayName}
                     relatedProjects={donorProjects}
-                    donorSummary={csvDonorSummary}
-                    donorProjectFunding={chartData}
+                    summary={csvSummary}
+                    chartData={csvChartData}
                     lang={lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
@@ -99,7 +109,7 @@ var Donor = React.createClass({
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map markers={markers} location={mapLocation} />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
