@@ -170,7 +170,7 @@ var Category = React.createClass({
         <div className='inpage__body'>
 
           <div className='inner'>
-            <Map markers={markers} location={mapLocation} />
+            <Map markers={markers} location={mapLocation} lang={lang} />
             <section className='inpage__section'>
               <h1 className='section__title heading--small'>{t.comparison_title}</h1>
               <div className='chart-content chart__inline--labels'>

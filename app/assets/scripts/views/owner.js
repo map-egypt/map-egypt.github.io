@@ -9,6 +9,7 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally, shortText } from '../utils/format';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 
 var Owner = React.createClass({
@@ -42,6 +43,9 @@ var Owner = React.createClass({
         return sluggedName === ownerName;
       }
     });
+
+    const markers = getProjectCentroids(ownerProjects, this.props.api.geography);
+    const mapLocation = getFeatureCollection(markers);
 
     const chartData = ownerProjects.map((project) => {
       return {
@@ -96,7 +100,7 @@ var Owner = React.createClass({
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>

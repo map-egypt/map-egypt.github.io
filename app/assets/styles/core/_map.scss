@@ -34,7 +34,7 @@
 
 .marker__description {
   font-size: 0.875rem !important;
-	font-family: $base-font-family;
+  font-family: $base-font-family;
   color: $base-color;
 }
 
@@ -193,14 +193,15 @@
 }
 
 .legend__item {
+  float: left;
   font-size: 0.875rem;
-  line-height: 1rem;
-  margin: 0 1rem 0 0;
+  margin: 0.5rem 1rem 0 0;
   color: $base-color;
 }
 
 .legend__image {
   height: 0.875rem;
+  margin-right: 0.35rem;
 }
 
 .legend__image--marker img {
@@ -210,7 +211,7 @@
 
 .legend__image--cluster {
   position: relative;
-  margin-right: 0.25em;
+  margin-right: 0.6em;
   display: inline-block;
   width: 1em;
 }

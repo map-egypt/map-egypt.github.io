@@ -217,7 +217,7 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--overview'>
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map markers={markers} location={mapLocation} />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
