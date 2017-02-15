@@ -55,6 +55,13 @@
           right: 0;
         };
       }
+      &--type {
+        box-shadow: -1px 0 0 #2B2342;
+        margin-right: 0rem;
+        margin-left: 1rem;
+        padding-left: $global-spacing;
+        padding-right: 0;
+      }
     }
     &-meta__label {
       float: right;
