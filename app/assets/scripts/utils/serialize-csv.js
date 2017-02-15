@@ -49,13 +49,16 @@ export function project (p, lang) {
   ]]);
 }
 
-export function summary (data, headers) {
-  return [headers].concat([headers.map((item) => data[item])]);
+export function summary (data) {
+  const headers = Object.keys(data);
+  const result = [headers].concat([headers.map(header => data[header])]);
+  return result;
 }
 
 const chartDataHeaders = [['name', 'value', 'link']];
 export function chartData (data) {
   return chartDataHeaders.concat(data.map(d => [
+    d.name,
     d.value,
     `${config.baseUrl}#/${d.link}`
   ]));
