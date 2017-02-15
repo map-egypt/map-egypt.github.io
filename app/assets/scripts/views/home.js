@@ -117,8 +117,6 @@ var Home = React.createClass({
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                     </ul>
                   </li>
-                </ul>
-                <ul className='category-stats'>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>${totalFunding}<small>in funding</small></h3>
                     <ul className='link-list'>
@@ -127,8 +125,6 @@ var Home = React.createClass({
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                     </ul>
                   </li>
-                </ul>
-                <ul className='category-stats'>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{totalDonors}<small>total donors</small></h3>
                     <ul className='link-list'>
@@ -137,12 +133,12 @@ var Home = React.createClass({
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                     </ul>
                   </li>
-                </ul>
-              </div>
-              <div className='collaboration__stats'>
-                <h3>{`${collaborationCount} collaborations, by:`}</h3>
-                <ul>
-                  {collaboratorNames.map((name, i) => <li key={i}>{name}</li>)}
+                  <li className='category-stats__item'>
+                    <h3 className='inpage-stats heading--deco-small'>{collaborationCount}<small>donor collaborations</small></h3>
+                    <ul className='inpage-stats__collaborators'>
+                      {collaboratorNames.map((name, i) => <li key={i}>{name},</li>)}
+                    </ul>
+                  </li>
                 </ul>
               </div>
               <div className='overview-home-charts'>
