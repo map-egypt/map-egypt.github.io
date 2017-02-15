@@ -102,6 +102,7 @@
     &__body--alt p {
       float: right;
       margin-right: 0;
+      width: 100%;
     }
     &__header-data{
       .inpage-stats li {
@@ -388,7 +389,7 @@
   .react-autosuggest__input {
     font-size: 1rem;
   }
-  
+
   .button--tag {
     &:after {
       @extend %collecticon-xmark;

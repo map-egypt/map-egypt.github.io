@@ -12,6 +12,7 @@ import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../ut
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
+import { window } from 'global';
 
 import Map from '../components/map';
 import Share from '../components/share';
