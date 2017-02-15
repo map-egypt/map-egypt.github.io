@@ -43,7 +43,7 @@ projects_list_view:
   sort_option1: Alphabetical
 
 project_pages:
-  print_pdf: Print to PDF
+  print: Print
   status_label: "Status:"
   status_ontime: On Time
   status_delayed: Delayed
@@ -83,7 +83,7 @@ project_pages:
   related_sds_projects_title: Related Projects By SDS Goal
 
 category_pages:
-  print_pdf: Print to PDF
+  print: Print
   stat_one: Total Funds (US dollars)
   cat_stats_funded_1: Project
   cat_stats_funded_2: Projects
@@ -98,7 +98,7 @@ category_pages:
   category_complete_chart_title: Percentage Complete
 
 donor_pages:
-  print_pdf: Print to PDF
+  print: Print
   donor_stats_funds: Total Funds (US dollars)
   donor_stats_funded_1: Project
   donor_stats_funded_2: Projects

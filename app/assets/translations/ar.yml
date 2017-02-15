@@ -44,7 +44,7 @@ projects_list_view:
   sort_option1: 'أبجدي'
 
 project_pages:
-  print_pdf: 'طباعة pdf'
+  print: 'طباعة'
   status_label: Status
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
@@ -84,7 +84,7 @@ project_pages:
   related_sds_projects_title: ' مشروعات ذات صلة - حسب أهداف استراتيجية التنمية المُستدامة '
 
 category_pages:
-  print_pdf: 'طباعة pdf'
+  print: 'طباعة'
   stat_one: 'جُملة التمويل - بالدولار الأمريكي'
   cat_stats_funded_1: 'المشروع'
   cat_stats_funded_2: 'المشروعات'
@@ -99,7 +99,7 @@ category_pages:
   category_complete_chart_title: 'نسبة الانتهاء'
 
 donor_pages:
-  print_pdf: 'طباعة pdf'
+  print: 'طباعة'
   donor_stats_funds: 'جُملة التمويل - بالدولار الأمريكي'
   donor_stats_funded_1: 'المشروع'
   donor_stats_funded_2: 'المشروعات'

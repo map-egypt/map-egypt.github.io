@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { get } from 'object-path';
 import CSVBtn from '../components/csv-btn';
 import Share from '../components/share';
+import Print from '../components/print-btn';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
@@ -88,7 +89,7 @@ var Ministry = React.createClass({
                     ministryActiveProjects={activeProjects}
                     chartData={csvChartData}
                     lang={lang} /></li>
-                  <li><button className='button button--medium button--primary button--download'>Download</button></li>
+                  <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
