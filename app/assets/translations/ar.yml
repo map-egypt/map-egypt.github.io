@@ -45,6 +45,7 @@ projects_list_view:
 
 project_pages:
   print_pdf: 'طباعة pdf'
+  status_label: Status
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
   last_update_title: 'التحديث الأخير'
@@ -54,6 +55,8 @@ project_pages:
   donors_title: 'الجهات المانحة'
 
   funding_title: 'التمويل'
+  funding_loans_title: Loans
+  funding_grants_title: Grants
   objective_title: 'الهدف'
   location_title: 'النطاق الجغرافي'
   project_link: 'الرابط الالكتروني للمشروع'
@@ -111,6 +114,7 @@ map_labels:
 general_buttons:
   share: 'شارك'
   share_text: 'انسخ الرابط الالكتروني للمشاركة'
+  csv: Download CSV
 
 footer:
   subscription_title: 'إشترك الآن'

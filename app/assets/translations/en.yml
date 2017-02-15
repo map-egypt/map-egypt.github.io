@@ -44,6 +44,7 @@ projects_list_view:
 
 project_pages:
   print_pdf: Print to PDF
+  status_label: "Status:"
   status_ontime: On Time
   status_delayed: Delayed
   last_update_title: Last Update
@@ -53,6 +54,8 @@ project_pages:
   donors_title: Donors
 
   funding_title: Funding
+  funding_loans_title: Loans
+  funding_grants_title: Grants
   objective_title: Objective
   location_title: Location
   project_link: Project Link
@@ -61,7 +64,7 @@ project_pages:
   local_manager_title: Local Manager
   kmi_components: Project Components
   sdg_goals_title: SDG Goals
-  sds_pillars_title: SDG Pillars
+  sds_pillars_title: SDS Pillars
 
   monitoring_indicators_title: Monitoring Indicators
   funding_by_donor_title: Funding by Donor (US dollars)
@@ -110,6 +113,7 @@ map_labels:
 general_buttons:
   share: Share
   share_text: Copy URL to Share
+  csv: Download CSV
 
 footer:
   subscription_title: Want Updates?

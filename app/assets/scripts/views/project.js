@@ -9,10 +9,9 @@ import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../utils/format';
-import { byId as districtNames } from '../utils/districts';
-import { byId as governorateNames } from '../utils/governorates';
 import { hasValidToken } from '../utils/auth';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import getLocation from '../utils/location';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -20,6 +19,7 @@ import ProjectCard from '../components/project-card';
 import ProjectTimeline from '../components/project-timeline';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
+import CSVBtn from '../components/csv-btn';
 
 const barChartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
 
@@ -68,11 +68,19 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
+
+    // put id on project data object since it's missing from the project detail endpoint.
+    data.id = meta.id;
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
+
+    const disbursedFunds = {loan: 0, grant: 0};
+    get(data, 'disbursed', []).forEach((fund) => {
+      disbursedFunds[fund.type.en.toLowerCase()] += fund.fund.amount;
+    });
 
     const allProjects = get(this.props.api, 'projects', []);
 
@@ -88,7 +96,7 @@ var Project = React.createClass({
     });
 
     // Create map markers for this project
-    const markers = getProjectCentroids([data], get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const markers = getProjectCentroids([data], this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     // All three project comparison charts need to have the same ordering in the Y axis,
@@ -128,8 +136,33 @@ var Project = React.createClass({
       value: d.value
     }));
 
-    const locationLang = this.props.meta.lang === 'en' ? 'name' : 'nameAr';
     const t = get(window.t, [this.props.meta.lang, 'project_pages'], {});
+
+    const csvChartData = [
+      {
+        title: 'Funding By Donor (US Dollars)',
+        data: donors
+      },
+      {
+        title: 'Funding By Category',
+        data: budgets
+      },
+      {
+        title: 'Percentage Complete By Category',
+        data: completion
+      },
+      {
+        title: 'Beneficiaries Reached By Category',
+        data: served
+      }
+    ];
+
+    if (authenticated && disbursement.length) {
+      csvChartData.push({
+        title: 'Disbursement vs. Reach',
+        data: disbursement
+      });
+    }
 
     return (
       <section className='inpage'>
@@ -138,12 +171,18 @@ var Project = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                  <li><CSVBtn
+                      title={data.name}
+                      relatedProjects={relatedProjects}
+                      project={data}
+                      chartData={csvChartData}
+                      lang={this.props.meta.lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
               </div>
               <dl className={'inpage-meta project--' + ontime}>
-                <dt className='inpage-meta__label visually-hidden'>Status</dt>
+                <dt className='inpage-meta__label'>{t.status_label} <span className='inpage-meta__label--light'>{data.status[lang]}</span></dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontimeLookup[ontime]}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
@@ -178,14 +217,23 @@ var Project = React.createClass({
             <section className='inpage__section inpage__section--overview'>
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map markers={markers} location={mapLocation} />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
                   <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
                   <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
-
+                {disbursedFunds.loan || disbursedFunds.grant
+                  ? <ul className='inpage-stats'>
+                      {disbursedFunds.loan
+                        ? <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
+                        : ''}
+                      {disbursedFunds.grant
+                        ? <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
+                        : ''}
+                    </ul>
+                  : ''}
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>
@@ -196,12 +244,11 @@ var Project = React.createClass({
                     <h1 className='overview-item__title heading-alt'>{t.location_title}</h1>
                     <div className='link-list'>
                        {get(data, 'location', []).map((loc, i) => {
-                         const id = loc.district.district && loc.district.district.toLowerCase() !== 'all'
-                           ? districtNames(loc.district.district) : governorateNames(loc.district.governorate);
-                         if (id) {
-                           const display = id[locationLang];
+                         const location = getLocation(loc, lang);
+                         if (location) {
+                           const display = location.display;
                            return (
-                             <span key={id.id}>
+                             <span key={location.id}>
                                <span>{display || '--'}{i === data.location.length - 1 ? '' : ', '}</span>
                              </span>
                            );
@@ -233,7 +280,7 @@ var Project = React.createClass({
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>{t.local_manager_title}</h2>
                     <ul className='link-list'>
-                      <li><a href='' className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
+                      <li><a href={`#/${lang}/owner/${slugify(data.local_manager)}`} className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
                     </ul>
                   </div>
                 )}

@@ -3,11 +3,13 @@ import React from 'react';
 import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import CSVBtn from '../components/csv-btn';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally, shortText } from '../utils/format';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import slugify from '../utils/slugify';
 
 var Owner = React.createClass({
@@ -32,13 +34,18 @@ var Owner = React.createClass({
 
     const lang = this.props.meta.lang;
     const ownerProjects = projects.filter((project) => {
-      const name = project.local_manager[lang];
-      const sluggedName = slugify(name);
-      if (sluggedName === ownerName) {
-        ownerDisplayName = name;
+      let name = project.local_manager;
+      if (name) {
+        const sluggedName = slugify(name);
+        if (sluggedName === ownerName) {
+          ownerDisplayName = name;
+        }
+        return sluggedName === ownerName;
       }
-      return sluggedName === ownerName;
     });
+
+    const markers = getProjectCentroids(ownerProjects, this.props.api.geography);
+    const mapLocation = getFeatureCollection(markers);
 
     const chartData = ownerProjects.map((project) => {
       return {
@@ -51,6 +58,21 @@ var Owner = React.createClass({
     const singleProject = ownerProjects.length <= 1 ? ' funding--single' : '';
     const numActiveProjects = ownerProjects.filter((project) => project.actual_end_date).length;
 
+    const csvSummary = {
+      title: 'Owner Summary',
+      data: {
+        active_projects: numActiveProjects,
+        total_projects: ownerProjects.length
+      }
+    };
+
+    const csvChartData = [
+      {
+        title: 'Number Served Per Project',
+        data: chartData
+      }
+    ];
+
     return (
       <section className='inpage owner'>
         <header className='inpage__header'>
@@ -58,6 +80,12 @@ var Owner = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                  <li><CSVBtn
+                      title={ownerDisplayName}
+                      relatedProjects={ownerProjects}
+                      summary={csvSummary}
+                      chartData={csvChartData}
+                      lang={lang} /></li>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
@@ -72,7 +100,7 @@ var Owner = React.createClass({
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>

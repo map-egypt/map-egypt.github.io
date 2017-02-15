@@ -8,9 +8,10 @@ import Map from '../components/map';
 import ProjectCard from '../components/project-card';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
+import CSVBtn from '../components/csv-btn';
 import { tally, shortTally, pct, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import { window } from 'global';
 
 const chartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
@@ -86,7 +87,7 @@ var Category = React.createClass({
       });
     });
 
-    const markers = getProjectCentroids(categoryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+    const markers = getProjectCentroids(categoryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const categoryBudgets = categoryProjects
@@ -110,6 +111,33 @@ var Category = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
+    const csvSummary = {
+      title: 'Category Summary',
+      data: {
+        budget: totalBudget,
+        projects_funded: categoryProjects.length
+      }
+    };
+
+    const csvChartData = [
+      {
+        title: 'Comparison of Number of Projects per Category',
+        data: numProjectsChartData
+      },
+      {
+        title: 'Comparison of Project Funding per Category (US dollars)',
+        data: budgetPerCategoryChartData
+      },
+      {
+        title: 'Category Funding for Projects (US dollars)',
+        data: chartData
+      },
+      {
+        title: 'Category Percentage Complete By Project',
+        data: completion
+      }
+    ];
+
     const singleProject = categoryProjects.length <= 1 ? ' category--single' : '';
     const t = get(window.t, [this.props.meta.lang, 'category_pages'], {});
     return (
@@ -119,6 +147,12 @@ var Category = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                <li><CSVBtn
+                    title={categoryDisplayName}
+                    relatedProjects={categoryProjects}
+                    summary={csvSummary}
+                    chartData={csvChartData}
+                    lang={lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
@@ -136,8 +170,8 @@ var Category = React.createClass({
         <div className='inpage__body'>
 
           <div className='inner'>
-            <Map markers={markers} location={mapLocation} />
-            <section className='inpage__section inpage__section--compare'>
+            <Map markers={markers} location={mapLocation} lang={lang} />
+            <section className='inpage__section'>
               <h1 className='section__title heading--small'>{t.comparison_title}</h1>
               <div className='chart-content chart__inline--labels'>
                 <h3>{t.comparison_chart_title1}</h3>
@@ -166,6 +200,7 @@ var Category = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>{t.category_funding_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
+                 lang={this.props.meta.lang}
                  data={chartData}
                  margin={chartMargin}
                  xFormat={shortTally}
@@ -175,6 +210,7 @@ var Category = React.createClass({
                <div className='chart-content chart__inline--labels'>
                 {!singleProject && (<h3>{t.category_complete_chart_title}</h3>)}
                 {!singleProject && (<HorizontalBarChart
+                  lang={this.props.meta.lang}
                   data={completion}
                   margin={chartMargin}
                   yTitle=''
