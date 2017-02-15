@@ -29,10 +29,8 @@ var CSVBtn = React.createClass({
     }
 
     if (this.props.summary) {
-      let summary = this.props.summary;
-      csv += `\n\n${summary.title}\n\n`;
-      summary = serialize.summary(summary.data, Object.keys(summary.data));
-      csv = csv.concat(serialize.serialize(summary));
+      csv += `\n\n${this.props.summary.title}\n\n`;
+      csv = csv.concat(serialize.serialize(serialize.summary(this.props.summary.data)));
     }
 
     if (this.props.ministryActiveProjects) {
@@ -41,10 +39,12 @@ var CSVBtn = React.createClass({
       csv = csv.concat(serialize.serialize(ministryActiveProjects));
     }
 
-    this.props.chartData.forEach(d => {
-      csv += '\n\n' + d.title + '\n\n';
-      csv += serialize.serialize(serialize.chartData(d.data));
-    });
+    if (this.props.chartData && this.props.chartData.length) {
+      this.props.chartData.forEach(d => {
+        csv += '\n\n' + d.title + '\n\n';
+        csv += serialize.serialize(serialize.chartData(d.data));
+      });
+    }
 
     if (this.props.relatedProjects && this.props.relatedProjects.length) {
       let projects = serialize.relatedProjects(get(this.props, 'relatedProjects', []), this.props.lang);
