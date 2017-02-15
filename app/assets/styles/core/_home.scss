@@ -68,5 +68,16 @@
   li {
     display: inline-block;
     margin-right: .5em;
+    &::after {
+      content: ",";
+    }
+    &:last-child {
+      &::after {
+        content: "";
+      }
+      &::before {
+        content: 'and ';
+      }
+    }
   }
 }
