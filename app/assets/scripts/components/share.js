@@ -1,6 +1,7 @@
 'use strict';
 import React from 'react';
 import url from 'url';
+import hideOnBlur from 'react-click-outside';
 import { get } from 'object-path';
 import { baseUrl } from '../config';
 import Clipboard from 'clipboard';
@@ -59,4 +60,4 @@ const ShareButton = React.createClass({
   }
 });
 
-module.exports = ShareButton;
+module.exports = hideOnBlur(ShareButton);
