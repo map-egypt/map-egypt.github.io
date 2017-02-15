@@ -34,7 +34,7 @@
 
 .marker__description {
   font-size: 0.875rem !important;
-	font-family: $base-font-family;
+  font-family: $base-font-family;
   color: $base-color;
 }
 
@@ -182,61 +182,42 @@
   .legend__container {
     position: absolute;
     background-color: rgba(255,255,255, 0.6);
+    margin-top: 0.75rem;
     padding: 0.5rem 1rem;
     border-radius: 4px;
-    margin-top: 0.75rem;
   }
 }
 
-.legend__markers {
-  display: inline-block;
-}
-
 .legend__item {
-  font-size: 0.875rem;
-  line-height: 1rem;
-  margin: 0 1rem 0 0;
+  float: left;
+  font-size: 0.8rem;
+  margin: 0.5rem 1rem 0.5rem 0;
   color: $base-color;
 }
 
-.legend__image {
-  height: 0.875rem;
+.legend__label--cluster {
+  &:before {
+    display: inline-block;
+    height: 1.25rem;
+    width: 1.25rem;
+    margin-right: 0.6em;
+    padding-left:0.37rem;
+    line-height: 1.25rem;
+    background-color: rgba($base-color, 0.6);
+    color: #FFFFFF;
+    border-radius: 50%;
+    content: "8";
+  }
 }
 
-.legend__image--marker img {
-  width: 18px;
-  margin-bottom: -24px;
-}
-
-.legend__image--cluster {
-  position: relative;
-  margin-right: 0.25em;
-  display: inline-block;
-  width: 1em;
-}
-
-.legend__image--cluster--bg {
-  border-radius: 50%;
-  position: absolute;
-  height: 1.5em;
-  left: -0.25em;
-  top: -0.25em;
-  background-color: rgba($base-color, 0.6);
-  width: 1.5em;
-}
-
-.legend__image--cluster--text {
-  font-size: 0.8em;
-  left: 0.4em;
-  position: absolute;
-  color: #fff;
-}
-
-.legend__item--overlay--bg {
-  display: inline-block;
-  width: 1em;
-  height: 1em;
-  border-radius: 0.1em;
-  margin-right: 0.2em;
-  margin-bottom: -2px;
+.legend__label--marker {
+  &:before {
+    display: inline-block;
+    width: 18px;
+    height: 25px;
+    margin: 0 0.65rem -9px 0;
+    background-size: cover;
+    background-image: url("/assets/graphics/content/map-pin.png");
+    content: "";
+  }
 }

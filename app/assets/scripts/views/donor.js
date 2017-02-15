@@ -3,6 +3,7 @@ import React from 'react';
 import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import CSVBtn from '../components/csv-btn';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
@@ -10,7 +11,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
 import { shortTally, tally, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
 var Donor = React.createClass({
   displayName: 'Donor',
@@ -41,7 +42,8 @@ var Donor = React.createClass({
         return sluggedName === donorName;
       });
     });
-    const markers = getProjectCentroids(donorProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    const markers = getProjectCentroids(donorProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const projectBudgets = donorProjects
@@ -61,6 +63,23 @@ var Donor = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
+    const { lang } = this.props.meta;
+
+    const csvSummary = {
+      title: 'Donor Summary',
+      data: {
+        budget: totalBudget,
+        projects_funded: donorProjects.length
+      }
+    };
+
+    const csvChartData = [
+      {
+        title: 'Donor Project Funding',
+        data: chartData
+      }
+    ];
+
     const singleProject = donorProjects.length <= 1 ? ' funding--single' : '';
     const t = get(window.t, [this.props.meta.lang, 'donor_pages'], {});
     return (
@@ -70,6 +89,12 @@ var Donor = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                <li><CSVBtn
+                    title={donorDisplayName}
+                    relatedProjects={donorProjects}
+                    summary={csvSummary}
+                    chartData={csvChartData}
+                    lang={lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
@@ -84,7 +109,7 @@ var Donor = React.createClass({
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map markers={markers} location={mapLocation} />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>

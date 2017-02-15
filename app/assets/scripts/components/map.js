@@ -5,7 +5,8 @@ import bbox from '@turf/bbox';
 import { scaleQuantile, scaleOrdinal } from 'd3-scale';
 import { extend, uniq } from 'lodash';
 import { get } from 'object-path';
-import { byEgy, byName } from '../utils/governorates';
+import { byId as byIdDist, byName as byNameDist } from '../utils/districts';
+import { byEgy as byEgyGove, byName as byNameGove } from '../utils/governorates';
 import { isNumerical } from '../utils/is-numerical-overlay';
 import { roundedNumber } from '../utils/format';
 const L = window.L;
@@ -95,10 +96,10 @@ const Map = React.createClass({
       const leafletMarker = L.marker(marker.centroid, {
         icon: L.mapbox.marker.icon({'marker-symbol': 'circle', 'marker-color': '2B2342'})
       });
-
-      let status = marker.ontime ? 'On Time' : 'Delayed';
-      let statusClass = marker.ontime ? 'project--ontime' : 'project--delayed';
-
+      const status = marker.ontime ? 'On Time' : 'Delayed';
+      const statusClass = marker.ontime ? 'project--ontime' : 'project--delayed';
+      const accessor = marker.isDistrict ? byNameDist : byNameGove;
+      const location = accessor(marker.region)[locationLang];
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
           `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
@@ -106,7 +107,7 @@ const Map = React.createClass({
                 `<dt class='card-meta__label'>Status</dt>` +
                 `<dd class='card-meta__value card-meta__value--status'>${status}</dd>` +
                 `<dt class='card-meta__label'>Location</dt>` +
-                `<dd class='card-meta__value card-meta__value--location'>${byName(marker.region)[locationLang]}</dd>` +
+                `<dd class='card-meta__value card-meta__value--location'>${location}</dd>` +
               `</dl>` +
         `</div>`
       );
@@ -185,8 +186,9 @@ const Map = React.createClass({
     }
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
-      const id = feature.properties.admin_id;
-      const name = isDistrict ? districtNameMap[id] : get(byEgy(id), 'name');
+      const id = isDistrict ? feature.properties.id : feature.properties.admin_id;
+      const name = isDistrict ? get(byIdDist(id), 'name') : get(byEgyGove(id), 'name');
+
       return `
       <div class='marker__internal'>
         <h5 class='marker__title'>${name}</h5>
@@ -261,13 +263,14 @@ const Map = React.createClass({
   renderMarkerLegend: function () {
     const t = get(window.t, [this.props.lang, 'map_labels'], {});
     return (
-      <span className='legend__markers'>
-        <span className='legend__item legend__marker--cluster'><span className='legend__image legend__image--cluster'>
-          <span className='legend__image--cluster--bg'></span>
-          <span className='legend__image--cluster--text'>8</span>
-        </span>{t.map_group_label}</span>
-        <span className='legend__item legend__marker--project'><span className='legend__image legend__image--marker'><img src='assets/graphics/content/map-pin.png' alt='A marker indicates a single project'/></span> {t.map_project_label}</span>
-      </span>
+      <div className='legend__markers'>
+        <div className='legend__item'>
+          <span className='legend__label--cluster'>{t.map_group_label}</span>
+        </div>
+        <div className='legend__item'>
+          <span className='legend__label--marker'>{t.map_project_label}</span>
+        </div>
+      </div>
     );
   },
 

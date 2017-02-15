@@ -3,6 +3,7 @@ import React from 'react';
 import path from 'path';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
+import CSVBtn from '../components/csv-btn';
 import Share from '../components/share';
 import Map from '../components/map';
 import ProjectCard from '../components/project-card';
@@ -10,7 +11,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import ProjectTimeline from '../components/project-timeline';
 import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
-import { GOVERNORATE, getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 
 var Ministry = React.createClass({
   displayName: 'Ministry',
@@ -40,7 +41,8 @@ var Ministry = React.createClass({
       }
       return sluggedName === ministryName;
     });
-    const markers = getProjectCentroids(ministryProjects, get(this.props.api, 'geography.' + GOVERNORATE + '.features'));
+
+    const markers = getProjectCentroids(ministryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const chartData = ministryProjects.map((project) => {
@@ -51,8 +53,26 @@ var Ministry = React.createClass({
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
+    const { lang } = this.props.meta;
+
     const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
-    const numActiveProjects = ministryProjects.filter((project) => project.actual_end_date).length;
+    const activeProjects = ministryProjects.filter((project) => project.actual_end_date);
+    const numActiveProjects = activeProjects.length;
+
+    const csvSummary = {
+      title: 'Ministry Summary',
+      data: {
+        active_projects: numActiveProjects,
+        total_projects: ministryProjects.length
+      }
+    };
+
+    const csvChartData = [
+      {
+        title: 'Number Served Per Project',
+        data: chartData
+      }
+    ];
 
     return (
       <section className='inpage funding'>
@@ -61,6 +81,13 @@ var Ministry = React.createClass({
             <div className='inpage__headline'>
               <div className='inpage__headline-actions'>
                 <ul>
+                <li><CSVBtn
+                    title={ministryDisplayName}
+                    relatedProjects={ministryProjects}
+                    summary={csvSummary}
+                    ministryActiveProjects={activeProjects}
+                    chartData={csvChartData}
+                    lang={lang} /></li>
                   <li><button className='button button--medium button--primary button--download'>Download</button></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
                 </ul>
@@ -85,7 +112,7 @@ var Ministry = React.createClass({
 
               <h1 className='visually-hidden'>Project Overview</h1>
               <div className='inpage__col--map'>
-                <Map markers={markers} location={mapLocation} />
+                <Map markers={markers} location={mapLocation} lang={lang} />
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
