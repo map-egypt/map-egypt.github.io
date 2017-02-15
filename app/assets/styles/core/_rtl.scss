@@ -55,6 +55,13 @@
           right: 0;
         };
       }
+      &--type {
+        box-shadow: -1px 0 0 #2B2342;
+        margin-right: 0rem;
+        margin-left: 1rem;
+        padding-left: $global-spacing;
+        padding-right: 0;
+      }
     }
     &-meta__label {
       float: right;
@@ -102,6 +109,7 @@
     &__body--alt p {
       float: right;
       margin-right: 0;
+      width: 100%;
     }
     &__header-data{
       .inpage-stats li {
@@ -388,7 +396,7 @@
   .react-autosuggest__input {
     font-size: 1rem;
   }
-  
+
   .button--tag {
     &:after {
       @extend %collecticon-xmark;

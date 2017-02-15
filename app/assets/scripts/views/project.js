@@ -12,6 +12,7 @@ import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../ut
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
+import { window } from 'global';
 
 import Map from '../components/map';
 import Share from '../components/share';
@@ -182,7 +183,9 @@ var Project = React.createClass({
                 </ul>
               </div>
               <dl className={'inpage-meta project--' + ontime}>
-                <dt className='inpage-meta__label'>{t.status_label} <span className='inpage-meta__label--light'>{data.status[lang]}</span></dt>
+                <dt className='inpage-meta__label visually-hidden'>Type</dt>
+                <dd className='inpage-meta__value inpage-meta__value--type'>{data.status[lang]}</dd>
+                <dt className='inpage-meta__label visually-hidden'></dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontimeLookup[ontime]}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>

@@ -19,7 +19,7 @@ var Print = React.createClass({
   render: function () {
     const t = get(window.t, [this.props.lang, 'category_pages'], {});
     return (
-      <button className='button button--medium button--primary button--download' onClick={this.print}>{t.print_pdf}</button>
+      <button className='button button--medium button--primary' onClick={this.print}>{t.print}</button>
     );
   }
 });

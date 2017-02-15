@@ -12,6 +12,7 @@ import Print from '../components/print-btn';
 import { shortTally, tally, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { window } from 'global';
 
 var Donor = React.createClass({
   displayName: 'Donor',
