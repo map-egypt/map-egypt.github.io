@@ -1,8 +1,8 @@
 'use strict';
 import React from 'react';
+import { get } from 'object-path';
 import { connect } from 'react-redux';
-import en from '../about/en';
-import ar from '../about/ar';
+import { window } from 'global';
 
 var About = React.createClass({
   displayName: 'About',
@@ -12,20 +12,24 @@ var About = React.createClass({
   },
 
   render: function () {
-    const content = this.props.meta.lang === 'ar' ? ar : en;
+    const content = get(window, 't.about.' + this.props.meta.lang, {});
     return (
       <section className='inpage'>
         <header className='inpage__header--alt'>
           <div className='inner'>
             <div className='inpage__headline'>
-              <h1 className='inpage__title heading--deco heading--large'>About</h1>
+              <h1 className='inpage__title heading--deco heading--large'>{content.title}</h1>
             </div>
           </div>
         </header>
         <div className='inpage__body--alt'>
           <div className='inner'>
             <section>
-              {content}
+              {get(content, 'body', []).map((p, i) => {
+                let text = p.text ? p.text : p;
+                let className = p.class ? p.class : '';
+                return <p key={i} className={className}>{text}</p>;
+              })}
             </section>
           </div>
         </div>
