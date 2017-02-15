@@ -2,6 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
+import _ from 'lodash';
 import { shortText, tally, shorterTally } from '../utils/format';
 import { get } from 'object-path';
 import path from 'path';
@@ -57,7 +58,14 @@ var Home = React.createClass({
     const totalProjects = projects.length;
     let totalDonors = {};
     let totalFunding = 0;
+    const collaborations = [];
     projects.forEach((project) => {
+      let collaborators = project.budget.filter((b) => {
+        return b.donor_name !== 'MoALR / Government of Egypt contribution' && b.donor_name !== 'Government of Egypt';
+      });
+      if (collaborators.length > 1) {
+        collaborators.forEach((c) => collaborations.push(c.donor_name));
+      }
       project.budget.forEach((budget) => {
         totalDonors[budget.donor_name] = '';
         totalFunding += budget.fund.amount;
@@ -65,6 +73,8 @@ var Home = React.createClass({
     });
     totalFunding = shorterTally(totalFunding);
     totalDonors = Object.keys(totalDonors).length;
+    const collaborationCount = collaborations.length;
+    const collaboratorNames = _.uniq(collaborations).sort((a, b) => a.length < b.length);
 
     const pie = [{
       name: 'On Time',
@@ -107,8 +117,6 @@ var Home = React.createClass({
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                     </ul>
                   </li>
-                </ul>
-                <ul className='category-stats'>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>${totalFunding}<small>in funding</small></h3>
                     <ul className='link-list'>
@@ -117,8 +125,6 @@ var Home = React.createClass({
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                     </ul>
                   </li>
-                </ul>
-                <ul className='category-stats'>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{totalDonors}<small>total donors</small></h3>
                     <ul className='link-list'>
@@ -127,9 +133,14 @@ var Home = React.createClass({
                       <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
                     </ul>
                   </li>
+                  <li className='category-stats__item'>
+                    <h3 className='inpage-stats heading--deco-small'>{collaborationCount}<small>donor collaborations</small></h3>
+                    <ul className='inpage-stats__collaborators'>
+                      {collaboratorNames.map((name, i) => <li key={i}>{name}</li>)}
+                    </ul>
+                  </li>
                 </ul>
               </div>
-
               <div className='overview-home-charts'>
                 <div className='chart-content chart__inline--labels'>
                   <h3>{t.chart_title_one}</h3>
