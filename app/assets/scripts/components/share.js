@@ -28,6 +28,12 @@ const ShareButton = React.createClass({
     this.setState({ isOpen: false });
   },
 
+  handleClickOutside () {
+    setTimeout(() => {
+      this.close();
+    }, 100);
+  },
+
   componentDidMount: function () {
     this.clipboard = new Clipboard('#share-url-button');
   },
