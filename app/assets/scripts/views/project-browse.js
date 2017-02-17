@@ -165,8 +165,14 @@ var ProjectBrowse = React.createClass({
   },
 
   // indicator modals
-  toggleIndicatorDropdown: function () {
-    this.setState({indicatorToggle: !this.state.indicatorToggle});
+  openIndicatorDropdown: function () {
+    this.setState({indicatorToggle: true});
+  },
+
+  closeIndicatorDropdown: function (e) {
+    setTimeout(() => {
+      this.setState({indicatorToggle: false});
+    }, 200);
   },
 
   openIndicatorSelector: function (activeIndicatorType) {
@@ -567,8 +573,8 @@ var ProjectBrowse = React.createClass({
                 <ul className='button--list'>
                   <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>{t.filter_projects_btn}</button></li>
                   <li>
-                    <span className='dropdown__container'>
-                      <button type='button' onClick={this.toggleIndicatorDropdown}
+                    <span className='dropdown__container' onBlur={this.closeIndicatorDropdown}>
+                      <button type='button' onClick={this.openIndicatorDropdown}
                         className='button button--medium button--secondary drop__toggle--caret'>{t.indicator_overlays_btn}</button>
                       {this.state.indicatorToggle &&
                         <ul className='drop__menu drop--align-left button--secondary'>
