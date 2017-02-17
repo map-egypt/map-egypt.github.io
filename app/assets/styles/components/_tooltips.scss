@@ -1,0 +1,15 @@
+/* ==========================================================================
+   Tooltips
+   ========================================================================== */
+
+.__react_component_tooltip {
+  max-width: $row-min-width;
+  pointer-events: auto !important;
+  &:hover {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  span {
+    display: inline-block;
+  }
+}
