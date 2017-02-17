@@ -142,6 +142,10 @@ var ProjectBrowse = React.createClass({
     }
   },
 
+  componentDidUpdate: function () {
+    ReactTooltip.rebuild();
+  },
+
   componentWillUpdate: function (nextProps, nextState) {
     const activeIndicator = nextState.activeIndicator;
     if (activeIndicator && activeIndicator !== this.state.activeIndicator) {
@@ -403,7 +407,7 @@ var ProjectBrowse = React.createClass({
                   type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
             </ul>
         </div>
-        <ReactTooltip html={true} delayHide={1000} effect='solid'/>
+        <ReactTooltip html={true} delayHide={500} effect='solid'/>
       </section>
     );
   },
@@ -655,7 +659,6 @@ var ProjectBrowse = React.createClass({
               <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
               {activeIndicators.length ? this.renderActiveIndicators(activeIndicator, activeIndicators) : null}
             </div>)}
-
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
 
