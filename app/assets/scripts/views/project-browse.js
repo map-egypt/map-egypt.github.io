@@ -14,6 +14,7 @@ import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, DISTRICT, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
+import { indicatorTooltipContent } from '../utils/tooltips';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { window } from 'global';
 
@@ -380,8 +381,7 @@ var ProjectBrowse = React.createClass({
               {availableIndicators.length && availableIndicators.map((indicator) => {
                 const name = indicator.name;
                 const id = 'subtypes-' + slugify(name);
-                const tipContent = `${(indicator.description) ? `<span class="tooltip__description">Description: ${indicator.description}</span>` : ''}` +
-                  `${(indicator.sources) ? `<span class="tooltip__sources">Sources: ${indicator.sources.join(', ')}</span>` : ''}`;
+
                 return (
                   <label key={name}
                     className={'form__option form__option--custom-checkbox' + (selectedIndicators.indexOf(name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
@@ -392,7 +392,7 @@ var ProjectBrowse = React.createClass({
                       onChange={() => this.toggleSelectedIndicator(name)} />
                     <span className='form__option__text'>{name}</span>
                     <span className='form__option__ui'></span>
-                    <span className='form__option__info' data-tip={tipContent}>?</span>
+                    <span className='form__option__info' data-tip={indicatorTooltipContent(indicator)}>?</span>
                   </label>
                 );
               })}
@@ -423,6 +423,7 @@ var ProjectBrowse = React.createClass({
               className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
               <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator)}><span>toggle visibility</span></button>
               <span className='indicator-layer-name'>{indicator}</span>
+              <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator))}>?</span>
               <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
             </li>
           ))}
