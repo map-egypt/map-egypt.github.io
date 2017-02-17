@@ -29,9 +29,7 @@ const ShareButton = React.createClass({
   },
 
   handleClickOutside () {
-    setTimeout(() => {
-      this.close();
-    }, 100);
+    this.close();
   },
 
   componentDidMount: function () {

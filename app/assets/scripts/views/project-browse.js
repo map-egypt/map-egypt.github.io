@@ -169,8 +169,10 @@ var ProjectBrowse = React.createClass({
     this.setState({indicatorToggle: true});
   },
 
-  closeIndicatorDropdown: function () {
-    this.setState({indicatorToggle: false});
+  closeIndicatorDropdown: function (e) {
+    setTimeout(() => {
+      this.setState({indicatorToggle: false});
+    }, 1000);
   },
 
   openIndicatorSelector: function (activeIndicatorType) {
@@ -571,14 +573,14 @@ var ProjectBrowse = React.createClass({
                 <ul className='button--list'>
                   <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>{t.filter_projects_btn}</button></li>
                   <li>
-                    <span className='dropdown__container' onBlur={this.closeIndicatorDropdown}>
+                    <span className='dropdown__container' onBlur={(e) => this.closeIndicatorDropdown(e)}>
                       <button type='button' onClick={this.openIndicatorDropdown}
                         className='button button--medium button--secondary drop__toggle--caret'>{t.indicator_overlays_btn}</button>
                       {this.state.indicatorToggle &&
                         <ul className='drop__menu drop--align-left button--secondary'>
                           {indicatorTypes.map((d) => {
                             return <li key={d}
-                              onMouseDown={() => this.openIndicatorSelector(d)}
+                              onClick={() => this.openIndicatorSelector(d)}
                               className='drop__menu-item'>{d}</li>;
                           })}
                         </ul>
