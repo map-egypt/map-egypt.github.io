@@ -407,7 +407,6 @@ var ProjectBrowse = React.createClass({
                   type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
             </ul>
         </div>
-        <ReactTooltip html={true} delayHide={500} effect='solid'/>
       </section>
     );
   },
@@ -661,7 +660,7 @@ var ProjectBrowse = React.createClass({
             </div>)}
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
-
+        <ReactTooltip html={true} delayHide={500} effect='solid'/>
       </section>
     );
   }

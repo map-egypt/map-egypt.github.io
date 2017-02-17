@@ -12,5 +12,12 @@
   }
   span {
     display: inline-block;
+    &.tooltip__sources {
+      font-size: 0.7rem;
+      margin-top: 0.5rem;
+    }
+    &:only-of-type {
+      margin: 0;
+    }
   }
 }
