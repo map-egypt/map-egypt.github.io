@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
 import { without, clone } from 'lodash';
+import ReactTooltip from 'react-tooltip';
 
 import { getIndicator } from '../actions';
 import Map from '../components/map';
@@ -373,8 +374,10 @@ var ProjectBrowse = React.createClass({
             </div>
             <div className='indicators--options'>
               {availableIndicators.length && availableIndicators.map((indicator) => {
-                let name = indicator.name;
-                let id = 'subtypes-' + slugify(name);
+                const name = indicator.name;
+                const id = 'subtypes-' + slugify(name);
+                const tipContent = `${(indicator.description) ? `<span class="tooltip__description">Description: ${indicator.description}</span>` : ''}` +
+                  `${(indicator.sources) ? `<span class="tooltip__sources">Sources: ${indicator.sources.join(', ')}</span>` : ''}`;
                 return (
                   <label key={name}
                     className={'form__option form__option--custom-checkbox' + (selectedIndicators.indexOf(name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
@@ -385,6 +388,7 @@ var ProjectBrowse = React.createClass({
                       onChange={() => this.toggleSelectedIndicator(name)} />
                     <span className='form__option__text'>{name}</span>
                     <span className='form__option__ui'></span>
+                    <span className='form__option__info' data-tip={tipContent}>?</span>
                   </label>
                 );
               })}
@@ -399,6 +403,7 @@ var ProjectBrowse = React.createClass({
                   type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
             </ul>
         </div>
+        <ReactTooltip html={true} delayHide={1000} effect='solid'/>
       </section>
     );
   },
