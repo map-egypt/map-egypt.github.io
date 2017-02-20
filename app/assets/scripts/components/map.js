@@ -9,6 +9,7 @@ import { byId as byIdDist, byName as byNameDist } from '../utils/districts';
 import { byEgy as byEgyGove, byName as byNameGove } from '../utils/governorates';
 import { isNumerical } from '../utils/is-numerical-overlay';
 import { roundedNumber } from '../utils/format';
+import { customScales } from '../utils/scales';
 const L = window.L;
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
@@ -71,7 +72,8 @@ const Map = React.createClass({
     return {
       activeProject: true,
       activeIndicator: false,
-      overlayScale: false
+      overlayScale: false,
+      overlayLayer: false
     };
   },
 
@@ -214,9 +216,20 @@ const Map = React.createClass({
       this.addClusterMarkers(props.markers, props.lang);
     }
 
+    // if we have a new overlay or we had one and now don't
     if ((props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) || (this.props.overlay && !props.overlay)) {
-      let overlayScale = this.renderOverlay(props.overlay);
-      this.setState({overlayScale});
+      if (props.overlay && props.overlay.hasOwnProperty('mapid')) {
+        const layer = this.addMapboxLayer(props.overlay.mapid);
+        this.renderOverlay(false);
+        this.setState({overlayLayer: layer, overlayScale: customScales[props.overlay.mapid]});
+      } else {
+        if (this.props.overlay && this.props.overlay.hasOwnProperty('mapid')) {
+          this.removeMapboxLayer();
+          this.setState({overlayLayer: false});
+        }
+        let overlayScale = this.renderOverlay(props.overlay);
+        this.setState({overlayScale});
+      }
     }
   },
 
@@ -260,6 +273,16 @@ const Map = React.createClass({
     }
   },
 
+  addMapboxLayer: function (mapid) {
+    const layer = L.mapbox.tileLayer(mapid);
+    this.map.addLayer(layer);
+    return layer;
+  },
+
+  removeMapboxLayer: function () {
+    this.map.removeLayer(this.state.overlayLayer);
+  },
+
   renderMarkerLegend: function () {
     const t = get(window.t, [this.props.lang, 'map_labels'], {});
     return (
@@ -276,12 +299,13 @@ const Map = React.createClass({
 
   renderOverlayLegend: function (scale) {
     const isQuantile = scale.hasOwnProperty('invertExtent');
-    let iterable = (isQuantile ? scale.range() : scale.domain()).sort();
-
+    let iterable = (isQuantile ? scale.range() : scale.domain());
+    iterable.sort((a, b) => b - a);
     let convertId = false;
     let category = get(this.props, 'overlay.category');
     if (category && category.toLowerCase() === 'categorical') {
-      let converted = iterable.map((category) => categoryLookup[category]).sort();
+      let converted = iterable.map((category) => categoryLookup[category]);
+      converted.sort((a, b) => b - a);
       convertId = converted.filter(Boolean).length === iterable.length;
       iterable = convertId ? converted : iterable;
     }
