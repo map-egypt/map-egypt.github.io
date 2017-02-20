@@ -9,6 +9,7 @@ import { byId as byIdDist, byName as byNameDist } from '../utils/districts';
 import { byEgy as byEgyGove, byName as byNameGove } from '../utils/governorates';
 import { isNumerical } from '../utils/is-numerical-overlay';
 import { roundedNumber } from '../utils/format';
+import { customScales } from '../utils/scales';
 const L = window.L;
 
 const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
@@ -220,7 +221,7 @@ const Map = React.createClass({
       if (props.overlay && props.overlay.hasOwnProperty('mapid')) {
         const layer = this.addMapboxLayer(props.overlay.mapid);
         this.renderOverlay(false);
-        this.setState({overlayLayer: layer, overlayScale: false});
+        this.setState({overlayLayer: layer, overlayScale: customScales[props.overlay.mapid]});
       } else {
         if (this.props.overlay && this.props.overlay.hasOwnProperty('mapid')) {
           this.removeMapboxLayer();
