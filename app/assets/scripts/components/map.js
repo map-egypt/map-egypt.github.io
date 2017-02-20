@@ -276,12 +276,13 @@ const Map = React.createClass({
 
   renderOverlayLegend: function (scale) {
     const isQuantile = scale.hasOwnProperty('invertExtent');
-    let iterable = (isQuantile ? scale.range() : scale.domain()).sort();
-
+    let iterable = (isQuantile ? scale.range() : scale.domain());
+    iterable.sort((a, b) => b - a);
     let convertId = false;
     let category = get(this.props, 'overlay.category');
     if (category && category.toLowerCase() === 'categorical') {
-      let converted = iterable.map((category) => categoryLookup[category]).sort();
+      let converted = iterable.map((category) => categoryLookup[category]);
+      converted.sort((a, b) => b - a);
       convertId = converted.filter(Boolean).length === iterable.length;
       iterable = convertId ? converted : iterable;
     }
