@@ -53,8 +53,14 @@ var CSVBtn = React.createClass({
     }
 
     if (window.encodeURI && typeof window.encodeURI === 'function') {
-      var encodedUri = window.encodeURI(csv);
-      window.open(encodedUri);
+      // hacky attempt to save custom file name
+      const link = document.createElement('a');
+      document.body.appendChild(link);
+      link.download = 'download.csv';
+      link.href = window.encodeURI(csv);
+      link.target = '_blank';
+      link.click();
+      document.body.removeChild(link);
     }
   },
 
