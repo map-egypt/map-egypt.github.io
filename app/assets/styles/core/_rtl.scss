@@ -162,10 +162,21 @@
     right: 0;
   }
 
-  .inpage__overview-links li {
-    @include media (medium-up) {
+  .inpage__overview-links {
+    .overview-item {
       float: right;
+      margin-left: 3%;
       margin-right: 0;
+    }
+    .overview-item:nth-of-type(2) {
+      float: left;
+      margin-left: 0;
+    }
+    li {
+      @include media (medium-up) {
+        float: right;
+        margin-right: 0;
+      }
     }
   }
 
