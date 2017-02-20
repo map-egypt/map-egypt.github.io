@@ -536,29 +536,38 @@ var ProjectBrowse = React.createClass({
       const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
       const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
       if (indicatorData) {
-        // Indicators have a data_geography property, type boolean.
-        // true = governorate, false = district.
-        // Default to governorates if no property exists.
-        let adminLevel = (!indicatorData.data.hasOwnProperty('data_geography') ||
-                          indicatorData.data.data_geography) ? GOVERNORATE : DISTRICT;
-        const regions = get(this.props.api, 'geography.' + adminLevel);
-        if (regions) {
+        // if we have an external mapbox id, skip the other checks
+        if (typeof indicatorData.data.data === 'string') {
           overlay = {
             id: indicatorData.id,
-            values: indicatorData.data.data.map((d) => ({
-              id: d.sub_nat_id,
-              value: d.data_value
-            })).filter(d => typeof d.value !== 'undefined'),
-            category: indicatorData.data.category,
-            regions
+            mapid: indicatorData.data.data,
+            category: indicatorData.data.category
           };
-        }
+        } else {
+          // Indicators have a data_geography property, type boolean.
+          // true = governorate, false = district.
+          // Default to governorates if no property exists.
+          let adminLevel = (!indicatorData.data.hasOwnProperty('data_geography') ||
+                            indicatorData.data.data_geography) ? GOVERNORATE : DISTRICT;
+          const regions = get(this.props.api, 'geography.' + adminLevel);
+          if (regions) {
+            overlay = {
+              id: indicatorData.id,
+              values: indicatorData.data.data.map((d) => ({
+                id: d.sub_nat_id,
+                value: d.data_value
+              })).filter(d => typeof d.value !== 'undefined'),
+              category: indicatorData.data.category,
+              regions
+            };
+          }
 
-        if (this.state.listView) {
-          indicatorChartData = indicatorData.data.data.map(d => ({
-            name: d.sub_nat_id,
-            value: +d.data_value
-          }));
+          if (this.state.listView) {
+            indicatorChartData = indicatorData.data.data.map(d => ({
+              name: d.sub_nat_id,
+              value: +d.data_value
+            }));
+          }
         }
       }
     }
