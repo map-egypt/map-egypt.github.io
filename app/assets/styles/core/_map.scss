@@ -221,3 +221,11 @@
     content: "";
   }
 }
+
+.form__option__info {
+  margin-left: .6em;
+  background-color: $tertiary-color;
+  border-radius: 15px;
+  padding: .2em .6em;
+  font-size: .8em;
+}

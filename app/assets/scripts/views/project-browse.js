@@ -3,6 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
 import { without, clone } from 'lodash';
+import ReactTooltip from 'react-tooltip';
 
 import { getIndicator } from '../actions';
 import Map from '../components/map';
@@ -13,6 +14,7 @@ import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, DISTRICT, getProjectCentroids } from '../utils/map-utils';
 import slugify from '../utils/slugify';
+import { indicatorTooltipContent } from '../utils/tooltips';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { window } from 'global';
 
@@ -139,6 +141,10 @@ var ProjectBrowse = React.createClass({
         activeIndicatorType
       });
     }
+  },
+
+  componentDidUpdate: function () {
+    ReactTooltip.rebuild();
   },
 
   componentWillUpdate: function (nextProps, nextState) {
@@ -379,8 +385,9 @@ var ProjectBrowse = React.createClass({
             </div>
             <div className='indicators--options'>
               {availableIndicators.length && availableIndicators.map((indicator) => {
-                let name = indicator.name;
-                let id = 'subtypes-' + slugify(name);
+                const name = indicator.name;
+                const id = 'subtypes-' + slugify(name);
+
                 return (
                   <label key={name}
                     className={'form__option form__option--custom-checkbox' + (selectedIndicators.indexOf(name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
@@ -391,6 +398,7 @@ var ProjectBrowse = React.createClass({
                       onChange={() => this.toggleSelectedIndicator(name)} />
                     <span className='form__option__text'>{name}</span>
                     <span className='form__option__ui'></span>
+                    <span className='form__option__info' data-tip={indicatorTooltipContent(indicator)}>?</span>
                   </label>
                 );
               })}
@@ -421,6 +429,7 @@ var ProjectBrowse = React.createClass({
               className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
               <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator)}><span>toggle visibility</span></button>
               <span className='indicator-layer-name'>{indicator}</span>
+              <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator))}>?</span>
               <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
             </li>
           ))}
@@ -656,10 +665,9 @@ var ProjectBrowse = React.createClass({
               <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
               {activeIndicators.length ? this.renderActiveIndicators(activeIndicator, activeIndicators) : null}
             </div>)}
-
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
         {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
-
+        <ReactTooltip html={true} delayHide={500} effect='solid'/>
       </section>
     );
   }
