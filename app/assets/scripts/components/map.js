@@ -71,7 +71,8 @@ const Map = React.createClass({
     return {
       activeProject: true,
       activeIndicator: false,
-      overlayScale: false
+      overlayScale: false,
+      overlayLayer: false
     };
   },
 
@@ -214,9 +215,20 @@ const Map = React.createClass({
       this.addClusterMarkers(props.markers, props.lang);
     }
 
+    // if we have a new overlay or we had one and now don't
     if ((props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) || (this.props.overlay && !props.overlay)) {
-      let overlayScale = this.renderOverlay(props.overlay);
-      this.setState({overlayScale});
+      if (props.overlay && props.overlay.hasOwnProperty('mapid')) {
+        const layer = this.addMapboxLayer(props.overlay.mapid);
+        this.renderOverlay(false);
+        this.setState({overlayLayer: layer, overlayScale: false});
+      } else {
+        if (this.props.overlay && this.props.overlay.hasOwnProperty('mapid')) {
+          this.removeMapboxLayer();
+          this.setState({overlayLayer: false});
+        }
+        let overlayScale = this.renderOverlay(props.overlay);
+        this.setState({overlayScale});
+      }
     }
   },
 
@@ -258,6 +270,16 @@ const Map = React.createClass({
         this.setState({overlayScale});
       }
     }
+  },
+
+  addMapboxLayer: function (mapid) {
+    const layer = L.mapbox.tileLayer(mapid);
+    this.map.addLayer(layer);
+    return layer;
+  },
+
+  removeMapboxLayer: function () {
+    this.map.removeLayer(this.state.overlayLayer);
   },
 
   renderMarkerLegend: function () {
