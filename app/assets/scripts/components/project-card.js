@@ -89,7 +89,7 @@ var ProjectCard = React.createClass({
             <div className='card__body'>
               <dl className='card-meta'>
                 <dt className='card-meta__label'>Status</dt>
-                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{ontimeLookup[ontime]}</dd>
+                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{ontimeLookup(ontime, lang)}</dd>
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>

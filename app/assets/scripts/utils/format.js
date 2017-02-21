@@ -1,5 +1,7 @@
 'use strict';
 import numeral from 'numeral';
+import { get } from 'object-path';
+import { window } from 'global';
 
 const tally = (n) => numeral(n).format('0,0');
 module.exports.tally = tally;
@@ -57,7 +59,19 @@ function roundedNumber (n, decimalPlaces = 1) {
 }
 module.exports.roundedNumber = roundedNumber;
 
-const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
+const ontimeLookup = (key, lang) => {
+  const t = get(window.t, [lang, 'project_pages'], {});
+  switch (key) {
+    case 'extended':
+      return t.status_extended;
+    case 'delayed':
+      return t.status_delayed;
+    case 'ontime':
+      return t.status_ontime;
+    case 'closed':
+      return t.status_closed;
+  }
+};
 module.exports.ontimeLookup = ontimeLookup;
 
 const currency = (value) => '$' + value.toString();
