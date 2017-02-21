@@ -33,8 +33,8 @@ const ProjectList = React.createClass({
 
   render: function () {
     const { lang } = this.props;
-    const {projects, meta} = this.props;
-    const {sortAccessor} = this.state;
+    const { projects, meta } = this.props;
+    const { sortAccessor } = this.state;
     const data = projects.slice().sort((a, b) => sortAccessor(a) < sortAccessor(b) ? -1 : 1);
 
     const t = get(window.t, [lang, 'projects_list_view'], {});

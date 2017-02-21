@@ -7,6 +7,7 @@ import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
 import { tally, shortTally, pct, shortParagraph, ontimeLookup, currency } from '../utils/format';
 import getLocation from '../utils/location';
+import { getProjectName, getDescription } from '../utils/accessors';
 
 function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
@@ -78,7 +79,7 @@ var ProjectCard = React.createClass({
         <article className={statusClass}>
           <div className='card__contents'>
             <header className='card__header'>
-              <h1 className='card__title heading--xsmall'><Link to={path.resolve(basepath, 'projects', project.id)} className='link--deco' href=''>{project.name}</Link></h1>
+              <h1 className='card__title heading--xsmall'><Link to={path.resolve(basepath, 'projects', project.id)} className='link--deco' href=''>{getProjectName(project, lang)}</Link></h1>
 
               {completion && (
                 <ul className='card-cmplt'>
@@ -93,7 +94,7 @@ var ProjectCard = React.createClass({
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>
-              <p>{shortParagraph(project.description)}</p>
+              <p>{shortParagraph(getDescription(project, lang))}</p>
               <div className='card__categories'>
                 {project.categories.map((c, i) => {
                   let key = c.en;
