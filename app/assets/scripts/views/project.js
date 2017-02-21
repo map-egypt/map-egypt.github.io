@@ -124,7 +124,7 @@ var Project = React.createClass({
 
     const donors = get(data, 'budget', []).map((donor) => ({
       name: getDonorName(donor, lang),
-      link: path.resolve(basepath, 'donor', slugify(donor.donor_name)),
+      link: linkPath(basepath, 'donor', donor.donor_name),
       value: donor.fund.amount
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
@@ -214,7 +214,7 @@ var Project = React.createClass({
                 <p className='tags__label'>{t.donors_title}:</p>
                 <div className='inpage__subtitles'>
                   {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
-                      <Link to={linkPath(basepath, 'donor', donor.name)} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
+                      <Link to={donor.link} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
                     </span>)}
                 </div>
               </div>
