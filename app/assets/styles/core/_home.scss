@@ -39,7 +39,6 @@
 
 .category-stats {
   @include clearfix;
-  /*width: 65%;*/
   margin: 0 auto;
 }
 
@@ -50,6 +49,7 @@
   margin-bottom: $global-spacing/2;
   font-size: 0.875rem;
   border-right: 0;
+  min-width: 47%;
   @include media(medium-up) {
     margin-top: $global-spacing * 2;
     padding: 0 1.4em;
@@ -58,9 +58,16 @@
     max-width: 24%;
     border-right: 1px solid $tertiary-color;
   }
+  @include media(medium-down) {
+    min-width: 47%;
+    &:nth-of-type(2) {
+      border-right: 0;
+    }
+  }
   &:last-child {
     border-right: 0;
-  };
+    padding-right: 0;
+  }
 }
 
 .inpage-stats__collaborators {
