@@ -12,6 +12,7 @@ import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../ut
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
+import { getDonorName, getProjectName } from '../utils/accessors';
 import { window } from 'global';
 
 import Map from '../components/map';
@@ -103,7 +104,7 @@ var Project = React.createClass({
     // All three project comparison charts need to have the same ordering in the Y axis,
     // so don't do any more sorting after the budget map.
     const budgets = allProjects.map((project) => ({
-      name: project.name,
+      name: getProjectName(project, lang),
       value: get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
       link: path.resolve(basepath, 'projects', project.id),
       project: project
@@ -122,7 +123,7 @@ var Project = React.createClass({
     }));
 
     const donors = get(data, 'budget', []).map((donor) => ({
-      name: donor.donor_name,
+      name: getDonorName(donor, lang),
       link: path.resolve(basepath, 'donor', slugify(donor.donor_name)),
       value: donor.fund.amount
     })).sort((a, b) => b.value > a.value ? -1 : 1);
@@ -145,15 +146,15 @@ var Project = React.createClass({
         data: donors
       },
       {
-        title: 'Funding By Category',
+        title: 'Funding By Project',
         data: budgets
       },
       {
-        title: 'Percentage Complete By Category',
+        title: 'Percentage Complete',
         data: completion
       },
       {
-        title: 'Beneficiaries Reached By Category',
+        title: 'Beneficiaries Reached',
         data: served
       }
     ];
@@ -165,7 +166,11 @@ var Project = React.createClass({
       });
     }
 
-    const localManager = lang === 'ar' ? data.local_manager_ar : data.local_manager;
+    // Handle the annoying _ar data properties
+    const isArabic = lang === 'ar';
+    const projectDisplayName = isArabic ? data.name_ar : data.name;
+    const localManager = isArabic ? data.local_manager_ar : data.local_manager;
+    const description = isArabic ? data.description_ar : data.description;
 
     return (
       <section className='inpage'>
@@ -192,7 +197,7 @@ var Project = React.createClass({
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
-              <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
+              <h1 className='inpage__title heading--deco heading--large'>{projectDisplayName}</h1>
             </div>
             <ProjectTimeline project={data} lang={lang}/>
 
@@ -242,7 +247,7 @@ var Project = React.createClass({
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>
-                  <li>{data.description}</li>
+                  <li>{description}</li>
                 </ul>
                 {data.location && (
                   <div className='overview-item'>
