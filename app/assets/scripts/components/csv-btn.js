@@ -3,6 +3,8 @@ import React from 'react';
 import { get } from 'object-path';
 import { window } from 'global';
 import * as serialize from '../utils/serialize-csv';
+import { byId as byIdDist } from '../utils/districts';
+import { byId as byIdGove } from '../utils/governorates';
 
 const meta = 'data:text/csv;charset=utf-8,';
 
@@ -15,8 +17,10 @@ var CSVBtn = React.createClass({
     relatedProjects: React.PropTypes.array,
     project: React.PropTypes.object,
     chartData: React.PropTypes.array,
+    disbursement: React.PropTypes.array,
     summary: React.PropTypes.object,
-    ministryActiveProjects: React.PropTypes.array
+    ministryActiveProjects: React.PropTypes.array,
+    kmiData: React.PropTypes.array
   },
 
   serialize: function () {
@@ -33,6 +37,28 @@ var CSVBtn = React.createClass({
       csv = csv.concat(serialize.serialize(serialize.summary(this.props.summary.data)));
     }
 
+    if (this.props.project) {
+      let locations = this.props.project.location.map((location) => {
+        let governorate = byIdGove(location.district.governorate);
+        if (governorate) {
+          governorate = this.props.lang === 'en' ? governorate.name : governorate.nameAr;
+        } else {
+          governorate = 'N/A';
+        }
+        let district = byIdDist(location.district.district);
+        if (district) {
+          district = this.props.lang === 'en' ? district.name : district.nameAr;
+        } else {
+          district = 'N/A';
+        }
+        return {governorate: governorate, district: district};
+      });
+
+      locations = serialize.locations(locations);
+      csv += '\n\nLocations\n\n';
+      csv = csv.concat(serialize.serialize(locations));
+    }
+
     if (this.props.ministryActiveProjects) {
       let ministryActiveProjects = serialize.ministryActiveProjects(this.props.ministryActiveProjects);
       csv += '\n\nActive Project Status\n\n';
@@ -44,6 +70,18 @@ var CSVBtn = React.createClass({
         csv += '\n\n' + d.title + '\n\n';
         csv += serialize.serialize(serialize.chartData(d.data));
       });
+    }
+
+    if (this.props.disbursement && this.props.disbursement.length) {
+      let disbursement = serialize.disbursement(this.props.disbursement);
+      csv += '\n\nDisbursement vs. Reach\n\n';
+      csv = csv.concat(serialize.serialize(disbursement));
+    }
+
+    if (this.props.kmiData && Array.isArray(this.props.kmiData) && this.props.kmiData.length) {
+      let kmiData = serialize.kmiData(get(this.props, 'kmiData', []), this.props.lang);
+      csv += '\n\nMonitoring Indicators\n\n';
+      csv = csv.concat(serialize.serialize(kmiData));
     }
 
     if (this.props.relatedProjects && this.props.relatedProjects.length) {
