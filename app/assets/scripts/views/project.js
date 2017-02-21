@@ -184,7 +184,9 @@ var Project = React.createClass({
               </div>
               <dl className={'inpage-meta project--' + ontime}>
                 <dt className='inpage-meta__label visually-hidden'>Type</dt>
-                <dd className='inpage-meta__value inpage-meta__value--type'>{data.status[lang]}</dd>
+                {ontime !== 'closed'
+                  ? <dd className='inpage-meta__value inpage-meta__value--type'>{data.status[lang]}</dd>
+                  : ''}
                 <dt className='inpage-meta__label visually-hidden'></dt>
                 <dd className='inpage-meta__value inpage-meta__value--status'>{ontimeLookup[ontime]}</dd>
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
