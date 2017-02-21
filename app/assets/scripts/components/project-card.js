@@ -23,6 +23,8 @@ function isOntime (project) {
   // if projects are both delayed and extended, they should be classed as delayed
   if (!plannedStart) {
     return null;
+  } else if (actualEnd && actualEnd < new Date().getTime()) {
+    return 'closed';
   } else if (projectDelayed) {
     return 'delayed';
   } else if (projectExtended) {
