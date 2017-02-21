@@ -57,7 +57,7 @@ function roundedNumber (n, decimalPlaces = 1) {
 }
 module.exports.roundedNumber = roundedNumber;
 
-const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time'};
+const ontimeLookup = {extended: 'Extended', delayed: 'Delayed', ontime: 'On Time', closed: 'Closed'};
 module.exports.ontimeLookup = ontimeLookup;
 
 const currency = (value) => '$' + value.toString();
