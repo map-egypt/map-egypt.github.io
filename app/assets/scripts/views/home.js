@@ -112,27 +112,12 @@ var Home = React.createClass({
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{totalProjects}<small>total projects</small></h3>
-                    <ul className='link-list'>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                    </ul>
                   </li>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>${totalFunding}<small>in funding</small></h3>
-                    <ul className='link-list'>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                    </ul>
                   </li>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{totalDonors}<small>total donors</small></h3>
-                    <ul className='link-list'>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                    </ul>
                   </li>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{collaborationCount}<small>donor collaborations</small></h3>
