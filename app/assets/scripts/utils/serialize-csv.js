@@ -64,12 +64,11 @@ export function chartData (data) {
   ]));
 }
 
-const disbursementHeaders = [['name', 'donor', 'type', 'value']];
+const disbursementHeaders = [['name', 'donor', 'value']];
 export function disbursement (disbursement) {
   return disbursementHeaders.concat(disbursement.map(d => [
     d.name,
     d.donor,
-    d.type,
     d.value
   ]));
 }

@@ -17,6 +17,7 @@ var CSVBtn = React.createClass({
     relatedProjects: React.PropTypes.array,
     project: React.PropTypes.object,
     chartData: React.PropTypes.array,
+    disbursement: React.PropTypes.array,
     summary: React.PropTypes.object,
     ministryActiveProjects: React.PropTypes.array,
     kmiData: React.PropTypes.array
@@ -69,6 +70,12 @@ var CSVBtn = React.createClass({
         csv += '\n\n' + d.title + '\n\n';
         csv += serialize.serialize(serialize.chartData(d.data));
       });
+    }
+
+    if (this.props.disbursement && this.props.disbursement.length) {
+      let disbursement = serialize.disbursement(this.props.disbursement);
+      csv += '\n\nDisbursement vs. Reach\n\n';
+      csv = csv.concat(serialize.serialize(disbursement));
     }
 
     if (this.props.kmiData && Array.isArray(this.props.kmiData) && this.props.kmiData.length) {

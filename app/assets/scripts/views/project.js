@@ -158,13 +158,6 @@ var Project = React.createClass({
       }
     ];
 
-    if (authenticated && disbursement.length) {
-      csvChartData.push({
-        title: 'Disbursement vs. Reach',
-        data: disbursement
-      });
-    }
-
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -177,6 +170,7 @@ var Project = React.createClass({
                       relatedProjects={relatedProjects}
                       project={data}
                       chartData={csvChartData}
+                      disbursement={disbursement}
                       kmiData={data.kmi}
                       lang={this.props.meta.lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
