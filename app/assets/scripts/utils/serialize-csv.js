@@ -64,12 +64,11 @@ export function chartData (data) {
   ]));
 }
 
-const disbursementHeaders = [['name', 'donor', 'type', 'value']];
+const disbursementHeaders = [['name', 'donor', 'value']];
 export function disbursement (disbursement) {
   return disbursementHeaders.concat(disbursement.map(d => [
     d.name,
     d.donor,
-    d.type,
     d.value
   ]));
 }
@@ -81,6 +80,26 @@ export function ministryActiveProjects (activeProjects) {
     p.planned_start_date,
     p.actual_start_date,
     p.planned_end_date
+  ]));
+}
+
+const kmiDataHeader = [['component', 'kpi', 'status', 'target', 'current', 'date']];
+export function kmiData (kmiData, lang) {
+  return kmiDataHeader.concat(kmiData.map(i => [
+    i.component,
+    i.kpi,
+    i.status[lang],
+    i.target,
+    i.current,
+    i.date
+  ]));
+}
+
+const locationHeaders = [['governorate', 'district']];
+export function locations (locations) {
+  return locationHeaders.concat(locations.map(l => [
+    l.governorate,
+    l.district
   ]));
 }
 

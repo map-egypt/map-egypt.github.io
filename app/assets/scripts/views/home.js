@@ -59,12 +59,14 @@ var Home = React.createClass({
     let totalDonors = {};
     let totalFunding = 0;
     const collaborations = [];
+    let collaborationCount = 0;
     projects.forEach((project) => {
       let collaborators = project.budget.filter((b) => {
-        return b.donor_name !== 'MoALR / Government of Egypt contribution' && b.donor_name !== 'Government of Egypt';
+        return b.donor_name !== 'MoALR / Government of Egypt contribution' && b.donor_name !== 'Government of Egypt' && b.donor_name !== 'Project Beneficiaries';
       });
       if (collaborators.length > 1) {
         collaborators.forEach((c) => collaborations.push(c.donor_name));
+        collaborationCount += 1;
       }
       project.budget.forEach((budget) => {
         totalDonors[budget.donor_name] = '';
@@ -73,7 +75,6 @@ var Home = React.createClass({
     });
     totalFunding = shorterTally(totalFunding);
     totalDonors = Object.keys(totalDonors).length;
-    const collaborationCount = collaborations.length;
     const collaboratorNames = _.uniq(collaborations).sort((a, b) => a.length < b.length);
 
     const pie = [{
@@ -111,27 +112,12 @@ var Home = React.createClass({
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{totalProjects}<small>total projects</small></h3>
-                    <ul className='link-list'>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                    </ul>
                   </li>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>${totalFunding}<small>in funding</small></h3>
-                    <ul className='link-list'>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                    </ul>
                   </li>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{totalDonors}<small>total donors</small></h3>
-                    <ul className='link-list'>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                      <li><a title='Visit project webpage' href='' className='link--primary'><span>Project Name</span></a></li>
-                    </ul>
                   </li>
                   <li className='category-stats__item'>
                     <h3 className='inpage-stats heading--deco-small'>{collaborationCount}<small>donor collaborations</small></h3>

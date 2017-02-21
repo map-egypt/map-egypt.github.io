@@ -159,13 +159,6 @@ var Project = React.createClass({
       }
     ];
 
-    if (authenticated && disbursement.length) {
-      csvChartData.push({
-        title: 'Disbursement vs. Reach',
-        data: disbursement
-      });
-    }
-
     // Handle the annoying _ar data properties
     const isArabic = lang === 'ar';
     const projectDisplayName = isArabic ? data.name_ar : data.name;
@@ -184,6 +177,8 @@ var Project = React.createClass({
                       relatedProjects={relatedProjects}
                       project={data}
                       chartData={csvChartData}
+                      disbursement={disbursement}
+                      kmiData={data.kmi}
                       lang={lang} /></li>
                   <li><Print lang={lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={lang}/></li>
