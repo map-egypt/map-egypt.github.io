@@ -177,6 +177,7 @@ var Project = React.createClass({
                       relatedProjects={relatedProjects}
                       project={data}
                       chartData={csvChartData}
+                      kmiData={data.kmi}
                       lang={this.props.meta.lang} /></li>
                   <li><Print lang={this.props.meta.lang} /></li>
                   <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>

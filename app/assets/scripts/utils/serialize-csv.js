@@ -84,6 +84,18 @@ export function ministryActiveProjects (activeProjects) {
   ]));
 }
 
+const kmiDataHeader = [['component', 'kpi', 'status', 'target', 'current', 'date']];
+export function kmiData (kmiData, lang) {
+  return kmiDataHeader.concat(kmiData.map(i => [
+    i.component,
+    i.kpi,
+    i.status[lang],
+    i.target,
+    i.current,
+    i.date
+  ]));
+}
+
 export function serialize (list) {
   return list.map(row => {
     return row.map(item => {

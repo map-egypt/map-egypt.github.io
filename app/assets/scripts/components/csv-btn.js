@@ -16,7 +16,8 @@ var CSVBtn = React.createClass({
     project: React.PropTypes.object,
     chartData: React.PropTypes.array,
     summary: React.PropTypes.object,
-    ministryActiveProjects: React.PropTypes.array
+    ministryActiveProjects: React.PropTypes.array,
+    kmiData: React.PropTypes.array
   },
 
   serialize: function () {
@@ -44,6 +45,12 @@ var CSVBtn = React.createClass({
         csv += '\n\n' + d.title + '\n\n';
         csv += serialize.serialize(serialize.chartData(d.data));
       });
+    }
+
+    if (this.props.kmiData && Array.isArray(this.props.kmiData) && this.props.kmiData.length) {
+      let kmiData = serialize.kmiData(get(this.props, 'kmiData', []), this.props.lang);
+      csv += '\n\nMonitoring Indicators\n\n';
+      csv = csv.concat(serialize.serialize(kmiData));
     }
 
     if (this.props.relatedProjects && this.props.relatedProjects.length) {
