@@ -29,20 +29,21 @@ var Donor = React.createClass({
     if (projects.length === 0) {
       return <div></div>; // TODO loading indicator
     }
-    const basepath = '/' + this.props.meta.lang;
-
+    const { lang } = this.props.meta;
+    const basepath = '/' + lang;
     const donorName = this.props.params.name;
-    let donorDisplayName;
-
+    let donorMeta;
     const donorProjects = projects.filter((project) => {
       return get(project, 'budget', []).some((item) => {
+        console.log(item);
         let sluggedName = slugify(item.donor_name);
         if (sluggedName === donorName) {
-          donorDisplayName = item.donor_name;
+          donorMeta = item;
         }
         return sluggedName === donorName;
       });
     });
+    const donorDisplayName = lang === 'ar' ? donorMeta.donor_name_ar : donorMeta.donor_name;
 
     const markers = getProjectCentroids(donorProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
@@ -64,8 +65,6 @@ var Donor = React.createClass({
       return budget.fund.amount + currentValue;
     }, 0);
 
-    const { lang } = this.props.meta;
-
     const csvSummary = {
       title: 'Donor Summary',
       data: {
@@ -82,7 +81,7 @@ var Donor = React.createClass({
     ];
 
     const singleProject = donorProjects.length <= 1 ? ' funding--single' : '';
-    const t = get(window.t, [this.props.meta.lang, 'donor_pages'], {});
+    const t = get(window.t, [lang, 'donor_pages'], {});
     return (
       <section className='inpage funding'>
         <header className='inpage__header'>
@@ -96,8 +95,8 @@ var Donor = React.createClass({
                     summary={csvSummary}
                     chartData={csvChartData}
                     lang={lang} /></li>
-                  <li><Print lang={this.props.meta.lang} /></li>
-                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
+                  <li><Print lang={lang} /></li>
+                  <li><Share path={this.props.location.pathname} lang={lang}/></li>
                 </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{donorDisplayName}</h1>
@@ -121,7 +120,7 @@ var Donor = React.createClass({
                   <div className='inpage__overview-chart'>
                     <div className='chart-content'>
                     <HorizontalBarChart
-                      lang={this.props.meta.lang}
+                      lang={lang}
                       data={chartData}
                       margin={{ left: 130, right: 50, top: 10, bottom: 50 }}
                       xFormat={shortTally}
@@ -140,7 +139,7 @@ var Donor = React.createClass({
                 {donorProjects.map((p) => {
                   return (
                     <li key={p.id} className='projects-list__card'>
-                      <ProjectCard lang={this.props.meta.lang}
+                      <ProjectCard lang={lang}
                         project={p} />
                     </li>
                   );
