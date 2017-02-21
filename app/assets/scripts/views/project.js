@@ -137,7 +137,7 @@ var Project = React.createClass({
       value: d.value
     }));
 
-    const t = get(window.t, [this.props.meta.lang, 'project_pages'], {});
+    const t = get(window.t, [lang, 'project_pages'], {});
 
     const csvChartData = [
       {
@@ -165,6 +165,8 @@ var Project = React.createClass({
       });
     }
 
+    const localManager = lang === 'ar' ? data.local_manager_ar : data.local_manager;
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -177,9 +179,9 @@ var Project = React.createClass({
                       relatedProjects={relatedProjects}
                       project={data}
                       chartData={csvChartData}
-                      lang={this.props.meta.lang} /></li>
-                  <li><Print lang={this.props.meta.lang} /></li>
-                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
+                      lang={lang} /></li>
+                  <li><Print lang={lang} /></li>
+                  <li><Share path={this.props.location.pathname} lang={lang}/></li>
                 </ul>
               </div>
               <dl className={'inpage-meta project--' + ontime}>
@@ -192,7 +194,7 @@ var Project = React.createClass({
               </dl>
               <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
             </div>
-            <ProjectTimeline project={data} lang={this.props.meta.lang}/>
+            <ProjectTimeline project={data} lang={lang}/>
 
             <div className='tags'>
               <div className='tags__group'>
@@ -274,16 +276,16 @@ var Project = React.createClass({
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>{t.responsible_ministry_title}</h2>
                     <ul className='link-list'>
-                      <li><a href={`#/${lang}/ministry/${slugify(data.responsible_ministry[lang])}`} className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
+                      <li><a href={`#/${lang}/ministry/${slugify(data.responsible_ministry.en)}`} className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
                     </ul>
                   </div>
                 )}
 
-                {((lang === 'en' && data.local_manager) || lang === 'ar' && data.local_manager_ar) && (
+                {localManager && (
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>{t.local_manager_title}</h2>
                     <ul className='link-list'>
-                      <li><a href={`#/${lang}/owner/${slugify(data.local_manager)}`} className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
+                      <li><a href={`#/${lang}/owner/${slugify(data.local_manager)}`} className='link--primary'><span>{localManager}</span></a></li>
                     </ul>
                   </div>
                 )}
@@ -342,7 +344,7 @@ var Project = React.createClass({
                 <div className={'chart-content chart__inline--labels' + (!authenticated ? ' chart__block' : '')}>
                   <h3>{t.funding_by_donor_title}</h3>
                   <HorizontalBarChart
-                    lang={this.props.meta.lang}
+                    lang={lang}
                     data={donors}
                     margin={barChartMargin}
                     yTitle=''
@@ -357,7 +359,7 @@ var Project = React.createClass({
                       margin={barChartMargin}
                       yTitle=''
                       xFormat={shortTally}
-                      lang={this.props.meta.lang}
+                      lang={lang}
                     />
                   </div>
                 ) : null}
@@ -403,7 +405,7 @@ var Project = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 <h3>{t.comparison_chart_title1}</h3>
                 <HorizontalBarChart
-                  lang={this.props.meta.lang}
+                  lang={lang}
                   data={budgets}
                   margin={barChartMargin}
                   yTitle=''
@@ -415,7 +417,7 @@ var Project = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 <h3>{t.comparison_chart_title2}</h3>
                 <HorizontalBarChart
-                  lang={this.props.meta.lang}
+                  lang={lang}
                   data={completion}
                   margin={barChartMargin}
                   yTitle=''
@@ -428,7 +430,7 @@ var Project = React.createClass({
                 <div className='chart-content chart__inline--labels'>
                   <h3>{t.comparision_chart_title3}</h3>
                   <HorizontalBarChart
-                    lang={this.props.meta.lang}
+                    lang={lang}
                     data={served}
                     margin={barChartMargin}
                     yTitle=''
@@ -449,7 +451,7 @@ var Project = React.createClass({
                     <li key={p.id}
                       className='projects-list__card'>
                       <ProjectCard
-                        lang={this.props.meta.lang}
+                        lang={lang}
                         project={p}
                       />
                     </li>
