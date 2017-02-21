@@ -3,6 +3,8 @@ import React from 'react';
 import { get } from 'object-path';
 import { window } from 'global';
 import * as serialize from '../utils/serialize-csv';
+import { byId as byIdDist } from '../utils/districts';
+import { byId as byIdGove } from '../utils/governorates';
 
 const meta = 'data:text/csv;charset=utf-8,';
 
@@ -32,6 +34,28 @@ var CSVBtn = React.createClass({
     if (this.props.summary) {
       csv += `\n\n${this.props.summary.title}\n\n`;
       csv = csv.concat(serialize.serialize(serialize.summary(this.props.summary.data)));
+    }
+
+    if (this.props.project) {
+      let locations = this.props.project.location.map((location) => {
+        let governorate = byIdGove(location.district.governorate);
+        if (governorate) {
+          governorate = this.props.lang === 'en' ? governorate.name : governorate.nameAr;
+        } else {
+          governorate = 'N/A';
+        }
+        let district = byIdDist(location.district.district);
+        if (district) {
+          district = this.props.lang === 'en' ? district.name : district.nameAr;
+        } else {
+          district = 'N/A';
+        }
+        return {governorate: governorate, district: district};
+      });
+
+      locations = serialize.locations(locations);
+      csv += '\n\nLocations\n\n';
+      csv = csv.concat(serialize.serialize(locations));
     }
 
     if (this.props.ministryActiveProjects) {

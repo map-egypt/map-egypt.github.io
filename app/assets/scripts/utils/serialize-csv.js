@@ -96,6 +96,14 @@ export function kmiData (kmiData, lang) {
   ]));
 }
 
+const locationHeaders = [['governorate', 'district']];
+export function locations (locations) {
+  return locationHeaders.concat(locations.map(l => [
+    l.governorate,
+    l.district
+  ]));
+}
+
 export function serialize (list) {
   return list.map(row => {
     return row.map(item => {
