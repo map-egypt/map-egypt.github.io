@@ -1,7 +1,5 @@
 'use strict';
 import numeral from 'numeral';
-import { get } from 'object-path';
-import { window } from 'global';
 
 const tally = (n) => numeral(n).format('0,0');
 module.exports.tally = tally;
