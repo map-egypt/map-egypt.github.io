@@ -164,6 +164,7 @@ var Project = React.createClass({
     const projectDisplayName = isArabic ? data.name_ar : data.name;
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
+    const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
 
     return (
       <section className='inpage'>
@@ -227,7 +228,7 @@ var Project = React.createClass({
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
                   <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
-                  <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
+                  <li>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
                 </ul>
                 {disbursedFunds.loan || disbursedFunds.grant
                   ? <ul className='inpage-stats'>
