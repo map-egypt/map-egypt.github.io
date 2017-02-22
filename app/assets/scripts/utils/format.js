@@ -59,20 +59,5 @@ function roundedNumber (n, decimalPlaces = 1) {
 }
 module.exports.roundedNumber = roundedNumber;
 
-const ontimeLookup = (key, lang) => {
-  const t = get(window.t, [lang, 'project_pages'], {});
-  switch (key) {
-    case 'extended':
-      return t.status_extended;
-    case 'delayed':
-      return t.status_delayed;
-    case 'ontime':
-      return t.status_ontime;
-    case 'closed':
-      return t.status_closed;
-  }
-};
-module.exports.ontimeLookup = ontimeLookup;
-
 const currency = (value) => '$' + value.toString();
 module.exports.currency = currency;

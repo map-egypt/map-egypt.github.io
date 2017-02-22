@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
-import { tally, shortTally, pct, shortParagraph, ontimeLookup, currency } from '../utils/format';
+import { tally, shortTally, pct, shortParagraph, currency } from '../utils/format';
 import getLocation from '../utils/location';
 
 function categoryLink (base, categoryName) {
@@ -75,6 +75,7 @@ var ProjectCard = React.createClass({
       }
     });
 
+    const t = get(window.t, [lang, 'project_pages'], {});
     return (
       <div className='project'>
         <article className={statusClass}>
@@ -91,7 +92,7 @@ var ProjectCard = React.createClass({
             <div className='card__body'>
               <dl className='card-meta'>
                 <dt className='card-meta__label'>Status</dt>
-                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{ontimeLookup(ontime, lang)}</dd>
+                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{t['status_' + ontime]}</dd>
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>
