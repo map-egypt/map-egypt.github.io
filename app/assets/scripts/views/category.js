@@ -13,6 +13,7 @@ import { tally, shortTally, pct, shortText, currency } from '../utils/format';
 import slugify from '../utils/slugify';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import { window } from 'global';
+import { getProjectName } from '../utils/accessors';
 
 const chartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
 
@@ -58,7 +59,7 @@ var Category = React.createClass({
 
     const numProjectsChartData = Object.keys(numProjectsPerCategory).map((key) => {
       return {
-        name: key,
+        name: get(categoryNames, [key, lang]),
         link: path.resolve(basepath, 'category', slugify(key)),
         value: numProjectsPerCategory[key]
       };
@@ -66,7 +67,7 @@ var Category = React.createClass({
 
     const budgetPerCategoryChartData = Object.keys(budgetPerCategory).map((key) => {
       return {
-        name: key,
+        name: get(categoryNames, [key, lang]),
         link: path.resolve(basepath, 'category', slugify(key)),
         value: budgetPerCategory[key]
       };
@@ -90,12 +91,8 @@ var Category = React.createClass({
     const markers = getProjectCentroids(categoryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
-    const categoryBudgets = categoryProjects
-      .map((project) => project.budget)
-      .reduce((a, b) => a.concat(b), []);
-
     const chartData = categoryProjects.map((project) => ({
-      name: project.name,
+      name: getProjectName(project, lang),
       link: path.resolve(basepath, 'projects', project.id),
       value: project.budget.reduce((cur, item) => cur + item.fund.amount, 0),
       project
@@ -107,7 +104,10 @@ var Category = React.createClass({
       value: ProjectCard.percentComplete(d.project)
     }));
 
-    const totalBudget = categoryBudgets.reduce((currentValue, budget) => {
+    const totalBudget = categoryProjects
+    .map((project) => project.budget)
+    .reduce((a, b) => a.concat(b), [])
+    .reduce((currentValue, budget) => {
       return budget.fund.amount + currentValue;
     }, 0);
 

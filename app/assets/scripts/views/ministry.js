@@ -13,6 +13,7 @@ import ProjectTimeline from '../components/project-timeline';
 import { shortTally, shortText } from '../utils/format';
 import slugify from '../utils/slugify';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
+import { getProjectName } from '../utils/accessors';
 
 var Ministry = React.createClass({
   displayName: 'Ministry',
@@ -29,32 +30,22 @@ var Ministry = React.createClass({
     if (projects.length === 0) {
       return <div></div>; // TODO loading indicator
     }
-    const basepath = '/' + this.props.meta.lang;
-
-    const ministryName = this.props.params.name;
-    let ministryDisplayName;
-
-    let ministryProjects = projects.filter((project) => {
-      const name = project.responsible_ministry.en;
-      const sluggedName = slugify(name);
-      if (sluggedName === ministryName) {
-        ministryDisplayName = name;
-      }
-      return sluggedName === ministryName;
-    });
+    const { lang } = this.props.meta;
+    const basepath = '/' + lang;
+    const sluggedName = this.props.params.name;
+    const ministryProjects = projects.filter(project => get(project, 'responsible_ministry.en') && sluggedName === slugify(project.responsible_ministry.en));
+    const ministryDisplayName = get(ministryProjects, [0, 'responsible_ministry', lang]);
 
     const markers = getProjectCentroids(ministryProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const chartData = ministryProjects.map((project) => {
       return {
-        name: project.name,
+        name: getProjectName(project, lang),
         link: path.resolve(basepath, 'projects', project.id),
         value: project.number_served.number_served
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
-
-    const { lang } = this.props.meta;
 
     const singleProject = ministryProjects.length <= 1 ? ' funding--single' : '';
     const activeProjects = ministryProjects.filter((project) => project.actual_end_date);
@@ -89,8 +80,8 @@ var Ministry = React.createClass({
                     ministryActiveProjects={activeProjects}
                     chartData={csvChartData}
                     lang={lang} /></li>
-                  <li><Print lang={this.props.meta.lang} /></li>
-                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
+                  <li><Print lang={lang} /></li>
+                  <li><Share path={this.props.location.pathname} lang={lang}/></li>
                 </ul>
               </div>
               <h1 className='inpage__title heading--deco heading--large'>{ministryDisplayName}</h1>
@@ -99,8 +90,8 @@ var Ministry = React.createClass({
               if (!project.actual_end_date) {
                 return (
                   <div key ={'timeline-' + i}>
-                    <h5>{project.name}</h5>
-                    <ProjectTimeline project={project} lang={this.props.meta.lang}/>
+                    <h5>{getProjectName(project)}</h5>
+                    <ProjectTimeline project={project} lang={lang}/>
                   </div>
                 );
               }
@@ -121,16 +112,16 @@ var Ministry = React.createClass({
                   <li> {ministryProjects.length} <small>Total {ministryProjects.length > 1 ? 'Projects' : 'Project'}</small></li>
                 </ul>
                 <div className='inpage__overview-chart'>
-                  <div className='chart-content'>
+                  {chartData.length > 1 && (<div className='chart-content'>
                     <h3>Number Served</h3>
-                    {!singleProject && (<HorizontalBarChart
-                      lang={this.props.meta.lang}
+                    <HorizontalBarChart
+                      lang={lang}
                       data={chartData}
                       margin={{ left: 140, right: 50, top: 10, bottom: 50 }}
                       xFormat={shortTally}
                       yFormat={shortText}
-                    />)}
-                  </div>
+                    />
+                  </div>)}
                 </div>
               </div>
             </section>
@@ -143,7 +134,7 @@ var Ministry = React.createClass({
                 {ministryProjects.map((p) => {
                   return (
                     <li key={p.id} className='projects-list__card'>
-                      <ProjectCard lang={this.props.meta.lang}
+                      <ProjectCard lang={lang}
                         project={p} />
                     </li>
                   );

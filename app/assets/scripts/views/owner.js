@@ -12,6 +12,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { shortTally, shortText } from '../utils/format';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import slugify from '../utils/slugify';
+import { getProjectName } from '../utils/accessors';
 
 var Owner = React.createClass({
   displayName: 'Owner',
@@ -29,28 +30,17 @@ var Owner = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const basepath = '/' + this.props.meta.lang;
-
     const ownerName = this.props.params.name;
-    let ownerDisplayName;
-
+    const ownerProjects = projects.filter(project => project.local_manager && ownerName === slugify(project.local_manager));
     const lang = this.props.meta.lang;
-    const ownerProjects = projects.filter((project) => {
-      let name = project.local_manager;
-      if (name) {
-        const sluggedName = slugify(name);
-        if (sluggedName === ownerName) {
-          ownerDisplayName = name;
-        }
-        return sluggedName === ownerName;
-      }
-    });
+    const ownerDisplayName = lang === 'ar' ? get(ownerProjects, '0.local_manager_ar') : get(ownerProjects, '0.local_manager');
 
     const markers = getProjectCentroids(ownerProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);
 
     const chartData = ownerProjects.map((project) => {
       return {
-        name: project.name,
+        name: getProjectName(project, lang),
         link: path.resolve(basepath, 'projects', project.id),
         value: project.number_served.number_served
       };

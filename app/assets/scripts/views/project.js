@@ -12,6 +12,7 @@ import { tally, shortTally, pct, shortText, ontimeLookup, currency } from '../ut
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
+import { getDonorName, getProjectName } from '../utils/accessors';
 import { window } from 'global';
 
 import Map from '../components/map';
@@ -103,7 +104,7 @@ var Project = React.createClass({
     // All three project comparison charts need to have the same ordering in the Y axis,
     // so don't do any more sorting after the budget map.
     const budgets = allProjects.map((project) => ({
-      name: project.name,
+      name: getProjectName(project, lang),
       value: get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
       link: path.resolve(basepath, 'projects', project.id),
       project: project
@@ -122,8 +123,8 @@ var Project = React.createClass({
     }));
 
     const donors = get(data, 'budget', []).map((donor) => ({
-      name: donor.donor_name,
-      link: path.resolve(basepath, 'donor', slugify(donor.donor_name)),
+      name: getDonorName(donor, lang),
+      link: linkPath(basepath, 'donor', donor.donor_name),
       value: donor.fund.amount
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
@@ -137,7 +138,7 @@ var Project = React.createClass({
       value: d.value
     }));
 
-    const t = get(window.t, [this.props.meta.lang, 'project_pages'], {});
+    const t = get(window.t, [lang, 'project_pages'], {});
 
     const csvChartData = [
       {
@@ -145,18 +146,25 @@ var Project = React.createClass({
         data: donors
       },
       {
-        title: 'Funding By Category',
+        title: 'Funding By Project',
         data: budgets
       },
       {
-        title: 'Percentage Complete By Category',
+        title: 'Percentage Complete',
         data: completion
       },
       {
-        title: 'Beneficiaries Reached By Category',
+        title: 'Beneficiaries Reached',
         data: served
       }
     ];
+
+    // Handle the annoying _ar data properties
+    const isArabic = lang === 'ar';
+    const projectDisplayName = isArabic ? data.name_ar : data.name;
+    const localManager = isArabic ? data.local_manager_ar : data.local_manager;
+    const description = isArabic ? data.description_ar : data.description;
+    const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
 
     return (
       <section className='inpage'>
@@ -172,9 +180,9 @@ var Project = React.createClass({
                       chartData={csvChartData}
                       disbursement={disbursement}
                       kmiData={data.kmi}
-                      lang={this.props.meta.lang} /></li>
-                  <li><Print lang={this.props.meta.lang} /></li>
-                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
+                      lang={lang} /></li>
+                  <li><Print lang={lang} /></li>
+                  <li><Share path={this.props.location.pathname} lang={lang}/></li>
                 </ul>
               </div>
               <dl className={'inpage-meta project--' + ontime}>
@@ -185,9 +193,9 @@ var Project = React.createClass({
                 <dt className='inpage-meta__label'>{t.last_update_title}: </dt>
                 <dd className='inpage-meta__value'>&nbsp;{lastUpdated}</dd>
               </dl>
-              <h1 className='inpage__title heading--deco heading--large'>{meta.name}</h1>
+              <h1 className='inpage__title heading--deco heading--large'>{projectDisplayName}</h1>
             </div>
-            <ProjectTimeline project={data} lang={this.props.meta.lang}/>
+            <ProjectTimeline project={data} lang={lang}/>
 
             <div className='tags'>
               <div className='tags__group'>
@@ -202,7 +210,7 @@ var Project = React.createClass({
                 <p className='tags__label'>{t.donors_title}:</p>
                 <div className='inpage__subtitles'>
                   {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
-                      <Link to={linkPath(basepath, 'donor', donor.name)} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
+                      <Link to={donor.link} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
                     </span>)}
                 </div>
               </div>
@@ -220,7 +228,7 @@ var Project = React.createClass({
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
                   <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
-                  <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
+                  <li>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
                 </ul>
                 {disbursedFunds.loan || disbursedFunds.grant
                   ? <ul className='inpage-stats'>
@@ -235,7 +243,7 @@ var Project = React.createClass({
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>
-                  <li>{data.description}</li>
+                  <li>{description}</li>
                 </ul>
                 {data.location && (
                   <div className='overview-item'>
@@ -269,16 +277,16 @@ var Project = React.createClass({
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>{t.responsible_ministry_title}</h2>
                     <ul className='link-list'>
-                      <li><a href={`#/${lang}/ministry/${slugify(data.responsible_ministry[lang])}`} className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
+                      <li><a href={`#/${lang}/ministry/${slugify(data.responsible_ministry.en)}`} className='link--primary'><span>{data.responsible_ministry[lang]}</span></a></li>
                     </ul>
                   </div>
                 )}
 
-                {((lang === 'en' && data.local_manager) || lang === 'ar' && data.local_manager_ar) && (
+                {localManager && (
                   <div className='overview-item'>
                     <h2 className='overview-item__title heading-alt'>{t.local_manager_title}</h2>
                     <ul className='link-list'>
-                      <li><a href={`#/${lang}/owner/${slugify(data.local_manager)}`} className='link--primary'><span>{lang === 'en' ? data.local_manager : data.local_manager_ar}</span></a></li>
+                      <li><a href={`#/${lang}/owner/${slugify(data.local_manager)}`} className='link--primary'><span>{localManager}</span></a></li>
                     </ul>
                   </div>
                 )}
@@ -337,7 +345,7 @@ var Project = React.createClass({
                 <div className={'chart-content chart__inline--labels' + (!authenticated ? ' chart__block' : '')}>
                   <h3>{t.funding_by_donor_title}</h3>
                   <HorizontalBarChart
-                    lang={this.props.meta.lang}
+                    lang={lang}
                     data={donors}
                     margin={barChartMargin}
                     yTitle=''
@@ -352,7 +360,7 @@ var Project = React.createClass({
                       margin={barChartMargin}
                       yTitle=''
                       xFormat={shortTally}
-                      lang={this.props.meta.lang}
+                      lang={lang}
                     />
                   </div>
                 ) : null}
@@ -398,38 +406,38 @@ var Project = React.createClass({
               <div className='chart-content chart__inline--labels'>
                 <h3>{t.comparison_chart_title1}</h3>
                 <HorizontalBarChart
-                  lang={this.props.meta.lang}
+                  lang={lang}
                   data={budgets}
                   margin={barChartMargin}
                   yTitle=''
                   xFormat={shortTally}
                   yFormat={shortText}
-                  activeProject={meta.name}
+                  activeProject={projectDisplayName}
                 />
               </div>
               <div className='chart-content chart__inline--labels'>
                 <h3>{t.comparison_chart_title2}</h3>
                 <HorizontalBarChart
-                  lang={this.props.meta.lang}
+                  lang={lang}
                   data={completion}
                   margin={barChartMargin}
                   yTitle=''
                   xFormat={pct}
                   yFormat={shortText}
-                  activeProject={meta.name}
+                  activeProject={projectDisplayName}
                 />
               </div>
               {authenticated ? (
                 <div className='chart-content chart__inline--labels'>
                   <h3>{t.comparision_chart_title3}</h3>
                   <HorizontalBarChart
-                    lang={this.props.meta.lang}
+                    lang={lang}
                     data={served}
                     margin={barChartMargin}
                     yTitle=''
                     xFormat={tally}
                     yFormat={shortText}
-                    activeProject={meta.name}
+                    activeProject={projectDisplayName}
                   />
                 </div>
               ) : null}
@@ -444,7 +452,7 @@ var Project = React.createClass({
                     <li key={p.id}
                       className='projects-list__card'>
                       <ProjectCard
-                        lang={this.props.meta.lang}
+                        lang={lang}
                         project={p}
                       />
                     </li>
