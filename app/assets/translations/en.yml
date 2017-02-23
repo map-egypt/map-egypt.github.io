@@ -47,6 +47,8 @@ project_pages:
   status_label: "Status:"
   status_ontime: On Time
   status_delayed: Delayed
+  status_extended: Extended
+  status_closed: Closed
   last_update_title: Last Update
   current_progress_title: Current Progress
   proposed_timeline_title: Proposed Timeline

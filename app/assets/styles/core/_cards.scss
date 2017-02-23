@@ -109,6 +109,9 @@
         .project--extended & {
           background: $partial-success-color;
         }
+        .project--closed & {
+          background: rgba($base-font-color, 0.5);;
+        }
       }
     }
     &--location {

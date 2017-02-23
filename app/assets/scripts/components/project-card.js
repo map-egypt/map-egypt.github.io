@@ -5,7 +5,7 @@ import { Link } from 'react-router';
 import { get } from 'object-path';
 import { parseProjectDate } from '../utils/date';
 import slugify from '../utils/slugify';
-import { tally, shortTally, pct, shortParagraph, ontimeLookup, currency } from '../utils/format';
+import { tally, shortTally, pct, shortParagraph, currency } from '../utils/format';
 import getLocation from '../utils/location';
 import { getProjectName, getDescription } from '../utils/accessors';
 
@@ -24,6 +24,8 @@ function isOntime (project) {
   // if projects are both delayed and extended, they should be classed as delayed
   if (!plannedStart) {
     return null;
+  } else if (actualEnd && actualEnd < new Date().getTime()) {
+    return 'closed';
   } else if (projectDelayed) {
     return 'delayed';
   } else if (projectExtended) {
@@ -74,6 +76,7 @@ var ProjectCard = React.createClass({
       }
     });
 
+    const t = get(window.t, [lang, 'project_pages'], {});
     return (
       <div className='project'>
         <article className={statusClass}>
@@ -90,7 +93,7 @@ var ProjectCard = React.createClass({
             <div className='card__body'>
               <dl className='card-meta'>
                 <dt className='card-meta__label'>Status</dt>
-                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{ontimeLookup[ontime]}</dd>
+                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{t['status_' + ontime]}</dd>
                 <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>

@@ -48,6 +48,8 @@ project_pages:
   status_label: Status
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
+  status_extended: Extended
+  status_closed: Closed
   last_update_title: 'التحديث الأخير'
   current_progress_title: 'التقدم الحالي'
   proposed_timeline_title: 'الجدول الزمني المقترح'
