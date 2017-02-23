@@ -223,12 +223,14 @@ var Project = React.createClass({
                   <li>{tally(data.number_served.number_served)} <small>{data.number_served.number_served_unit}</small></li>
                 </ul>
                 {disbursedFunds.loan || disbursedFunds.grant
+                  ? <ul className='inpage-stats'>
                       {disbursedFunds.loan
                         ? <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
                         : ''}
                       {disbursedFunds.grant
                         ? <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
                         : ''}
+                </ul>
                   : ''}
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
