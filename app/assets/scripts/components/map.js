@@ -16,8 +16,8 @@ const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd
 const satelliteLayer = 'mapbox.satellite';
 
 const BOUNDS = [
-  [11.6485513,40.459639],
-  [19.832937,54.8901821]
+  [11.898260, 42.736816],
+  [19.008892, 53.151855]
 ];
 
 const SEQUENTIAL = [
@@ -189,7 +189,7 @@ const Map = React.createClass({
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
       const id = isDistrict ? feature.properties.id : feature.properties.governorat;
-      const name = isDistrict ? get(byIdDist(id), 'name') : get(byEgyGove(id), 'name');
+      const name = isDistrict ? get(byIdDist(id), 'name') : get(byYemGove(id), 'name');
 
       return `
       <div class='marker__internal'>
