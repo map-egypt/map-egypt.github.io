@@ -42,7 +42,7 @@ export default function reducer (state = initialState, action) {
       if (action.data.name === DISTRICT) {
         get(action.data.features, 'features', []).forEach((feature) => {
           let id = feature.properties.Qism_Mar_1;
-          feature.properties.admin_id = 'EGY' + id;
+          feature.properties.admin_id = 'YEM' + id;
         });
       }
       set(state, ['geography', action.data.name], action.data.features);

@@ -31,7 +31,7 @@ var PageFooter = React.createClass({
                 <h1 className='updates__title heading--xsmall'>{t.subscription_title}</h1>
                 <p className='updates__description'>{t.subscription_subtitle} <span className='italic'>{t.subscription_subtitle_timeframe}</span>.</p>
                 <div id='mc_embed_signup'>
-                  <form action='//github.us14.list-manage.com/subscribe/post?u=7a02eb473bd111aa85bfb7ffc&amp;id=120d44b3d2' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' className='validate form__input-group' target='_blank' noValidate>
+                  <form action='//github.us15.list-manage.com/subscribe?u=894bba1697000794bd3b3af0b&id=302df7ea11' method='post' id='mc-embedded-subscribe-form' name='mc-embedded-subscribe-form' className='validate form__input-group' target='_blank' noValidate>
                     <input type='email' value={this.state.email} placeholder={t.email_field} name='EMAIL' className='required email form__control form__control--large' id='form-input-6' onChange={this.onChange}/>
                     <div id='mce-responses' className='clear'>
                       <div className='response' id='mce-error-response' style={{'display': 'none'}}></div>
