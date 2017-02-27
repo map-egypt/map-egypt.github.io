@@ -269,7 +269,7 @@
   line-height: 1.5rem;
   overflow: hidden;
   @include media(medium-up) {
-    font-size: 3.25rem;
+    font-size: 3rem;
     line-height: 2.75rem;
   }
 
@@ -285,6 +285,7 @@
     @include media(medium-down) {
       box-shadow: none;
       font-size: .8em;
+      padding-right: 1rem;
     }
     &:last-child {
       box-shadow: none;
