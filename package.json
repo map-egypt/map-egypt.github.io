@@ -1,10 +1,10 @@
 {
-  "name": "map-egypt",
+  "name": "map-yemen",
   "version": "1.0.0",
   "description": "",
   "repository": {
     "type": "git",
-    "url": "https://github.com/map-egypt/map-egypt.github.io"
+    "url": "https://github.com/map-yemen/map-yemen.github.io"
   },
   "author": {
     "name": "Development Seed",
@@ -12,9 +12,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/map-egypt/map-egypt.github.io/issues"
+    "url": "https://github.com/map-yemen/map-yemen.github.io/issues"
   },
-  "homepage": "https://github.com/map-egypt/map-egypt.github.io",
+  "homepage": "https://github.com/map-yemen/map-yemen.github.io",
   "scripts": {
     "postinstall": "[ -f app/assets/scripts/config/local.js ] || echo 'module.exports = {};' > app/assets/scripts/config/local.js",
     "serve": "gulp collecticons && DS_ENV=development NODE_ENV=development gulp serve",
