@@ -1,33 +1,25 @@
 'use strict';
 
 const governorates = [
-  {'egy': 'EGY1163', 'name': 'Alexandria', 'id': 2, 'nameAr': 'اسكندرية'},
-  {'egy': 'EGY1173', 'name': 'Aswan', 'id': 28, 'nameAr': 'أسوان'},
-  {'egy': 'EGY1174', 'name': 'Asyout', 'id': 25, 'nameAr': 'أسيوط'},
-  {'egy': 'EGY1159', 'name': 'Behera', 'id': 18, 'nameAr': 'البحيرة'},
-  {'egy': 'EGY1175', 'name': 'Beni-Suef', 'id': 22, 'nameAr': 'بني سويف'},
-  {'egy': 'EGY1167', 'name': 'Cairo', 'id': 1, 'nameAr': 'القاهرة'},
-  {'egy': 'EGY1160', 'name': 'Dakahlia', 'id': 12, 'nameAr': 'الدقهلية'},
-  {'egy': 'EGY1177', 'name': 'Damietta', 'id': 11, 'nameAr': 'دمياط'},
-  {'egy': 'EGY1161', 'name': 'Fayoum', 'id': 23, 'nameAr': 'الفيوم'},
-  {'egy': 'EGY1162', 'name': 'Gharbia', 'id': 16, 'nameAr': 'الغربية'},
-  {'egy': 'EGY1164', 'name': 'Giza', 'id': 21, 'nameAr': 'الجيزة'},
-  {'egy': 'EGY1170', 'name': 'Ismailia', 'id': 19, 'nameAr': 'الإسماعيلية'},
-  {'egy': 'EGY1179', 'name': 'Kafr-ElSheikh', 'id': 15, 'nameAr': 'كفر الشيخ'},
-  {'egy': 'EGY1184', 'name': 'Luxor', 'id': 29, 'nameAr': 'الأقصر'},
-  {'egy': 'EGY1180', 'name': 'Matrouh', 'id': 33, 'nameAr': 'مطروح'},
-  {'egy': 'EGY1166', 'name': 'Menia', 'id': 24, 'nameAr': 'المنيا'},
-  {'egy': 'EGY1165', 'name': 'Menoufia', 'id': 17, 'nameAr': 'المنوفية'},
-  {'egy': 'EGY1169', 'name': 'New Valley', 'id': 32, 'nameAr': 'الوادي الجديد'},
-  {'egy': 'EGY1182', 'name': 'North Sinai', 'id': 34, 'nameAr': 'شمال سيناء'},
-  {'egy': 'EGY1176', 'name': 'Port Said', 'id': 3, 'nameAr': 'بورسعيد'},
-  {'egy': 'EGY1168', 'name': 'Qalyoubia', 'id': 14, 'nameAr': 'القليوبية'},
-  {'egy': 'EGY1181', 'name': 'Qena', 'id': 27, 'nameAr': 'قنا'},
-  {'egy': 'EGY1158', 'name': 'Red Sea', 'id': 31, 'nameAr': 'البحر الأحمر'},
-  {'egy': 'EGY1172', 'name': 'Sharqia', 'id': 13, 'nameAr': 'الشرقية'},
-  {'egy': 'EGY1183', 'name': 'Sohag', 'id': 26, 'nameAr': 'سوهاج'},
-  {'egy': 'EGY1178', 'name': 'South Sinai', 'id': 35, 'nameAr': 'شمال سيناء'},
-  {'egy': 'EGY1171', 'name': 'Suez', 'id': 4, 'nameAr': 'السويس'}
+  {'yem': 'YEM01', 'name': 'Ibb', 'id': 11, 'nameAr': 'إب'},
+  {'yem': 'YEM02', 'name': 'Al Jawf', 'id': 16, 'nameAr': 'الجوف'},
+  {'yem': 'YEM03', 'name': 'Al Hodieda', 'id': 18, 'nameAr': 'الحديده'},
+  {'yem': 'YEM04', 'name': 'Sana\'a City', 'id': 13, 'nameAr': 'أمانة العاصمة'},
+  {'yem': 'YEM05', 'name': 'Abyan', 'id': 12, 'nameAr': 'أبين'},
+  {'yem': 'YEM06', 'name': 'Al Baidha', 'id': 14, 'nameAr': 'البيضاء'},
+  {'yem': 'YEM07', 'name': 'Addhale', 'id': 30, 'nameAr': 'الضالع'},
+  {'yem': 'YEM08', 'name': 'Al Mahweet', 'id': 27, 'nameAr': 'المحويت'},
+  {'yem': 'YEM09', 'name': 'Al Mahara', 'id': 28, 'nameAr': 'المهره'},
+  {'yem': 'YEM10', 'name': 'Dhamar', 'id': 20, 'nameAr': 'ذمار'},
+  {'yem': 'YEM11', 'name': 'Taiz', 'id': 15, 'nameAr': 'تعز'},
+  {'yem': 'YEM12', 'name': 'Rayma', 'id': 31, 'nameAr': 'ريمة'},
+  {'yem': 'YEM13', 'name': 'Hajja', 'id': 17, 'nameAr': 'حجه'},
+  {'yem': 'YEM14', 'name': 'Shabwa', 'id': 21, 'nameAr': 'شبوة'},
+  {'yem': 'YEM15', 'name': 'Sa\'ada', 'id': 22, 'nameAr': 'صعدة'},
+  {'yem': 'YEM16', 'name': 'Sana\'a', 'id': 23, 'nameAr': 'صنعاء'},
+  {'yem': 'YEM17', 'name': 'Amran', 'id': 29, 'nameAr': 'عمران'},
+  {'yem': 'YEM18', 'name': 'Laheg', 'id': 25, 'nameAr': 'لحج'},
+  {'yem': 'YEM19', 'name': 'Mareb', 'id': 26, 'nameAr': 'مأرب'}
 ];
 
 module.exports.byId = function (id) {
@@ -36,8 +28,8 @@ module.exports.byId = function (id) {
   return result;
 };
 
-module.exports.byEgy = function (egy) {
-  const result = governorates.find((d) => d.egy === egy);
+module.exports.byEgy = function (yem) {
+  const result = governorates.find((d) => d.yem === yem);
   return result;
 };
 
