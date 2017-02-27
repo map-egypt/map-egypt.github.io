@@ -5,7 +5,7 @@ import * as governoratesMeta from './governorates';
 import * as districtsMeta from './districts';
 import { isOntime } from '../components/project-card';
 
-export const GOVERNORATE = 'egy2';
+export const GOVERNORATE = 'boundary';
 export const DISTRICT = 'districts';
 
 export const hasDistrictData = function (location) {
@@ -28,7 +28,7 @@ export const getProjectCentroids = function (projects, features) {
 
   const regions = {};
   projects.forEach(function (project) {
-    get(project, 'location', []).forEach(function (location) {
+    (get(project, 'location', []) || []).forEach(function (location) {
       const isDistrict = hasDistrictData(location);
       const id = isDistrict ? location.district.district : location.district.governorate;
       regions[id] = regions[id] || { isDistrict, projects: [] };
@@ -44,7 +44,7 @@ export const getProjectCentroids = function (projects, features) {
       feature = districts.find((f) => f.properties.id === meta.id);
     } else {
       meta = governoratesMeta.byId(id);
-      feature = governorates.find((f) => f.properties.admin_id === meta.egy);
+      feature = governorates.find((f) => f.properties.governorat * 1 === meta.yem.substring(3) * 1);
     }
     const centroid = get(getCentroid(feature), 'geometry.coordinates');
     if (centroid) {
