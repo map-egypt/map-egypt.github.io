@@ -240,7 +240,7 @@ var Project = React.createClass({
                       {disbursedFunds.grant
                         ? <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
                         : ''}
-                    </ul>
+                </ul>
                   : ''}
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
