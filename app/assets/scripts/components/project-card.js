@@ -92,9 +92,8 @@ var ProjectCard = React.createClass({
             </header>
             <div className='card__body'>
               <dl className='card-meta'>
-                <dt className='card-meta__label'>Status</dt>
+                <dd className='card-meta__value card-meta__value--timeline'>{project.status[lang]}</dd>
                 <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{t['status_' + ontime]}</dd>
-                <dt className='card-meta__label'>Location</dt>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>
               <p>{shortParagraph(getDescription(project, lang))}</p>
