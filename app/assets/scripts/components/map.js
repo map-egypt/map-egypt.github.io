@@ -297,7 +297,7 @@ const Map = React.createClass({
     );
   },
 
-  renderOverlayLegend: function (scale) {
+  renderOverlayLegend: function (scale, units) {
     const isQuantile = scale.hasOwnProperty('invertExtent');
     let iterable = (isQuantile ? scale.range() : scale.domain());
     iterable.sort((a, b) => b - a);
@@ -316,12 +316,15 @@ const Map = React.createClass({
           let backgroundColor = isQuantile ? d : scale(d);
           let text = isQuantile ? scale.invertExtent(d).map(roundedNumber).join(' - ') : d;
           return (
-            <span key={d} className='legend__item legend__overlay--item'>
-              <span className='legend__item--overlay--bg' style={{backgroundColor}}></span>
-              <span className='legend__item--overlay-text'>{convertId && !isQuantile ? idLookup[text] : text}</span>
-            </span>
+            <dl key={d} className='legend__item legend__overlay--item'>
+              <dt className='legend__item--overlay--bg' style={{backgroundColor}}></dt>
+              <dt className='legend__item--overlay-text'>{convertId && !isQuantile ? idLookup[text] : text}</dt>
+            </dl>
           );
         })}
+        <span className='legend__overlay--units'>
+          {units && units.toLowerCase() !== 'unknown' ? units : ''}
+        </span>
       </span>
     );
   },
@@ -333,7 +336,7 @@ const Map = React.createClass({
         <div className='inner'>
           <div className='legend__container'>
             {this.renderMarkerLegend()}
-            {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale)}
+            {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale, this.props.overlay.units)}
           </div>
         </div>
       </div>
