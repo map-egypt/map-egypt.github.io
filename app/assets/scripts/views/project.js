@@ -161,7 +161,7 @@ var Project = React.createClass({
 
     // Handle the annoying _ar data properties
     const isArabic = lang === 'ar';
-    const projectDisplayName = isArabic ? data.name_ar : data.name;
+    const projectDisplayName = isArabic ? data.nameAr : data.name;
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;

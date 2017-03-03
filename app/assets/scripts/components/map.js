@@ -187,9 +187,11 @@ const Map = React.createClass({
       });
     }
 
+    var that = this;
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
       const id = isDistrict ? feature.properties.id : feature.properties.admin_id;
-      const name = isDistrict ? get(byIdDist(id), 'name') : get(byYemGove(id), 'name');
+      const nameKey = (that.props.lang === 'ar') ? 'nameAr' : 'name';
+      const name = isDistrict ? get(byIdDist(id), nameKey) : get(byYemGove(id), nameKey);
 
       return `
       <div class='marker__internal'>

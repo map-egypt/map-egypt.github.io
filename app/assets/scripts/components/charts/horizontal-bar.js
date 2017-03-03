@@ -4,6 +4,7 @@ import { scaleLinear, scaleBand } from 'd3-scale';
 import { debounce, throttle, max } from 'lodash';
 import Axis from './axis';
 import { byYem } from '../../utils/governorates';
+import { byId } from '../../utils/districts';
 
 var HorizontalBarChart = React.createClass({
   displayName: 'HorizontalBarChart',
@@ -73,6 +74,7 @@ var HorizontalBarChart = React.createClass({
         right: margin.left
       });
     }
+    this.state.height = Math.max(this.state.height, data.length * 2 + margin.top + margin.bottom);
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
@@ -84,8 +86,12 @@ var HorizontalBarChart = React.createClass({
     const langSelector = rtl ? 'nameAr' : 'name';
     data.map((a, i) => {
       let name = a.name;
-      if (name && name.substring(0, 3) === 'YEM') {
-        name = byYem(name)[langSelector];
+      if (name && name.indexOf('YEM') === 0) {
+        if (name.length === 5) {
+          name = byYem(name)[langSelector];
+        } else if (name.length === 7) {
+          name = byId(name.substring(3))[langSelector];
+        }
       }
       data[i].name = name;
     });
