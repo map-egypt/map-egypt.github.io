@@ -34,7 +34,6 @@
       margin-bottom: 0.5rem;
     }
   }
-
 }
 
 .card__categories {
@@ -43,7 +42,11 @@
 
 .card-meta__value--timeline {
   margin-right: 0.75rem;
+  padding-right: .5rem;
+  border-right: 1px solid $base-color;
 }
+
+
 
 /* Project cards specifics
    ========================================================================== */
@@ -87,7 +90,7 @@
 
   &__value {
     line-height: 1rem;
-    margin-bottom: 0;
+    margin-bottom: .5em;
     float: left;
 
     &--status {
