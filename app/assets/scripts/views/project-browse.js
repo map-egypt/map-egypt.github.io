@@ -541,7 +541,8 @@ var ProjectBrowse = React.createClass({
           overlay = {
             id: indicatorData.id,
             mapid: indicatorData.data.data,
-            category: indicatorData.data.category
+            category: indicatorData.data.category,
+            units: indicatorData.data.units
           };
         } else {
           // Indicators have a data_geography property, type boolean.
@@ -558,6 +559,7 @@ var ProjectBrowse = React.createClass({
                 value: d.data_value
               })).filter(d => typeof d.value !== 'undefined'),
               category: indicatorData.data.category,
+              units: indicatorData.data.units,
               regions
             };
           }
@@ -573,6 +575,7 @@ var ProjectBrowse = React.createClass({
     }
 
     const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
+
     return (
       <section className='inpage project-browse'>
         <header className='inpage__header'>
