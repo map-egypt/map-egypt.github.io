@@ -22,7 +22,7 @@ import { window } from 'global';
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
 const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
-const barChartMargin = { left: 75, right: 20, top: 10, bottom: 50 };
+const barChartMargin = { left: 145, right: 20, top: 10, bottom: 50 };
 
 function countByProp (array, path) {
   const result = {};
