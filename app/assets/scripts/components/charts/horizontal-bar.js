@@ -74,7 +74,7 @@ var HorizontalBarChart = React.createClass({
         right: margin.left
       });
     }
-    this.state.height = Math.max(this.state.height, data.length * 2 + margin.top + margin.bottom);
+    this.setState({height: Math.max(this.state.height, data.length * 2 + margin.top + margin.bottom)});
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
