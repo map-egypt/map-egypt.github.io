@@ -19,7 +19,9 @@ const governorates = [
   {'yem': 'YEM23', 'name': 'Sana\'a', 'id': 23, 'nameAr': 'صنعاء'},
   {'yem': 'YEM29', 'name': 'Amran', 'id': 29, 'nameAr': 'عمران'},
   {'yem': 'YEM25', 'name': 'Laheg', 'id': 25, 'nameAr': 'لحج'},
-  {'yem': 'YEM26', 'name': 'Mareb', 'id': 26, 'nameAr': 'مأرب'}
+  {'yem': 'YEM26', 'name': 'Mareb', 'id': 26, 'nameAr': 'مأرب'},
+  {'yem': 'YEM19', 'name': 'Hadramout', 'id': 19, 'nameAr': 'حضرموت'},
+  {'yem': 'YEM24', 'name': 'Aden', 'id': 24, 'nameAr': 'عدن'}
 ];
 
 module.exports.byId = function (id) {
