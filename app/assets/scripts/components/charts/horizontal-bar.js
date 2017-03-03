@@ -3,7 +3,7 @@ import React from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { debounce, throttle, max } from 'lodash';
 import Axis from './axis';
-import { byEgy } from '../../utils/governorates';
+import { byYem } from '../../utils/governorates';
 
 var HorizontalBarChart = React.createClass({
   displayName: 'HorizontalBarChart',
@@ -84,8 +84,9 @@ var HorizontalBarChart = React.createClass({
     const langSelector = rtl ? 'nameAr' : 'name';
     data.map((a, i) => {
       let name = a.name;
-      if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name)[langSelector]);
-      if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name)[langSelector];
+      if (name && name.substring(0, 3) === 'YEM') {
+        name = byYem(name)[langSelector];
+      }
       data[i].name = name;
     });
 
