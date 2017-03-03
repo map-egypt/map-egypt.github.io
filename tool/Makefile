@@ -34,12 +34,12 @@ $(TMPDIR):
 $(GEOJSONDIR)/yem_boundary.geojson:
 	ogr2ogr -f GeoJSON -t_srs crs:84 \
 		geojson/yem_boundary.geojson \
-		shp/yem_boundary/yem_bnd_adm1_a.shp
+		shp/yem_boundary/yem_bnd_reduced.shp
 
 $(GEOJSONDIR)/yem_districts.geojson:
 	ogr2ogr -f GeoJSON -t_srs crs:84 \
 		geojson/yem_districts.geojson \
-		shp/yem_districts/yem_bnd_adm2_a.shp
+		shp/yem_districts/yem_dis_reduced.shp
 
 clean:
 	-rm -rf tmp geojson topojson
