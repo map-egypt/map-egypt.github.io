@@ -162,6 +162,7 @@
 .legend__container {
   position: relative;
   padding: 1em 0;
+  @extend .clearfix;
 }
 
 .home, .category {
@@ -212,8 +213,8 @@
 
 .legend__overlay--units {
   float: left;
-  font-size: 1rem;
-  line-height: 2rem;
+  font-size: .8rem;
+  margin-top: .8em;
   color: $base-color;
 }
 
