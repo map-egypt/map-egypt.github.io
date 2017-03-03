@@ -1,16 +1,16 @@
 'use strict';
 
 export const getDonorName = function (donor, lang) {
-  if (lang === 'ar' && donor.donor_nameAr) {
-    return donor.donor_nameAr;
+  if (lang === 'ar' && donor.donor_name_ar) {
+    return donor.donor_name_ar;
   } else {
     return donor.donor_name;
   }
 };
 
 export const getProjectName = function (project, lang) {
-  if (lang === 'ar' && project.nameAr) {
-    return project.nameAr;
+  if (lang === 'ar' && project.name_ar) {
+    return project.name_ar;
   } else {
     return project.name;
   }

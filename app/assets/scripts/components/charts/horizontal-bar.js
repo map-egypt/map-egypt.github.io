@@ -74,12 +74,11 @@ var HorizontalBarChart = React.createClass({
         right: margin.left
       });
     }
-    this.setState({height: Math.max(this.state.height, data.length * 2 + margin.top + margin.bottom)});
     const innerWidth = width - margin.left - margin.right;
     const innerHeight = height - margin.top - margin.bottom;
 
     // short circut if we have too small an area
-    if (innerWidth <= 0) {
+    if (innerWidth <= 0 || innerHeight <= data.length * 2) {
       return <div className='chart-container' ref='chartContainer' />;
     }
 
