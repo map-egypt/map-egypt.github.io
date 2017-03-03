@@ -41,7 +41,7 @@ export default function reducer (state = initialState, action) {
       // normalize district admin properties
       if (action.data.name === DISTRICT) {
         get(action.data.features, 'features', []).forEach((feature) => {
-          let id = feature.properties.Qism_Mar_1;
+          let id = feature.properties.id;
           feature.properties.admin_id = 'YEM' + id;
         });
       }

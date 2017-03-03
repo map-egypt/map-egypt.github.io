@@ -175,7 +175,7 @@ const Map = React.createClass({
     });
 
     regions.features.forEach(function (feature) {
-      feature.properties._value = get(idMap, feature.properties.governorat);
+      feature.properties._value = get(idMap, feature.properties.admin_id);
     });
 
     // for district features, use the geojson to determine district name
@@ -183,12 +183,12 @@ const Map = React.createClass({
     const districtNameMap = {};
     if (isDistrict) {
       regions.features.forEach(function (feature) {
-        districtNameMap[feature.properties.governorat] = feature.properties.District;
+        districtNameMap[feature.properties.admin_id] = feature.properties.District;
       });
     }
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
-      const id = isDistrict ? feature.properties.id : feature.properties.governorat;
+      const id = isDistrict ? feature.properties.id : feature.properties.admin_id;
       const name = isDistrict ? get(byIdDist(id), 'name') : get(byYemGove(id), 'name');
 
       return `
