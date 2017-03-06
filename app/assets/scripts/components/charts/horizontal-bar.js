@@ -32,7 +32,9 @@ var HorizontalBarChart = React.createClass({
 
   onWindowResize: function () {
     let rect = this.refs.chartContainer.getBoundingClientRect();
-    this.setState({ width: rect.width, height: rect.height });
+    const { data } = this.props;
+    this.setState({ width: rect.width });
+    this.setState({ height: (13.248 * data.length + 138.28) });
   },
 
   mouseover: function (x, y, data) {
@@ -75,12 +77,7 @@ var HorizontalBarChart = React.createClass({
       });
     }
     const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom;
-
-    // short circut if we have too small an area
-    if (innerWidth <= 0 || innerHeight <= data.length * 2) {
-      return <div className='chart-container' ref='chartContainer' />;
-    }
+    const innerHeight = 13.248 * data.length + 100;
 
     const langSelector = rtl ? 'nameAr' : 'name';
     data.map((a, i) => {
@@ -113,7 +110,7 @@ var HorizontalBarChart = React.createClass({
 
     return (
       <div className='chart-container' ref='chartContainer'>
-        <svg className='chart' width={width} height={height} ref='svg'>
+        <svg className='chart' width={width} height={13.248 * data.length + 138.28} ref='svg'>
           <Axis
             scale={axisScale}
             labels={xLabels}
