@@ -510,7 +510,7 @@ var ProjectBrowse = React.createClass({
     const deselectedClassNames = 'button button--primary-bounded';
 
     let mapLocation;
-    const governorateId = get(this.state, 'activeGovernorate.egy');
+    const governorateId = get(this.state, 'activeGovernorate.yem');
     if (governorateId) {
       const features = get(this.props.api, 'geography.' + GOVERNORATE + '.features', []);
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
