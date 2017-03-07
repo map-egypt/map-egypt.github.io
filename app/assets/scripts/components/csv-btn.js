@@ -15,6 +15,7 @@ var CSVBtn = React.createClass({
     lang: React.PropTypes.string,
     title: React.PropTypes.string,
     relatedProjects: React.PropTypes.array,
+    projects: React.PropTypes.array,
     project: React.PropTypes.object,
     chartData: React.PropTypes.array,
     disbursement: React.PropTypes.array,
@@ -30,14 +31,7 @@ var CSVBtn = React.createClass({
       let project = serialize.project(this.props.project, this.props.lang);
       csv += '\n\nProject Data\n\n';
       csv = csv.concat(serialize.serialize(project));
-    }
 
-    if (this.props.summary) {
-      csv += `\n\n${this.props.summary.title}\n\n`;
-      csv = csv.concat(serialize.serialize(serialize.summary(this.props.summary.data)));
-    }
-
-    if (this.props.project) {
       let locations = this.props.project.location.map((location) => {
         let governorate = byIdGove(location.district.governorate);
         if (governorate) {
@@ -57,6 +51,11 @@ var CSVBtn = React.createClass({
       locations = serialize.locations(locations);
       csv += '\n\nLocations\n\n';
       csv = csv.concat(serialize.serialize(locations));
+    }
+
+    if (this.props.summary) {
+      csv += `\n\n${this.props.summary.title}\n\n`;
+      csv = csv.concat(serialize.serialize(serialize.summary(this.props.summary.data)));
     }
 
     if (this.props.ministryActiveProjects) {
@@ -87,6 +86,12 @@ var CSVBtn = React.createClass({
     if (this.props.relatedProjects && this.props.relatedProjects.length) {
       let projects = serialize.relatedProjects(get(this.props, 'relatedProjects', []), this.props.lang);
       csv += '\n\nRelated Projects\n\n';
+      csv = csv.concat(serialize.serialize(projects));
+    }
+
+    if (this.props.projects && this.props.projects.length) {
+      let projects = serialize.relatedProjects(get(this.props, 'projects', []), this.props.lang);
+      csv += '\n\nProjects\n\n';
       csv = csv.concat(serialize.serialize(projects));
     }
 
