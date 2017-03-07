@@ -601,7 +601,6 @@ var ProjectBrowse = React.createClass({
                       chartData={csvCharts}
                       lang={lang} /></li>
                   <li><Print lang={lang} /></li>
-                  <li><Share path={this.props.location.pathname} lang={lang}/></li>
                 </ul>
               </div>
                 <h1 className='inpage__title heading--deco heading--large'>{t.projects_title}</h1>

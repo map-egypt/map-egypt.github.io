@@ -228,4 +228,37 @@
   td:nth-of-type(6):before { 
     content: "Date"; 
   }
+
+  /*projects page*/
+  .actions-toggle {
+    display: none;
+  }
+  .map__actions {
+    display: none;
+  }
+  .button--list {
+    display: none;
+  }
+  .inpage__description {
+    display: none;
+  }
+
+  .project-browse {
+    .inpage__header {
+      margin-top: 0;
+      page-break-after: avoid;
+    }
+  }
+  .indicator-close {
+    display: none;
+  }
+  .indicator__overlay {
+    box-shadow: none;
+    padding: 0;
+  }
+  .legend__overlay {
+    display: block;
+    clear: both;
+    margin-left: .6em;
+  }
 }

@@ -190,11 +190,13 @@
     padding: 0.25rem 1rem;
     color: inherit;
     transition: all 0.16s ease 0s;
+    text-align: left;
     &:hover,
     &:focus {
       color: $link-color;
       background-color: tint($link-color, 92%);
       opacity: 1;
+      text-align: left;
     }
   }
 }
