@@ -7,6 +7,8 @@ import ReactTooltip from 'react-tooltip';
 
 import { getIndicator } from '../actions';
 import Map from '../components/map';
+import Print from '../components/print-btn';
+import CSVBtn from '../components/csv-btn';
 import Share from '../components/share';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
@@ -320,6 +322,38 @@ var ProjectBrowse = React.createClass({
   selectListView: function () { this.setState({ listView: true }); },
   selectMapView: function () { this.setState({ listView: false }); },
 
+  createOverlay: function (indicatorData) {
+    if (!indicatorData) { return null; }
+    const { id, data } = indicatorData;
+    const overlay = {
+      id,
+      category: data.category,
+      units: data.units
+    };
+
+    // if we have an external mapbox id, skip the other checks
+    if (typeof data.data === 'string') {
+      overlay.mapid = data.data;
+      return overlay;
+    } else {
+      // Indicators have a data_geography property, type boolean.
+      // true = governorate, false = district.
+      // Default to governorates if no property exists.
+      let adminLevel = (!data.hasOwnProperty('data_geography') ||
+                        data.data_geography) ? GOVERNORATE : DISTRICT;
+      const regions = get(this.props.api, 'geography.' + adminLevel);
+      if (regions) {
+        overlay.values = data.data.map((d) => ({
+          id: d.sub_nat_id,
+          value: d.data_value
+        })).filter(d => typeof d.value !== 'undefined');
+        overlay.regions = regions;
+        return overlay;
+      }
+    }
+    return null;
+  },
+
   renderIndicatorSelector: function () {
     const { selectedIndicators, activeIndicatorTheme, activeIndicatorType } = this.state;
     const { lang } = this.props.meta;
@@ -532,49 +566,27 @@ var ProjectBrowse = React.createClass({
 
     let overlay;
     let indicatorChartData;
+    let csvCharts;
     if (activeIndicator) {
       const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
       const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
       if (indicatorData) {
-        // if we have an external mapbox id, skip the other checks
-        if (typeof indicatorData.data.data === 'string') {
-          overlay = {
-            id: indicatorData.id,
-            mapid: indicatorData.data.data,
-            category: indicatorData.data.category,
-            units: indicatorData.data.units
-          };
-        } else {
-          // Indicators have a data_geography property, type boolean.
-          // true = governorate, false = district.
-          // Default to governorates if no property exists.
-          let adminLevel = (!indicatorData.data.hasOwnProperty('data_geography') ||
-                            indicatorData.data.data_geography) ? GOVERNORATE : DISTRICT;
-          const regions = get(this.props.api, 'geography.' + adminLevel);
-          if (regions) {
-            overlay = {
-              id: indicatorData.id,
-              values: indicatorData.data.data.map((d) => ({
-                id: d.sub_nat_id,
-                value: d.data_value
-              })).filter(d => typeof d.value !== 'undefined'),
-              category: indicatorData.data.category,
-              units: indicatorData.data.units,
-              regions
-            };
-          }
-
-          if (this.state.listView) {
-            indicatorChartData = indicatorData.data.data.map(d => ({
-              name: d.sub_nat_id,
-              value: +d.data_value
-            }));
-          }
-        }
+        overlay = this.createOverlay(indicatorData);
+      }
+      if (indicatorData && Array.isArray(indicatorData.data.data)) {
+        indicatorChartData = indicatorData.data.data.map(d => ({
+          name: d.sub_nat_id,
+          value: isNaN(d.data_value) ? d.data_value : +d.data_value
+        }));
+        csvCharts = [{
+          title: activeIndicator,
+          data: indicatorChartData
+        }];
       }
     }
 
-    const t = get(window.t, [this.props.meta.lang, 'projects_indicators'], {});
+    const { lang } = this.props.meta;
+    const t = get(window.t, [lang, 'projects_indicators'], {});
 
     return (
       <section className='inpage project-browse'>
@@ -583,7 +595,13 @@ var ProjectBrowse = React.createClass({
             <div className='inpage__headline'>
              <div className='inpage__headline-actions'>
                 <ul>
-                  <li><Share path={this.props.location.pathname} lang={this.props.meta.lang}/></li>
+                  <li><CSVBtn
+                      title={'All Projects'}
+                      relatedProjects={projects || this.props.api.projects}
+                      chartData={csvCharts}
+                      lang={lang} /></li>
+                  <li><Print lang={lang} /></li>
+                  <li><Share path={this.props.location.pathname} lang={lang}/></li>
                 </ul>
               </div>
                 <h1 className='inpage__title heading--deco heading--large'>{t.projects_title}</h1>
@@ -663,7 +681,7 @@ var ProjectBrowse = React.createClass({
                           data={indicatorChartData}
                           margin={barChartMargin}
                           yTitle=''
-                          lang={this.props.meta.lang}
+                          lang={lang}
                         />
                       </div>
                     </div>
