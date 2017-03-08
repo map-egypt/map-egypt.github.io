@@ -169,28 +169,21 @@ const Map = React.createClass({
       }, OVERLAY_STYLE);
     };
 
+    const isDistrict = regions.features.length > 300;
+    const idName = isDistrict ? 'id' : 'admin_id';
     const idMap = {};
     values.forEach((value) => {
-      idMap[value.id] = category === 'categorical' ? value.value : +value.value;
+      isDistrict
+        ? idMap[value.id.substring(3, 7)] = category === 'categorical' ? value.value : +value.value
+        : idMap[value.id] = category === 'categorical' ? value.value : +value.value;
     });
-
     regions.features.forEach(function (feature) {
-      feature.properties._value = get(idMap, feature.properties.admin_id);
+      feature.properties._value = get(idMap, feature.properties[idName]);
     });
-
-    // for district features, use the geojson to determine district name
-    const isDistrict = regions.features.length > 300;
-    const districtNameMap = {};
-    if (isDistrict) {
-      regions.features.forEach(function (feature) {
-        districtNameMap[feature.properties.admin_id] = feature.properties.District;
-      });
-    }
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
-      const id = isDistrict ? feature.properties.id : feature.properties.admin_id;
+      const id = feature.properties[idName];
       const name = isDistrict ? get(byIdDist(id), 'name') : get(byEgyGove(id), 'name');
-
       return `
       <div class='marker__internal'>
         <h5 class='marker__title'>${name}</h5>
@@ -330,6 +323,7 @@ const Map = React.createClass({
   },
 
   render: function () {
+    // console.log(this.props.overlay)
     return (
       <div className='map__group'>
         <div className='map__container' ref={this.mountMap}></div>
