@@ -9,7 +9,6 @@ import { getIndicator } from '../actions';
 import Map from '../components/map';
 import Print from '../components/print-btn';
 import CSVBtn from '../components/csv-btn';
-import Share from '../components/share';
 import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
 import { isOntime } from '../components/project-card';
@@ -601,7 +600,6 @@ var ProjectBrowse = React.createClass({
                       chartData={csvCharts}
                       lang={lang} /></li>
                   <li><Print lang={lang} /></li>
-                  <li><Share path={this.props.location.pathname} lang={lang}/></li>
                 </ul>
               </div>
                 <h1 className='inpage__title heading--deco heading--large'>{t.projects_title}</h1>
