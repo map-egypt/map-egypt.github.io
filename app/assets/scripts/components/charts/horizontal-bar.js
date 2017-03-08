@@ -33,8 +33,8 @@ var HorizontalBarChart = React.createClass({
   onWindowResize: function () {
     let rect = this.refs.chartContainer.getBoundingClientRect();
     const { data } = this.props;
-    this.setState({ width: rect.width });
-    this.setState({ height: (13.248 * data.length + 138.28) });
+    const heightCalc = 15 * data.length + 150;
+    this.setState({ width: rect.width, height: heightCalc });
   },
 
   mouseover: function (x, y, data) {
@@ -76,8 +76,14 @@ var HorizontalBarChart = React.createClass({
         right: margin.left
       });
     }
-    const innerWidth = width - margin.left - margin.right;
-    const innerHeight = 13.248 * data.length + 100;
+    let innerWidth = width - margin.left - margin.right;
+
+    // short circut if we have too small an area
+    if (innerWidth <= 0) {
+      return <div className='chart-container' ref='chartContainer' />;
+    }
+
+    const innerHeight = 15 * data.length;
 
     const langSelector = rtl ? 'nameAr' : 'name';
     data.map((a, i) => {
@@ -104,13 +110,13 @@ var HorizontalBarChart = React.createClass({
     let xScale = scaleLinear().range([0, innerWidth]).domain([0, max(dataValues)]);
     let axisScale = rtl ? scaleLinear().range([innerWidth, 0]).domain([0, max(dataValues)]) : xScale;
     let xLabels = xScale.ticks(3);
-    let yScale = ordinalScale.rangeRound([innerHeight, 0]).domain(dataNames);
+    let yScale = ordinalScale.rangeRound([innerHeight, -10]).domain(dataNames);
     let yLabels = dataNames;
     let rectHeight = yScale.bandwidth();
 
     return (
       <div className='chart-container' ref='chartContainer'>
-        <svg className='chart' width={width} height={13.248 * data.length + 138.28} ref='svg'>
+        <svg className='chart' width={width} height={15 * data.length + 150} ref='svg'>
           <Axis
             scale={axisScale}
             labels={xLabels}
