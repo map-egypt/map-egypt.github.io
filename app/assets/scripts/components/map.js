@@ -16,8 +16,8 @@ const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd
 const satelliteLayer = 'mapbox.satellite';
 
 const BOUNDS = [
-  [11.898260, 42.736816],
-  [19.008892, 53.151855]
+  [11.6485513, 40.459639],
+  [19.832937, 54.8901821]
 ];
 
 const SEQUENTIAL = [
@@ -170,30 +170,21 @@ const Map = React.createClass({
       }, OVERLAY_STYLE);
     };
 
+    const isDistrict = regions.features.length > 300;
+    const idName = isDistrict ? 'id' : 'admin_id';
     const idMap = {};
     values.forEach((value) => {
-      idMap[value.id] = category === 'categorical' ? value.value : +value.value;
+      isDistrict
+        ? idMap[value.id.substring(3, 7)] = category === 'categorical' ? value.value : +value.value
+        : idMap[value.id] = category === 'categorical' ? value.value : +value.value;
     });
-
     regions.features.forEach(function (feature) {
-      feature.properties._value = get(idMap, feature.properties.admin_id);
+      feature.properties._value = get(idMap, feature.properties[idName]);
     });
 
-    // for district features, use the geojson to determine district name
-    const isDistrict = regions.features.length > 300;
-    const districtNameMap = {};
-    if (isDistrict) {
-      regions.features.forEach(function (feature) {
-        districtNameMap[feature.properties.admin_id] = feature.properties.District;
-      });
-    }
-
-    var that = this;
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
-      const id = isDistrict ? feature.properties.id : feature.properties.admin_id;
-      const nameKey = (that.props.lang === 'ar') ? 'nameAr' : 'name';
-      const name = isDistrict ? get(byIdDist(id), nameKey) : get(byYemGove(id), nameKey);
-
+      const id = feature.properties[idName];
+      const name = isDistrict ? get(byIdDist(id), 'name') : get(byYemGove(id), 'name');
       return `
       <div class='marker__internal'>
         <h5 class='marker__title'>${name}</h5>
@@ -300,7 +291,7 @@ const Map = React.createClass({
     );
   },
 
-  renderOverlayLegend: function (scale) {
+  renderOverlayLegend: function (scale, units) {
     const isQuantile = scale.hasOwnProperty('invertExtent');
     let iterable = (isQuantile ? scale.range() : scale.domain());
     iterable.sort((a, b) => b - a);
@@ -319,24 +310,28 @@ const Map = React.createClass({
           let backgroundColor = isQuantile ? d : scale(d);
           let text = isQuantile ? scale.invertExtent(d).map(roundedNumber).join(' - ') : d;
           return (
-            <span key={d} className='legend__item legend__overlay--item'>
-              <span className='legend__item--overlay--bg' style={{backgroundColor}}></span>
-              <span className='legend__item--overlay-text'>{convertId && !isQuantile ? idLookup[text] : text}</span>
-            </span>
+            <dl key={d} className='legend__item legend__overlay--item'>
+              <dt className='legend__item--overlay--bg' style={{backgroundColor}}></dt>
+              <dt className='legend__item--overlay-text'>{convertId && !isQuantile ? idLookup[text] : text}</dt>
+            </dl>
           );
         })}
+        <span className='legend__overlay--units'>
+          {units && units.toLowerCase() !== 'unknown' ? `${units} (Units)` : ''}
+        </span>
       </span>
     );
   },
 
   render: function () {
+    // console.log(this.props.overlay)
     return (
       <div className='map__group'>
         <div className='map__container' ref={this.mountMap}></div>
         <div className='inner'>
           <div className='legend__container'>
             {this.renderMarkerLegend()}
-            {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale)}
+            {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale, this.props.overlay.units)}
           </div>
         </div>
       </div>

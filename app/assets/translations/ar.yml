@@ -45,11 +45,11 @@ projects_list_view:
 
 project_pages:
   print: 'طباعة'
-  status_label: Status
+  status_label: 'الحالة'
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
-  status_extended: Extended
-  status_closed: Closed
+  status_extended: 'ممتد'
+  status_closed: 'منتهي'
   last_update_title: 'التحديث الأخير'
   current_progress_title: 'التقدم الحالي'
   proposed_timeline_title: 'الجدول الزمني المقترح'
@@ -57,8 +57,8 @@ project_pages:
   donors_title: 'الجهات المانحة'
 
   funding_title: 'التمويل'
-  funding_loans_title: Loans
-  funding_grants_title: Grants
+  funding_loans_title: 'قرض'
+  funding_grants_title: 'منحة'
   objective_title: 'الهدف'
   location_title: 'النطاق الجغرافي'
   project_link: 'الرابط الالكتروني للمشروع'
@@ -116,7 +116,7 @@ map_labels:
 general_buttons:
   share: 'شارك'
   share_text: 'انسخ الرابط الالكتروني للمشاركة'
-  csv: Download CSV
+  csv: 'تحميل'
 
 footer:
   subscription_title: 'إشترك الآن'

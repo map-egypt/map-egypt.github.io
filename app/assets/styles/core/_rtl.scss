@@ -152,7 +152,6 @@
         margin-right: 0;
       }
     }
-
   }
 
   .heading--deco::after {
@@ -214,13 +213,13 @@
     }
 
     .logos {
-      @include media(medium-up) {
+      @include media(medium-down) {
         clear: right;
         float: right;
       }
     }
     .logos__list li  {
-      float: right;
+      float: left;
     }
   }
 
@@ -288,7 +287,7 @@
   .card-meta__value--status {
     margin-left: 1rem;
     padding-right: 0.75rem;
-    margin-right: 0;
+    margin-right: 0.75rem;
     padding-left: 0;
   }
 
@@ -422,13 +421,6 @@
     font-size: 1rem;
   }
 
-  .button--tag {
-    &:after {
-      @extend %collecticon-xmark;
-      margin-right: $global-spacing/2;
-    }
-  }
-
   /*general styles */
   .drop__toggle--caret:after {
     padding-right: $global-spacing/4;
@@ -471,6 +463,9 @@
       border-left-width: 1px;
       text-align: right;
     }
+    .list__item--active {
+      border-left: 0;
+    }
   }
   .modal__instructions p{
     float: right;
@@ -478,6 +473,16 @@
   .indicators--selected {
     .button--tag {
       float: right;
+      &:after {
+        margin-top: .5em;
+        float: left;
+        margin-right: $global-spacing/2;
+        margin-left: 0;
+      }
+    }
+    .heading--label {
+      float: right;
+      margin-top: .5em;
     }
   }
   .share--box {
@@ -604,3 +609,15 @@
   margin-right: .6em;
 }
 
+.drop__menu {
+  .drop__menu-item {
+    width: 100%;
+    direction: rtl;
+    text-align: right;
+    &:hover {
+      width: 100%;
+      direction: rtl;
+      text-align: right;
+    }
+  }
+}

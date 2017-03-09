@@ -60,7 +60,7 @@ export function chartData (data) {
   return chartDataHeaders.concat(data.map(d => [
     d.name,
     d.value,
-    `${config.baseUrl}#/${d.link}`
+    (d.link ? `${config.baseUrl}#/${d.link}` : '')
   ]));
 }
 
