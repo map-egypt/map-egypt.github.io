@@ -6,7 +6,7 @@ import { scaleQuantile, scaleOrdinal } from 'd3-scale';
 import { extend, uniq } from 'lodash';
 import { get } from 'object-path';
 import { byId as byIdDist, byName as byNameDist } from '../utils/districts';
-import { byEgy as byEgyGove, byName as byNameGove } from '../utils/governorates';
+import { byYem as byYemGove, byName as byNameGove } from '../utils/governorates';
 import { isNumerical } from '../utils/is-numerical-overlay';
 import { roundedNumber } from '../utils/format';
 import { customScales } from '../utils/scales';
@@ -16,8 +16,8 @@ const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd
 const satelliteLayer = 'mapbox.satellite';
 
 const BOUNDS = [
-  [22.278144, 25.127830],
-  [31.118067, 33.719138]
+  [11.6485513, 40.459639],
+  [19.832937, 54.8901821]
 ];
 
 const SEQUENTIAL = [
@@ -102,9 +102,10 @@ const Map = React.createClass({
       const statusClass = marker.ontime ? 'project--ontime' : 'project--delayed';
       const accessor = marker.isDistrict ? byNameDist : byNameGove;
       const location = accessor(marker.region)[locationLang];
+      const localMarkerName = (lang === 'en') ? (marker.name || marker.name_ar) : (marker.name_ar || marker.name);
       leafletMarker.bindPopup(
         `<div class='marker__internal'>` +
-          `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
+          `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${localMarkerName}</a></h5>` +
           `<dl class='card-meta ${statusClass}'>` +
                 `<dt class='card-meta__label'>Status</dt>` +
                 `<dd class='card-meta__value card-meta__value--status'>${status}</dd>` +
@@ -183,7 +184,7 @@ const Map = React.createClass({
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
       const id = feature.properties[idName];
-      const name = isDistrict ? get(byIdDist(id), 'name') : get(byEgyGove(id), 'name');
+      const name = isDistrict ? get(byIdDist(id), 'name') : get(byYemGove(id), 'name');
       return `
       <div class='marker__internal'>
         <h5 class='marker__title'>${name}</h5>

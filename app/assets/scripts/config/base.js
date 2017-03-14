@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = {
-  api: 'https://ifpri-egypt-silo.herokuapp.com/',
-  authDomain: 'map-egypt.auth0.com',
-  authClientId: 'ZCoeGvXrh2Ex0x2UtCnnZ89wgUEMURRA'
+  api: '//ifpri-yemen-silo.herokuapp.com/',
+  authDomain: 'ifpri-yemen-silo.auth0.com',
+  authClientId: 'aAMY6pWnvscb5VCePYnH9w1Grv7c7QpH'
 };

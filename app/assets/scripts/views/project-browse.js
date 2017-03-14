@@ -22,7 +22,7 @@ import { window } from 'global';
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
 const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
-const barChartMargin = { left: 75, right: 20, top: 10, bottom: 50 };
+const barChartMargin = { left: 145, right: 20, top: 10, bottom: 50 };
 
 function countByProp (array, path) {
   const result = {};
@@ -543,7 +543,7 @@ var ProjectBrowse = React.createClass({
     const deselectedClassNames = 'button button--primary-bounded';
 
     let mapLocation;
-    const governorateId = get(this.state, 'activeGovernorate.egy');
+    const governorateId = get(this.state, 'activeGovernorate.yem');
     if (governorateId) {
       const features = get(this.props.api, 'geography.' + GOVERNORATE + '.features', []);
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);

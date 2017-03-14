@@ -62,6 +62,8 @@ var ProjectCard = React.createClass({
   },
 
   render: function () {
+    console.log(this.props.project);
+
     const { project, lang } = this.props;
     const ontime = isOntime(project);
     const statusClass = 'project--' + ontime;
@@ -92,7 +94,7 @@ var ProjectCard = React.createClass({
             </header>
             <div className='card__body'>
               <dl className='card-meta'>
-                <dd className='card-meta__value card-meta__value--timeline'>{project.status[lang]}</dd>
+                <dd className='card-meta__value card-meta__value--timeline'></dd>
                 <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{t['status_' + ontime]}</dd>
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>

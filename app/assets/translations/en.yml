@@ -5,8 +5,8 @@ main_navigation:
   logout_navitem: Log Out
 
 homepage:
-  subhead: tracking egypt
-  title: Monitoring Agricultural and Rural Development in Egypt
+  subhead: tracking yemen
+  title: Monitoring Agricultural and Rural Development in Yemen
   description: Keep track of agricultural development projects, map their locations, compare their objectives and reach, and match the socioeconomic status of project areas on the subnational level.
   more: Learn More
 
@@ -23,7 +23,7 @@ homepage:
   chart_two_label3: Extended
 
   other_indicators_title: Other Progress Indicators
-  other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Egypt. Overlay agriculture and rural development projects in areas of interest.
+  other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Yemen. Overlay agriculture and rural development projects in areas of interest.
   sds_button: SDS Indicators
   sdg_button: SDG Indicators
   other_button: Other Indicators
