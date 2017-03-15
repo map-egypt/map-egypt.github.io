@@ -51,7 +51,7 @@ var PageHeader = React.createClass({
         <div className='inner'>
           <div className='page__headline'>
              <h1 className='page__title'><a href='/' title='Visit homepage'>
-              <img src='/assets/graphics/layout/logo.svg' alt='logotype' height='75' />
+              <img src='/assets/graphics/layout/logo.svg' alt='logotype' height='53' />
             </a></h1>
           </div>
           <nav className='page__prime-nav'>
