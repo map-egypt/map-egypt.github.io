@@ -16,8 +16,8 @@ const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd
 const satelliteLayer = 'mapbox.satellite';
 
 const BOUNDS = [
-  [11.6485513, 40.459639],
-  [19.832937, 54.8901821]
+  [12.355429, 53.360596],
+  [19.1, 41.231689]
 ];
 
 const SEQUENTIAL = [
