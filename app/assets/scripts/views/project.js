@@ -356,7 +356,7 @@ var Project = React.createClass({
                 </div>
                 {authenticated && disbursement.length ? (
                   <div className='chart-content chart__inline--labels'>
-                    <h3>Disbursement vs. Reach</h3>
+                    <h3>Disbursement</h3>
                     <HorizontalBarChart
                       data={disbursement}
                       margin={barChartMargin}
@@ -375,9 +375,9 @@ var Project = React.createClass({
                 <table className='inpage__table'>
                   <thead>
                     <tr>
-                      <th className='row-status'>{t.status_title}</th>
                       <th className='row-name'>{t.component_title}</th>
                       <th className='row-kpi'>{t.kpi_title}</th>
+                      <th className='row-status'>{t.status_title}</th>
                       <th className='row-target'>{t.target_title}</th>
                       <th className='row-progress'>{t.rate_title}</th>
                       <th className='row-date'>{t.date_title}</th>
@@ -388,11 +388,11 @@ var Project = React.createClass({
                       const key = slugify(d.status.en);
                       return (
                         <tr key={d.kpi}>
+                          <td className='cell-name'>{d.component}</td>
+                          <td>{d.kpi}</td>
                           <td className={'project--' + key}>
                             <p className='activity-name'>{d.status[lang]}</p>
                           </td>
-                          <td className='cell-name'>{d.component}</td>
-                          <td>{d.kpi}</td>
                           <td>{tally(d.target)}</td>
                           <td>{tally(d.current)}</td>
                           <td>{formatSimpleDate(parseProjectDate(d.date))}</td>
