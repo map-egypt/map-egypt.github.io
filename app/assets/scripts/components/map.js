@@ -323,7 +323,6 @@ const Map = React.createClass({
   },
 
   render: function () {
-    // console.log(this.props.overlay)
     return (
       <div className='map__group'>
         <div className='map__container' ref={this.mountMap}></div>
