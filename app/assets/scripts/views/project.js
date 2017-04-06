@@ -76,7 +76,7 @@ var Project = React.createClass({
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
-    const lastUpdated = formatDate(meta.updated_at, lang) || '';
+    const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
     const disbursedFunds = {loan: 0, grant: 0};
@@ -134,7 +134,7 @@ var Project = React.createClass({
       type: fund.type[lang],
       value: fund.fund.amount
     })).sort((a, b) => a.name > b.name ? 1 : -1).map((d, i) => ({
-      name: `${d.donor} - ${formatDate(d.name, lang)} (${d.type})`,
+      name: `${d.donor} - ${formatDate(d.name)} (${d.type})`,
       value: d.value
     }));
 
