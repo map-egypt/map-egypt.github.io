@@ -37,11 +37,11 @@ var ProjectTimeline = React.createClass({
       <div className='timeline'>
         <div className='timeline__unit'>
           <h5 className='timeline__headline heading-alt'>{t.current_progress_title}</h5>
-          {actualStart && actualEnd && timeline(actualStart, actualEnd, scale)}
+          {actualStart && actualEnd && timeline(actualStart, actualEnd, scale, lang)}
         </div>
         <div className='timeline__unit'>
           <h5 className='timeline__headline heading-alt'>{t.proposed_timeline_title}</h5>
-          {timeline(plannedStart, plannedEnd, scale)}
+          {timeline(plannedStart, plannedEnd, scale, lang)}
         </div>
       </div>
     );
@@ -50,7 +50,7 @@ var ProjectTimeline = React.createClass({
 
 module.exports = ProjectTimeline;
 
-function timeline (start, end, scale) {
+function timeline (start, end, scale, lang) {
   const left = scale(new Date(start));
   const right = scale(new Date(end));
   const width = right - left;
@@ -63,8 +63,8 @@ function timeline (start, end, scale) {
       </div>
       <hr style={{ left: left + '%' }} />
       <hr style={{ left: right + '%' }} />
-      <h5 className='timeline__label' style={{ left: left + '%' }}>{formatDate(start)}</h5>
-      <h5 className='timeline__label timeline__label--right' style={{ right: (100 - right) + '%' }}>{formatDate(end)}</h5>
+      <h5 className='timeline__label' style={{ left: left + '%' }}>{formatDate(start, lang)}</h5>
+      <h5 className='timeline__label timeline__label--right' style={{ right: (100 - right) + '%' }}>{formatDate(end, lang)}</h5>
     </div>
   );
 }
