@@ -14,6 +14,10 @@ function categoryLink (base, categoryName) {
 }
 
 function isOntime (project) {
+  if (project.status.en.toLowerCase() === 'closed') {
+    return 'closed';
+  }
+
   let plannedEnd = parseProjectDate(project.planned_end_date);
   let actualEnd = parseProjectDate(project.actual_end_date);
   let plannedStart = parseProjectDate(project.planned_start_date);
@@ -24,8 +28,8 @@ function isOntime (project) {
   // if projects are both delayed and extended, they should be classed as delayed
   if (!plannedStart) {
     return null;
-  } else if (actualEnd && actualEnd < new Date().getTime()) {
-    return 'closed';
+  } else if (plannedStart > new Date().getTime()) {
+    return 'planned';
   } else if (projectDelayed) {
     return 'delayed';
   } else if (projectExtended) {
@@ -92,8 +96,12 @@ var ProjectCard = React.createClass({
             </header>
             <div className='card__body'>
               <dl className='card-meta'>
-                <dd className='card-meta__value card-meta__value--timeline'>{project.status[lang]}</dd>
-                <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{t['status_' + ontime]}</dd>
+                {ontime !== 'closed' && ontime !== 'planned'
+                  ? <dd className='card-meta__value card-meta__value--timeline'>{project.status[lang]}</dd>
+                  : ''}
+                {ontime !== 'planned'
+                  ? <dd className={'card-meta__value card-meta__value--status ' + statusClass}>{t['status_' + ontime]}</dd>
+                  : ''}
                 <dd className='card-meta__value card-meta__value--location'>{projects.join(', ')}</dd>
               </dl>
               <p>{shortParagraph(getDescription(project, lang))}</p>
