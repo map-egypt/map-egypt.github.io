@@ -304,9 +304,17 @@ const Map = React.createClass({
       iterable = convertId ? converted : iterable;
     }
 
+    const t = get(window.t, [this.props.lang, 'map_labels'], {});
+    const nodataLegend = this.props.overlay.values.length < this.props.overlay.regions.features.length
+      ? (<dl key='nodata-swatch' className='legend__item legend__overlay--item'>
+          <dt className='legend__item--overlay--bg' style={{backgroundColor: '#ffffff'}}></dt>
+          <dt className='legend__item--overlay-text'>{t['no_data']}</dt>
+        </dl>)
+      : '';
     return (
       <span className='legend__overlay'>
-        {iterable.map((d) => {
+        {nodataLegend}
+        {iterable.map((d, i) => {
           let backgroundColor = isQuantile ? d : scale(d);
           let text = isQuantile ? scale.invertExtent(d).map(roundedNumber).join(' - ') : d;
           return (
