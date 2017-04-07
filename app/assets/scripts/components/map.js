@@ -276,11 +276,12 @@ const Map = React.createClass({
     this.map.removeLayer(this.state.overlayLayer);
   },
 
-  renderMarkerLegend: function () {
+  renderMarkerLegend: function (count) {
     const t = get(window.t, [this.props.lang, 'map_labels'], {});
     return (
       <div className='legend__markers'>
         <div className='legend__item'>
+          <span className='legend--cluster'>{count}</span>
           <span className='legend__label--cluster'>{t.map_group_label}</span>
         </div>
         <div className='legend__item'>
@@ -323,13 +324,12 @@ const Map = React.createClass({
   },
 
   render: function () {
-    // console.log(this.props.overlay)
     return (
       <div className='map__group'>
         <div className='map__container' ref={this.mountMap}></div>
         <div className='inner'>
           <div className='legend__container'>
-            {this.renderMarkerLegend()}
+            {this.renderMarkerLegend(this.props.markers.length)}
             {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale, this.props.overlay.units)}
           </div>
         </div>

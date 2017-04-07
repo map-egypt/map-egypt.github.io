@@ -218,19 +218,17 @@
   color: $base-color;
 }
 
-.legend__label--cluster {
-  &:before {
-    display: inline-block;
-    height: 1.25rem;
-    width: 1.25rem;
-    margin-right: 0.6em;
-    padding-left:0.37rem;
-    line-height: 1.25rem;
-    background-color: rgba($base-color, 0.6);
-    color: #FFFFFF;
-    border-radius: 50%;
-    content: "8";
-  }
+.legend--cluster {
+  font-size: 0.7rem;
+  display: inline-block;
+  height: 1.45rem;
+  width: 1.45rem;
+  margin-right: 0.6em;
+  padding-left: 0.29rem;
+  line-height: 1.45rem;
+  background-color: rgba($base-color, 0.6);
+  color: #FFFFFF;
+  border-radius: 50%;
 }
 
 .legend__label--marker {
