@@ -96,8 +96,8 @@ export function getIndicator (id) {
   };
 }
 
-const governorateUrl = 'assets/data/topojson/a2-withluxor.json';
-const districtUrl = 'assets/data/topojson/districts.json';
+const governorateUrl = 'assets/data/topojson/yem_boundary.json';
+const districtUrl = 'assets/data/topojson/yem_districts.json';
 
 export function getGeography (name) {
   let path = name === GOVERNORATE ? governorateUrl : districtUrl;

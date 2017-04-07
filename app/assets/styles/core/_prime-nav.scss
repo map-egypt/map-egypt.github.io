@@ -14,7 +14,7 @@
 
 .page__headline {
   float: left;
-  padding: $global-spacing $global-spacing $global-spacing 0;
+  padding: $global-spacing * 1.5 $global-spacing $global-spacing 0;
 
   .lang--rtl & {
     padding-left: $global-spacing;
@@ -24,8 +24,9 @@
 
 .page__title {
   box-shadow: inset -1px 0 0 $tertiary-color;
-  padding-right: $global-spacing;
+  padding-right: $global-spacing * 2;
   height: 100%;
+  padding-bottom: .5em;
 }
 
 .page__prime-nav {
@@ -181,7 +182,7 @@
 }
 
 .browse-menu {
-  margin: 3rem $global-spacing 0 $global-spacing;
+  margin: 3.2rem $global-spacing 0 $global-spacing;
   @include media(medium-up) {
     float: left;
 
@@ -203,7 +204,7 @@
 }
 
 .utilities-menu {
-  margin: 3rem 0 0 0;
+  margin: 3.2rem 0 0 0;
   @include media(medium-up) {
     float: right;
 
