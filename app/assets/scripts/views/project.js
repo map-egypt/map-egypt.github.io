@@ -69,7 +69,7 @@ var Project = React.createClass({
     if (!meta) {
       return <div></div>; // TODO loading indicator
     }
-    const data = meta.data;
+    let data = meta.data;
 
     // put id on project data object since it's missing from the project detail endpoint.
     data.id = meta.id;
@@ -166,6 +166,10 @@ var Project = React.createClass({
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
 
+    data.recommendations = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
+    data.recommendations_ar = 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
+    data.contract_date = data.planned_start_date;
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -197,6 +201,8 @@ var Project = React.createClass({
               </dl>
               <h1 className='inpage__title heading--deco heading--large'>{projectDisplayName}</h1>
             </div>
+
+            <div>{`${t.contract_date}: ${formatDate(data.contract_date)}`}</div>
             <ProjectTimeline project={data} lang={lang}/>
 
             <div className='tags'>
@@ -335,6 +341,13 @@ var Project = React.createClass({
                         );
                       })}
                     </ul>
+                  </div>
+                )}
+
+                {data.recommendations && (
+                  <div className='overview-item--alt'>
+                    <h2 className='overview-item__title heading-alt'>{t.recommendations}</h2>
+                    <p>{isArabic ? data.recommendations_ar : data.recommendations}</p>
                   </div>
                 )}
 

@@ -54,6 +54,8 @@ project_pages:
   proposed_timeline_title: Proposed Timeline
   categories_title: Categories
   donors_title: Donors
+  recommendations: Recommendations based on project experience
+  contract_date: Contract Signed
 
   funding_title: Funding
   funding_loans_title: Loans
