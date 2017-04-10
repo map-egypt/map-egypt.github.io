@@ -69,7 +69,7 @@ var Project = React.createClass({
     if (!meta) {
       return <div></div>; // TODO loading indicator
     }
-    let data = meta.data;
+    const data = meta.data;
 
     // put id on project data object since it's missing from the project detail endpoint.
     data.id = meta.id;
