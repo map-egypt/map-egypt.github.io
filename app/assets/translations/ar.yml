@@ -55,6 +55,8 @@ project_pages:
   proposed_timeline_title: 'الجدول الزمني المقترح'
   categories_title: 'القطاعات الفرعية'
   donors_title: 'الجهات المانحة'
+  recommendations: توصيات بناء على خبرة المشروع
+  contract_date: تم توقيع العقد
 
   funding_title: 'التمويل'
   funding_loans_title: 'قرض'
