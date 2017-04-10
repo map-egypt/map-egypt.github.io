@@ -202,7 +202,10 @@ var Project = React.createClass({
               <h1 className='inpage__title heading--deco heading--large'>{projectDisplayName}</h1>
             </div>
 
-            <div>{`${t.contract_date}: ${formatDate(data.contract_date)}`}</div>
+            {data.contract_date && (
+              <div>{`${t.contract_date}: ${formatDate(data.contract_date)}`}</div>
+            )}
+
             <ProjectTimeline project={data} lang={lang}/>
 
             <div className='tags'>
