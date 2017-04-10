@@ -109,6 +109,7 @@ donor_pages:
   funded_title: Projects Funded
 
 map_labels:
+  no_data: No Data
   map_group_label: Number of Project Locations
   map_project_label: Project
 

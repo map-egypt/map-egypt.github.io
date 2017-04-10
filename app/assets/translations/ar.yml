@@ -110,6 +110,7 @@ donor_pages:
   funded_title: 'المشروعات المُمولة'
 
 map_labels:
+  no_data: 'No Data'
   map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
 

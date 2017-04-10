@@ -200,6 +200,7 @@
   height: 13px;
   display: inline-block;
   margin: 0.25rem .25em 0 0;
+  border: 1px solid #ccc;
   border-radius: 2px;
 }
 
@@ -209,6 +210,7 @@
   font-size: 0.8rem;
   font-weight: 400;
   color: $base-color;
+  text-transform: capitalize;
 }
 
 .legend__overlay--units {
