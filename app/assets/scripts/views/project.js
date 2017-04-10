@@ -203,7 +203,10 @@ var Project = React.createClass({
             </div>
 
             {data.contract_date && (
-              <div>{`${t.contract_date}: ${formatDate(data.contract_date)}`}</div>
+              <dl className='date-contract'>
+                <dt className='timeline__headline heading-alt'>{`${t.contract_date}:`}</dt>
+                <dd>{`${formatDate(data.contract_date)}`}</dd>
+              </dl>
             )}
 
             <ProjectTimeline project={data} lang={lang}/>
