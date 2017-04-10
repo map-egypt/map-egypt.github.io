@@ -229,12 +229,14 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
-                  <li>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
-                </ul>
-                <ul className='inpage-stats'>
-                  <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
-                  <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
+                  <li className='num__internal--large'>{currency(shortTally(budget))}
+                    <small>{t.funding_title}</small>
+                    <ul>
+                      <li className='num__internal'>{currency(shortTally(disbursedFunds.loan))} {t.funding_loans_title}</li>
+                      <li className='num__internal'>{currency(shortTally(disbursedFunds.grant))} {t.funding_grants_title}</li>
+                    </ul>
+                  </li>
+                  <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
                 </ul>
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
