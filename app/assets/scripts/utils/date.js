@@ -19,8 +19,8 @@ module.exports.formatDate = function (date, lang) {
   const d = new Date(date);
 
   return lang === 'ar'
-    ? `${d.getFullYear()}/${d.getDate()}/${d.getMonth() + 1}`
-    : `${d.getMonth() + 1}/${d.getDate()}/${d.getFullYear()}`;
+    ? `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`
+    : `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 };
 
 // returns MONTH/YEAR
