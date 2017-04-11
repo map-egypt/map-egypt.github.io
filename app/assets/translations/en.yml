@@ -22,6 +22,11 @@ homepage:
   chart_two_label2: Delayed
   chart_two_label3: Extended
 
+  total_projects: total projects
+  in_funding: in funding
+  total_donors: total donors
+  donor_collaborations: donor collaborations
+
   other_indicators_title: Other Progress Indicators
   other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Egypt. Overlay agriculture and rural development projects in areas of interest.
   sds_button: SDS Indicators
