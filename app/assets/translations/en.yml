@@ -36,6 +36,9 @@ projects_indicators:
   search_text: Zoom to Governorate
   map_toggle_btn: Map
   list_toggle_btn: List/Chart
+  sds_dropdown: SDS Indicators
+  sdg_dropdown: SDG Indicators
+  other_dropdown: Other Indicators
 
 projects_list_view:
   projects_title: Projects
