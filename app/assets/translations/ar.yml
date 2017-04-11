@@ -44,7 +44,9 @@ projects_indicators:
 projects_list_view:
   projects_title: 'المشروعات'
   sort_by_title: 'تصنيف'
-  sort_option1: 'أبجدي'
+  sort_alphabetical: 'أبجدي'
+  sort_ascending: النسبة المئوية مكتملة
+  sort_descending: النسبة المئوية مكتملة
 
 project_pages:
   print: 'طباعة'

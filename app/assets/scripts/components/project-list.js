@@ -20,7 +20,7 @@ const ProjectList = React.createClass({
       showSort: false,
       sortAccessor: {
         name: 'Alphabetical',
-        class: 'alphabetical',
+        class: 'sort-alphabetical',
         func: (projects) => projects.sort((a, b) => a.name < b.name ? -1 : 1)
       }
     };
@@ -50,7 +50,7 @@ const ProjectList = React.createClass({
     const sortOptions = {
       alphabetical: {
         name: 'Alphabetical',
-        class: 'alphabetical',
+        class: 'sort-alphabetical',
         func: (projects) => projects.sort((a, b) => a.name < b.name ? -1 : 1)
       },
       completeUp: {
@@ -76,16 +76,16 @@ const ProjectList = React.createClass({
               <label className='heading--label'>{t.sort_by_title}:</label>
               <span className='dropdown__container'>
                 <button className={`button button--medium button--secondary drop__toggle--caret ${this.state.sortAccessor.class}`}
-                onClick={this.toggleSort}>{this.state.sortAccessor.name}</button>
+                onClick={this.toggleSort}>{t[this.state.sortAccessor.class.replace('-', '_')]}</button>
                 {this.state.showSort &&
-                  <ul className='drop__menu drop--align-left button--secondary drop__menu--wide'>
+                  <ul className='drop__menu drop--align-left button--secondary'>
                     {_.map(sortOptions, (option, name) => {
                       return (
                         <li
-                          className={`drop__menu-item drop__menu--wide ${option.class}`}
+                          className={`drop__menu-item menu-item--wide ${option.class}`}
                           key={option.class}
                           onClick={() => this.setSortAccessor(option)}>
-                            {option.name}
+                            {t[option.class.replace('-', '_')]}
                         </li>
                       );
                     })}

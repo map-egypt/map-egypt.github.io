@@ -43,7 +43,9 @@ projects_indicators:
 projects_list_view:
   projects_title: Projects
   sort_by_title: Sort by
-  sort_option1: Alphabetical
+  sort_alphabetical: Alphabetical
+  sort_ascending: Percentage Complete
+  sort_descending: Percentage Complete
 
 project_pages:
   print: Print
