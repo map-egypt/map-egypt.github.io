@@ -46,7 +46,7 @@ const OVERLAY_STYLE = {
   weight: 1,
   opacity: 1,
   color: 'white',
-  fillOpacity: 0.7
+  fillOpacity: 0.8
 };
 
 const categoryLookup = {'very low': 5, 'low': 4, 'medium': 3, 'high': 2, 'very high': 1};

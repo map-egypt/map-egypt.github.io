@@ -22,6 +22,10 @@ homepage:
   chart_two_label2: 'متأخر'
   chart_two_label3: 'ممتد'
 
+  total_projects: 'المشروعات مجموع'
+  in_funding: 'التمويل'
+  total_donors: 'المانحة مجموع'
+  donor_collaborations: 'المانحة التعاون'
 
   other_indicators_title: 'مؤشرات التنمية'
   other_indicators_description: 'إضافة ومقارنة مؤشرات التنمية'
