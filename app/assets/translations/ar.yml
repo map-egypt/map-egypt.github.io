@@ -41,11 +41,16 @@ projects_indicators:
   search_text: 'اسم المحافظة'
   map_toggle_btn: 'خريطة'
   list_toggle_btn: 'قائمة \رسم بياني'
+  sds_dropdown: 'مؤشرات استراتيجية التنمية المستدامة'
+  sdg_dropdown: 'مؤشرات أهداف التنمية المُستدامة'
+  other_dropdown: 'مؤشرات تنمية أخرى'
 
 projects_list_view:
   projects_title: 'المشروعات'
   sort_by_title: 'تصنيف'
-  sort_option1: 'أبجدي'
+  sort_alphabetical: 'أبجدي'
+  sort_ascending: النسبة المئوية مكتملة
+  sort_descending: النسبة المئوية مكتملة
 
 project_pages:
   print: 'طباعة'

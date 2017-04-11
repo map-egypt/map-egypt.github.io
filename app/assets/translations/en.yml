@@ -41,11 +41,16 @@ projects_indicators:
   search_text: Zoom to Governorate
   map_toggle_btn: Map
   list_toggle_btn: List/Chart
+  sds_dropdown: SDS Indicators
+  sdg_dropdown: SDG Indicators
+  other_dropdown: Other Indicators
 
 projects_list_view:
   projects_title: Projects
   sort_by_title: Sort by
-  sort_option1: Alphabetical
+  sort_alphabetical: Alphabetical
+  sort_ascending: Percentage Complete
+  sort_descending: Percentage Complete
 
 project_pages:
   print: Print
