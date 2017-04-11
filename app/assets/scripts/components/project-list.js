@@ -3,7 +3,6 @@ import React from 'react';
 import { get } from 'object-path';
 import _ from 'lodash';
 import ProjectCard, { percentComplete } from './project-card';
-// import { percentComplete } from './project-card';
 import { window } from 'global';
 
 const ProjectList = React.createClass({
