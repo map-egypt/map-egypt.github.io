@@ -79,7 +79,7 @@ var Project = React.createClass({
     const lastUpdated = formatDate(meta.updated_at, lang) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
-    const disbursedFunds = {loan: 0, grant: 0};
+    const disbursedFunds = {loan: 0, grant: 0, 'local contribution': 0};
     get(data, 'disbursed', []).forEach((fund) => {
       disbursedFunds[fund.type.en.toLowerCase()] += fund.fund.amount;
     });
@@ -166,10 +166,6 @@ var Project = React.createClass({
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
 
-    data.recommendations = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.';
-    data.recommendations_ar = 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum';
-    data.contract_date = data.planned_start_date;
-
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -241,19 +237,16 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
-                  <li>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
+                  <li className='num__internal--large'>{currency(shortTally(budget))}
+                    <small>{t.funding_title}</small>
+                    <ul className='num__internal'>
+                      <li>{currency(shortTally(disbursedFunds.loan))} {t.funding_loans_title}</li>
+                      <li>{currency(shortTally(disbursedFunds.grant))} {t.funding_grants_title}</li>
+                      <li>{currency(shortTally(disbursedFunds['local contribution']))} {t.funding_local_title}</li>
+                    </ul>
+                  </li>
+                  <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
                 </ul>
-                {disbursedFunds.loan || disbursedFunds.grant
-                  ? <ul className='inpage-stats'>
-                      {disbursedFunds.loan
-                        ? <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
-                        : ''}
-                      {disbursedFunds.grant
-                        ? <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
-                        : ''}
-                </ul>
-                  : ''}
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>
