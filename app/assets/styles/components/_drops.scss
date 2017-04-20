@@ -73,7 +73,7 @@
 }
 
 .react-autosuggest__suggestions-list {
-  margin-bottom: 0; 
+  margin-bottom: 0;
 }
 
 .tether-element {
@@ -191,12 +191,24 @@
     color: inherit;
     transition: all 0.16s ease 0s;
     text-align: left;
+    &.menu-item--wide {
+      width: 13rem;
+    }
     &:hover,
     &:focus {
       color: $link-color;
       background-color: tint($link-color, 92%);
       opacity: 1;
       text-align: left;
+    }
+    &:after {
+      margin-left: 0.25rem;
+      &.sort-descending {
+        @extend %collecticon-arrow-down;
+      }
+      &.sort-ascending {
+        @extend %collecticon-arrow-up;
+      }
     }
   }
 }

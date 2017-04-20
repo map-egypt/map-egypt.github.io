@@ -12,12 +12,15 @@ module.exports.parseProjectDate = function (date) {
   return parsed.getTime();
 };
 
-module.exports.formatDate = function (date) {
+module.exports.formatDate = function (date, lang) {
   if (!date) {
     return false;
   }
   const d = new Date(date);
-  return d.toLocaleDateString();
+
+  return lang === 'ar'
+    ? `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()}`
+    : `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 };
 
 // returns MONTH/YEAR

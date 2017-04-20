@@ -44,11 +44,13 @@
 
   &__header-data {
     margin-top: $global-spacing;
-    .inpage-stats li{
-      font-size: 2.25rem;
-      line-height: 1.75rem;
-      padding-right: $global-spacing * 2;
-      margin-right: $global-spacing * 2;
+    .inpage-stats {
+      li {
+        font-size: 2.25rem;
+        line-height: 1.75rem;
+        padding-right: $global-spacing * 2;
+        margin-right: $global-spacing * 2;
+      }
     }
   }
 
@@ -271,15 +273,32 @@
   @include media(medium-up) {
     font-size: 3rem;
     line-height: 2.75rem;
+    .num__internal {
+      max-width: 14rem;
+      li {
+        font-size: .3em;
+        line-height: 1.5em;
+        color: lighten($base-font-color, 2%);
+        float: left;
+        margin-right: .8em;
+        list-style-type: none;
+        &:after {
+          content: ',';
+        }
+        &:last-of-type:after {
+          content: '';
+        }
+      }
+    }
   }
 
-  li {
+  .num__internal--large {
     float: left;
     box-shadow: 1px 0 0 $tertiary-color;
     padding-right: $global-spacing * 2;
     margin-right: $global-spacing * 2;
     @include media(medium-up) {
-      padding-right: $global-spacing * 3;
+      padding-right: $global-spacing * 2;
       margin-right: $global-spacing * 3;
     }
     @include media(medium-down) {

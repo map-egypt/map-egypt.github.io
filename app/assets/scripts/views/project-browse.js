@@ -21,7 +21,7 @@ import { window } from 'global';
 
 const PROJECTS = 'projects';
 const INDICATORS = 'indicators';
-const indicatorTypes = ['SDS Indicators', 'SDG Indicators', 'Other Development Indicators'];
+const indicatorTypes = ['sds', 'sdg', 'other'];
 const barChartMargin = { left: 145, right: 20, top: 10, bottom: 50 };
 
 function countByProp (array, path) {
@@ -616,6 +616,7 @@ var ProjectBrowse = React.createClass({
                       {this.state.indicatorToggle &&
                         <ul className='drop__menu drop--align-left button--secondary'>
                           {indicatorTypes.map((d) => {
+                            d = t[d + '_dropdown'];
                             return <li key={d}
                               onClick={() => this.openIndicatorSelector(d)}
                               className='drop__menu-item'>{d}</li>;
