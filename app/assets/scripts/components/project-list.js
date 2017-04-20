@@ -1,7 +1,8 @@
 'use strict';
 import React from 'react';
 import { get } from 'object-path';
-import ProjectCard from './project-card';
+import _ from 'lodash';
+import ProjectCard, { percentComplete } from './project-card';
 import { window } from 'global';
 
 const ProjectList = React.createClass({
@@ -16,7 +17,11 @@ const ProjectList = React.createClass({
   getInitialState: function () {
     return {
       showSort: false,
-      sortAccessor: (d) => d.name
+      sortAccessor: {
+        name: 'Alphabetical',
+        class: 'sort-alphabetical',
+        func: (projects) => projects.sort((a, b) => a.name < b.name ? -1 : 1)
+      }
     };
   },
 
@@ -26,7 +31,11 @@ const ProjectList = React.createClass({
 
   setSortAccessor: function (prop) {
     this.setState({
-      sortAccessor: prop,
+      sortAccessor: {
+        name: prop.name,
+        class: prop.class,
+        func: prop.func
+      },
       showSort: false
     });
   },
@@ -35,7 +44,25 @@ const ProjectList = React.createClass({
     const { lang } = this.props;
     const { projects, meta } = this.props;
     const { sortAccessor } = this.state;
-    const data = projects.slice().sort((a, b) => sortAccessor(a) < sortAccessor(b) ? -1 : 1);
+    const data = sortAccessor.func(projects.slice());
+
+    const sortOptions = {
+      alphabetical: {
+        name: 'Alphabetical',
+        class: 'sort-alphabetical',
+        func: (projects) => projects.sort((a, b) => a.name < b.name ? -1 : 1)
+      },
+      completeUp: {
+        name: 'Percent Complete',
+        class: 'sort-ascending',
+        func: (projects) => projects.sort((a, b) => percentComplete(a) < percentComplete(b) ? -1 : 1)
+      },
+      completeDown: {
+        name: 'Percent Complete',
+        class: 'sort-descending',
+        func: (projects) => projects.sort((a, b) => percentComplete(a) > percentComplete(b) ? -1 : 1)
+      }
+    };
 
     const t = get(window.t, [lang, 'projects_list_view'], {});
     return (
@@ -47,13 +74,20 @@ const ProjectList = React.createClass({
             <div className='sort'>
               <label className='heading--label'>{t.sort_by_title}:</label>
               <span className='dropdown__container'>
-                <button className='button button--medium button--secondary drop__toggle--caret'
-                onClick={this.toggleSort}>Alphabetical</button>
+                <button className={`button button--medium button--secondary drop__toggle--caret ${this.state.sortAccessor.class}`}
+                onClick={this.toggleSort}>{t[this.state.sortAccessor.class.replace('-', '_')]}</button>
                 {this.state.showSort &&
                   <ul className='drop__menu drop--align-left button--secondary'>
-                    <li className='drop__menu-item'
-                      onClick={() => this.setSortAccessor((d) => d.name)}
-                      >{t.sort_option1}</li>
+                    {_.map(sortOptions, (option, name) => {
+                      return (
+                        <li
+                          className={`drop__menu-item menu-item--wide ${option.class}`}
+                          key={option.class}
+                          onClick={() => this.setSortAccessor(option)}>
+                            {t[option.class.replace('-', '_')]}
+                        </li>
+                      );
+                    })}
                   </ul>
                 }
               </span>

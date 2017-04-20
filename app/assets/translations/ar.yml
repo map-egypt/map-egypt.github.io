@@ -22,6 +22,10 @@ homepage:
   chart_two_label2: 'متأخر'
   chart_two_label3: 'ممتد'
 
+  total_projects: 'المشروعات مجموع'
+  in_funding: 'التمويل'
+  total_donors: 'المانحة مجموع'
+  donor_collaborations: 'المانحة التعاون'
 
   other_indicators_title: 'مؤشرات التنمية'
   other_indicators_description: 'إضافة ومقارنة مؤشرات التنمية'
@@ -37,11 +41,16 @@ projects_indicators:
   search_text: 'اسم المحافظة'
   map_toggle_btn: 'خريطة'
   list_toggle_btn: 'قائمة \رسم بياني'
+  sds_dropdown: 'مؤشرات استراتيجية التنمية المستدامة'
+  sdg_dropdown: 'مؤشرات أهداف التنمية المُستدامة'
+  other_dropdown: 'مؤشرات تنمية أخرى'
 
 projects_list_view:
   projects_title: 'المشروعات'
   sort_by_title: 'تصنيف'
-  sort_option1: 'أبجدي'
+  sort_alphabetical: 'أبجدي'
+  sort_ascending: النسبة المئوية مكتملة
+  sort_descending: النسبة المئوية مكتملة
 
 project_pages:
   print: 'طباعة'
@@ -55,6 +64,8 @@ project_pages:
   proposed_timeline_title: 'الجدول الزمني المقترح'
   categories_title: 'القطاعات الفرعية'
   donors_title: 'الجهات المانحة'
+  recommendations: توصيات بناء على خبرة المشروع
+  contract_date: تم توقيع العقد
 
   funding_title: 'التمويل'
   funding_loans_title: 'قرض'
@@ -111,6 +122,7 @@ donor_pages:
   funded_title: 'المشروعات المُمولة'
 
 map_labels:
+  no_data: 'No Data'
   map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
 

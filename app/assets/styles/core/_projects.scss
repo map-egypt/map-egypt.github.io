@@ -44,3 +44,18 @@
     }
   }
 }
+
+.date-contract {
+  margin: 1em 0 .8em;
+  @extend .clearfix;
+  dt {
+    font-size: 0.75rem;
+    float: left;
+    margin-bottom: 0;
+  }
+  dd {
+    float: left;
+    font-size: .8em;
+    font-weight: $base-font-light;
+  }
+}

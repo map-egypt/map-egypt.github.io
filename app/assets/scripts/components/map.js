@@ -46,7 +46,7 @@ const OVERLAY_STYLE = {
   weight: 1,
   opacity: 1,
   color: 'white',
-  fillOpacity: 0.7
+  fillOpacity: 0.8
 };
 
 const categoryLookup = {'very low': 5, 'low': 4, 'medium': 3, 'high': 2, 'very high': 1};
@@ -276,11 +276,12 @@ const Map = React.createClass({
     this.map.removeLayer(this.state.overlayLayer);
   },
 
-  renderMarkerLegend: function () {
+  renderMarkerLegend: function (count) {
     const t = get(window.t, [this.props.lang, 'map_labels'], {});
     return (
       <div className='legend__markers'>
         <div className='legend__item'>
+          <span className='legend--cluster'>{count}</span>
           <span className='legend__label--cluster'>{t.map_group_label}</span>
         </div>
         <div className='legend__item'>
@@ -303,9 +304,17 @@ const Map = React.createClass({
       iterable = convertId ? converted : iterable;
     }
 
+    const t = get(window.t, [this.props.lang, 'map_labels'], {});
+    const nodataLegend = this.props.overlay.values.length < this.props.overlay.regions.features.length
+      ? (<dl key='nodata-swatch' className='legend__item legend__overlay--item'>
+          <dt className='legend__item--overlay--bg' style={{backgroundColor: '#ffffff'}}></dt>
+          <dt className='legend__item--overlay-text'>{t['no_data']}</dt>
+        </dl>)
+      : '';
     return (
       <span className='legend__overlay'>
-        {iterable.map((d) => {
+        {nodataLegend}
+        {iterable.map((d, i) => {
           let backgroundColor = isQuantile ? d : scale(d);
           let text = isQuantile ? scale.invertExtent(d).map(roundedNumber).join(' - ') : d;
           return (
@@ -323,13 +332,12 @@ const Map = React.createClass({
   },
 
   render: function () {
-    // console.log(this.props.overlay)
     return (
       <div className='map__group'>
         <div className='map__container' ref={this.mountMap}></div>
         <div className='inner'>
           <div className='legend__container'>
-            {this.renderMarkerLegend()}
+            {this.renderMarkerLegend(this.props.markers.length)}
             {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale, this.props.overlay.units)}
           </div>
         </div>

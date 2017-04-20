@@ -76,7 +76,7 @@ var Project = React.createClass({
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
-    const lastUpdated = formatDate(meta.updated_at) || '';
+    const lastUpdated = formatDate(meta.updated_at, lang) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
     const disbursedFunds = {loan: 0, grant: 0, 'local contribution': 0};
@@ -134,7 +134,7 @@ var Project = React.createClass({
       type: fund.type[lang],
       value: fund.fund.amount
     })).sort((a, b) => a.name > b.name ? 1 : -1).map((d, i) => ({
-      name: `${d.donor} - ${formatDate(d.name)} (${d.type})`,
+      name: `${d.donor} - ${formatDate(d.name, lang)} (${d.type})`,
       value: d.value
     }));
 
@@ -165,6 +165,7 @@ var Project = React.createClass({
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
+
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -196,6 +197,14 @@ var Project = React.createClass({
               </dl>
               <h1 className='inpage__title heading--deco heading--large'>{projectDisplayName}</h1>
             </div>
+
+            {data.contract_date && (
+              <dl className='date-contract'>
+                <dt className='timeline__headline heading-alt'>{`${t.contract_date}:`}</dt>
+                <dd>{`${formatDate(data.contract_date)}`}</dd>
+              </dl>
+            )}
+
             <ProjectTimeline project={data} lang={lang}/>
 
             <div className='tags'>
@@ -331,6 +340,13 @@ var Project = React.createClass({
                         );
                       })}
                     </ul>
+                  </div>
+                )}
+
+                {data.recommendations && (
+                  <div className='overview-item--alt'>
+                    <h2 className='overview-item__title heading-alt'>{t.recommendations}</h2>
+                    <p>{isArabic ? data.recommendations_ar : data.recommendations}</p>
                   </div>
                 )}
 
