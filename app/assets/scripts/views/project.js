@@ -79,7 +79,7 @@ var Project = React.createClass({
     const lastUpdated = formatDate(meta.updated_at) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
-    const disbursedFunds = {loan: 0, grant: 0};
+    const disbursedFunds = {loan: 0, grant: 0, 'local contribution': 0};
     get(data, 'disbursed', []).forEach((fund) => {
       disbursedFunds[fund.type.en.toLowerCase()] += fund.fund.amount;
     });
@@ -165,7 +165,6 @@ var Project = React.createClass({
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
-
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -235,6 +234,7 @@ var Project = React.createClass({
                 <ul className='inpage-stats'>
                   <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
                   <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
+                  <li>{currency(shortTally(disbursedFunds['local contribution']))} <small>{t.funding_local_title}</small></li>
                 </ul>
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
