@@ -22,6 +22,8 @@ branches:
 before_install:
 - chmod +x ./.build_scripts/deploy.sh
 - chmod +x ./.build_scripts/lint.sh
+install:
+- npm install -no-bin-links
 before_script:
 - "./.build_scripts/lint.sh"
 - npm test
