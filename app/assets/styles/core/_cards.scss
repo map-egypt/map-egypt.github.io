@@ -1,0 +1,198 @@
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+
+.card {
+  &__subtitle {
+    margin-bottom: 0;
+    font-weight: $base-font-light;
+    font-size: 0.675rem;
+    line-height: 1rem;
+    margin: 0.5rem 0;
+    a {
+  /*    text-decoration: none;
+    color: $base-color;*/
+      margin-right: 0.35rem;
+ /*     background-color: $input-color;
+      padding: 0.15rem 0.25rem;*/
+     /* border-radius: 0.25rem;/**/
+    }
+  }
+
+  &__title {
+    margin-bottom: 0.5rem;
+  }
+
+  &__body {
+    font-size: 0.75rem;
+
+    > *:last-child {
+      margin-bottom: 0;
+    }
+
+    p {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+}
+
+.card__categories {
+  margin-bottom: 0.75rem;
+}
+
+/* Project cards specifics
+   ========================================================================== */
+
+.card-cmplt {
+  margin: 0 0 0.5rem 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  background: rgba($base-font-color, 0.16);
+  width: 80%;
+  border-radius: $base-border-radius;
+
+  > li {
+    background: $base-color;
+    height: 0.25rem;
+    border-radius: $base-border-radius;
+
+    > span {
+      position: absolute;
+      left: 100%;
+      margin-left: 0.5rem;
+      margin-top: -3px;
+      white-space: nowrap;
+      font-size: 0.75rem;
+      line-height: 1;
+    }
+  }
+}
+
+.card-meta {
+  overflow: hidden;
+  font-size: 0.75rem;
+  font-weight: $base-font-bold;
+  color: $base-color;
+  margin: 0.75rem 0;
+
+  &__label {
+    @extend .visually-hidden;
+  }
+
+  &__value {
+    line-height: 1rem;
+    margin-bottom: 0;
+    float: left;
+
+    &--status {
+      margin-right: 1rem;
+      position: relative;
+      padding-left: 0.75rem;
+      &:before {
+        content: '';
+        position: absolute;
+        top: 0.25rem;
+        left: 0;
+        background: rgba($base-font-color, 0.5);
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: $full-border-radius;
+
+        .project--ontime & {
+          background: $success-color;
+        }
+        .project--delayed & {
+          background: $warning-color;
+        }
+      }
+    }
+    &--location {
+      &:before {
+        margin-right: 0.25rem;
+        vertical-align: sub;
+        @extend %collecticon-location;
+      }
+    }
+  }
+}
+
+.card-stats {
+  color: $base-color;
+  list-style: none;
+  font-size: 1.5rem;
+  font-weight: $base-font-light;
+  line-height: 1.5rem;
+  overflow: hidden;
+
+  li {
+    float: left;
+    box-shadow: 1px 0 0 $tertiary-color;
+    padding-right: 1rem;
+    margin-right: 1rem;
+
+    &:last-child {
+      box-shadow: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+  small {
+    display: block;
+    font-weight: $base-font-bold;
+    font-size: 0.75rem;
+    color: rgba($base-color, 0.66);
+  }
+}
+
+.project-list {
+  list-style: none;
+}
+
+.inpage__section--bleed {
+  .projects-list__card {
+    list-style: none;
+    padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
+    display: inline-block;
+    @include col(4/12, $offset: 0/12);
+    max-width: 20rem;
+    min-width: 18rem;
+    @include media(small-down) {
+      @include col(5.5/12);
+    }
+    @include media(xsmall-only) {
+      @include col(12/12);
+    }
+    @include media(medium-up) {
+      max-width: 25rem;
+      @include col(4/12);
+    }
+  }
+}
+
+.inpage__section {
+  .projects-list__card {
+    list-style: none;
+    padding: ($global-spacing * 2) ($global-spacing * 2) ($global-spacing * 2) 0;
+/*    display: inline-block;*/
+   /* max-width: 20rem;*/
+
+    @include media(medium-up) {
+       @include col(4/12, $cycle: 3);
+        min-width: 10rem;
+    }
+    @include media(medium-list-down) {
+      @include col(6/12, $uncycle: 3, $cycle: 2);
+ /*     max-width: 20rem;*/
+    }
+    @include media(small-down) {
+      @include col(6/12, $cycle: 2);
+    }
+    @include media(xsmall-only) {
+      @include col(12/12, $uncycle: 1);
+      max-width: 18rem;
+    }
+  }
+}

@@ -1,0 +1,270 @@
+/* ==========================================================================
+   Prime Navigation
+   ========================================================================== */
+
+/**
+  Note: Was proving too time consuming fixing the problem that originates
+  from having the `offcanvas-revealed` class while in `medium-up`.
+  The current solution relies on javascript to remove the class if the screen
+  size grows past the breaking point. Should be fixed eventually.
+ */
+
+.page__headline {
+  float: left;
+  padding: $global-spacing $global-spacing $global-spacing 0;
+
+  .lang--rtl & {
+    padding-left: $global-spacing;
+    padding-right: 0;
+  }
+}
+
+.page__title {
+  box-shadow: inset -1px 0 0 $tertiary-color;
+  padding-right: $global-spacing;
+  height: 100%;
+}
+
+.page__prime-nav {
+  position: relative;
+  li {
+    display: inline-block;
+    list-style: none;
+  }
+
+  .offcanvas-revealed & {
+    position: static;
+  }
+}
+
+.page__prime-nav-title {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  font-size: 1rem;
+  line-height: 1;
+  margin: 0;
+  padding: ($global-spacing * 1.5) 0;
+  transition: all 0.32s ease 0s;
+
+  // RTL variants
+  .lang--rtl & {
+    left: 0;
+    right: auto;
+  }
+
+  a {
+    &, *, &::after {
+      display: inline-block;
+      vertical-align: top;
+    }
+
+    &::after {
+      @extend %collecticon-hamburger-menu;
+      margin-left: $global-spacing / 4;
+    }
+  }
+
+  span {
+    @extend .visually-hidden;
+  }
+
+  .offcanvas-revealed & {
+    width: 12rem;
+    background: #fff;
+    right: 0;
+    box-shadow: 0 2px 0 0 $base-semi-alpha-color;
+    padding-right: $global-spacing;
+    padding-left: $global-spacing;
+
+    a::after {
+      @extend %collecticon-xmark;
+      margin-left: $global-spacing / 4;
+    }
+  }
+
+  @include media(medium-up) {
+    display: none;
+  }
+}
+
+
+.nav-block {
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  width: 12rem;
+  padding: ($global-spacing * 4.5) 0 0 0;
+  background: #fff;
+  box-shadow: 0 0 32px 16px $base-alpha-color;
+  overflow-y: scroll;
+  height: 100vh;
+
+  /* Pre animation */
+  opacity: 0;
+  visibility: hidden;
+  
+
+  /* Post animation */
+  .offcanvas-revealed & {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  @include media(medium-up) {
+    position: initial;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    opacity: 1;
+    visibility: visible;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+  }
+}
+
+/* LTR variation */
+.lang--ltr {
+  .nav-block {
+    transition: opacity 0.16s ease 0s, right 0.16s ease 0s, visibility 0.16s linear 0s;
+    right: -12rem;
+  }
+
+  &.offcanvas-revealed .nav-block {
+    right: 0;
+  }
+}
+
+/* RTL variation */
+.lang--rtl {
+  .nav-block {
+    transition: opacity 0.16s ease 0s, left 0.16s ease 0s, visibility 0.16s linear 0s;
+    left: -12rem;
+  }
+
+  &.offcanvas-revealed .nav-block {
+    left: 0;
+  }
+}
+
+.utilities-menu,
+.browse-menu {
+  list-style: none;
+  padding: 0;
+
+  > li {
+    position: relative;
+    margin: 0 0 ($global-spacing / 2) 0;
+  }
+
+  .offcanvas-revealed & {
+    margin-top: 0;
+
+    > li {
+      display: block;
+    }
+  }
+}
+
+.lang--rtl:not(.offcanvas-revealed) {
+  .utilities-menu {
+    float: left;
+  }
+  .browse-menu {
+    float: right;
+  }
+}
+
+.browse-menu {
+  margin: 2.75rem $global-spacing 0 $global-spacing;
+  @include media(medium-up) {
+    float: left;
+
+    > li {
+      float: left;
+      margin: 0 ($global-spacing * 1.5) 0 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .offcanvas-revealed & {
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 0 $tertiary-color;
+  }
+}
+
+.utilities-menu {
+  margin: 2.75rem 0 0 0;
+  @include media(medium-up) {
+    float: right;
+
+    > li {
+      float: left;
+      margin: 0 ($global-spacing * 1.5) 0 0;
+
+      &:last-child {
+        margin-right: 0;
+      }
+      &:nth-child(2) {
+        box-shadow: inset -1px 0 0 $tertiary-color;
+        padding-right: $global-spacing * 1.5;
+      }
+    }
+  }
+
+  .offcanvas-revealed & {
+    margin-left: $global-spacing;
+    margin-right: $global-spacing;
+
+    > li:nth-child(2) {
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+      box-shadow: 0 1px 0 $tertiary-color;
+    }
+  }
+}
+
+
+.browse-menu__item {
+  position: relative;
+  line-height: 0.75rem;
+  font-size: 0.75rem;
+  display: inline-block;
+  list-style: none;
+  font-weight: $base-font-light;
+
+  &::before {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    height: 2px;
+    width: 100%;
+    background: transparent;
+    content: '';
+  }
+
+  &--active {
+    font-weight: $base-font-bold;
+    &::before {
+      background: $base-color;
+    }
+  }
+
+  @include media(medium-up) {
+    margin: 0;
+  }
+}
+
+.offcanvas-revealed {
+  overflow-y: hidden;
+
+  @include media(medium-up) {
+    overflow-y: visible;
+  }
+}

@@ -1,0 +1,215 @@
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+.inpage {
+
+  &__table {
+  table-layout: fixed;
+  margin: ($global-spacing * 2) $global-spacing;
+  position: relative;
+  @include media(small-down) {
+    display: block; 
+  }
+
+  .card-meta__value--status:before {
+    top: 0.34rem;
+  }
+
+  tbody {
+    @include media(small-down) {
+      display: block;
+    }
+  }
+
+  thead {
+    box-shadow: inset 0 -1px 0 0 $tertiary-color;
+    @include media(small-down) {
+    display: block; 
+    }
+    tr {
+      @include media(small-down) {
+        display: block; 
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+      }
+    }
+  }
+
+  th {
+    color: $base-color;
+    font-weight: $base-font-light;
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    padding-bottom: $global-spacing;
+    @include media(small-down) {
+      display: block; 
+    }
+  }
+
+  td {
+    font-size: 0.75rem;
+    line-height: 1.25rem;
+    position: relative;
+    font-weight: $base-font-light;
+    padding: ($global-spacing * 2) ($global-spacing * 2) $global-spacing 0;
+
+    @include media(small-down) {
+      display: block; 
+      border: none;
+      &:last-child {
+        box-shadow: inset 0 -1px 0 0 $tertiary-color;
+        margin-bottom: $global-spacing;
+      };
+    }
+
+    .activity-name {
+      color: $base-color;
+      font-weight: $base-font-bold;
+      margin-bottom: 0;
+      position: absolute;
+      @include media(small-down) {
+        position: relative;
+        top: 0;
+      }
+    }
+  }
+
+  td:before { 
+    @include media(small-down) {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      width: 45%; 
+      padding-right: 10px; 
+      white-space: nowrap;
+    }
+  }
+}
+
+  td:nth-of-type(n):before {
+    @extend th;
+    left: 0;
+    position: absolute;
+  }
+  
+  td:nth-of-type(1):before { 
+    @include media(small-down){
+    content: "Name and Description"; 
+    }
+  }
+  td:nth-of-type(2):before { 
+    @include media(small-down){
+    content: "KPI"; 
+    }
+  }
+  td:nth-of-type(3):before { 
+    @include media(small-down){
+    content: "Target"; 
+    }
+  }
+  td:nth-of-type(4):before { 
+    @include media(small-down){
+    content: "Progress"; 
+    }
+  }
+  td:nth-of-type(5):before { 
+    @include media(small-down){
+    content: "Date"; 
+    }
+  }
+  .row-name {
+    width: 35%;
+  }
+  .row-target, .row-progress, .row-date {
+    width: 12%;
+  }
+}
+
+
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: $global-spacing;
+
+  th, td  {
+    padding: 0.75rem 0.5rem;
+    vertical-align: top;
+    text-align: left;
+    box-shadow: inset 0 -2px 0 0 $base-alpha-color;
+  }
+
+  th:first-child,
+  td:first-child {
+    padding-left: 1rem;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 1rem;
+  }
+
+  thead th {
+    @extend .heading-alt;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    vertical-align: bottom;
+    box-shadow: inset 0 -4px 0 0 $base-alpha-color;
+    a {
+      display: inline-block;
+      &.table__sort:after {
+        font-size: 1rem;
+        margin-left: 0.375rem;
+        vertical-align: top;
+        display: inline-block;
+        line-height: inherit !important;
+      }
+      // &.table__sort--none:after {
+      //   @extend %collecticons-sort-none;
+      // }
+      // &.table__sort--asc:after {
+      //   @extend %collecticons-sort-asc;
+      // }
+      // &.table__sort--desc:after {
+      //   @extend %collecticons-sort-desc;
+      // }
+    }
+    a, a:visited, a:hover {
+      color: inherit;
+    }
+  }
+
+  &--zebra {
+    tbody tr:nth-of-type(odd) {
+      background: rgba($base-color, 0.04);
+    }
+  }
+}
+
+/* Prose specific */
+
+.prose--responsive {
+  > .table thead th {
+    @include media(medium-up) {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+
+/* Responsive table wrapper
+   ========================================================================== */
+
+.responsive-table-wrapper {
+  position: relative;
+  min-height: .01%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  width: 100%;
+  margin-bottom: $global-spacing;
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}

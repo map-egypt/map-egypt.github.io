@@ -1,0 +1,51 @@
+.inpage__section--comparison {
+	.chart-content {
+    @include col(6/12);
+  }
+}
+
+.inpage__section--charts {
+  .overview-charts {
+    padding: 0;
+  }
+}
+
+.inpage__overview-links {
+  border-top: solid 1px $tertiary-color;
+  overflow: hidden;
+  padding-top: 1rem;
+
+  .overview-item {
+    @include col(6/12, $cycle:2);
+    @include media(small-down) {
+      @include col(12/12);
+    }
+  }
+  .overview-item--alt {
+    @include col(12/12);  
+  }
+}
+
+.overview-item__title {
+    display: block;
+    margin-bottom: $global-spacing/2;
+    margin-top: $global-spacing;
+  
+  ul {
+    margin: 0;
+    overflow:hidden;
+  }
+
+  li {
+    font-size: 0.875rem;
+    float: left;
+    list-style: none;
+    padding-top: 0;
+    &:last-child {
+      margin-bottom: $global-spacing;
+    };
+    &:first-child {
+      @include col(12/12);
+    }
+  }
+}

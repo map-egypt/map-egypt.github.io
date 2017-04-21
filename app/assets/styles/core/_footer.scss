@@ -1,0 +1,100 @@
+.page__footer {
+  background-color: $base-color;
+  padding: ($global-spacing * 2) 0;
+  box-shadow: inset 0 1px 0 0 rgba($base-color, .9);
+}
+
+.updates {
+  @include col(12/12);
+
+  @include media(medium-up){
+    @include col(12/12);
+  }
+
+  @include media(large-up){
+    @include col(5/12);
+    box-shadow: none;
+  }
+
+  &__title,  {
+    font-size: 1.25rem;
+    font-family: $base-font-family;
+    color: #fff;
+    margin-bottom: 0;
+  }
+  &__description {
+    color: #fff;
+    font-weight: $base-font-regular;
+  }
+  .form__input-group {
+    width: 280px;
+  }
+}
+
+
+.logos {
+  @include media(medium-up) {
+    @include col(12/12);
+  }
+  @include media(large-up){
+    @include col(7/12);
+  }
+
+  &__list {
+    margin: 0;
+    padding: 0;    
+
+    li {
+      float: left;
+      list-style: none;
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.3);
+      padding: $global-spacing;
+      border-radius: $base-border-radius;
+      margin: $global-spacing $global-spacing/2;
+      max-width: 15rem;
+        &:first-child {
+          margin-left: 0;
+        };
+      @include media(medium-up) {
+        float: left;
+        width: auto;
+        padding-top: $global-spacing;
+      }
+
+      @include media(large-up) {
+        float: right;
+        &:first-child {
+          margin-right: 0;
+        };
+      }
+      @include media(xsmall-only) {
+        width: auto;
+        padding: 0 $global-spacing/2;
+        margin: $global-spacing/4;
+      }
+    }
+  }
+
+  &__item {
+    display: block;
+    height: 4rem;
+    text-align: center;
+    line-height: 4rem;
+
+    img {
+      max-height: 4rem;
+      vertical-align: middle;
+      @include media(xsmall-only) {
+        max-height: 3rem;
+      }
+    }
+  }
+}
+
+.contact {
+  @include col(12/12);
+  padding-top: $global-spacing;
+  .contact__item a{
+    color: #fff;
+  }
+}

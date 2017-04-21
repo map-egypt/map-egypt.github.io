@@ -1,0 +1,31 @@
+.error {
+  height: 50vh;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  resize: both;
+  text-align: center;
+  position: relative;
+}
+
+.error-content {
+  width: 50%;
+  transform: translate(-50%, -30%);
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  resize: both;
+  p {
+    font-size: 1.25rem;
+  }
+  a {
+    text-decoration: none;
+  }
+  .heading--deco::after {
+    left: 50%;
+    transform: translate(-50%, 0)
+  }
+}

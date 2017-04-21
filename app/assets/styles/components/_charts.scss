@@ -1,0 +1,128 @@
+.chart-container {
+  height: 240px;
+  width: 100%;
+  float: left;
+}
+
+.chart-content {
+  h3 {
+    font-family: $base-font-family;
+    font-size: 1rem;
+    text-align: center;
+  }
+}
+
+.pie__slice__on-time {
+  fill: $base-color;
+}
+
+.pie__slice__delayed {
+  fill: rgba(43, 35, 66, 0.55);
+}
+
+.chart__bar {
+  fill: $base-color;
+}
+
+.chart__axis-ticks {
+  fill: $base-font-color;
+  font-size: 0.75rem;
+  font-weight: $base-font-light;
+}
+
+.status-key {
+  float:left;
+  margin-left: calc(50% + 2rem);
+  transform: translate(-50%, 0);
+  .status-key__label {
+    float: left;
+    font-size: 0.875rem;
+    color: $base-color;
+    margin-right: $global-spacing * 3;
+    position: relative;
+  }
+  .status-key__label:before {
+    content: '';
+    position: absolute;
+    width: 0.75rem;
+    height: 0.75rem;
+    top: .325rem;
+    left: -1rem;
+    border-radius: .15rem;
+  }
+  .status-ontime:before {
+    background: $base-color;
+  }
+  .status-delayed:before {
+    background: rgba(43, 35, 66, 0.55);
+  }
+}
+
+/* Timeline */
+
+$timeline-height: 6px;
+$timeline-outer: rgba($base-color, 0.3);
+$timeline-inner: $base-color;
+
+.timeline__unit {
+  @include col(12/12);
+  margin-bottom: $global-spacing * 2;
+  &:first-child {
+    margin-top: $global-spacing;
+  }
+  @include media(medium-up) {
+    margin-bottom: 0;
+  }
+  &:last-child{
+    margin-top: 0.5rem;
+  }
+  .heading-alt {
+    font-size: 0.75rem;
+  }
+}
+
+.timeline__headline {
+  @include col(12/12);
+  @include media(medium-up) {
+    @include col(2/12);
+  }
+}
+
+.timeline__row {
+  @include col(12/12);
+  @include media(medium-up) {
+    @include col(10/12);
+  }
+  background-color: $timeline-outer;
+  margin-top: $global-spacing/4;
+  height: $timeline-height;
+  position: relative;
+
+  hr {
+    background-color: $timeline-inner;
+    bottom: -32px;
+    height: $timeline-height * 2;
+    width: 1px;
+    position: absolute;
+  }
+}
+
+.timeline__label {
+
+}
+
+.timeline__inner {
+  background-color: $timeline-inner;
+  height: $timeline-height;
+  position: absolute;
+}
+
+.timeline__label {
+  bottom: -9px;
+  display: inline-block;
+  position: absolute;
+  font-family: $base-font-family;
+  font-weight: $base-font-light;
+  font-size: 0.657rem;
+  color: $base-font-color;
+}
