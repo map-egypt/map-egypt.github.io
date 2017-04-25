@@ -142,7 +142,7 @@ var Project = React.createClass({
 
     const csvChartData = [
       {
-        title: 'Funding By Donor (US Dollars)',
+        title: 'Funding (US Dollars)',
         data: donors
       },
       {
