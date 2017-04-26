@@ -76,10 +76,10 @@ var Project = React.createClass({
     const { lang } = this.props.meta;
     const basepath = '/' + lang;
     const ontime = ProjectCard.isOntime(data);
-    const lastUpdated = formatDate(meta.updated_at) || '';
+    const lastUpdated = formatDate(meta.updated_at, lang) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
-    const disbursedFunds = {loan: 0, grant: 0};
+    const disbursedFunds = {loan: 0, grant: 0, 'local contribution': 0};
     get(data, 'disbursed', []).forEach((fund) => {
       disbursedFunds[fund.type.en.toLowerCase()] += fund.fund.amount;
     });
@@ -134,7 +134,7 @@ var Project = React.createClass({
       type: fund.type[lang],
       value: fund.fund.amount
     })).sort((a, b) => a.name > b.name ? 1 : -1).map((d, i) => ({
-      name: `${d.donor} - ${formatDate(d.name)} (${d.type})`,
+      name: `${d.donor} - ${formatDate(d.name, lang)} (${d.type})`,
       value: d.value
     }));
 
@@ -197,6 +197,14 @@ var Project = React.createClass({
               </dl>
               <h1 className='inpage__title heading--deco heading--large'>{projectDisplayName}</h1>
             </div>
+
+            {data.contract_date && (
+              <dl className='date-contract'>
+                <dt className='timeline__headline heading-alt'>{`${t.contract_date}:`}</dt>
+                <dd>{`${formatDate(data.contract_date)}`}</dd>
+              </dl>
+            )}
+
             <ProjectTimeline project={data} lang={lang}/>
 
             <div className='tags'>
@@ -229,19 +237,16 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li>{currency(shortTally(budget))} <small>{t.funding_title}</small></li>
-                  <li>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
+                  <li className='num__internal--large'>{currency(shortTally(budget))}
+                    <small>{t.funding_title}</small>
+                    <ul className='num__internal'>
+                      <li>{currency(shortTally(disbursedFunds.loan))} {t.funding_loans_title}</li>
+                      <li>{currency(shortTally(disbursedFunds.grant))} {t.funding_grants_title}</li>
+                      <li>{currency(shortTally(disbursedFunds['local contribution']))} {t.funding_local_title}</li>
+                    </ul>
+                  </li>
+                  <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
                 </ul>
-                {disbursedFunds.loan || disbursedFunds.grant
-                  ? <ul className='inpage-stats'>
-                      {disbursedFunds.loan
-                        ? <li>{currency(shortTally(disbursedFunds.loan))} <small>{t.funding_loans_title}</small></li>
-                        : ''}
-                      {disbursedFunds.grant
-                        ? <li>{currency(shortTally(disbursedFunds.grant))} <small>{t.funding_grants_title}</small></li>
-                        : ''}
-                </ul>
-                  : ''}
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>
                 <ul>
@@ -338,6 +343,13 @@ var Project = React.createClass({
                   </div>
                 )}
 
+                {data.recommendations && (
+                  <div className='overview-item--alt'>
+                    <h2 className='overview-item__title heading-alt'>{t.recommendations}</h2>
+                    <p>{isArabic ? data.recommendations_ar : data.recommendations}</p>
+                  </div>
+                )}
+
                 </div>
               </div>
             </section>
@@ -356,7 +368,7 @@ var Project = React.createClass({
                 </div>
                 {authenticated && disbursement.length ? (
                   <div className='chart-content chart__inline--labels'>
-                    <h3>Disbursement vs. Reach</h3>
+                    <h3>Disbursement</h3>
                     <HorizontalBarChart
                       data={disbursement}
                       margin={barChartMargin}
@@ -375,9 +387,9 @@ var Project = React.createClass({
                 <table className='inpage__table'>
                   <thead>
                     <tr>
-                      <th className='row-status'>{t.status_title}</th>
                       <th className='row-name'>{t.component_title}</th>
                       <th className='row-kpi'>{t.kpi_title}</th>
+                      <th className='row-status'>{t.status_title}</th>
                       <th className='row-target'>{t.target_title}</th>
                       <th className='row-progress'>{t.rate_title}</th>
                       <th className='row-date'>{t.date_title}</th>
@@ -388,11 +400,11 @@ var Project = React.createClass({
                       const key = slugify(d.status.en);
                       return (
                         <tr key={d.kpi}>
+                          <td className='cell-name'>{d.component}</td>
+                          <td>{d.kpi}</td>
                           <td className={'project--' + key}>
                             <p className='activity-name'>{d.status[lang]}</p>
                           </td>
-                          <td className='cell-name'>{d.component}</td>
-                          <td>{d.kpi}</td>
                           <td>{tally(d.target)}</td>
                           <td>{tally(d.current)}</td>
                           <td>{formatSimpleDate(parseProjectDate(d.date))}</td>

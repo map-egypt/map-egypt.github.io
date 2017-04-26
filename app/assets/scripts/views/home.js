@@ -111,16 +111,16 @@ var Home = React.createClass({
                 <p className='section__description'>{t.overview_description}</p>
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>{totalProjects}<small>total projects</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{totalProjects}<small>{t.total_projects}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>${totalFunding}<small>in funding</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>${totalFunding}<small>{t.in_funding}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>{totalDonors}<small>total donors</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{totalDonors}<small>{t.total_donors}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>{collaborationCount}<small>donor collaborations</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{collaborationCount}<small>{t.donor_collaborations}</small></h3>
                     <ul className='inpage-stats__collaborators'>
                       {collaboratorNames.map((name, i) => <li key={i}>{name}</li>)}
                     </ul>

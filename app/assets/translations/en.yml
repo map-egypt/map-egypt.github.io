@@ -22,6 +22,11 @@ homepage:
   chart_two_label2: Delayed
   chart_two_label3: Extended
 
+  total_projects: total projects
+  in_funding: in funding
+  total_donors: total donors
+  donor_collaborations: donor collaborations
+
   other_indicators_title: Other Progress Indicators
   other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Yemen. Overlay agriculture and rural development projects in areas of interest.
   sds_button: SDS Indicators
@@ -36,11 +41,16 @@ projects_indicators:
   search_text: Zoom to Governorate
   map_toggle_btn: Map
   list_toggle_btn: List/Chart
+  sds_dropdown: SDS Indicators
+  sdg_dropdown: SDG Indicators
+  other_dropdown: Other Indicators
 
 projects_list_view:
   projects_title: Projects
   sort_by_title: Sort by
-  sort_option1: Alphabetical
+  sort_alphabetical: Alphabetical
+  sort_ascending: Percentage Complete
+  sort_descending: Percentage Complete
 
 project_pages:
   print: Print
@@ -54,10 +64,13 @@ project_pages:
   proposed_timeline_title: Proposed Timeline
   categories_title: Categories
   donors_title: Donors
+  recommendations: Recommendations based on project experience
+  contract_date: Contract Signed
 
   funding_title: Funding
   funding_loans_title: Loans
   funding_grants_title: Grants
+  funding_local_title: Local Contributions
   objective_title: Objective
   location_title: Location
   project_link: Project Link
@@ -80,7 +93,7 @@ project_pages:
   project_comparison_title: Project Comparison By Category
   comparison_chart_title1: Funding
   comparison_chart_title2: Percentage Complete
-  comparision_chart_title3: Beneficiaries Reached
+  comparision_chart_title3: Targeted Beneficiaries
 
   related_sds_projects_title: Related Projects By SDS Goal
 
@@ -109,6 +122,7 @@ donor_pages:
   funded_title: Projects Funded
 
 map_labels:
+  no_data: No Data
   map_group_label: Number of Project Locations
   map_project_label: Project
 

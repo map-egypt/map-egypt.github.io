@@ -614,6 +614,9 @@
     width: 100%;
     direction: rtl;
     text-align: right;
+    &:after {
+      margin-right: 0.5rem;
+    }
     &:hover {
       width: 100%;
       direction: rtl;
