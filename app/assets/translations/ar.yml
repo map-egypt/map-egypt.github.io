@@ -67,7 +67,7 @@ project_pages:
   recommendations: توصيات بناء على خبرة المشروع
   contract_date: تم توقيع العقد
 
-  funding_title: 'التمويل'
+  budget_title: 'ميزانية'
   funding_loans_title: 'قرض'
   funding_grants_title: 'منحة'
   funding_local_title: 'قرضة'
