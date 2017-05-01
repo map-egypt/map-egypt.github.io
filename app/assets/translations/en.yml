@@ -68,6 +68,7 @@ project_pages:
   contract_date: Contract Signed
 
   funding_title: Funding
+  budget_title: Budget
   funding_loans_title: Loans
   funding_grants_title: Grants
   funding_local_title: Local Contributions

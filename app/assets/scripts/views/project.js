@@ -79,9 +79,9 @@ var Project = React.createClass({
     const lastUpdated = formatDate(meta.updated_at, lang) || '';
     const budget = get(data, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0);
 
-    const disbursedFunds = {loan: 0, grant: 0, 'local contribution': 0};
-    get(data, 'disbursed', []).forEach((fund) => {
-      disbursedFunds[fund.type.en.toLowerCase()] += fund.fund.amount;
+    const budgetBreakdown = {loan: 0, grant: 0, 'local contribution': 0};
+    get(data, 'budget', []).forEach((fund) => {
+      budgetBreakdown[fund.type.en.toLowerCase()] += fund.fund.amount;
     });
 
     const allProjects = get(this.props.api, 'projects', []);
@@ -238,11 +238,11 @@ var Project = React.createClass({
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
                   <li className='num__internal--large'>{currency(shortTally(budget))}
-                    <small>{t.funding_title}</small>
+                    <small>{t.budget_title}</small>
                     <ul className='num__internal'>
-                      <li>{currency(shortTally(disbursedFunds.loan))} {t.funding_loans_title}</li>
-                      <li>{currency(shortTally(disbursedFunds.grant))} {t.funding_grants_title}</li>
-                      <li>{currency(shortTally(disbursedFunds['local contribution']))} {t.funding_local_title}</li>
+                      <li>{currency(shortTally(budgetBreakdown.loan))} {t.funding_loans_title}</li>
+                      <li>{currency(shortTally(budgetBreakdown.grant))} {t.funding_grants_title}</li>
+                      <li>{currency(shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
                     </ul>
                   </li>
                   <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
