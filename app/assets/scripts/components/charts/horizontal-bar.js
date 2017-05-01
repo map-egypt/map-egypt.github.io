@@ -3,7 +3,8 @@ import React from 'react';
 import { scaleLinear, scaleBand } from 'd3-scale';
 import { debounce, throttle, max } from 'lodash';
 import Axis from './axis';
-import { byEgy } from '../../utils/governorates';
+import { byYem } from '../../utils/governorates';
+import { byId } from '../../utils/districts';
 
 var HorizontalBarChart = React.createClass({
   displayName: 'HorizontalBarChart',
@@ -31,7 +32,9 @@ var HorizontalBarChart = React.createClass({
 
   onWindowResize: function () {
     let rect = this.refs.chartContainer.getBoundingClientRect();
-    this.setState({ width: rect.width, height: rect.height });
+    const { data } = this.props;
+    const heightCalc = 15 * data.length + 150;
+    this.setState({ width: rect.width, height: heightCalc });
   },
 
   mouseover: function (x, y, data) {
@@ -73,19 +76,25 @@ var HorizontalBarChart = React.createClass({
         right: margin.left
       });
     }
-    const innerWidth = width - margin.left - margin.right;
-    const innerHeight = height - margin.top - margin.bottom;
+    let innerWidth = width - margin.left - margin.right;
 
     // short circut if we have too small an area
     if (innerWidth <= 0) {
       return <div className='chart-container' ref='chartContainer' />;
     }
 
+    const innerHeight = 15 * data.length;
+
     const langSelector = rtl ? 'nameAr' : 'name';
     data.map((a, i) => {
       let name = a.name;
-      if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name)[langSelector]);
-      if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name)[langSelector];
+      if (name && name.indexOf('YEM') === 0) {
+        if (name.length === 5) {
+          name = byYem(name)[langSelector];
+        } else if (name.length === 7) {
+          name = byId(name.substring(3))[langSelector];
+        }
+      }
       data[i].name = name;
     });
 
@@ -101,13 +110,13 @@ var HorizontalBarChart = React.createClass({
     let xScale = scaleLinear().range([0, innerWidth]).domain([0, max(dataValues)]);
     let axisScale = rtl ? scaleLinear().range([innerWidth, 0]).domain([0, max(dataValues)]) : xScale;
     let xLabels = xScale.ticks(3);
-    let yScale = ordinalScale.rangeRound([innerHeight, 0]).domain(dataNames);
+    let yScale = ordinalScale.rangeRound([innerHeight, -10]).domain(dataNames);
     let yLabels = dataNames;
     let rectHeight = yScale.bandwidth();
 
     return (
       <div className='chart-container' ref='chartContainer'>
-        <svg className='chart' width={width} height={height} ref='svg'>
+        <svg className='chart' width={width} height={15 * data.length + 150} ref='svg'>
           <Axis
             scale={axisScale}
             labels={xLabels}

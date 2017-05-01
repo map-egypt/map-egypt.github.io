@@ -2,5 +2,5 @@
 
 module.exports = {
   environment: 'production',
-  baseUrl: 'https://map-egypt.github.io/'
+  baseUrl: 'https://map-yemen.github.io/'
 };
