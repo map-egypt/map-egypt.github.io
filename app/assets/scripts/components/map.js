@@ -106,11 +106,11 @@ const Map = React.createClass({
         `<div class='marker__internal'>` +
           `<h5 class='marker__title'><a href='#/${lang}/projects/${marker.id}' class='link--deco'>${marker.name}</a></h5>` +
           `<dl class='card-meta ${statusClass}'>` +
-                `<dt class='card-meta__label'>Status</dt>` +
-                `<dd class='card-meta__value card-meta__value--status'>${status}</dd>` +
-                `<dt class='card-meta__label'>Location</dt>` +
-                `<dd class='card-meta__value card-meta__value--location'>${location}</dd>` +
-              `</dl>` +
+              `<dt class='card-meta__label'>Status</dt>` +
+              `<dd class='card-meta__value card-meta__value--status'>${status}</dd>` +
+              `<dt class='card-meta__label'>Location</dt>` +
+              `<dd class='card-meta__value card-meta__value--location'>${marker.village ? marker.village + ', ' : ''}${location}</dd>` +
+            `</dl>` +
         `</div>`
       );
       markerLayer.addLayer(leafletMarker);

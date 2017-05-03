@@ -165,7 +165,6 @@ var Project = React.createClass({
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
-
     return (
       <section className='inpage'>
         <header className='inpage__header'>
