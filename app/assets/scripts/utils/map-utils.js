@@ -36,7 +36,6 @@ export const getProjectCentroids = function (projects, features) {
     });
   });
 
-  // console.log(regions);
   let i = 0;
   Object.keys(regions).forEach(function (id) {
     let meta;
@@ -51,9 +50,7 @@ export const getProjectCentroids = function (projects, features) {
 
     const centroid = get(getCentroid(feature), 'geometry.coordinates');
     if (centroid) {
-      // console.log(id)
       regions[id].projects.forEach(function (project) {
-        // console.log(project)
         const marker = {
           centroid: [centroid[1], centroid[0]],
           ontime: isOntime(project),
@@ -64,7 +61,7 @@ export const getProjectCentroids = function (projects, features) {
           location: project.location
         };
 
-        // add village name and use coordinates when available,
+        // add village name and use specific coordinates when available,
         // instead of district/ governorate centroids
         if (project.location[i]) {
           const hardcodedLoc = project.location[i].marker;
