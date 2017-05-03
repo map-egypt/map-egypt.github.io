@@ -36,6 +36,8 @@ export const getProjectCentroids = function (projects, features) {
     });
   });
 
+  // console.log(regions);
+  let i = 0;
   Object.keys(regions).forEach(function (id) {
     let meta;
     let feature;
@@ -46,17 +48,38 @@ export const getProjectCentroids = function (projects, features) {
       meta = governoratesMeta.byId(id);
       feature = governorates.find((f) => f.properties.admin_id === meta.egy);
     }
+
     const centroid = get(getCentroid(feature), 'geometry.coordinates');
     if (centroid) {
+      // console.log(id)
       regions[id].projects.forEach(function (project) {
-        markers.push({
+        // console.log(project)
+        const marker = {
           centroid: [centroid[1], centroid[0]],
           ontime: isOntime(project),
           region: meta.name,
           name: project.name,
           id: project.id,
-          isDistrict: regions[id].isDistrict
-        });
+          isDistrict: regions[id].isDistrict,
+          location: project.location
+        };
+
+        // add village name and use coordinates when available,
+        // instead of district/ governorate centroids
+        if (project.location[i]) {
+          const hardcodedLoc = project.location[i].marker;
+          if (hardcodedLoc) {
+            if (hardcodedLoc.lat && hardcodedLoc.lon) {
+              marker.centroid = [hardcodedLoc.lat, hardcodedLoc.lon];
+            }
+            if (hardcodedLoc.village) {
+              marker.village = hardcodedLoc.village;
+            }
+          }
+        }
+
+        markers.push(marker);
+        i++;
       });
     }
   });
