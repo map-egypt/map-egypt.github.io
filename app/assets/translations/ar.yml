@@ -21,6 +21,10 @@ homepage:
   chart_two_label: 'في الميعاد'
   chart_two_label2: 'متأخر'
   chart_two_label3: 'ممتد'
+  chart_title_three: 'ميزانية'
+  chart_three_label: 'قرض'
+  chart_three_label2: 'منحة'
+  chart_three_label3: 'قرضة'
 
   total_projects: 'المشروعات مجموع'
   in_funding: 'التمويل'
