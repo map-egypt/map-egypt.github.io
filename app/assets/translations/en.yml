@@ -22,8 +22,8 @@ homepage:
   chart_two_label2: Delayed
   chart_two_label3: Extended
   chart_title_three: Budget
-  chart_three_label: Grants
-  chart_three_label2: Loans
+  chart_three_label: Loans
+  chart_three_label2: Grants
   chart_three_label3: Local Contributions
 
   total_projects: total projects
