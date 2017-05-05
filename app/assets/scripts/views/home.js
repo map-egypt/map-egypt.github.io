@@ -88,6 +88,18 @@ var Home = React.createClass({
       value: status.extended
     }];
 
+    let budgetSummary = {loan: 0, grant: 0, 'local contribution': 0};
+    projects.forEach((project) => {
+      get(project, 'budget', []).forEach((fund) => {
+        budgetSummary[fund.type.en.toLowerCase()] += fund.fund.amount;
+      });
+    });
+    budgetSummary = [
+      {name: 'Loan', value: budgetSummary.loan},
+      {name: 'Grant', value: budgetSummary.grant},
+      {name: 'Local Contribution', value: budgetSummary['local contribution']}
+    ];
+
     const t = get(window.t, [lang, 'homepage'], {});
     return (
       <div>
@@ -144,7 +156,16 @@ var Home = React.createClass({
                   <div className='status-key'>
                     <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
                     <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
-                    <p className='status-key__label status-extended'>{t.chart_two_label3}</p>
+                    <p className='status-key__label status-extended last'>{t.chart_two_label3}</p>
+                  </div>
+                </div>
+                <div className='chart-content chart__inline--labels chart-content--status'>
+                  <h3>{t.chart_title_three}</h3>
+                  <PieChart data={budgetSummary} />
+                  <div className='status-key'>
+                    <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
+                    <p className='status-key__label budget-grant'>{t.chart_three_label2}</p>
+                    <p className='status-key__label budget-local last'>{t.chart_three_label3}</p>
                   </div>
                 </div>
               </div>
