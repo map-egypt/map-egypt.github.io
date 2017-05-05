@@ -44,6 +44,7 @@
 .home {
   .chart__inline--labels {
   @include col(6/12);
+  width: 47%;
   @include media(small-down) {
     @include col(12/12);
   }
@@ -112,7 +113,7 @@ svg {
 
 .status-key {
   text-align: center;
-  margin-left: 5rem;
+  margin-left: 6.5rem;
   .status-key__label {
     float: left;
     font-size: 0.875rem;
