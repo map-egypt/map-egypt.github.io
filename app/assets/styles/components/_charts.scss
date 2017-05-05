@@ -142,16 +142,26 @@ svg {
     background: $partial-success-color;
   }
   .budget-loan:before {
-    background: #696181;
+    background: #2B2342;
   }
   .budget-grant:before {
-    background: #2B2342;
+    background: #696181;
   }
   .budget-local:before {
     background: #B6B0C8;
   }
 }
+.pie__slice__loan {
+  fill: #2B2342;
+}
 
+.pie__slice__grant {
+  fill: #696181;
+}
+
+.pie__slice__local-contribution {
+  fill: #B6B0C8;
+}
 /* Timeline */
 
 $timeline-height: 6px;
