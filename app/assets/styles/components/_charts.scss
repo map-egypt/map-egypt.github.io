@@ -30,6 +30,7 @@
   height: 240px;
   width: 100%;
   float: left;
+  text-align: center;
 }
 
 .chart-content {
@@ -75,6 +76,18 @@
   fill: $partial-success-color;
 }
 
+.pie__slice__loan {
+  fill: #696181;
+}
+
+.pie__slice__grant {
+  fill: #2B2342;
+}
+
+.pie__slice__local-contribution {
+  fill: #B6B0C8;
+}
+
 .chart__bar {
   fill: $base-color;
   &.active {
@@ -93,17 +106,22 @@
   padding-bottom: 2.5em;
 }
 
+svg {
+  float: left;
+}
+
 .status-key {
-  float:left;
-  position: absolute;
-  bottom: 0;
-  transform: translate(40%, 0);
+  text-align: center;
+  margin-left: 5rem;
   .status-key__label {
     float: left;
     font-size: 0.875rem;
     color: $base-color;
     margin-right: $global-spacing * 3;
     position: relative;
+    &.last {
+      margin-right: 0;
+    }
   }
   .status-key__label:before {
     content: '';
@@ -122,6 +140,15 @@
   }
   .status-extended:before {
     background: $partial-success-color;
+  }
+  .budget-loan:before {
+    background: #696181;
+  }
+  .budget-grant:before {
+    background: #2B2342;
+  }
+  .budget-local:before {
+    background: #B6B0C8;
   }
 }
 

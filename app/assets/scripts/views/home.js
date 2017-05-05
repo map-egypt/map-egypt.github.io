@@ -156,7 +156,7 @@ var Home = React.createClass({
                   <div className='status-key'>
                     <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
                     <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
-                    <p className='status-key__label status-extended'>{t.chart_two_label3}</p>
+                    <p className='status-key__label status-extended last'>{t.chart_two_label3}</p>
                   </div>
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
@@ -165,7 +165,7 @@ var Home = React.createClass({
                   <div className='status-key'>
                     <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
                     <p className='status-key__label budget-grant'>{t.chart_three_label2}</p>
-                    <p className='status-key__label budget-local'>{t.chart_three_label3}</p>
+                    <p className='status-key__label budget-local last'>{t.chart_three_label3}</p>
                   </div>
                 </div>
               </div>
