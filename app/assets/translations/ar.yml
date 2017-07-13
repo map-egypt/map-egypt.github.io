@@ -24,7 +24,7 @@ homepage:
   chart_title_three: 'ميزانية'
   chart_three_label: 'منحة'
   chart_three_label2: 'قرض'
-  chart_three_label3: 'قرضة'
+  chart_three_label3: 'مساهمة محلية'
 
   total_projects: 'المشروعات مجموع'
   in_funding: 'التمويل'
@@ -68,9 +68,9 @@ project_pages:
   proposed_timeline_title: 'الجدول الزمني المقترح'
   categories_title: 'القطاعات الفرعية'
   donors_title: 'الجهات المانحة'
-  recommendations: توصيات بناء على خبرة المشروع
-  contract_date: تم توقيع العقد
-
+  recommendations: 'توصيات بناء على خبرة المشروع'
+  contract_date:'تاريخ توقيه العقد'
+  
   budget_title: 'ميزانية'
   funding_loans_title: 'قرض'
   funding_grants_title: 'منحة'
@@ -126,7 +126,7 @@ donor_pages:
   funded_title: 'المشروعات المُمولة'
 
 map_labels:
-  no_data: 'No Data'
+  no_data: 'لا توجد بيانات'
   map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
 
