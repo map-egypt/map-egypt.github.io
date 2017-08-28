@@ -57,6 +57,7 @@ projects_indicators:
   add_and_filter: Add and Filter projects
   all_projects: All Projects
   reset_filters: reset filters
+  selected_overlays: Selected Indicator Overlays
 
 projects_list_view:
   projects_title: 'المشروعات'

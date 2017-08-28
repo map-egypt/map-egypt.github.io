@@ -452,9 +452,11 @@ var ProjectBrowse = React.createClass({
   },
 
   renderActiveIndicators: function (activeIndicator, activeIndicators) {
+    const { lang } = this.props.meta;
+    const t = get(window.t, [lang, 'projects_indicators'], {});
     return (
       <div className='indicator__overlay'>
-        <h1 className='heading--label'>Selected Indicator Overlays</h1>
+        <h1 className='heading--label'>{t.selected_overlays}</h1>
         <ul className='indicator__overlay--list'>
           {activeIndicators.map((indicator) => (
             <li
