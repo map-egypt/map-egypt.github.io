@@ -48,6 +48,16 @@ projects_indicators:
   sds_dropdown: SDS Indicators
   sdg_dropdown: SDG Indicators
   other_dropdown: Other Indicators
+  compare_indicators: Add and compare development indicators listed below.
+  selected_indicators: Selected Indicators
+  add: Add
+  indicators: Indicators
+  cancel: Cancel
+  apply: Apply
+  add_and_filter: Add and Filter projects
+  all_projects: All Projects
+  reset_filters: reset filters
+  selected_overlays: Selected Indicator Overlays
 
 projects_list_view:
   projects_title: Projects

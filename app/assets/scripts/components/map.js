@@ -136,7 +136,7 @@ const Map = React.createClass({
     if (category) {
       switch (category.toLowerCase()) {
         case 'sequential':
-          domain = values.map(d => +d.value);
+          domain = values.filter(d => !isNaN(d.value)).map(d => +d.value);
           scale = scaleQuantile().domain(domain).range(SEQUENTIAL.slice(0, 5));
           break;
 
