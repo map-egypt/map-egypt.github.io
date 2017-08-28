@@ -21,15 +21,15 @@ homepage:
   chart_two_label: 'في الميعاد'
   chart_two_label2: 'متأخر'
   chart_two_label3: 'ممتد'
-  chart_title_three: 'ميزانية'
+  chart_title_three: 'الميزانية'
   chart_three_label: 'منحة'
   chart_three_label2: 'قرض'
   chart_three_label3: 'مساهمة محلية'
 
-  total_projects: 'المشروعات مجموع'
+  total_projects: 'مجموع المشروعات'
   in_funding: 'التمويل'
-  total_donors: 'المانحة مجموع'
-  donor_collaborations: 'المانحة التعاون'
+  total_donors: 'مجموع الجهات المانحة'
+  donor_collaborations: 'التعاون بين المانحين'
 
   other_indicators_title: 'مؤشرات التنمية'
   other_indicators_description: 'إضافة ومقارنة مؤشرات التنمية'
@@ -48,23 +48,23 @@ projects_indicators:
   sds_dropdown: 'مؤشرات استراتيجية التنمية المستدامة'
   sdg_dropdown: 'مؤشرات أهداف التنمية المُستدامة'
   other_dropdown: 'مؤشرات تنمية أخرى'
-  compare_indicators: Add and compare development indicators listed below.
-  selected_indicators: Selected Indicators
-  add: Add
-  indicators: Indicators
-  cancel: Cancel
-  apply: Apply
-  add_and_filter: Add and Filter projects
-  all_projects: All Projects
-  reset_filters: reset filters
-  selected_overlays: Selected Indicator Overlays
+  compare_indicators: 'أضف وقارن مؤشرات التنمية التالية'
+  selected_indicators: 'المؤشرات المختارة'
+  add: 'أضف'
+  indicators: 'المؤشرات'
+  cancel: 'إلغاء'
+  apply: 'تطبيق'
+  add_and_filter: 'إضافة وتصفية المشاريع'
+  all_projects: 'جميع المشاريع'
+  reset_filters: 'إعادة التصفية'
+  selected_overlays: 'المؤشرات المحددة'
 
 projects_list_view:
   projects_title: 'المشروعات'
   sort_by_title: 'تصنيف'
   sort_alphabetical: 'أبجدي'
-  sort_ascending: النسبة المئوية مكتملة
-  sort_descending: النسبة المئوية مكتملة
+  sort_ascending: 'تصاعدي'
+  sort_descending: 'تنازلي'
 
 project_pages:
   print: 'طباعة'
@@ -79,9 +79,9 @@ project_pages:
   categories_title: 'القطاعات الفرعية'
   donors_title: 'الجهات المانحة'
   recommendations: 'توصيات بناء على خبرة المشروع'
-  contract_date: 'تاريخ توقيه العقد'
+  contract_date: 'تاريخ توقيع العقد'
 
-  budget_title: 'ميزانية'
+  budget_title: 'الميزانية'
   funding_loans_title: 'قرض'
   funding_grants_title: 'منحة'
   funding_local_title: 'مساهمة محلية'
@@ -101,13 +101,13 @@ project_pages:
   component_title: 'المكون\النشاط'
   kpi_title: 'مؤشر الأداء'
   target_title: 'الهدف'
-  rate_title: 'التقدم في التنفيذ'
+  rate_title: 'التقدم المحرز'
   date_title: 'تاريخ الرصد'
 
   project_comparison_title: 'مقارنة المشروعات حسب القطاع الفرعي'
   comparison_chart_title1: 'التمويل'
   comparison_chart_title2: 'نسبة الانتهاء'
-  comparision_chart_title3: 'المستفيدون المستهدفون'
+  comparision_chart_title3: 'المستفيدين المستهدفين'
 
   related_sds_projects_title: ' مشروعات ذات صلة - حسب أهداف استراتيجية التنمية المُستدامة '
 
