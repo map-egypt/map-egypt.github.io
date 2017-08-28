@@ -48,6 +48,15 @@ projects_indicators:
   sds_dropdown: 'مؤشرات استراتيجية التنمية المستدامة'
   sdg_dropdown: 'مؤشرات أهداف التنمية المُستدامة'
   other_dropdown: 'مؤشرات تنمية أخرى'
+  compare_indicators: Add and compare development indicators listed below.
+  selected_indicators: Selected Indicators
+  add: Add
+  indicators: Indicators
+  cancel: Cancel
+  apply: Apply
+  add_and_filter: Add and Filter projects
+  all_projects: All Projects
+  reset_filters: reset filters
 
 projects_list_view:
   projects_title: 'المشروعات'
@@ -69,8 +78,8 @@ project_pages:
   categories_title: 'القطاعات الفرعية'
   donors_title: 'الجهات المانحة'
   recommendations: 'توصيات بناء على خبرة المشروع'
-  contract_date:'تاريخ توقيه العقد'
-  
+  contract_date: 'تاريخ توقيه العقد'
+
   budget_title: 'ميزانية'
   funding_loans_title: 'قرض'
   funding_grants_title: 'منحة'

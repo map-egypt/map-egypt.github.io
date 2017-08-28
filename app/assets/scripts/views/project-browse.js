@@ -386,15 +386,16 @@ var ProjectBrowse = React.createClass({
 
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
+    const t = get(window.t, [lang, 'projects_indicators'], {});
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
-          <h1 className='inpage__title heading--deco heading--medium'>Add {this.state.activeIndicatorType.toUpperCase()} Indicators</h1>
-          <div className='modal__instructions'><p>Add and compare development indicators listed below.</p></div>
+          <h1 className='inpage__title heading--deco heading--medium'>{t.add} {this.state.activeIndicatorType.toUpperCase()} {t.indicators}</h1>
+          <div className='modal__instructions'><p>{t.compare_indicators}</p></div>
 
           <div className='indicators--selected'>
-            <span className='heading--label'>Selected Indicators:&nbsp;</span>
+            <span className='heading--label'>{t.selected_indicators}</span>
             {selectedIndicators.map((name) => {
               return (
                 <span className='button--small button--tag'
@@ -440,10 +441,10 @@ var ProjectBrowse = React.createClass({
             <ul className='button--list'>
               <li><button
                   onClick={this.confirmIndicators}
-                  type='button' className='button button--medium button--primary'>Apply</button></li>
+                  type='button' className='button button--medium button--primary'>{t.apply}</button></li>
               <li><button
                   onClick={this.cancelIndicators}
-                  type='button' className='button button--medium button--primary-bounded'>Cancel</button></li>
+                  type='button' className='button button--medium button--primary-bounded'>{t.cancel}</button></li>
             </ul>
         </div>
       </section>
@@ -475,11 +476,12 @@ var ProjectBrowse = React.createClass({
     let projects = this.props.api.projects;
     let { lang } = this.props.meta;
     const { selectedProjectFilters } = this.state;
+    const t = get(window.t, [lang, 'projects_indicators'], {});
 
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__projects'>
-          <h1 className='inpage__title heading--deco heading--medium'>Add and Filter Projects</h1>
+          <h1 className='inpage__title heading--deco heading--medium'>{t.add_and_filter}</h1>
           <div className='modal__filters'>
             <div className='modal__filters--defaults'>
               <label className='form__option form__option--custom-checkbox'>
@@ -490,10 +492,10 @@ var ProjectBrowse = React.createClass({
                   id='form-checkbox-1'
                   onChange={this.toggleProjects}
                   value='All projects' />
-                <span className='form__option__text'>All Projects</span>
+                <span className='form__option__text'>{t.all_projects}</span>
                 <span className='form__option__ui'></span>
               </label>
-              <a onClick={this.resetProjectFilters} className='link--secondary'>reset filters</a>
+              <a onClick={this.resetProjectFilters} className='link--secondary'>{t.reset_filters}</a>
             </div>
 
             {projectFilters.map((filter) => (
@@ -525,11 +527,11 @@ var ProjectBrowse = React.createClass({
               <li><button
                   onClick={this.confirmFilters}
                   type='button'
-                  className='button button--medium button--primary'>Apply</button></li>
+                  className='button button--medium button--primary'>{t.apply}</button></li>
               <li><button
                   onClick={this.cancelFilters}
                   type='button'
-                  className='button button--medium button--primary-bounded'>Cancel</button></li>
+                  className='button button--medium button--primary-bounded'>{t.cancel}</button></li>
             </ul>
           </div>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
