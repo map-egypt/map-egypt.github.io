@@ -360,12 +360,13 @@ var ProjectBrowse = React.createClass({
     const indicators = get(this.props.api, 'indicators', []).filter((indicator) => {
       return indicator.theme.length && indicator.theme.find(d => d.type === indicatorProp);
     });
+    const t = get(window.t, [lang, 'projects_indicators'], {});
 
     const themes = {};
     indicators.forEach((indicator) => {
       indicator.theme.forEach((theme) => {
         if (theme.type === indicatorProp) {
-          let themeName = theme[lang] || 'Other';
+          let themeName = theme[lang] || t['other'];
           themes[themeName] = themes[themeName] || [];
           themes[themeName].push(indicator);
         }
@@ -386,7 +387,6 @@ var ProjectBrowse = React.createClass({
 
     const indicatorTheme = activeIndicatorTheme || themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
-    const t = get(window.t, [lang, 'projects_indicators'], {});
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>

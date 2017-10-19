@@ -58,6 +58,7 @@ projects_indicators:
   all_projects: All Projects
   reset_filters: reset filters
   selected_overlays: Selected Indicator Overlays
+  other: Other
 
 projects_list_view:
   projects_title: Projects
