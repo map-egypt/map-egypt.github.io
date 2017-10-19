@@ -365,7 +365,7 @@ var ProjectBrowse = React.createClass({
     indicators.forEach((indicator) => {
       indicator.theme.forEach((theme) => {
         if (theme.type === indicatorProp) {
-          let themeName = theme[lang];
+          let themeName = theme[lang] || 'Other';
           themes[themeName] = themes[themeName] || [];
           themes[themeName].push(indicator);
         }
@@ -419,7 +419,8 @@ var ProjectBrowse = React.createClass({
             </div>
             <div className='indicators--options'>
               {availableIndicators.length && availableIndicators.map((indicator) => {
-                const name = indicator.name;
+                const name = lang === 'en' ? indicator.name : indicator.name_ar;
+                if (!name) return null;
                 const id = 'subtypes-' + slugify(name);
 
                 return (
@@ -620,10 +621,10 @@ var ProjectBrowse = React.createClass({
                       {this.state.indicatorToggle &&
                         <ul className='drop__menu drop--align-left button--secondary'>
                           {indicatorTypes.map((d) => {
-                            d = t[d + '_dropdown'];
+                            let display = t[d + '_dropdown'];
                             return <li key={d}
                               onClick={() => this.openIndicatorSelector(d)}
-                              className='drop__menu-item'>{d}</li>;
+                              className='drop__menu-item'>{display}</li>;
                           })}
                         </ul>
                       }
