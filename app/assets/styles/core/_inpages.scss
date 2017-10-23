@@ -55,6 +55,7 @@
   }
 
   &__title {
+    text-transform: capitalize;
     @include col(7/12);
     @include media(small-down){
       @include col(12/12);
