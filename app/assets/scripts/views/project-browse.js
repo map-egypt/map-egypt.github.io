@@ -183,7 +183,7 @@ var ProjectBrowse = React.createClass({
   },
 
   openIndicatorSelector: function (activeIndicatorType) {
-    activeIndicatorType = activeIndicatorType.split(' ')[0].toUpperCase();
+    activeIndicatorType = activeIndicatorType.split(' ')[0];
     this.setState({
       modal: true,
       activeModal: INDICATORS,
@@ -391,7 +391,7 @@ var ProjectBrowse = React.createClass({
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
-          <h1 className='inpage__title heading--deco heading--medium'>{t.add} {this.state.activeIndicatorType.toUpperCase()} {t.indicators}</h1>
+          <h1 className='inpage__title heading--deco heading--medium'>{t.add} {this.state.activeIndicatorType} {t.indicators}</h1>
           <div className='modal__instructions'><p>{t.compare_indicators}</p></div>
 
           <div className='indicators--selected'>
