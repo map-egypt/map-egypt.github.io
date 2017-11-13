@@ -151,7 +151,7 @@ var ProjectBrowse = React.createClass({
   componentWillUpdate: function (nextProps, nextState) {
     const activeIndicator = nextState.activeIndicator;
     if (activeIndicator && activeIndicator !== this.state.activeIndicator) {
-      const meta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
+      const meta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator || indicator.name_ar === activeIndicator);
       if (meta && meta.id) {
         this.props.dispatch(getIndicator(meta.id));
       }
@@ -466,7 +466,7 @@ var ProjectBrowse = React.createClass({
               className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
               <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator)}><span>toggle visibility</span></button>
               <span className='indicator-layer-name'>{indicator}</span>
-              <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator))}>?</span>
+              <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator || i.name_ar === indicator))}>?</span>
               <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
             </li>
           ))}
@@ -544,6 +544,7 @@ var ProjectBrowse = React.createClass({
   },
 
   render: function () {
+    const { lang } = this.props.meta;
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
 
@@ -572,7 +573,7 @@ var ProjectBrowse = React.createClass({
     let indicatorChartData;
     let csvCharts;
     if (activeIndicator) {
-      const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator);
+      const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator || indicator.name_ar === activeIndicator);
       const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
       if (indicatorData) {
         overlay = this.createOverlay(indicatorData);
@@ -589,7 +590,6 @@ var ProjectBrowse = React.createClass({
       }
     }
 
-    const { lang } = this.props.meta;
     const t = get(window.t, [lang, 'projects_indicators'], {});
 
     return (
