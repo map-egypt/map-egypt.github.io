@@ -152,8 +152,7 @@ var ProjectBrowse = React.createClass({
     const activeIndicator = nextState.activeIndicator;
     const { lang } = nextProps.meta;
     if (activeIndicator && activeIndicator !== this.state.activeIndicator) {
-      let pk = lang === 'en' ? 'name' : 'name_ar';
-      const meta = this.props.api.indicators.find((indicator) => indicator[pk] === activeIndicator);
+      const meta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator || indicator.name_ar === activeIndicator);
       if (meta && meta.id) {
         this.props.dispatch(getIndicator(meta.id));
       }
@@ -456,7 +455,6 @@ var ProjectBrowse = React.createClass({
 
   renderActiveIndicators: function (activeIndicator, activeIndicators) {
     const { lang } = this.props.meta;
-    const pk = lang === 'en' ? 'name' : 'name_ar';
     const t = get(window.t, [lang, 'projects_indicators'], {});
     return (
       <div className='indicator__overlay'>
@@ -469,7 +467,7 @@ var ProjectBrowse = React.createClass({
               className={'indicator__overlay--item' + (activeIndicator === indicator ? ' indicator__overlay--selected' : '')}>
               <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator)}><span>toggle visibility</span></button>
               <span className='indicator-layer-name'>{indicator}</span>
-              <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i[pk] === indicator))}>?</span>
+              <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator || i.name_ar === indicator))}>?</span>
               <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
             </li>
           ))}
@@ -576,8 +574,7 @@ var ProjectBrowse = React.createClass({
     let indicatorChartData;
     let csvCharts;
     if (activeIndicator) {
-      let pk = lang === 'en' ? 'name' : 'name_ar';
-      const indicatorMeta = this.props.api.indicators.find((indicator) => indicator[pk] === activeIndicator);
+      const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator || indicator.name_ar === activeIndicator);
       const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
       if (indicatorData) {
         overlay = this.createOverlay(indicatorData);
