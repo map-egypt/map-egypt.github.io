@@ -366,7 +366,8 @@ var ProjectBrowse = React.createClass({
     indicators.forEach((indicator) => {
       indicator.theme.forEach((theme) => {
         if (theme.type === indicatorProp) {
-          let themeName = theme[lang] || t['other'];
+          let themeName = theme[lang];
+          if (!themeName) return;
           themes[themeName] = themes[themeName] || [];
           themes[themeName].push(indicator);
         }
@@ -385,13 +386,13 @@ var ProjectBrowse = React.createClass({
       }
     });
 
-    const indicatorTheme = activeIndicatorTheme || themeNames[0];
+    const indicatorTheme = activeIndicatorTheme && themeNames.indexOf(activeIndicatorTheme) >= 0 ? activeIndicatorTheme : themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
           <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
-          <h1 className='inpage__title heading--deco heading--medium'>{t.add} {this.state.activeIndicatorType} {t.indicators}</h1>
+          <h1 className='inpage__title heading--deco heading--medium'>{t.add} {t[this.state.activeIndicatorType.toLowerCase() + '_dropdown']}</h1>
           <div className='modal__instructions'><p>{t.compare_indicators}</p></div>
 
           <div className='indicators--selected'>
