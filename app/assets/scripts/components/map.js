@@ -49,8 +49,8 @@ const OVERLAY_STYLE = {
   fillOpacity: 0.8
 };
 
-const categoryLookup = {'very low': 5, 'low': 4, 'medium': 3, 'high': 2, 'very high': 1};
-const idLookup = {5: 'very low', 4: 'low', 3: 'medium', 2: 'high', 1: 'very high'};
+const categoryLookup = {'very low': 1, 'low': 2, 'medium': 3, 'high': 4, 'very high': 5};
+const idLookup = {1: 'very low', 2: 'low', 3: 'medium', 4: 'high', 5: 'very high'};
 
 function getLatLngBounds (bounds) {
   let b = bbox(bounds);
