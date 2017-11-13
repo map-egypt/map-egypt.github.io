@@ -83,6 +83,12 @@
         margin-right: 0;
       }
     }
+    &-stats {
+      .num__internal li {
+        box-shadow: none;
+        padding-left: 0;
+      }
+    }
     &__table {
       th {
       text-align: right
@@ -105,6 +111,7 @@
 
     &__col--content {
       float: right;
+      padding: 3rem 2rem 3rem 2rem;
     }
     &__body--alt p {
       float: right;
@@ -173,7 +180,6 @@
     }
     li {
       @include media (medium-up) {
-        float: right;
         margin-right: 0;
       }
     }
