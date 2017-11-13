@@ -386,7 +386,7 @@ var ProjectBrowse = React.createClass({
       }
     });
 
-    const indicatorTheme = activeIndicatorTheme || themeNames[0];
+    const indicatorTheme = activeIndicatorTheme && themeNames.indexOf(activeIndicatorTheme) >= 0 ? activeIndicatorTheme : themeNames[0];
     const availableIndicators = get(themes, indicatorTheme, []);
     return (
       <section className='modal modal--large'>
