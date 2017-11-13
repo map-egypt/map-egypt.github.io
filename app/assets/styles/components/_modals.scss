@@ -104,8 +104,8 @@
       &:hover {
         background: #F4F4F4;
       }
-      &:active {
-
+      &:last-of-type {
+        height: auto;
       };
     }
   }
