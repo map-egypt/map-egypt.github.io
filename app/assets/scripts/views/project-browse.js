@@ -150,7 +150,6 @@ var ProjectBrowse = React.createClass({
 
   componentWillUpdate: function (nextProps, nextState) {
     const activeIndicator = nextState.activeIndicator;
-    const { lang } = nextProps.meta;
     if (activeIndicator && activeIndicator !== this.state.activeIndicator) {
       const meta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator || indicator.name_ar === activeIndicator);
       if (meta && meta.id) {
