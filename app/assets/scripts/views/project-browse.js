@@ -366,7 +366,8 @@ var ProjectBrowse = React.createClass({
     indicators.forEach((indicator) => {
       indicator.theme.forEach((theme) => {
         if (theme.type === indicatorProp) {
-          let themeName = theme[lang] || t['other'];
+          let themeName = theme[lang];
+          if (!themeName) return;
           themes[themeName] = themes[themeName] || [];
           themes[themeName].push(indicator);
         }
