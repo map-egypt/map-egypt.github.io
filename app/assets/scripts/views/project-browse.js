@@ -41,7 +41,7 @@ const STATUS = {
     return [
       { display: t.status_ontime, filter: isOntime },
       { display: t.status_delayed, filter: (p) => !isOntime(p) }
-    ]
+    ];
   }
 };
 
