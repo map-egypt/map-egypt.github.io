@@ -384,12 +384,15 @@ var ProjectBrowse = React.createClass({
           return Number(digitA[0]) > Number(digitB[0]) ? 1 : -1;
         }
       } else {
-        return a > b ? -1 : 1;
+        return a < b ? -1 : 1;
       }
     });
 
     const indicatorTheme = activeIndicatorTheme && themeNames.indexOf(activeIndicatorTheme) >= 0 ? activeIndicatorTheme : themeNames[0];
-    const availableIndicators = get(themes, indicatorTheme, []);
+    const indicatorNameProp = lang === 'en' ? 'name' : 'name_ar';
+    const availableIndicators = get(themes, indicatorTheme, []).sort((a, b) => {
+      return a[indicatorNameProp] < b[indicatorNameProp] ? -1 : 1;
+    });
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
@@ -422,7 +425,7 @@ var ProjectBrowse = React.createClass({
             </div>
             <div className='indicators--options'>
               {availableIndicators.length && availableIndicators.map((indicator) => {
-                const name = lang === 'en' ? indicator.name : indicator.name_ar;
+                const name = indicator[indicatorNameProp];
                 if (!name) return null;
                 const id = 'subtypes-' + slugify(name);
 
