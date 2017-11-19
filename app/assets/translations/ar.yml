@@ -59,6 +59,8 @@ projects_indicators:
   reset_filters: 'إعادة التصفية'
   selected_overlays: 'المؤشرات المحددة'
   other: Other
+  status_ontime: 'في الميعاد'
+  status_delayed: 'متأخر'
 
 projects_list_view:
   projects_title: 'المشروعات'

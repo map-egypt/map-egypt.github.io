@@ -37,10 +37,12 @@ function countByProp (array, path) {
 // Project filters
 const STATUS = {
   display: 'Project Status',
-  items: [
-    { display: 'On Time', filter: isOntime },
-    { display: 'Delayed', filter: (p) => !isOntime(p) }
-  ]
+  items: (projects, lang, t) => {
+    return [
+      { display: t.status_ontime, filter: isOntime },
+      { display: t.status_delayed, filter: (p) => !isOntime(p) }
+    ]
+  }
 };
 
 const CATEGORY = {
@@ -509,7 +511,7 @@ var ProjectBrowse = React.createClass({
 
                  <label className='form__label'>{filter.display}</label>
                  <div className='form__group'>
-                  {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang)).map((item) => (
+                  {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang, t)).map((item) => (
                     <label key={item.display}
                       className={`form__option form__option--custom-checkbox ${this.state.projectsHidden ? 'disabled' : ''}`}>
                       <input
