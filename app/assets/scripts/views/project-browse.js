@@ -34,6 +34,22 @@ function countByProp (array, path) {
   return result;
 }
 
+// Sort function for indicators names.
+// First checks if there is a digit, ie. `Pillar 1`.
+// Otherwise sorts alphabetically.
+const digit = new RegExp(/[0-9]+/);
+const digitSort = (a, b) => {
+  let digitA = a.match(digit);
+  if (digitA) {
+    let digitB = b.match(digit);
+    if (digitB) {
+      return Number(digitA[0]) > Number(digitB[0]) ? 1 : -1;
+    }
+  } else {
+    return a < b ? -1 : 1;
+  }
+};
+
 // Project filters
 const STATUS = {
   display: 'Project Status',
@@ -90,7 +106,6 @@ const SDG = {
 };
 
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
-const digit = new RegExp(/[0-9]+/);
 
 var ProjectBrowse = React.createClass({
   displayName: 'ProjectBrowse',
@@ -376,20 +391,12 @@ var ProjectBrowse = React.createClass({
       });
     });
 
-    const themeNames = Object.keys(themes).sort((a, b) => {
-      let digitA = a.match(digit);
-      if (digitA) {
-        let digitB = b.match(digit);
-        if (digitB) {
-          return Number(digitA[0]) > Number(digitB[0]) ? 1 : -1;
-        }
-      } else {
-        return a > b ? -1 : 1;
-      }
-    });
-
+    const themeNames = Object.keys(themes).sort(digitSort);
     const indicatorTheme = activeIndicatorTheme && themeNames.indexOf(activeIndicatorTheme) >= 0 ? activeIndicatorTheme : themeNames[0];
-    const availableIndicators = get(themes, indicatorTheme, []);
+    const indicatorNameProp = lang === 'en' ? 'name' : 'name_ar';
+    const availableIndicators = get(themes, indicatorTheme, []).sort((a, b) => {
+      return a[indicatorNameProp] < b[indicatorNameProp] ? -1 : 1;
+    });
     return (
       <section className='modal modal--large'>
         <div className='modal__inner modal__indicators'>
@@ -422,7 +429,7 @@ var ProjectBrowse = React.createClass({
             </div>
             <div className='indicators--options'>
               {availableIndicators.length && availableIndicators.map((indicator) => {
-                const name = lang === 'en' ? indicator.name : indicator.name_ar;
+                const name = indicator[indicatorNameProp];
                 if (!name) return null;
                 const id = 'subtypes-' + slugify(name);
 
@@ -511,7 +518,9 @@ var ProjectBrowse = React.createClass({
 
                  <label className='form__label'>{filter.display}</label>
                  <div className='form__group'>
-                  {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang, t)).map((item) => (
+                   {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang, t)).sort((a, b) => {
+                     return a.display < b.display ? -1 : 1;
+                   }).map((item) => (
                     <label key={item.display}
                       className={`form__option form__option--custom-checkbox ${this.state.projectsHidden ? 'disabled' : ''}`}>
                       <input
