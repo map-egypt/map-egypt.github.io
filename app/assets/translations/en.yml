@@ -61,6 +61,12 @@ projects_indicators:
   other: Other
   status_ontime: On Time
   status_delayed: Delayed
+  project_status: Project Status
+  category: Category
+  donor: Donor
+  sds_goals: SDS Goals
+  sdg_goals: SDG Goals
+
 
 projects_list_view:
   projects_title: Projects
