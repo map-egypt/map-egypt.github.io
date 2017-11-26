@@ -52,7 +52,7 @@ const digitSort = (a, b) => {
 
 // Project filters
 const STATUS = {
-  display: 'Project Status',
+  translationPath: 'project_status',
   items: (projects, lang, t) => {
     return [
       { display: t.status_ontime, filter: isOntime },
@@ -62,7 +62,7 @@ const STATUS = {
 };
 
 const CATEGORY = {
-  display: 'Category',
+  translationPath: 'category',
   items: (projects, lang) => {
     const categories = countByProp(projects.reduce((a, b) => a.concat(b.categories), []), lang);
     return Object.keys(categories).map((category) => ({
@@ -73,18 +73,19 @@ const CATEGORY = {
 };
 
 const DONOR = {
-  display: 'Donor',
-  items: (projects) => {
-    const donors = countByProp(projects.reduce((a, b) => a.concat(b.budget), []), 'donor_name');
+  translationPath: 'donor',
+  items: (projects, lang) => {
+    const prop = lang === 'ar' ? 'donor_name_ar' : 'donor_name';
+    const donors = countByProp(projects.reduce((a, b) => a.concat(b.budget), []), prop);
     return Object.keys(donors).map((donor) => ({
       display: `${donor} (${donors[donor]})`,
-      filter: (p) => Array.isArray(p.budget) && p.budget.find((budget) => budget.donor_name === donor)
+      filter: (p) => Array.isArray(p.budget) && p.budget.find((budget) => budget[prop] === donor)
     }));
   }
 };
 
 const SDS = {
-  display: 'SDS Goals',
+  translationPath: 'sds_goals',
   items: (projects, lang) => {
     const goals = countByProp(projects.reduce((a, b) => a.concat(b.sds_indicators), []), lang);
     return Object.keys(goals).sort().map((goal) => ({
@@ -95,7 +96,7 @@ const SDS = {
 };
 
 const SDG = {
-  display: 'SDG Goals',
+  translationPath: 'sdg_goals',
   items: (projects, lang) => {
     const goals = countByProp(projects.reduce((a, b) => a.concat(b.sdg_indicators), []), lang);
     return Object.keys(goals).map((goal) => goal).sort().map((goal) => ({
@@ -513,10 +514,10 @@ var ProjectBrowse = React.createClass({
 
             {projectFilters.map((filter) => (
 
-              <fieldset key={filter.display}
+              <fieldset key={filter.translationPath}
                 className='form__fieldset'>
 
-                 <label className='form__label'>{filter.display}</label>
+                 <label className='form__label'>{t[filter.translationPath]}</label>
                  <div className='form__group'>
                    {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang, t)).sort((a, b) => {
                      return a.display < b.display ? -1 : 1;
