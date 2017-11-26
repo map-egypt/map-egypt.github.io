@@ -1,4 +1,4 @@
-'use stnrict';
+'use strict';
 import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
