@@ -7,7 +7,7 @@ main_navigation:
 homepage:
   subhead: 'تتبع المشروعات في مصر'
   title: 'أثر وتقدم المجال الزراعي'
-  description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها والمستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك الوشروعات على المستويين الوطنى والمحلى.'
+  description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها والمستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك المشروعات على المستويين الوطنى والمحلى.'
   more: 'اقرأ المزيد'
 
   map_key_circle: 'عدد الاماكن الجغرافية للمشروع'
@@ -58,14 +58,14 @@ projects_indicators:
   all_projects: 'جميع المشاريع'
   reset_filters: 'إعادة التصفية'
   selected_overlays: 'المؤشرات المحددة'
-  other: Other
+  other: 'اخرى'
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
-  project_status: Project Status
-  category: Category
-  donor: Donor
-  sds_goals: SDS Goals
-  sdg_goals: SDG Goals
+  project_status: 'حالة المشروع'
+  category: 'القطاع الفرعي'
+  donor: 'الجهة المانحة'
+  sds_goals: 'استراتيجية التنمية المستدامة'
+  sdg_goals: 'أهداف التنمية المُستدامة'
 
 projects_list_view:
   projects_title: 'المشروعات'
