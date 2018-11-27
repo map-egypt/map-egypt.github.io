@@ -59,7 +59,7 @@ auth.on('authenticated', function (authResult) {
     dispatches.forEach((d) => d(isAuthenticated));
   }, 0);
 
-  auth.getProfile(authResult.idToken, function (err, profile) {
+  auth.getProfile(authResult.accessToken, function (err, profile) {
     if (err) { throw new Error(err); }
     store.set('profile', JSON.stringify(profile));
   });
@@ -81,5 +81,8 @@ module.exports = {
   hasValidToken: () => {
     let t = store.get('id_token');
     return !!t && !isTokenExpired(t);
+  },
+  resumeAuth: (hash) => {
+    auth.resumeAuth(hash, () => {});
   }
 };
