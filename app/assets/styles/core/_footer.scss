@@ -4,34 +4,6 @@
   box-shadow: inset 0 1px 0 0 rgba($base-color, .9);
 }
 
-.updates {
-  @include col(12/12);
-
-  @include media(medium-up){
-    @include col(12/12);
-  }
-
-  @include media(large-up){
-    @include col(5/12);
-    box-shadow: none;
-  }
-
-  &__title,  {
-    font-size: 1.25rem;
-    font-family: $base-font-family;
-    color: #fff;
-    margin-bottom: 0;
-  }
-  &__description {
-    color: #fff;
-    font-weight: $base-font-regular;
-  }
-  .form__input-group {
-    width: 280px;
-  }
-}
-
-
 .logos {
   @include media(medium-up) {
     @include col(12/12);
@@ -90,6 +62,9 @@
 
 .contact {
   @include col(12/12);
+  @include media(large-up){
+    @include col(5/12);
+  }
   padding-top: $global-spacing;
   .contact__item a{
     color: #fff;
