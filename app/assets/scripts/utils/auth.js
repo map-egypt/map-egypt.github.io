@@ -11,7 +11,9 @@ if (process.env.DS_ENV === 'testing') {
 } else {
   auth = new Lock(authClientId, authDomain, {
     theme: { primaryColor: '#55CBC9',
-    logo: 'assets/graphics/layout/logo.svg' }
+    logo: 'assets/graphics/layout/logo.svg' },
+    configurationBaseUrl: 'https://cdn.auth0.com',
+    autoParseHash: false
   });
 }
 

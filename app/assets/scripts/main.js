@@ -34,7 +34,7 @@ const store = createStore(reducer, applyMiddleware(
 ));
 
 import { getAuthStatus, getProjects, getIndicators, getGeography, updateLang } from './actions';
-import { hasValidToken } from './utils/auth';
+import { hasValidToken, resumeAuth } from './utils/auth';
 const needsValidatedFetch = !hasValidToken();
 store.dispatch(getAuthStatus(function () {
   if (needsValidatedFetch) {
@@ -70,7 +70,7 @@ render((
   <Provider store={store}>
     <Router history={hashHistory} render={applyRouterMiddleware(scrollerMiddleware)}>
       <Route path='/404' component={UhOh} />
-      <Route path='/access_token=:token' />
+      <Route path='/access_token=:access_token' onEnter={completeAuth} />
       <Route path='/:lang' component={App} onEnter={redirectToLastUrl}>
         <Route path='projects' component={ProjectBrowse} />
         <Route path='projects_sds' component={ProjectBrowse} modal='SDS' />
@@ -92,6 +92,11 @@ render((
     </Router>
   </Provider>
 ), document.querySelector('#app-container'));
+
+function completeAuth (nextState, replace) {
+  resumeAuth(`access_token=${nextState.params.access_token}`);
+  redirectToLastUrl(nextState, replace);
+}
 
 function redirectToLastUrl (nextState, replace) {
   const path = storage.get('last_path_before_auth');
