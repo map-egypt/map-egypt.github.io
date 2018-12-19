@@ -2,5 +2,5 @@
 
 module.exports = {
   environment: 'production',
-  baseUrl: 'http://mapegypt.org/'
+  baseUrl: 'https://mapegypt.org/'
 };
