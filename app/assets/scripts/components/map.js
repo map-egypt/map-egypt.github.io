@@ -12,7 +12,7 @@ import { roundedNumber } from '../utils/format';
 import { customScales } from '../utils/scales';
 const L = window.L;
 
-const tileLayer = 'https://api.mapbox.com/styles/v1/map-egypt/civld9uy0000n2kmnd7lqs3ne/tiles/256/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwLWVneXB0IiwiYSI6ImNpdmxkMjl6bTA3c2YyeXBvNDJnZDlqZGMifQ.KQSizb18ILr6wri0cBcd2Q';
+const tileLayer = 'https://api.mapbox.com/styles/v1/devseed/ck1ksxtqm1yow1cpg4kan0era/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiZGV2c2VlZCIsImEiOiJnUi1mbkVvIn0.018aLhX0Mb0tdtaT2QNe2Q';
 const satelliteLayer = 'mapbox.satellite';
 
 const BOUNDS = [
