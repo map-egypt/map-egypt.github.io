@@ -39,7 +39,8 @@ var Category = React.createClass({
     const categoryNames = {};
     // Count number of projects per category
     const justCategories = projects.map((project) => {
-      let budget = project.budget.reduce((cur, item) => cur + get(item, 'fund.amount', 0), 0);
+      let budgets = project.budget || [];
+      let budget = budgets.reduce((cur, item) => cur + get(item, 'fund.amount', 0), 0);
       return get(project, 'categories', []).map((category) => {
         let key = category.en;
         categoryNames[key] = category;

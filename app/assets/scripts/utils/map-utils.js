@@ -28,6 +28,7 @@ export const getProjectCentroids = function (projects, features) {
 
   const regions = {};
   projects.forEach(function (project) {
+    project.location = project.location || [];
     get(project, 'location', []).forEach(function (location) {
       const isDistrict = hasDistrictData(location);
       const id = isDistrict ? location.district.district : location.district.governorate;

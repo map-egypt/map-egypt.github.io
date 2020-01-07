@@ -70,10 +70,12 @@ var ProjectCard = React.createClass({
     const ontime = isOntime(project);
     const statusClass = 'project--' + ontime;
     const basepath = '/' + lang;
-    const funding = get(project, 'budget', []).reduce((a, b) => a + b.fund.amount, 0);
+    const budget = project.budget || [];
+    const funding = budget.reduce((a, b) => a + b.fund.amount, 0);
     let completion = pct(percentComplete(project));
     let projects = [];
-    get(project, 'location', []).map((loc, i) => {
+    let locations = project.location || [];
+    locations.map((loc, i) => {
       const location = getLocation(loc, lang);
       if (location) {
         projects.push(location.display);
