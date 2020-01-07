@@ -74,7 +74,7 @@ var ProjectCard = React.createClass({
     const funding = budget.reduce((a, b) => a + b.fund.amount, 0);
     let completion = pct(percentComplete(project));
     let projects = [];
-    let locations = project.location || []
+    let locations = project.location || [];
     locations.map((loc, i) => {
       const location = getLocation(loc, lang);
       if (location) {

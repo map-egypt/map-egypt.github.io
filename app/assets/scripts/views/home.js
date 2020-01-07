@@ -61,7 +61,7 @@ var Home = React.createClass({
     const collaborations = [];
     let collaborationCount = 0;
     projects.forEach((project) => {
-      let budgets = project.budget || []
+      let budgets = project.budget || [];
       let collaborators = budgets.filter((b) => {
         return b.donor_name !== 'MoALR / Government of Egypt contribution' && b.donor_name !== 'Government of Egypt' && b.donor_name !== 'Project Beneficiaries';
       });
@@ -69,7 +69,6 @@ var Home = React.createClass({
         collaborators.forEach((c) => collaborations.push(c.donor_name));
         collaborationCount += 1;
       }
-      let budgets = project.budget || []
       budgets.forEach((budget) => {
         totalDonors[budget.donor_name] = '';
         totalFunding += budget.fund.amount;
