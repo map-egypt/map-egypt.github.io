@@ -105,7 +105,7 @@ var Project = React.createClass({
     // so don't do any more sorting after the budget map.
     const budgets = allProjects.map((project) => ({
       name: getProjectName(project, lang),
-      value: get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
+      value: project.budget ? get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0) : 0,
       link: path.resolve(basepath, 'projects', project.id),
       project: project
     })).sort((a, b) => b.value > a.value ? -1 : 1);

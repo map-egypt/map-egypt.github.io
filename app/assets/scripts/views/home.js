@@ -61,14 +61,16 @@ var Home = React.createClass({
     const collaborations = [];
     let collaborationCount = 0;
     projects.forEach((project) => {
-      let collaborators = project.budget.filter((b) => {
+      let budgets = project.budget || []
+      let collaborators = budgets.filter((b) => {
         return b.donor_name !== 'MoALR / Government of Egypt contribution' && b.donor_name !== 'Government of Egypt' && b.donor_name !== 'Project Beneficiaries';
       });
       if (collaborators.length > 1) {
         collaborators.forEach((c) => collaborations.push(c.donor_name));
         collaborationCount += 1;
       }
-      project.budget.forEach((budget) => {
+      let budgets = project.budget || []
+      budgets.forEach((budget) => {
         totalDonors[budget.donor_name] = '';
         totalFunding += budget.fund.amount;
       });
@@ -90,7 +92,8 @@ var Home = React.createClass({
 
     let budgetSummary = {loan: 0, grant: 0, 'local contribution': 0};
     projects.forEach((project) => {
-      get(project, 'budget', []).forEach((fund) => {
+      let budgets = project.budget || [];
+      budgets.forEach((fund) => {
         budgetSummary[fund.type.en.toLowerCase()] += fund.fund.amount;
       });
     });

@@ -1,5 +1,6 @@
 'use strict';
 module.exports = function slugify (text) {
+  text = text || ''
   return text.toString().toLowerCase()
   .replace(/\s+/g, '-')           // Replace spaces with -
   .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
