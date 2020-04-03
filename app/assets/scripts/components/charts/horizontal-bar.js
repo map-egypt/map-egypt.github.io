@@ -48,6 +48,17 @@ var HorizontalBarChart = React.createClass({
     this.setState({ tooltip: false });
   },
 
+  reduceDataChart: function (data, activeProject, size = 8) {
+    let index = 0;
+    data.forEach((d, i) => { if (d.name === activeProject) { index = i; } });
+    if (index >= 0 && index <= 8) {
+      return data.slice(0, 8);
+    }
+    if (index >= (data.length - 8) && index <= data.length) {
+      return data.slice((data.length - 8), data.length);
+    }
+    return data.slice((index - 4), (index + 4));
+  },
   componentDidMount: function () {
     // Capture initial width (presumably set in css)
     this.onWindowResize();
@@ -63,7 +74,8 @@ var HorizontalBarChart = React.createClass({
 
   render: function () {
     const { width, height } = this.state;
-    const { lang, data, yTitle } = this.props;
+    const { lang, yTitle, activeProject, data } = this.props;
+
     const rtl = lang === 'ar';
     let margin = Object.assign({}, this.props.margin);
     if (rtl) {
@@ -82,16 +94,19 @@ var HorizontalBarChart = React.createClass({
     }
 
     const langSelector = rtl ? 'nameAr' : 'name';
-    data.map((a, i) => {
+
+    const innerData = this.reduceDataChart(data, activeProject);
+
+    innerData.map((a, i) => {
       let name = a.name;
       if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name)[langSelector]);
       if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name)[langSelector];
-      data[i].name = name;
+      innerData[i].name = name;
     });
 
-    const dataNames = data.map((a) => a.name);
-    const dataValues = data.map((a) => a.value);
-    const links = data.map(a => a.link).filter(Boolean);
+    const dataNames = innerData.map((a) => a.name);
+    const dataValues = innerData.map((a) => a.value);
+    const links = innerData.map(a => a.link).filter(Boolean);
 
     const ordinalScale = scaleBand()
     .paddingInner(0.6)
@@ -128,8 +143,8 @@ var HorizontalBarChart = React.createClass({
             links={links}
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
-            {data.map((d, i) => {
-              let active = d.name === this.props.activeProject ? ' active' : '';
+            {innerData.map((d, i) => {
+              let active = d.name === activeProject ? ' active' : '';
               let rectWidth = xScale(d.value);
               let x = rtl ? xRange[1] - rectWidth : 0;
               return <rect
