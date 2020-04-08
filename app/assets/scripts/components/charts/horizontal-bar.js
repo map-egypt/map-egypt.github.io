@@ -48,6 +48,23 @@ var HorizontalBarChart = React.createClass({
     this.setState({ tooltip: false });
   },
 
+  reduceDataChart: function (data, activeProject, size = 8) {
+    /*
+     returns a data extract (size) that includes activeProject
+     */
+    const index = data.findIndex(i => (i.name === activeProject));
+    // if the index is among the top 'size'
+    if (index <= size) {
+      return data.slice(0, size);
+    }
+    // if the index is among the last 'size'
+    if (index >= (data.length - size)) {
+      return data.slice((data.length - size), data.length);
+    }
+    // if the index is in the middle
+    return data.slice((index - (size / 2 >> 0)), (index + (size / 2 >> 0)));
+  },
+
   componentDidMount: function () {
     // Capture initial width (presumably set in css)
     this.onWindowResize();
@@ -63,7 +80,8 @@ var HorizontalBarChart = React.createClass({
 
   render: function () {
     const { width, height } = this.state;
-    const { lang, data, yTitle } = this.props;
+    const { lang, yTitle, activeProject, data } = this.props;
+
     const rtl = lang === 'ar';
     let margin = Object.assign({}, this.props.margin);
     if (rtl) {
@@ -82,16 +100,19 @@ var HorizontalBarChart = React.createClass({
     }
 
     const langSelector = rtl ? 'nameAr' : 'name';
-    data.map((a, i) => {
+
+    const innerData = this.reduceDataChart(data, activeProject);
+
+    innerData.map((a, i) => {
       let name = a.name;
       if (name && name.length === 7 && name.substring(0, 3) === 'EGY') name = (byEgy(name)[langSelector]);
       if (name && name.length === 6 && name.substring(0, 2) === 'GY') name = byEgy('E' + name)[langSelector];
-      data[i].name = name;
+      innerData[i].name = name;
     });
 
-    const dataNames = data.map((a) => a.name);
-    const dataValues = data.map((a) => a.value);
-    const links = data.map(a => a.link).filter(Boolean);
+    const dataNames = innerData.map((a) => a.name);
+    const dataValues = innerData.map((a) => a.value);
+    const links = innerData.map(a => a.link).filter(Boolean);
 
     const ordinalScale = scaleBand()
     .paddingInner(0.6)
@@ -128,8 +149,8 @@ var HorizontalBarChart = React.createClass({
             links={links}
           />
           <g transform={`translate(${margin.left}, ${margin.top})`}>
-            {data.map((d, i) => {
-              let active = d.name === this.props.activeProject ? ' active' : '';
+            {innerData.map((d, i) => {
+              let active = d.name === activeProject ? ' active' : '';
               let rectWidth = xScale(d.value);
               let x = rtl ? xRange[1] - rectWidth : 0;
               return <rect
