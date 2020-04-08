@@ -1,0 +1,164 @@
+main_navigation:
+  projects_navitem: Projects & Indicators
+  about_navitem: About
+  login_navitem: Log In
+  logout_navitem: Log Out
+
+homepage:
+  subhead: tracking egypt
+  title: Monitoring Agricultural and Rural Development in Egypt
+  description: Keep track of agricultural development projects, map their locations, compare their objectives and reach, and match the socioeconomic status of project areas on the subnational level.
+  more: Learn More
+
+  map_key_circle: Number of Project Locations
+  map_key_marker: Project
+
+  stats_overview: Overview of Agricultural Projects
+  overview_description: View consolidated project information and compare investments in different subsectors.
+  all_projects_btn: View All Projects
+  chart_title_one: Number of Projects by Category
+  chart_title_two: Status
+  chart_two_label: On Time
+  chart_two_label2: Delayed
+  chart_two_label3: Extended
+  chart_title_three: Budget
+  chart_three_label: Loans
+  chart_three_label2: Grants
+  chart_three_label3: Local Contributions
+
+  total_projects: total projects
+  in_funding: in funding
+  total_donors: total donors
+  donor_collaborations: donor collaborations
+
+  other_indicators_title: Other Progress Indicators
+  other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Egypt. Overlay agriculture and rural development projects in areas of interest.
+  sds_button: SDS Indicators
+  sdg_button: SDG Indicators
+  other_button: Other Indicators
+
+projects_indicators:
+  projects_title: Projects and Indicators
+  projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
+  filter_projects_btn: Add & Filter Projects
+  indicator_overlays_btn: Add Indicator Overlays
+  search_text: Zoom to Governorate
+  map_toggle_btn: Map
+  list_toggle_btn: List/Chart
+  sds_dropdown: SDS Indicators
+  sdg_dropdown: SDG Indicators
+  other_dropdown: Other Indicators
+  compare_indicators: Add and compare development indicators listed below.
+  selected_indicators: Selected Indicators
+  add: Add
+  indicators: Indicators
+  cancel: Cancel
+  apply: Apply
+  add_and_filter: Add and Filter projects
+  all_projects: All Projects
+  reset_filters: reset filters
+  selected_overlays: Selected Indicator Overlays
+  other: Other
+  status_ontime: On Time
+  status_delayed: Delayed
+  project_status: Project Status
+  category: Category
+  donor: Donor
+  sds_goals: SDS Goals
+  sdg_goals: SDG Goals
+
+
+projects_list_view:
+  projects_title: Projects
+  sort_by_title: Sort by
+  sort_alphabetical: Alphabetical
+  sort_ascending: Percentage Complete
+  sort_descending: Percentage Complete
+
+project_pages:
+  print: Print
+  status_label: "Status:"
+  status_ontime: On Time
+  status_delayed: Delayed
+  status_extended: Extended
+  status_closed: Closed
+  last_update_title: Last Update
+  current_progress_title: Current Progress
+  proposed_timeline_title: Proposed Timeline
+  categories_title: Categories
+  donors_title: Donors
+  recommendations: Recommendations based on project experience
+  contract_date: Contract Signed
+
+  funding_title: Funding
+  budget_title: Budget
+  funding_loans_title: Loans
+  funding_grants_title: Grants
+  funding_local_title: Local Contributions
+  objective_title: Objective
+  location_title: Location
+  project_link: Project Link
+  view_documentation_title: View Project Documentation
+  responsible_ministry_title: Responsible Ministry
+  local_manager_title: Local Manager
+  kmi_components: Project Components
+  sdg_goals_title: SDG Goals
+  sds_pillars_title: SDS Pillars
+
+  monitoring_indicators_title: Monitoring Indicators
+  funding_by_donor_title: Funding (US dollars)
+  status_title: Status
+  component_title: Component
+  kpi_title: Key Performance Indicator
+  target_title: Target
+  rate_title: Rate of Implementation
+  date_title: Date
+
+  project_comparison_title: Project Comparison By Category
+  comparison_chart_title1: Funding
+  comparison_chart_title2: Percentage Complete
+  comparision_chart_title3: Targeted Beneficiaries
+
+  related_sds_projects_title: Related Projects By SDS Goal
+
+category_pages:
+  print: Print
+  stat_one: Total Funds (US dollars)
+  cat_stats_funded_1: Project
+  cat_stats_funded_2: Projects
+  cat_stats_funded_3: Funded
+
+  comparison_title: Comparison
+  comparison_chart_title1: Number of Projects per Category
+  comparison_chart_title2: Funding of Projects per Category (US dollars)
+
+  projects_parttitle: Projects
+  category_funding_chart_title: Funding (US dollars)
+  category_complete_chart_title: Percentage Complete
+
+donor_pages:
+  print: Print
+  donor_stats_funds: Total Funds (US dollars)
+  donor_stats_funded_1: Project
+  donor_stats_funded_2: Projects
+  donor_stats_funded_3: Funded
+  donor_chart_title: Amount Funded (US dollars)
+  funded_title: Projects Funded
+
+map_labels:
+  no_data: No Data
+  map_group_label: Number of Project Locations
+  map_project_label: Project
+
+general_buttons:
+  share: Share
+  share_text: Copy URL to Share
+  csv: Download CSV
+
+footer:
+  subscription_title: Want Updates?
+  subscription_subtitle: Get notifications when we update projects
+  subscription_subtitle_timeframe: quarterly
+  email_field: Enter Your Email Address
+  contact_link: Contact Us
+  contact_sentence: with questions or comments
