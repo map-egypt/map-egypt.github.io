@@ -49,16 +49,22 @@ var HorizontalBarChart = React.createClass({
   },
 
   reduceDataChart: function (data, activeProject, size = 8) {
-    let index = 0;
-    data.forEach((d, i) => { if (d.name === activeProject) { index = i; } });
-    if (index >= 0 && index <= 8) {
-      return data.slice(0, 8);
+    /*
+     returns a data extract (size) that includes activeProject
+     */
+    const index = data.findIndex(i => (i.name === activeProject));
+    // if the index is among the top 'size'
+    if (index <= size) {
+      return data.slice(0, size);
     }
-    if (index >= (data.length - 8) && index <= data.length) {
-      return data.slice((data.length - 8), data.length);
+    // if the index is among the last 'size'
+    if (index >= (data.length - size)) {
+      return data.slice((data.length - size), data.length);
     }
-    return data.slice((index - 4), (index + 4));
+    // if the index is in the middle
+    return data.slice((index - (size / 2 >> 0)), (index + (size / 2 >> 0)));
   },
+
   componentDidMount: function () {
     // Capture initial width (presumably set in css)
     this.onWindowResize();
