@@ -22,8 +22,8 @@ homepage:
   chart_two_label2: 'متأخر'
   chart_two_label3: 'ممتد'
   chart_title_three: 'الميزانية'
-  chart_three_label: 'منحة'
-  chart_three_label2: 'قرض'
+  chart_three_label: 'قرض'
+  chart_three_label2: 'منحة'
   chart_three_label3: 'مساهمة محلية'
 
   total_projects: 'مجموع المشروعات'

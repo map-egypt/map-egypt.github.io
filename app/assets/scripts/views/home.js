@@ -97,9 +97,9 @@ var Home = React.createClass({
       });
     });
     budgetSummary = [
-      {name: 'Loan', value: budgetSummary.loan},
-      {name: 'Grant', value: budgetSummary.grant},
-      {name: 'Local Contribution', value: budgetSummary['local contribution']}
+      {name: 'Loan', name_ar: 'قرض', value: budgetSummary.loan},
+      {name: 'Grant', name_ar: 'منحة', value: budgetSummary.grant},
+      {name: 'Local Contribution', name_ar: 'مساهمة محلية', value: budgetSummary['local contribution']}
     ];
 
     const t = get(window.t, [lang, 'homepage'], {});
@@ -163,7 +163,7 @@ var Home = React.createClass({
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_three}</h3>
-                  <PieChart data={budgetSummary} />
+                  <PieChart data={budgetSummary} lang={lang} />
                   <div className='status-key'>
                     <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
                     <p className='status-key__label budget-grant'>{t.chart_three_label2}</p>

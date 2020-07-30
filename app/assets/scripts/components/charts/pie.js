@@ -8,7 +8,8 @@ var PieChart = React.createClass({
   displayName: 'PieChart',
 
   propTypes: {
-    data: React.PropTypes.array
+    data: React.PropTypes.array,
+    lang: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -55,7 +56,7 @@ var PieChart = React.createClass({
 
   render: function () {
     const { width, height } = this.state;
-    const { data } = this.props;
+    const { data, lang } = this.props;
     const radius = Math.min(width, height) / 2;
 
     // short circut if we have too small an area
@@ -70,7 +71,10 @@ var PieChart = React.createClass({
     const dataValues = d3.pie()
     .value((d) => d.value)(this.props.data);
 
-    const dataNames = data.map(d => d.name);
+    const names = data.map(d => d.name);
+    const namesAr = data.map(d => d.name_ar);
+    const rtl = lang === 'ar';
+    const langSelector = rtl ? namesAr : names;
 
     return (
       <div className='chart-container' ref='chartContainer'>
@@ -82,8 +86,8 @@ var PieChart = React.createClass({
               return <path
                 key={i}
                 d={arc(d)}
-                className={'pie__slice__' + slugify(dataNames[i])}
-                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, dataNames[i], valWithCommas)}
+                className={'pie__slice__' + slugify(names[i])}
+                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, langSelector[i], valWithCommas)}
                 onMouseOut={this.mouseout}
               />;
             })}
