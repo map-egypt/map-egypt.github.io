@@ -77,11 +77,13 @@ var PieChart = React.createClass({
         <svg className='chart' width={width} height={height} ref='svg'>
           <g className='arc' transform={`translate(${width / 2}, ${height / 2})`}>
             {dataValues.map((d, i) => {
+               // make values readable with commas
+              let valWithCommas = d.value.toString().match(/.{1,4}/g).join(',');
               return <path
                 key={i}
                 d={arc(d)}
                 className={'pie__slice__' + slugify(dataNames[i])}
-                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, dataNames[i], d.value)}
+                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, dataNames[i], valWithCommas)}
                 onMouseOut={this.mouseout}
               />;
             })}
