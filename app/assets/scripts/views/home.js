@@ -80,12 +80,15 @@ var Home = React.createClass({
 
     const pie = [{
       name: 'On Time',
+      name_ar: 'فى الميعاد',
       value: status.ontime
     }, {
       name: 'Delayed',
+      name_ar: 'متأخر',
       value: status.delayed
     }, {
       name: 'Extended',
+      name_ar: 'ممتد',
       value: status.extended
     }];
 
@@ -154,7 +157,7 @@ var Home = React.createClass({
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_two}</h3>
-                  <PieChart data={pie} />
+                  <PieChart data={pie} lang={lang} />
                   <div className='status-key'>
                     <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
                     <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
