@@ -113,7 +113,7 @@ project_pages:
   kpi_title: Key Performance Indicator
   target_title: Target
   rate_title: Rate of Implementation
-  date_title: Date
+  date_title: date of last update
 
   project_comparison_title: Project Comparison By Category
   comparison_chart_title1: Funding
