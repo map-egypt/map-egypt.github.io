@@ -97,10 +97,12 @@ var CSVBtn = React.createClass({
 
     if (window.encodeURI && typeof window.encodeURI === 'function') {
       // hacky attempt to save custom file name
+      var universalBOM = '\uFEFF';
       const link = document.createElement('a');
       document.body.appendChild(link);
       link.download = 'download.csv';
       link.href = window.encodeURI(csv);
+      link.setAttribute('href', meta + encodeURIComponent(universalBOM + csv));
       link.target = '_blank';
       link.click();
       document.body.removeChild(link);
