@@ -301,13 +301,13 @@ var Project = React.createClass({
                   <div className='overview-item--alt'>
                     <h2 className='overview-item__title heading-alt'>{t.kmi_components}</h2>
                     <ul className='link-list'>
-                      {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
-                        return (
+                    {uniq(get(data, 'kmi', []).map((kmi) => isArabic ? kmi.component_ar : kmi.component.trim())).map(component => {
+                      return (
                           <li key={component}>
                             <span>{component}</span>
                           </li>
                         );
-                      })}
+                    })}
                     </ul>
                   </div>
                 )}
