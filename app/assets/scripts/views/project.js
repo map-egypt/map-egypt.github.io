@@ -399,8 +399,8 @@ var Project = React.createClass({
                       const key = slugify(d.status.en);
                       return (
                         <tr key={d.kpi}>
-                          <td className='cell-name'>{d.component}</td>
-                          <td>{d.kpi}</td>
+                          <td className='cell-name'>{lang === 'en' ? d.component : d.component_ar}</td>
+                          <td>{lang === 'en' ? d.kpi : d.kpi_ar}</td>
                           <td className={'project--' + key}>
                             <p className='activity-name'>{d.status[lang]}</p>
                           </td>
