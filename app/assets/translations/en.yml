@@ -83,6 +83,7 @@ project_pages:
   status_delayed: Delayed
   status_extended: Extended
   status_closed: Closed
+  status_complete: Complete
   last_update_title: Last Update
   current_progress_title: Current Progress
   proposed_timeline_title: Proposed Timeline

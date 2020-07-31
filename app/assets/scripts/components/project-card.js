@@ -92,7 +92,7 @@ var ProjectCard = React.createClass({
 
               {completion && (
                 <ul className='card-cmplt'>
-                  <li style={{ width: completion }}><span>{completion} cmplt</span></li>
+                  <li style={{ width: completion }}><span>{completion}{t.status_complete}</span></li>
                 </ul>
               )}
             </header>
@@ -118,8 +118,8 @@ var ProjectCard = React.createClass({
                 })}
               </div>
               <ul className='card-stats'>
-                <li>{currency(shortTally(funding))} <small>funding</small></li>
-                <li>{tally(project.number_served.number_served)} <small>{project.number_served.number_served_unit.toLowerCase()}</small></li>
+              <li>{currency(shortTally(funding))} <small>{t.funding_title}</small></li>
+              <li>{tally(project.number_served.number_served)} <small>{ (lang === 'en' ? project.number_served.number_served_unit : project.number_served.number_served_unit_ar).toLowerCase()}</small></li>
               </ul>
             </div>
           </div>

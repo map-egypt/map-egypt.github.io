@@ -82,6 +82,7 @@ project_pages:
   status_delayed: 'متأخر'
   status_extended: 'ممتد'
   status_closed: 'منتهي'
+  status_complete: 'مكتمل'
   last_update_title: 'التحديث الأخير'
   current_progress_title: 'التقدم الحالي'
   proposed_timeline_title: 'الجدول الزمني المقترح'
@@ -89,7 +90,7 @@ project_pages:
   donors_title: 'الجهات المانحة'
   recommendations: 'توصيات بناء على خبرة المشروع'
   contract_date: 'تاريخ توقيع العقد'
-
+  funding_title: التمويل
   budget_title: 'الميزانية'
   funding_loans_title: 'قرض'
   funding_grants_title: 'منحة'
