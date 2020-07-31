@@ -148,6 +148,7 @@ donor_pages:
 map_labels:
   map_value_label: Value
   no_data: No Data
+  units_label: Units
   map_group_label: Number of Project Locations
   map_project_label: Project
 

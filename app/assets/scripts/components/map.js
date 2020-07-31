@@ -328,7 +328,7 @@ const Map = React.createClass({
           );
         })}
         <span className='legend__overlay--units'>
-          {units && units.toLowerCase() !== 'unknown' ? `${units} (Units)` : ''}
+          {units && units.toLowerCase() !== 'unknown' ? `${units} (${t.units_label})` : ''}
         </span>
       </span>
     );

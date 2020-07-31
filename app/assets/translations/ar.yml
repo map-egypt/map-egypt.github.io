@@ -146,6 +146,7 @@ donor_pages:
 map_labels:
   map_value_label: 'القيمة'
   no_data: 'لا توجد بيانات'
+  units_label: 'الوحدات'
   map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
 
