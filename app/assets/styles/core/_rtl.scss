@@ -171,12 +171,15 @@
   .inpage__overview-links {
     .overview-item {
       float: right;
-      margin-left: 3%;
       margin-right: 0;
     }
     .overview-item:nth-of-type(2) {
       float: left;
       margin-left: 0;
+    }
+    .overview-item:nth-of-type(3) {
+      float: right;
+      margin-left: 3%;
     }
     li {
       @include media (medium-up) {

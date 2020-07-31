@@ -100,6 +100,7 @@ project_pages:
   project_link: 'الرابط الالكتروني للمشروع'
   view_documentation_title: 'عرض ملفات المشروع'
   responsible_ministry_title: 'الوزارة المسؤولة'
+  implementing_partners_title: 'الهيئة المنفذة'
   local_manager_title: 'المدير المحلي للمشروع'
   kmi_components: 'مكونات وأنشطة المشروع'
   sdg_goals_title: 'أهداف التنمية المُستدامة'

@@ -296,7 +296,14 @@ var Project = React.createClass({
                     </ul>
                   </div>
                 )}
-
+                {data.implementing_partners && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>{t.implementing_partners_title}</h2>
+                    <ul className='link-list'>
+                      <li><span className='link--primary'><span>{lang === 'ar' ? data.implementing_partners_ar : data.implementing_partners}</span></span></li>
+                    </ul>
+                  </div>
+                )}
                 {data.kmi && (
                   <div className='overview-item--alt'>
                     <h2 className='overview-item__title heading-alt'>{t.kmi_components}</h2>
