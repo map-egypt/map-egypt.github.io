@@ -110,7 +110,7 @@ project_pages:
   component_title: 'المكون\النشاط'
   kpi_title: 'مؤشر الأداء'
   target_title: 'الهدف'
-  rate_title: 'التقدم المحرز'
+  rate_title: 'معدل التقدم'
   date_title: 'تاريخ الرصد'
 
   project_comparison_title: 'مقارنة المشروعات حسب القطاع الفرعي'
