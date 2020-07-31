@@ -117,7 +117,8 @@ const Map = React.createClass({
     });
   },
 
-  renderOverlay: function (overlay) {
+  renderOverlay: function (overlay, lang) {
+    const t = get(window.t, [lang, 'map_labels'], {});
     if (this.overlay) {
       this.overlay.remove();
     }
@@ -183,11 +184,13 @@ const Map = React.createClass({
 
     this.overlay = L.geoJson(regions, { style }).bindPopup(function ({ feature }) {
       const id = feature.properties[idName];
-      const name = isDistrict ? get(byIdDist(id), 'name') : get(byEgyGove(id), 'name');
+     // change name depend on lang
+      const locationName = lang === 'en' ? 'name' : 'nameAr';
+      const name = isDistrict ? get(byIdDist(id), locationName) : get(byEgyGove(id), locationName);
       return `
       <div class='marker__internal'>
         <h5 class='marker__title'>${name}</h5>
-        <p class='marker__description'>Value: <strong>${get(feature, 'properties._value', '--')}</strong></p>
+        <p class='marker__description'>${t.map_value_label}: <strong>${get(feature, 'properties._value', '--')}</strong></p>
       </div>
       `;
     }).addTo(this.overlayLayer);
@@ -210,7 +213,7 @@ const Map = React.createClass({
     }
 
     // if we have a new overlay or we had one and now don't
-    if ((props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) || (this.props.overlay && !props.overlay)) {
+    if ((props.overlay && (!this.props.overlay || props.overlay.id !== this.props.overlay.id)) || props.lang !== this.props.lang || (this.props.overlay && !props.overlay)) {
       if (props.overlay && props.overlay.hasOwnProperty('mapid')) {
         const layer = this.addMapboxLayer(props.overlay.mapid);
         this.renderOverlay(false);
@@ -220,7 +223,7 @@ const Map = React.createClass({
           this.removeMapboxLayer();
           this.setState({overlayLayer: false});
         }
-        let overlayScale = this.renderOverlay(props.overlay);
+        let overlayScale = this.renderOverlay(props.overlay, props.lang);
         this.setState({overlayScale});
       }
     }
@@ -260,7 +263,7 @@ const Map = React.createClass({
         this.addClusterMarkers(markers, lang);
       }
       if (overlay) {
-        let overlayScale = this.renderOverlay(overlay);
+        let overlayScale = this.renderOverlay(overlay, lang);
         this.setState({overlayScale});
       }
     }
