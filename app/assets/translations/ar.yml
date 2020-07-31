@@ -78,6 +78,7 @@ projects_list_view:
 project_pages:
   print: 'طباعة'
   status_label: 'الحالة'
+  status_planned: 'مخطط'
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
   status_extended: 'ممتد'

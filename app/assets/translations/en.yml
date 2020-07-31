@@ -79,6 +79,7 @@ projects_list_view:
 project_pages:
   print: Print
   status_label: "Status:"
+  status_planned: Planned
   status_ontime: On Time
   status_delayed: Delayed
   status_extended: Extended

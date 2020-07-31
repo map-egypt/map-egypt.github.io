@@ -13,9 +13,11 @@ function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
 }
 
-function isOntime (project) {
+function isOntime (project, lang) {
+  const t = get(window.t, [lang, 'project_pages'], {});
+
   if (project.status.en.toLowerCase() === 'closed') {
-    return 'closed';
+    return t.status_closed;
   }
 
   let plannedEnd = parseProjectDate(project.planned_end_date);
@@ -29,13 +31,13 @@ function isOntime (project) {
   if (!plannedStart) {
     return null;
   } else if (plannedStart > new Date().getTime()) {
-    return 'planned';
+    return t.status_planned;
   } else if (projectDelayed) {
-    return 'delayed';
+    return t.status_delayed;
   } else if (projectExtended) {
-    return 'extended';
+    return t.status_extended;
   } else {
-    return 'ontime';
+    return t.status_ontime;
   }
 }
 

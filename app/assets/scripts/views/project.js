@@ -173,7 +173,7 @@ var Project = React.createClass({
               <div className='inpage__headline-actions'>
                 <ul>
                   <li><CSVBtn
-                      title={data.name}
+                      title={isArabic ? data.name_ar : data.name }
                       relatedProjects={relatedProjects}
                       project={data}
                       chartData={csvChartData}
