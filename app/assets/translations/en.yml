@@ -146,6 +146,7 @@ donor_pages:
   funded_title: Projects Funded
 
 map_labels:
+  description_label : Description
   map_value_label: Value
   no_data: No Data
   units_label: Units

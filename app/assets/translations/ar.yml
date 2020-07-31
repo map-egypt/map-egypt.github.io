@@ -144,6 +144,7 @@ donor_pages:
   funded_title: 'المشروعات المُمولة'
 
 map_labels:
+  description_label : 'الوصف'
   map_value_label: 'القيمة'
   no_data: 'لا توجد بيانات'
   units_label: 'الوحدات'

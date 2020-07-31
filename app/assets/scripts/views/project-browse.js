@@ -457,7 +457,7 @@ var ProjectBrowse = React.createClass({
                       onChange={() => this.toggleSelectedIndicator(indicator, lang)} />
                     <span className='form__option__text'>{name}</span>
                     <span className='form__option__ui'></span>
-                    <span className='form__option__info' data-tip={indicatorTooltipContent(indicator)}>?</span>
+                    <span className='form__option__info' data-tip={indicatorTooltipContent(indicator, lang)}>?</span>
                   </label>
                 );
               })}
@@ -490,7 +490,7 @@ var ProjectBrowse = React.createClass({
             className={'indicator__overlay--item' + (activeIndicator === indicator.name ? ' indicator__overlay--selected' : '')}>
             <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator.name)}><span>toggle visibility</span></button>
             <span className='indicator-layer-name'>{lang === indicator.lang ? indicator.name : indicator.alternative }</span>
-            <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator.name || i.name_ar === indicator.name))}>?</span>
+            <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator.name || i.name_ar === indicator.name), lang)}>?</span>
               <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
             </li>
           ))}
