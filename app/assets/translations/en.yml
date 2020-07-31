@@ -1,5 +1,6 @@
 main_navigation:
-  projects_navitem: Projects & Indicators
+  projects_navitem: Projects
+  indicators_navitem : Indicators
   about_navitem: About
   login_navitem: Log In
   logout_navitem: Log Out

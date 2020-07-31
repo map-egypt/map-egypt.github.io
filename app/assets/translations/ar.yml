@@ -1,5 +1,6 @@
 main_navigation:
-  projects_navitem: 'المشروعات والمؤشرات'
+  projects_navitem: 'المشروعات'
+  indicators_navitem : 'المؤشرات'
   about_navitem: 'عن الموقع'
   login_navitem: 'تسجيل الدخول'
   logout_navitem: 'تسجيل الخروج'
