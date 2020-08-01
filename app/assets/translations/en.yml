@@ -1,5 +1,6 @@
 main_navigation:
   international_projects_navitem: International Projects
+  domestic_projects_navitem: Domestic Projects
   indicators_navitem : Indicators
   about_navitem: About
   login_navitem: Log In
@@ -40,7 +41,9 @@ homepage:
 
 projects_indicators:
   International_projects_title: International Projects
+  Domestic_projects_title: Domestic Projects
   International_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
+  Domestic_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
   filter_projects_btn: Add & Filter Projects
   indicator_overlays_btn: Add Indicator Overlays
   search_text: Zoom to Governorate

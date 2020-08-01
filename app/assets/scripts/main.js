@@ -56,6 +56,7 @@ import App from './views/app';
 import Home from './views/home';
 import UhOh from './views/uhoh';
 import InternationalProjectBrowse from './views/internationalProject-browse';
+import DomesticProjectBrowse from './views/domesticProject-browse';
 import IndicatorBrowse from './views/indicator-browse';
 import Project from './views/project';
 import Category from './views/category';
@@ -74,6 +75,7 @@ render((
       <Route path='/access_token=:access_token' onEnter={completeAuth} />
       <Route path='/:lang' component={App} onEnter={redirectToLastUrl}>
         <Route path='international_projects' component={InternationalProjectBrowse} />
+        <Route path='domestic_projects' component={DomesticProjectBrowse} />
         <Route path='indicators' component={IndicatorBrowse}/>
         <Route path='projects_sds' component={InternationalProjectBrowse} modal='SDS' />
         <Route path='projects_sdg' component={InternationalProjectBrowse} modal='SDG' />
