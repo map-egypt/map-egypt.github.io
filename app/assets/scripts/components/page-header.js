@@ -58,7 +58,7 @@ var PageHeader = React.createClass({
             <h2 className='page__prime-nav-title'><a href='#nav-block-browse' onClick={this.offcanvasMenuClick}><span>Menu</span></a></h2>
             <div className='nav-block' id='nav-block-browse'>
               <ul className='browse-menu'>
-                <li><Link to={basepath + '/projects'} title='Visit projects' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>{t.projects_navitem}</span></Link></li>
+                <li><Link to={basepath + '/international_projects'} title='Visit international projects' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>{t.international_projects_navitem}</span></Link></li>
                 <li><Link to={basepath + '/indicators'} title='Visit indicators page' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>{t.indicators_navitem}</span></Link></li>
                 <li><Link to={basepath + '/about'} title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco-active' onClick={this.onRootMenuClick}><span>{t.about_navitem}</span></Link></li>
               </ul>

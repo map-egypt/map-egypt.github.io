@@ -108,8 +108,8 @@ const SDG = {
 
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
 
-var ProjectBrowse = React.createClass({
-  displayName: 'ProjectBrowse',
+var InternationalProjectBrowse = React.createClass({
+  displayName: 'InternationalProjectBrowse',
 
   getInitialState: function () {
     return {
@@ -633,8 +633,8 @@ var ProjectBrowse = React.createClass({
                   <li><Print lang={lang} /></li>
                 </ul>
               </div>
-                <h1 className='inpage__title heading--deco heading--large'>{t.projects_title}</h1>
-                <p className='inpage__description'>{t.projects_description}</p>
+                <h1 className='inpage__title heading--deco heading--large'>{t.International_projects_title}</h1>
+                <p className='inpage__description'>{t.International_projects_description}</p>
             </div>
             <div className='inpage__actions'>
             <div className='actions-filters'>
@@ -740,4 +740,4 @@ function mapStateToProps (state) {
   };
 }
 
-module.exports = connect(mapStateToProps)(ProjectBrowse);
+module.exports = connect(mapStateToProps)(InternationalProjectBrowse);
