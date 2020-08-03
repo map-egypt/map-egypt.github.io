@@ -340,7 +340,7 @@ const Map = React.createClass({
         <div className='map__container' ref={this.mountMap}></div>
         <div className='inner'>
           <div className='legend__container'>
-            {this.renderMarkerLegend(this.props.markers.length)}
+            {this.props.markers && this.renderMarkerLegend(this.props.markers.length)}
             {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale, this.props.overlay.units)}
           </div>
         </div>

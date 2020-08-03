@@ -385,7 +385,6 @@ var IndicatorBrowse = React.createClass({
     const { activeIndicators, activeIndicator } = this.state;
 
     let projects = [];
-    let markers = [];
 
     let overlay;
     let indicatorChartData;
@@ -500,7 +499,7 @@ var IndicatorBrowse = React.createClass({
             <ProjectList projects={projects} meta={this.props.meta} lang={this.props.meta.lang}/>
             </div>)
           : (<div className='map__outer'>
-              <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
+              <Map location={mapLocation} overlay={overlay} lang={this.props.meta.lang}/>
               {activeIndicators.length ? this.renderActiveIndicators(activeIndicator, activeIndicators) : null}
             </div>)}
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
