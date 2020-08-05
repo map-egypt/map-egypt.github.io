@@ -11,6 +11,8 @@ homepage:
   title: 'أثر وتقدم المجال الزراعي'
   description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها والمستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك المشروعات على المستويين الوطنى والمحلى.'
   more: 'اقرأ المزيد'
+  international_projects_type: المشاريع الدولية 
+  domestic_projects_type:  المشاريع المحلية
 
   map_key_circle: 'عدد الاماكن الجغرافية للمشروع'
   map_key_marker: 'مشروع'
@@ -28,8 +30,11 @@ homepage:
   chart_three_label2: 'منحة'
   chart_three_label3: 'مساهمة محلية'
 
-  total_projects: 'مجموع المشروعات'
-  in_funding: 'التمويل'
+  total: 'مجموع '
+  in_funding: 'تمويل'
+  total_currency : 'مليون / مليار'
+  currency_international_projects: 'دولار'
+  currency_domestic_projects: 'ج.م'
   total_donors: 'مجموع الجهات المانحة'
   donor_collaborations: 'التعاون بين المانحين'
 

@@ -11,6 +11,8 @@ homepage:
   title: Monitoring Agricultural and Rural Development in Egypt
   description: Keep track of agricultural development projects, map their locations, compare their objectives and reach, and match the socioeconomic status of project areas on the subnational level.
   more: Learn More
+  international_projects_type: International Projects 
+  domestic_projects_type: Domestic Projects
 
   map_key_circle: Number of Project Locations
   map_key_marker: Project
@@ -28,8 +30,11 @@ homepage:
   chart_three_label2: Grants
   chart_three_label3: Local Contributions
 
-  total_projects: total projects
-  in_funding: in funding
+  total: Total 
+  in_funding:  Funding
+  total_currency: 'Mn/Bn'
+  currency_international_projects: USD
+  currency_domestic_projects : EGP
   total_donors: total donors
   donor_collaborations: donor collaborations
 
