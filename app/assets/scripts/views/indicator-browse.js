@@ -424,8 +424,8 @@ var IndicatorBrowse = React.createClass({
                   <li><Print lang={lang} /></li>
                 </ul>
               </div>
-                <h1 className='inpage__title heading--deco heading--large'>{t.projects_title}</h1>
-                <p className='inpage__description'>{t.projects_description}</p>
+                <h1 className='inpage__title heading--deco heading--large'>{t.Indicators_title}</h1>
+                <p className='inpage__description'>{t.Indicators_description}</p>
             </div>
             <div className='inpage__actions'>
             <div className='actions-filters'>

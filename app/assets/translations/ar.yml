@@ -1,7 +1,7 @@
 main_navigation:
   international_projects_navitem: 'المشاريع دولية'
   domestic_projects_navitem: 'المشاريع المحلية'
-  indicators_navitem : 'المؤشرات'
+  indicators_navitem : 'المؤشرات الإقتصادية و الإجتماعية'
   about_navitem: 'عن الموقع'
   login_navitem: 'تسجيل الدخول'
   logout_navitem: 'تسجيل الخروج'
@@ -47,8 +47,10 @@ homepage:
 projects_indicators:
   International_projects_title: 'المشاريع الدولية'
   Domestic_projects_title: 'المشاريع المحلية'
+  Indicators_title: 'المؤشرات الإقتصادية و الإجتماعية'
   International_projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
   Domestic_projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
+  Indicators_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
   filter_projects_btn: 'اضافة وتصفية المشروعات'
   indicator_overlays_btn: 'اضافة مؤشرات'
   search_text: 'اسم المحافظة'
