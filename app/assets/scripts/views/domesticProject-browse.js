@@ -2,10 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { get } from 'object-path';
-import { without, clone } from 'lodash';
+import { clone } from 'lodash';
 import ReactTooltip from 'react-tooltip';
 
-import { getIndicator } from '../actions';
 import Map from '../components/map';
 import Print from '../components/print-btn';
 import CSVBtn from '../components/csv-btn';
@@ -14,14 +13,12 @@ import AutoSuggest from '../components/auto-suggest';
 import { isOntime } from '../components/project-card';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, DISTRICT, getProjectCentroids } from '../utils/map-utils';
-import slugify from '../utils/slugify';
-import { indicatorTooltipContent } from '../utils/tooltips';
+
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { window } from 'global';
 
 const PROJECTS = 'projects';
-const INDICATORS = 'indicators';
-const indicatorTypes = ['sds', 'sdg', 'other'];
+
 const barChartMargin = { left: 75, right: 20, top: 10, bottom: 50 };
 
 function countByProp (array, path) {
@@ -37,18 +34,6 @@ function countByProp (array, path) {
 // Sort function for indicators names.
 // First checks if there is a digit, ie. `Pillar 1`.
 // Otherwise sorts alphabetically.
-const digit = new RegExp(/[0-9]+/);
-const digitSort = (a, b) => {
-  let digitA = a.match(digit);
-  if (digitA) {
-    let digitB = b.match(digit);
-    if (digitB) {
-      return Number(digitA[0]) > Number(digitB[0]) ? 1 : -1;
-    }
-  } else {
-    return a < b ? -1 : 1;
-  }
-};
 
 // Project filters
 const STATUS = {
@@ -126,13 +111,6 @@ var DomesticProjectBrowse = React.createClass({
       // is the view set to list view or map
       listView: false,
 
-      // what's the currently active indicator
-      activeIndicatorType: null,
-      activeIndicatorTheme: null,
-      selectedIndicators: [],
-      activeIndicators: [],
-      activeIndicator: null,
-
       // which governorate are we zoomed into
       activeGovernorate: null,
 
@@ -151,29 +129,13 @@ var DomesticProjectBrowse = React.createClass({
     route: React.PropTypes.object
   },
 
-  componentWillMount: function () {
-    const activeIndicatorType = get(this.props, 'route.modal');
-    if (activeIndicatorType) {
-      this.setState({
-        modal: true,
-        activeModal: INDICATORS,
-        activeIndicatorType
-      });
-    }
-  },
+  componentWillMount: function () {},
 
   componentDidUpdate: function () {
     ReactTooltip.rebuild();
   },
 
   componentWillUpdate: function (nextProps, nextState) {
-    const activeIndicator = nextState.activeIndicator;
-    if (activeIndicator && activeIndicator !== this.state.activeIndicator) {
-      const meta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator || indicator.name_ar === activeIndicator);
-      if (meta && meta.id) {
-        this.props.dispatch(getIndicator(meta.id));
-      }
-    }
     const modal = nextState.modal;
     if (modal) {
       document.documentElement.classList.add('disable--page-scroll');
@@ -189,101 +151,13 @@ var DomesticProjectBrowse = React.createClass({
     });
   },
 
-  // indicator modals
-  openIndicatorDropdown: function () {
-    this.setState({indicatorToggle: true});
-  },
-
-  closeIndicatorDropdown: function (e) {
-    setTimeout(() => {
-      this.setState({indicatorToggle: false});
-    }, 200);
-  },
-
-  openIndicatorSelector: function (activeIndicatorType) {
-    activeIndicatorType = activeIndicatorType.split(' ')[0];
-    this.setState({
-      modal: true,
-      activeModal: INDICATORS,
-      indicatorToggle: false,
-      activeIndicatorType,
-      selectedIndicators: this.state.activeIndicators.length ? clone(this.state.activeIndicators) : []
-    });
-  },
-
-  cancelIndicators: function () {
-    this.setState({
-      modal: false,
-      activeIndicatorType: null,
-      activeIndicatorTheme: null,
-      selectedIndicators: this.state.activeIndicators.length ? clone(this.state.activeIndicators) : []
-    });
-  },
-
-  confirmIndicators: function () {
-    const active = this.state.selectedIndicators.length ? clone(this.state.selectedIndicators) : [];
-    this.setState({
-      modal: false,
-      activeIndicatorType: null,
-      activeIndicatorTheme: null,
-      activeIndicators: active,
-      activeIndicator: active.length ? active[0].name : null
-    });
-  },
-
-  selectIndicatorSubType: function (type) {
-    this.setState({
-      activeIndicatorTheme: type
-    });
-  },
-
-  setActiveIndicator: function (activeIndicator) {
-    this.setState({ activeIndicator });
-  },
-
-  removeActiveIndicator: function (indicator) {
-    const { activeIndicator, activeIndicators } = this.state;
-    const nextActiveIndicators = without(activeIndicators, indicator);
-    // if the one we're removing is currently active, make the next one active
-    const nextActiveIndicator = activeIndicator !== indicator ? activeIndicator
-      : nextActiveIndicators.length ? nextActiveIndicators[0] : null;
-    this.setState({
-      activeIndicators: nextActiveIndicators,
-      activeIndicator: nextActiveIndicator
-    });
-  },
-
   // project modal
   openProjectSelector: function () {
     this.setState({
       modal: true,
-      indicatorToggle: false,
+
       activeModal: PROJECTS,
       selectedProjectFilters: this.state.activeProjectFilters.length ? clone(this.state.activeProjectFilters) : []
-    });
-  },
-  // send lang as second parameter
-  toggleSelectedIndicator: function (indicator, lang) {
-    let active = this.state.selectedIndicators;
-    // check language to set name & alternative values
-    const ltr = lang === 'en';
-    let name = ltr ? indicator.name : indicator.name_ar;
-    let alternative = ltr ? indicator.name_ar : indicator.name;
-    // create array of object ;
-    let namesOfIndicate = [{
-      'name': name,
-      'alternative': alternative,
-      'lang': lang
-    }];
-    if (active.findIndex(indicate => indicate.name === indicator.name) >= 0) {
-      active = without(active, indicator);
-    } else {
-      namesOfIndicate.map(indicate => {
-        active = active.concat(indicate);
-      });
-    }
-    this.setState({
-      selectedIndicators: active
     });
   },
 
@@ -383,122 +257,6 @@ var DomesticProjectBrowse = React.createClass({
     return null;
   },
 
-  renderIndicatorSelector: function () {
-    const { selectedIndicators, activeIndicatorTheme, activeIndicatorType } = this.state;
-    const { lang } = this.props.meta;
-    const indicatorProp = activeIndicatorType.toLowerCase();
-    const indicators = get(this.props.api, 'indicators', []).filter((indicator) => {
-      return indicator.theme.length && indicator.theme.find(d => d.type === indicatorProp);
-    });
-    const t = get(window.t, [lang, 'projects_indicators'], {});
-
-    const themes = {};
-    indicators.forEach((indicator) => {
-      indicator.theme.forEach((theme) => {
-        if (theme.type === indicatorProp) {
-          let themeName = theme[lang];
-          if (!themeName) return;
-          themes[themeName] = themes[themeName] || [];
-          themes[themeName].push(indicator);
-        }
-      });
-    });
-
-    const themeNames = Object.keys(themes).sort(digitSort);
-    const indicatorTheme = activeIndicatorTheme && themeNames.indexOf(activeIndicatorTheme) >= 0 ? activeIndicatorTheme : themeNames[0];
-    const indicatorNameProp = lang === 'en' ? 'name' : 'name_ar';
-    const availableIndicators = get(themes, indicatorTheme, []).sort((a, b) => {
-      return a[indicatorNameProp] < b[indicatorNameProp] ? -1 : 1;
-    });
-    return (
-      <section className='modal modal--large'>
-        <div className='modal__inner modal__indicators'>
-          <button className='modal__button-dismiss' title='close' onClick={this.closeModal}></button>
-          <h1 className='inpage__title heading--deco heading--medium'>{t.add} {t[this.state.activeIndicatorType.toLowerCase() + '_dropdown']}</h1>
-          <div className='modal__instructions'><p>{t.compare_indicators}</p></div>
-
-          <div className='indicators--selected'>
-            <span className='heading--label'>{t.selected_indicators}</span>
-            {selectedIndicators.map((indicator) => {
-              return (
-                <span className='button--small button--tag'
-                  key={indicator.name}
-                  onClick={() => this.toggleSelectedIndicator(indicator, lang)}>{lang === indicator.lang ? indicator.name : indicator.alternative}</span>
-              );
-            })}
-          </div>
-
-          <div className='indicators__container'>
-            <div className='indicators'>
-              <ul>
-                {themeNames.length && themeNames.map((name) => {
-                  return (
-                    <li key={name}
-                    className={'list__item' + (name === indicatorTheme ? ' list__item--active' : '')}
-                    onClick={() => this.selectIndicatorSubType(name)}>{name}</li>
-                  );
-                })}
-              </ul>
-            </div>
-            <div className='indicators--options'>
-              {availableIndicators.length && availableIndicators.map((indicator) => {
-                const name = indicator[indicatorNameProp];
-                if (!name) return null;
-                const id = 'subtypes-' + slugify(name);
-
-                return (
-                  <label key={name}
-                  // using findIndex instate of IndexOf because findIndex expect callback  with your condition
-                  className={'form__option form__option--custom-checkbox' + (selectedIndicators.findIndex(indicator => indicator.name === name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
-                    <input type='checkbox' name='form-checkbox'
-                      checked={selectedIndicators.findIndex(indicator => indicator.name === name) >= 0}
-                      id={id}
-                      value={name}
-                      onChange={() => this.toggleSelectedIndicator(indicator, lang)} />
-                    <span className='form__option__text'>{name}</span>
-                    <span className='form__option__ui'></span>
-                    <span className='form__option__info' data-tip={indicatorTooltipContent(indicator, lang)}>?</span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-            <ul className='button--list'>
-              <li><button
-                  onClick={this.confirmIndicators}
-                  type='button' className='button button--medium button--primary'>{t.apply}</button></li>
-              <li><button
-                  onClick={this.cancelIndicators}
-                  type='button' className='button button--medium button--primary-bounded'>{t.cancel}</button></li>
-            </ul>
-        </div>
-      </section>
-    );
-  },
-
-  renderActiveIndicators: function (activeIndicator, activeIndicators) {
-    const { lang } = this.props.meta;
-    const t = get(window.t, [lang, 'projects_indicators'], {});
-    return (
-      <div className='indicator__overlay'>
-        <h1 className='heading--label'>{t.selected_overlays}</h1>
-        <ul className='indicator__overlay--list'>
-          {activeIndicators.map((indicator, i) => (
-            <li
-            key={i}
-            onClick={() => true}
-            className={'indicator__overlay--item' + (activeIndicator === indicator.name ? ' indicator__overlay--selected' : '')}>
-            <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator.name)}><span>toggle visibility</span></button>
-            <span className='indicator-layer-name'>{lang === indicator.lang ? indicator.name : indicator.alternative }</span>
-            <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator.name || i.name_ar === indicator.name), lang)}>?</span>
-              <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    );
-  },
-
   renderProjectSelector: function () {
     let projects = this.props.api.projects;
     let { lang } = this.props.meta;
@@ -581,7 +339,7 @@ var DomesticProjectBrowse = React.createClass({
       mapLocation = features.find((feature) => get(feature, 'properties.admin_id') === governorateId);
     }
 
-    const { activeProjectFilters, activeIndicators, activeIndicator } = this.state;
+    const { activeProjectFilters } = this.state;
 
     let projects = [];
     let markers = [];
@@ -598,23 +356,6 @@ var DomesticProjectBrowse = React.createClass({
     let overlay;
     let indicatorChartData;
     let csvCharts;
-    if (activeIndicator) {
-      const indicatorMeta = this.props.api.indicators.find((indicator) => indicator.name === activeIndicator || indicator.name_ar === activeIndicator);
-      const indicatorData = get(this.props.api, 'indicatorDetail.' + indicatorMeta.id);
-      if (indicatorData) {
-        overlay = this.createOverlay(indicatorData);
-      }
-      if (indicatorData && Array.isArray(indicatorData.data.data)) {
-        indicatorChartData = indicatorData.data.data.map(d => ({
-          name: d.sub_nat_id,
-          value: isNaN(d.data_value) ? d.data_value : +d.data_value
-        }));
-        csvCharts = [{
-          title: activeIndicator,
-          data: indicatorChartData
-        }];
-      }
-    }
 
     const t = get(window.t, [lang, 'projects_indicators'], {});
 
@@ -640,22 +381,7 @@ var DomesticProjectBrowse = React.createClass({
             <div className='actions-filters'>
                 <ul className='button--list'>
                   <li onClick={this.openProjectSelector}><button type='button' className='button button--medium button--primary'>{t.filter_projects_btn}</button></li>
-                  <li>
-                    <span className='dropdown__container' onBlur={this.closeIndicatorDropdown}>
-                      <button type='button' onClick={this.openIndicatorDropdown}
-                        className='button button--medium button--secondary drop__toggle--caret'>{t.indicator_overlays_btn}</button>
-                      {this.state.indicatorToggle &&
-                        <ul className='drop__menu drop--align-left button--secondary'>
-                          {indicatorTypes.map((d) => {
-                            let display = t[d + '_dropdown'];
-                            return <li key={d}
-                              onClick={() => this.openIndicatorSelector(d)}
-                              className='drop__menu-item'>{display}</li>;
-                          })}
-                        </ul>
-                      }
-                    </span>
-                  </li>
+
                 </ul>
                 {activeProjectFilters.length ? (
                   <div className='filters'>
@@ -706,7 +432,7 @@ var DomesticProjectBrowse = React.createClass({
                     <div className='section__header'>
                       <h1 className='section__title'>Indicators</h1>
                       <div className='indicator-list-container'>
-                      {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
+
                         <HorizontalBarChart
                           data={indicatorChartData}
                           margin={barChartMargin}
@@ -723,10 +449,9 @@ var DomesticProjectBrowse = React.createClass({
             </div>)
           : (<div className='map__outer'>
               <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
-              {activeIndicators.length ? this.renderActiveIndicators(activeIndicator, activeIndicators) : null}
+
             </div>)}
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
-        {this.state.modal && this.state.activeModal === INDICATORS && this.renderIndicatorSelector()}
         <ReactTooltip html={true} delayHide={500} effect='solid'/>
       </section>
     );
