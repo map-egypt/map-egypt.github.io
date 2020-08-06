@@ -323,6 +323,7 @@ var InternationalProjectBrowse = React.createClass({
 
   render: function () {
     const { lang } = this.props.meta;
+    const internationalProjects = this.props.api.projects.filter(project => project.type === 'international');
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
 
@@ -338,7 +339,7 @@ var InternationalProjectBrowse = React.createClass({
     let projects = [];
     let markers = [];
     if (!this.state.projectsHidden) {
-      projects = this.props.api.projects;
+      projects = internationalProjects;
       if (activeProjectFilters.length) {
         activeProjectFilters.forEach((filter) => {
           projects = projects.filter(filter.filter);
@@ -361,8 +362,8 @@ var InternationalProjectBrowse = React.createClass({
              <div className='inpage__headline-actions'>
                 <ul>
                   <li><CSVBtn
-                      title={'All Projects'}
-                      relatedProjects={projects || this.props.api.projects}
+                      title={t.International_projects_title}
+                      relatedProjects={projects || internationalProjects}
                       chartData={csvCharts}
                       lang={lang} /></li>
                   <li><Print lang={lang} /></li>

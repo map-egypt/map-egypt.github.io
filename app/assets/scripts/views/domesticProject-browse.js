@@ -329,6 +329,7 @@ var DomesticProjectBrowse = React.createClass({
 
   render: function () {
     const { lang } = this.props.meta;
+    const domesticProjects = this.props.api.projects.filter(project => project.type === 'domestic');
     const selectedClassNames = 'button button--primary';
     const deselectedClassNames = 'button button--primary-bounded';
 
@@ -344,7 +345,7 @@ var DomesticProjectBrowse = React.createClass({
     let projects = [];
     let markers = [];
     if (!this.state.projectsHidden) {
-      projects = this.props.api.projects;
+      projects = domesticProjects;
       if (activeProjectFilters.length) {
         activeProjectFilters.forEach((filter) => {
           projects = projects.filter(filter.filter);
@@ -367,8 +368,8 @@ var DomesticProjectBrowse = React.createClass({
              <div className='inpage__headline-actions'>
                 <ul>
                   <li><CSVBtn
-                      title={'All Projects'}
-                      relatedProjects={projects || this.props.api.projects}
+                      title={t.Domestic_projects_title}
+                      relatedProjects={projects || domesticProjects}
                       chartData={csvCharts}
                       lang={lang} /></li>
                   <li><Print lang={lang} /></li>
