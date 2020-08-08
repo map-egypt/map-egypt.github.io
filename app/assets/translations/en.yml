@@ -19,7 +19,8 @@ homepage:
 
   stats_overview: Overview of Agricultural Projects
   overview_description: View consolidated project information and compare investments in different subsectors.
-  all_projects_btn: View All Projects
+  all_international_projects_btn: View All International Projects 
+  all_domestic_projects_btn: View All Domestic Projects
   chart_title_one: Number of Projects by Category
   chart_title_two: Status
   chart_two_label: On Time
@@ -80,7 +81,6 @@ projects_indicators:
 
 
 projects_list_view:
-  projects_title: Projects
   sort_by_title: Sort by
   sort_alphabetical: Alphabetical
   sort_ascending: Percentage Complete

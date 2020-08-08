@@ -20,6 +20,8 @@ homepage:
   stats_overview: 'نظرة عامة عن المشروعات الزراعية'
   overview_description: 'عرض معلومات مجمعة عن المشروعات ومقارنة الاستثمارات في القطاعات الفرعية المختلفة'
   all_projects_btn: 'تصفح جميع المشروعات'
+  all_international_projects_btn: 'تصفح جميع المشاريع الدولية' 
+  all_domestic_projects_btn: 'تصفح جميع المشاريع المحلية'
   chart_title_one: 'عدد المشروعات في كل قطاع فرعي'
   chart_title_two: 'الحالة'
   chart_two_label: 'في الميعاد'
@@ -79,7 +81,6 @@ projects_indicators:
   sdg_goals: 'أهداف التنمية المُستدامة'
 
 projects_list_view:
-  projects_title: 'المشروعات'
   sort_by_title: 'تصنيف'
   sort_alphabetical: 'أبجدي'
   sort_ascending: 'تصاعدي'

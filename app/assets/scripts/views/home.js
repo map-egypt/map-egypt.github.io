@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
-import { shortText, tally, shorterTally } from '../utils/format';
+import { tally, shorterTally } from '../utils/format';
 import { get } from 'object-path';
 import path from 'path';
 import { window } from 'global';
@@ -26,8 +26,8 @@ var Home = React.createClass({
   render: function () {
     const { projects } = this.props.api;
     const { lang } = this.props.meta;
-    const categories = {};
-    const status = { ontime: 0, delayed: 0, extended: 0 };
+
+    const basepath = '/' + this.props.meta.lang;
     const t = get(window.t, [lang, 'homepage'], {});
     // international projects
     let internationalProjects = [];
@@ -37,31 +37,70 @@ var Home = React.createClass({
     let domesticProjects = [];
     domesticProjects = projects.filter(project => project.type === 'domestic');
     const totalDomestic = domesticProjects.length;
-    projects.forEach(function (project) {
-      get(project, 'categories', []).forEach(function (category) {
-        categories[category[lang]] = categories[category[lang]] + 1 || 1;
-      });
 
-      const ontime = isOntime(project);
-      if (ontime === null) {
-        return;
-      } else if (ontime === 'delayed') {
-        status.delayed += 1;
-      } else if (ontime === 'extended') {
-        status.extended += 1;
-      } else {
-        status.ontime += 1;
-      }
-    });
+    function getPie (p) {
+      const status = { ontime: 0, delayed: 0, extended: 0 };
+      p.forEach(function (project) {
+        const ontime = isOntime(project, lang);
+        if (ontime === null) {
+          return;
+        } else if (ontime === 'Delayed') {
+          status.delayed += 1;
+        } else if (ontime === 'Extended') {
+          status.extended += 1;
+        } else {
+          status.ontime += 1;
+        }
+      });
+      const pie = [{
+        name: 'On Time',
+        name_ar: 'فى الميعاد',
+        value: status.ontime
+      }, {
+        name: 'Delayed',
+        name_ar: 'متأخر',
+        value: status.delayed
+      }, {
+        name: 'Extended',
+        name_ar: 'ممتد',
+        value: status.extended
+      }];
+      return pie;
+    }
+
+    function getBars (p) {
+      const categories = {};
+      p.forEach(function (project) {
+        get(project, 'categories', []).forEach(function (category) {
+          categories[category[lang]] = categories[category[lang]] + 1 || 1;
+        });
+      });
+      const bars = Object.keys(categories).map((category) => ({
+        name: category,
+        link: path.resolve(basepath, 'category', slugify(category)),
+        value: categories[category]
+      })).sort((a, b) => b.value > a.value ? -1 : 1);
+
+      return bars;
+    }
+
+    function getBudgetsSummary (p) {
+      let budgetSummary = {loan: 0, grant: 0, 'local contribution': 0};
+      p.forEach((project) => {
+        let budgets = project.budget || [];
+        budgets.forEach((fund) => {
+          budgetSummary[fund.type.en.toLowerCase()] += fund.fund.amount;
+        });
+      });
+      budgetSummary = [
+        {name: 'Loan', name_ar: 'قرض', value: budgetSummary.loan},
+        {name: 'Grant', name_ar: 'منحة', value: budgetSummary.grant},
+        {name: 'Local Contribution', name_ar: 'مساهمة محلية', value: budgetSummary['local contribution']}
+      ];
+      return budgetSummary;
+    }
 
     const markers = getProjectCentroids(projects, this.props.api.geography);
-
-    const basepath = '/' + this.props.meta.lang;
-    const bars = Object.keys(categories).map((category) => ({
-      name: category,
-      link: path.resolve(basepath, 'category', slugify(category)),
-      value: categories[category]
-    })).sort((a, b) => b.value > a.value ? -1 : 1);
     // total funding for international projects
     let totalFundingInternational = 0;
     // total funding for domestic projects
@@ -85,33 +124,6 @@ var Home = React.createClass({
       });
     });
     totalFundingDomestic = shorterTally(totalFundingDomestic, t);
-
-    const pie = [{
-      name: 'On Time',
-      name_ar: 'فى الميعاد',
-      value: status.ontime
-    }, {
-      name: 'Delayed',
-      name_ar: 'متأخر',
-      value: status.delayed
-    }, {
-      name: 'Extended',
-      name_ar: 'ممتد',
-      value: status.extended
-    }];
-
-    let budgetSummary = {loan: 0, grant: 0, 'local contribution': 0};
-    projects.forEach((project) => {
-      let budgets = project.budget || [];
-      budgets.forEach((fund) => {
-        budgetSummary[fund.type.en.toLowerCase()] += fund.fund.amount;
-      });
-    });
-    budgetSummary = [
-      {name: 'Loan', name_ar: 'قرض', value: budgetSummary.loan},
-      {name: 'Grant', name_ar: 'منحة', value: budgetSummary.grant},
-      {name: 'Local Contribution', name_ar: 'مساهمة محلية', value: budgetSummary['local contribution']}
-    ];
 
     return (
       <div>
@@ -151,19 +163,19 @@ var Home = React.createClass({
                 </ul>
               </div>
               <div className='overview-home-charts'>
+                <h3 className="project-title">{t.international_projects_type}</h3>
                 <div className='chart-content chart__inline--labels'>
                   <h3>{t.chart_title_one}</h3>
                   <HorizontalBarChart
                     lang={lang}
-                    data={bars}
+                    data={getBars(internationalProjects)}
                     margin={barChartMargin}
-                    yFormat={shortText}
                     xFormat={tally}
                     yTitle='' />
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_two}</h3>
-                  <PieChart data={pie} lang={lang} />
+                  <PieChart data={getPie(internationalProjects)} lang={lang} />
                   <div className='status-key'>
                     <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
                     <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
@@ -172,7 +184,7 @@ var Home = React.createClass({
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_three}</h3>
-                  <PieChart data={budgetSummary} lang={lang} />
+                  <PieChart data={getBudgetsSummary(internationalProjects)} lang={lang} />
                   <div className='status-key'>
                     <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
                     <p className='status-key__label budget-grant'>{t.chart_three_label2}</p>
@@ -181,7 +193,40 @@ var Home = React.createClass({
                 </div>
               </div>
               <div className='section__footer'>
-                <Link to={basepath + '/projects'} type='button' className='button button--primary button--large'>{t.all_projects_btn}</Link>
+                <Link to={basepath + '/international_projects'} type='button' className='button button--primary button--large' style={{marginBottom: '25px'}} >{t.all_international_projects_btn}</Link>
+              </div>
+              <div className='overview-home-charts'>
+                <h3 className="project-title">{t.domestic_projects_type}</h3>
+                <div className='chart-content chart__inline--labels'>
+                  <h3>{t.chart_title_one}</h3>
+                  <HorizontalBarChart
+                    lang={lang}
+                    data={getBars(domesticProjects)}
+                    margin={barChartMargin}
+                    xFormat={tally}
+                    yTitle='' />
+                </div>
+                <div className='chart-content chart__inline--labels chart-content--status'>
+                  <h3>{t.chart_title_two}</h3>
+                  <PieChart data={getPie(domesticProjects)} lang={lang} />
+                  <div className='status-key'>
+                    <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
+                    <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
+                    <p className='status-key__label status-extended last'>{t.chart_two_label3}</p>
+                  </div>
+                </div>
+                <div className='chart-content chart__inline--labels chart-content--status'>
+                  <h3>{t.chart_title_three}</h3>
+                  <PieChart data={getBudgetsSummary(domesticProjects)} lang={lang} />
+                  <div className='status-key'>
+                    <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
+                    <p className='status-key__label budget-grant'>{t.chart_three_label2}</p>
+                    <p className='status-key__label budget-local last'>{t.chart_three_label3}</p>
+                  </div>
+                </div>
+              </div>
+              <div className='section__footer'>
+                <Link to={basepath + '/domestic_projects'} type='button' className='button button--primary button--large'>{t.all_domestic_projects_btn}</Link>
               </div>
             </section>
           </div>
