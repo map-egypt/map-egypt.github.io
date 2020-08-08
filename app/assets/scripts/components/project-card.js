@@ -69,7 +69,10 @@ var ProjectCard = React.createClass({
 
   render: function () {
     const { project, lang } = this.props;
-    const ontime = isOntime(project);
+    const t = get(window.t, [lang, 'project_pages'], {});
+    // check project type to set currencyValue
+    const currencyValue = project.type === 'international' ? t.currency_international_projects : t.currency_domestic_projects;
+    const ontime = isOntime(project, lang);
     const statusClass = 'project--' + ontime;
     const basepath = '/' + lang;
     const budget = project.budget || [];
@@ -84,7 +87,6 @@ var ProjectCard = React.createClass({
       }
     });
 
-    const t = get(window.t, [lang, 'project_pages'], {});
     return (
       <div className='project'>
         <article className={statusClass}>
@@ -120,7 +122,7 @@ var ProjectCard = React.createClass({
                 })}
               </div>
               <ul className='card-stats'>
-              <li>{currency(shortTally(funding))} <small>{t.funding_title}</small></li>
+              <li>{currency(currencyValue, shortTally(funding, t))} <small>{t.funding_title}</small></li>
               <li>{tally(project.number_served.number_served)} <small>{ (lang === 'en' ? project.number_served.number_served_unit : project.number_served.number_served_unit_ar).toLowerCase()}</small></li>
               </ul>
             </div>

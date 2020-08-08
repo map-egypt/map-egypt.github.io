@@ -4,11 +4,11 @@ import numeral from 'numeral';
 const tally = (n) => numeral(n).format('0,0');
 module.exports.tally = tally;
 
-const shortTally = (n) => {
+const shortTally = (n, t) => {
   if (n >= 1000000) {
-    return numeral(n / 1000000).format('0,0.[00]') + 'Mn/Bn';
+    return numeral(n / 1000000).format('0,0.[00]') + t.total_currency_M;
   } else if (n >= 1000) {
-    return numeral(n / 1000).format('0,0.[00]') + 'K';
+    return numeral(n / 1000).format('0,0.[00]') + t.total_currency_K;
   }
   return tally(n);
 };
@@ -57,5 +57,5 @@ function roundedNumber (n, decimalPlaces = 1) {
 }
 module.exports.roundedNumber = roundedNumber;
 
-const currency = (value) => '$' + value.toString();
+const currency = (value, currencyValue) => currencyValue + ' ' + value.toString();
 module.exports.currency = currency;
