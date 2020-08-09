@@ -8,7 +8,7 @@ import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct, shortText, currency } from '../utils/format';
+import { tally, shortTally, pct, currency } from '../utils/format';
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
@@ -236,12 +236,12 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li className='num__internal--large'>{currency(shortTally(budget))}
+                  <li className='num__internal--large'>{currency('$', shortTally(budget, t))}
                     <small>{t.budget_title}</small>
                     <ul className='num__internal'>
-                      <li>{currency(shortTally(budgetBreakdown.loan))} {t.funding_loans_title}</li>
-                      <li>{currency(shortTally(budgetBreakdown.grant))} {t.funding_grants_title}</li>
-                      <li>{currency(shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown.loan, t))} {t.funding_loans_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown.grant, t))} {t.funding_grants_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown['local contribution'], t))} {t.funding_local_title}</li>
                     </ul>
                   </li>
                   <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
@@ -369,7 +369,7 @@ var Project = React.createClass({
                     data={donors}
                     margin={barChartMargin}
                     yTitle=''
-                    xFormat={shortTally}
+
                   />
                 </div>
                 {authenticated && disbursement.length ? (
@@ -379,7 +379,7 @@ var Project = React.createClass({
                       data={disbursement}
                       margin={barChartMargin}
                       yTitle=''
-                      xFormat={shortTally}
+
                       lang={lang}
                     />
                   </div>
@@ -430,8 +430,6 @@ var Project = React.createClass({
                   data={budgets}
                   margin={barChartMargin}
                   yTitle=''
-                  xFormat={shortTally}
-                  yFormat={shortText}
                   activeProject={projectDisplayName}
                 />
               </div>
@@ -443,7 +441,6 @@ var Project = React.createClass({
                   margin={barChartMargin}
                   yTitle=''
                   xFormat={pct}
-                  yFormat={shortText}
                   activeProject={projectDisplayName}
                 />
               </div>
@@ -456,7 +453,6 @@ var Project = React.createClass({
                     margin={barChartMargin}
                     yTitle=''
                     xFormat={tally}
-                    yFormat={shortText}
                     activeProject={projectDisplayName}
                   />
                 </div>
