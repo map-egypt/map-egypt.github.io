@@ -70,7 +70,8 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
-
+    // check project type
+    const isInternationalProject = meta.type === 'international';
     // put id on project data object since it's missing from the project detail endpoint.
     data.id = meta.id;
     const { lang } = this.props.meta;
@@ -165,6 +166,7 @@ var Project = React.createClass({
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
+    const donorsTitle = isInternationalProject ? t.international_donors_title : t.domestic_donors_title;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -216,7 +218,7 @@ var Project = React.createClass({
                 </div>
               </div>
               <div className='tags__group'>
-                <p className='tags__label'>{t.donors_title}:</p>
+                <p className='tags__label'>{donorsTitle}:</p>
                 <div className='inpage__subtitles'>
                   {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
                       <Link to={donor.link} className='link--secondary' href=''>{donor.name}</Link>&nbsp;

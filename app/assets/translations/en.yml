@@ -101,7 +101,8 @@ project_pages:
   current_progress_title: Current Progress
   proposed_timeline_title: Proposed Timeline
   categories_title: Categories
-  donors_title: Donors
+  international_donors_title: Donors
+  domestic_donors_title: Funded 
   recommendations: Recommendations based on project experience
   contract_date: Contract Signed
 
