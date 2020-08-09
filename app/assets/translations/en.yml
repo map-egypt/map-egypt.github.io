@@ -33,7 +33,9 @@ homepage:
 
   total: Total 
   in_funding:  Funding
-  total_currency: 'Mn/Bn'
+  total_currency_B: Bn
+  total_currency_M: Mn
+  total_currency_K: k
   currency_international_projects: USD
   currency_domestic_projects : EGP
   total_donors: total donors
@@ -104,7 +106,8 @@ project_pages:
   contract_date: Contract Signed
 
   funding_title: Funding
-  total_currency_M: Mn/Bn
+  total_currency_B: Bn
+  total_currency_M: Mn
   total_currency_K: k
   currency_international_projects: USD
   currency_domestic_projects : EGP

@@ -5,7 +5,9 @@ const tally = (n) => numeral(n).format('0,0');
 module.exports.tally = tally;
 
 const shortTally = (n, t) => {
-  if (n >= 1000000) {
+  if (n >= 1000000000) {
+    return numeral(n / 1000000000).format('0,0.[00]') + t.total_currency_B;
+  } else if (n >= 1000000) {
     return numeral(n / 1000000).format('0,0.[00]') + t.total_currency_M;
   } else if (n >= 1000) {
     return numeral(n / 1000).format('0,0.[00]') + t.total_currency_K;
@@ -15,10 +17,12 @@ const shortTally = (n, t) => {
 module.exports.shortTally = shortTally;
 
 const shorterTally = (n, t) => {
-  if (n >= 1000000) {
-    return numeral(n / 1000000).format('0,0') + ' ' + t.total_currency;
+  if (n >= 1000000000) {
+    return numeral(n / 1000000000).format('0,0') + ' ' + t.total_currency_B;
+  } else if (n >= 1000000) {
+    return numeral(n / 1000000).format('0,0') + ' ' + t.total_currency_M;
   } else if (n >= 1000) {
-    return numeral(n / 1000).format('0,0') + 'K';
+    return numeral(n / 1000).format('0,0') + t.total_currency_K;
   }
   return tally(n);
 };

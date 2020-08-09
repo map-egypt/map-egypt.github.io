@@ -52,11 +52,8 @@
   @include clearfix;
   margin: 0 auto;
   
-  flex-wrap: wrap;
-  @include media(medium-up) {
-    display: flex;
+ 
   }
-}
 
 .category-stats__item {
   list-style: none;
@@ -70,11 +67,10 @@
     margin-top: $global-spacing * 2;
     padding: 0 1.4em;
     width: auto;
+    min-width: 22%;
     max-width: 24%;
     border-right: 1px solid $tertiary-color;
-    &:nth-of-type(2) {
-      border-right: 0;
-    }
+   
   }
   @include media(medium-down) {
     min-width: 47%;
