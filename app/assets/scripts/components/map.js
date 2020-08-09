@@ -302,7 +302,7 @@ const Map = React.createClass({
     let category = get(this.props, 'overlay.category');
     if (category && category.toLowerCase() === 'categorical') {
       let converted = iterable.map((category) => categoryLookup[category]);
-      converted.sort((a, b) => b - a);
+
       convertId = converted.filter(Boolean).length === iterable.length;
       iterable = convertId ? converted : iterable;
     }
