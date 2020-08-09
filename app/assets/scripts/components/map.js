@@ -51,6 +51,13 @@ const OVERLAY_STYLE = {
 
 const categoryLookup = {'very low': 1, 'low': 2, 'medium': 3, 'high': 4, 'very high': 5};
 const idLookup = {1: 'very low', 2: 'low', 3: 'medium', 4: 'high', 5: 'very high'};
+const idLookupArabic = {
+  1: 'منخفض جدا',
+  2: 'منخفض',
+  3: 'متوسط',
+  4: 'مرتفع',
+  5: 'مرتفع جدا'
+};
 
 function getLatLngBounds (bounds) {
   let b = bbox(bounds);
@@ -308,6 +315,8 @@ const Map = React.createClass({
     }
 
     const t = get(window.t, [this.props.lang, 'map_labels'], {});
+    // check legend text language
+    const lookUp = this.props.lang === 'en' ? idLookup : idLookupArabic;
     const nodataLegend = this.props.overlay.values.length < this.props.overlay.regions.features.length
       ? (<dl key='nodata-swatch' className='legend__item legend__overlay--item'>
           <dt className='legend__item--overlay--bg' style={{backgroundColor: '#ffffff'}}></dt>
@@ -323,7 +332,7 @@ const Map = React.createClass({
           return (
             <dl key={d} className='legend__item legend__overlay--item'>
               <dt className='legend__item--overlay--bg' style={{backgroundColor}}></dt>
-              <dt className='legend__item--overlay-text'>{convertId && !isQuantile ? idLookup[text] : text}</dt>
+              <dt className='legend__item--overlay-text'>{convertId && !isQuantile ? lookUp[text] : text}</dt>
             </dl>
           );
         })}
