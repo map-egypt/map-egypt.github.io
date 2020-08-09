@@ -11,7 +11,8 @@ const ProjectList = React.createClass({
   propTypes: {
     projects: React.PropTypes.array,
     meta: React.PropTypes.object,
-    lang: React.PropTypes.string
+    lang: React.PropTypes.string,
+    title: React.PropTypes.string
   },
 
   getInitialState: function () {
@@ -41,7 +42,7 @@ const ProjectList = React.createClass({
   },
 
   render: function () {
-    const { lang } = this.props;
+    const { lang, title } = this.props;
     const { projects, meta } = this.props;
     const { sortAccessor } = this.state;
     const data = sortAccessor.func(projects.slice());
@@ -70,7 +71,7 @@ const ProjectList = React.createClass({
       <div className='inner'>
         <section className='inpage__section project-list'>
           <div className='section__header'>
-            <h1 className='section__title'>{t.projects_title}</h1>
+            <h1 className='section__title'>{title}</h1>
             <div className='sort'>
               <label className='heading--label'>{t.sort_by_title}:</label>
               <span className='dropdown__container'>

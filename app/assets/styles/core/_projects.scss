@@ -47,6 +47,7 @@
 
 .date-contract {
   margin: 1em 0 .8em;
+  display: flex;
   @extend .clearfix;
   dt {
     font-size: 0.75rem;

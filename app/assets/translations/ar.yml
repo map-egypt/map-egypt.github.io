@@ -1,5 +1,7 @@
 main_navigation:
-  projects_navitem: 'المشروعات والمؤشرات'
+  international_projects_navitem: 'المشاريع دولية'
+  domestic_projects_navitem: 'المشاريع المحلية'
+  indicators_navitem : 'المؤشرات الإقتصادية و الإجتماعية'
   about_navitem: 'عن الموقع'
   login_navitem: 'تسجيل الدخول'
   logout_navitem: 'تسجيل الخروج'
@@ -9,6 +11,8 @@ homepage:
   title: 'أثر وتقدم المجال الزراعي'
   description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها والمستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك المشروعات على المستويين الوطنى والمحلى.'
   more: 'اقرأ المزيد'
+  international_projects_type: المشاريع الدولية 
+  domestic_projects_type:  المشاريع المحلية
 
   map_key_circle: 'عدد الاماكن الجغرافية للمشروع'
   map_key_marker: 'مشروع'
@@ -16,18 +20,23 @@ homepage:
   stats_overview: 'نظرة عامة عن المشروعات الزراعية'
   overview_description: 'عرض معلومات مجمعة عن المشروعات ومقارنة الاستثمارات في القطاعات الفرعية المختلفة'
   all_projects_btn: 'تصفح جميع المشروعات'
+  all_international_projects_btn: 'تصفح جميع المشاريع الدولية' 
+  all_domestic_projects_btn: 'تصفح جميع المشاريع المحلية'
   chart_title_one: 'عدد المشروعات في كل قطاع فرعي'
   chart_title_two: 'الحالة'
   chart_two_label: 'في الميعاد'
   chart_two_label2: 'متأخر'
   chart_two_label3: 'ممتد'
   chart_title_three: 'الميزانية'
-  chart_three_label: 'منحة'
-  chart_three_label2: 'قرض'
+  chart_three_label: 'قرض'
+  chart_three_label2: 'منحة'
   chart_three_label3: 'مساهمة محلية'
 
-  total_projects: 'مجموع المشروعات'
-  in_funding: 'التمويل'
+  total: 'مجموع '
+  in_funding: 'تمويل'
+  total_currency : 'مليون / مليار'
+  currency_international_projects: 'دولار'
+  currency_domestic_projects: 'ج.م'
   total_donors: 'مجموع الجهات المانحة'
   donor_collaborations: 'التعاون بين المانحين'
 
@@ -38,8 +47,12 @@ homepage:
   other_button: 'مؤشرات تنمية أخرى'
 
 projects_indicators:
-  projects_title: 'المشروعات والمؤشرات'
-  projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
+  International_projects_title: 'المشاريع الدولية'
+  Domestic_projects_title: 'المشاريع المحلية'
+  Indicators_title: 'المؤشرات الإقتصادية و الإجتماعية'
+  International_projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
+  Domestic_projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
+  Indicators_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
   filter_projects_btn: 'اضافة وتصفية المشروعات'
   indicator_overlays_btn: 'اضافة مؤشرات'
   search_text: 'اسم المحافظة'
@@ -68,7 +81,6 @@ projects_indicators:
   sdg_goals: 'أهداف التنمية المُستدامة'
 
 projects_list_view:
-  projects_title: 'المشروعات'
   sort_by_title: 'تصنيف'
   sort_alphabetical: 'أبجدي'
   sort_ascending: 'تصاعدي'
@@ -77,10 +89,12 @@ projects_list_view:
 project_pages:
   print: 'طباعة'
   status_label: 'الحالة'
+  status_planned: 'مخطط'
   status_ontime: 'في الميعاد'
   status_delayed: 'متأخر'
   status_extended: 'ممتد'
   status_closed: 'منتهي'
+  status_complete: 'مكتمل'
   last_update_title: 'التحديث الأخير'
   current_progress_title: 'التقدم الحالي'
   proposed_timeline_title: 'الجدول الزمني المقترح'
@@ -88,7 +102,11 @@ project_pages:
   donors_title: 'الجهات المانحة'
   recommendations: 'توصيات بناء على خبرة المشروع'
   contract_date: 'تاريخ توقيع العقد'
-
+  funding_title: 'التمويل'
+  total_currency_M: 'مليون / مليار'
+  total_currency_K: 'ألف'
+  currency_international_projects: 'دولار'
+  currency_domestic_projects: 'ج.م'
   budget_title: 'الميزانية'
   funding_loans_title: 'قرض'
   funding_grants_title: 'منحة'
@@ -98,6 +116,7 @@ project_pages:
   project_link: 'الرابط الالكتروني للمشروع'
   view_documentation_title: 'عرض ملفات المشروع'
   responsible_ministry_title: 'الوزارة المسؤولة'
+  implementing_partners_title: 'الهيئة المنفذة'
   local_manager_title: 'المدير المحلي للمشروع'
   kmi_components: 'مكونات وأنشطة المشروع'
   sdg_goals_title: 'أهداف التنمية المُستدامة'
@@ -109,7 +128,7 @@ project_pages:
   component_title: 'المكون\النشاط'
   kpi_title: 'مؤشر الأداء'
   target_title: 'الهدف'
-  rate_title: 'التقدم المحرز'
+  rate_title: 'معدل التقدم'
   date_title: 'تاريخ الرصد'
 
   project_comparison_title: 'مقارنة المشروعات حسب القطاع الفرعي'
@@ -144,7 +163,10 @@ donor_pages:
   funded_title: 'المشروعات المُمولة'
 
 map_labels:
+  description_label : 'الوصف'
+  map_value_label: 'القيمة'
   no_data: 'لا توجد بيانات'
+  units_label: 'الوحدات'
   map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
 

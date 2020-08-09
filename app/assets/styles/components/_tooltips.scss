@@ -12,6 +12,8 @@
   }
   span {
     display: inline-block;
+    width: 100%;
+    word-break: break-all;
     &.tooltip__sources {
       font-size: 0.7rem;
       margin-top: 0.5rem;

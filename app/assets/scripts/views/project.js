@@ -23,7 +23,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
 import CSVBtn from '../components/csv-btn';
 
-const barChartMargin = { left: 150, right: 20, top: 10, bottom: 50 };
+const barChartMargin = { left: 250, right: 20, top: 10, bottom: 50 };
 
 function linkPath (base, type, id) {
   return path.resolve(base, type, slugify(id));
@@ -173,7 +173,7 @@ var Project = React.createClass({
               <div className='inpage__headline-actions'>
                 <ul>
                   <li><CSVBtn
-                      title={data.name}
+                      title={isArabic ? data.name_ar : data.name }
                       relatedProjects={relatedProjects}
                       project={data}
                       chartData={csvChartData}
@@ -296,18 +296,25 @@ var Project = React.createClass({
                     </ul>
                   </div>
                 )}
-
+                {data.implementing_partners && (
+                  <div className='overview-item'>
+                    <h2 className='overview-item__title heading-alt'>{t.implementing_partners_title}</h2>
+                    <ul className='link-list'>
+                      <li><span className='link--primary'><span>{lang === 'ar' ? data.implementing_partners_ar : data.implementing_partners}</span></span></li>
+                    </ul>
+                  </div>
+                )}
                 {data.kmi && (
                   <div className='overview-item--alt'>
                     <h2 className='overview-item__title heading-alt'>{t.kmi_components}</h2>
                     <ul className='link-list'>
-                      {uniq(get(data, 'kmi', []).map((kmi) => kmi.component.trim())).map(component => {
-                        return (
+                    {uniq(get(data, 'kmi', []).map((kmi) => isArabic ? kmi.component_ar : kmi.component.trim())).map(component => {
+                      return (
                           <li key={component}>
                             <span>{component}</span>
                           </li>
                         );
-                      })}
+                    })}
                     </ul>
                   </div>
                 )}
@@ -399,8 +406,8 @@ var Project = React.createClass({
                       const key = slugify(d.status.en);
                       return (
                         <tr key={d.kpi}>
-                          <td className='cell-name'>{d.component}</td>
-                          <td>{d.kpi}</td>
+                          <td className='cell-name'>{lang === 'en' ? d.component : d.component_ar}</td>
+                          <td>{lang === 'en' ? d.kpi : d.kpi_ar}</td>
                           <td className={'project--' + key}>
                             <p className='activity-name'>{d.status[lang]}</p>
                           </td>

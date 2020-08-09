@@ -55,7 +55,9 @@ const scrollerMiddleware = useScroll((prevRouterProps, currRouterProps) => {
 import App from './views/app';
 import Home from './views/home';
 import UhOh from './views/uhoh';
-import ProjectBrowse from './views/project-browse';
+import InternationalProjectBrowse from './views/internationalProject-browse';
+import DomesticProjectBrowse from './views/domesticProject-browse';
+import IndicatorBrowse from './views/indicator-browse';
 import Project from './views/project';
 import Category from './views/category';
 import Donor from './views/donor';
@@ -72,10 +74,12 @@ render((
       <Route path='/404' component={UhOh} />
       <Route path='/access_token=:access_token' onEnter={completeAuth} />
       <Route path='/:lang' component={App} onEnter={redirectToLastUrl}>
-        <Route path='projects' component={ProjectBrowse} />
-        <Route path='projects_sds' component={ProjectBrowse} modal='SDS' />
-        <Route path='projects_sdg' component={ProjectBrowse} modal='SDG' />
-        <Route path='projects_other' component={ProjectBrowse} modal='other' />
+        <Route path='international_projects' component={InternationalProjectBrowse} />
+        <Route path='domestic_projects' component={DomesticProjectBrowse} />
+        <Route path='indicators' component={IndicatorBrowse}/>
+        <Route path='projects_sds' component={InternationalProjectBrowse} modal='SDS' />
+        <Route path='projects_sdg' component={InternationalProjectBrowse} modal='SDG' />
+        <Route path='projects_other' component={InternationalProjectBrowse} modal='other' />
         <Route path='projects/:id' component={Project} />
         <Route path='category/:name' component={Category} />
         <Route path='donor/:name' component={Donor} />

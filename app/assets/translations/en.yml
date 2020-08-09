@@ -1,5 +1,7 @@
 main_navigation:
-  projects_navitem: Projects & Indicators
+  international_projects_navitem: International Projects
+  domestic_projects_navitem: Domestic Projects
+  indicators_navitem : Socioeconomic Indicators
   about_navitem: About
   login_navitem: Log In
   logout_navitem: Log Out
@@ -9,13 +11,16 @@ homepage:
   title: Monitoring Agricultural and Rural Development in Egypt
   description: Keep track of agricultural development projects, map their locations, compare their objectives and reach, and match the socioeconomic status of project areas on the subnational level.
   more: Learn More
+  international_projects_type: International Projects 
+  domestic_projects_type: Domestic Projects
 
   map_key_circle: Number of Project Locations
   map_key_marker: Project
 
   stats_overview: Overview of Agricultural Projects
   overview_description: View consolidated project information and compare investments in different subsectors.
-  all_projects_btn: View All Projects
+  all_international_projects_btn: View All International Projects 
+  all_domestic_projects_btn: View All Domestic Projects
   chart_title_one: Number of Projects by Category
   chart_title_two: Status
   chart_two_label: On Time
@@ -26,8 +31,11 @@ homepage:
   chart_three_label2: Grants
   chart_three_label3: Local Contributions
 
-  total_projects: total projects
-  in_funding: in funding
+  total: Total 
+  in_funding:  Funding
+  total_currency: 'Mn/Bn'
+  currency_international_projects: USD
+  currency_domestic_projects : EGP
   total_donors: total donors
   donor_collaborations: donor collaborations
 
@@ -38,8 +46,12 @@ homepage:
   other_button: Other Indicators
 
 projects_indicators:
-  projects_title: Projects and Indicators
-  projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
+  International_projects_title: International Projects
+  Domestic_projects_title: Domestic Projects
+  Indicators_title: Socioeconomic Indicators
+  International_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
+  Domestic_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
+  Indicators_description:  Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
   filter_projects_btn: Add & Filter Projects
   indicator_overlays_btn: Add Indicator Overlays
   search_text: Zoom to Governorate
@@ -69,7 +81,6 @@ projects_indicators:
 
 
 projects_list_view:
-  projects_title: Projects
   sort_by_title: Sort by
   sort_alphabetical: Alphabetical
   sort_ascending: Percentage Complete
@@ -78,10 +89,12 @@ projects_list_view:
 project_pages:
   print: Print
   status_label: "Status:"
+  status_planned: Planned
   status_ontime: On Time
   status_delayed: Delayed
   status_extended: Extended
   status_closed: Closed
+  status_complete: Complete
   last_update_title: Last Update
   current_progress_title: Current Progress
   proposed_timeline_title: Proposed Timeline
@@ -91,6 +104,10 @@ project_pages:
   contract_date: Contract Signed
 
   funding_title: Funding
+  total_currency_M: Mn/Bn
+  total_currency_K: k
+  currency_international_projects: USD
+  currency_domestic_projects : EGP
   budget_title: Budget
   funding_loans_title: Loans
   funding_grants_title: Grants
@@ -100,6 +117,7 @@ project_pages:
   project_link: Project Link
   view_documentation_title: View Project Documentation
   responsible_ministry_title: Responsible Ministry
+  implementing_partners_title: Implementing Partners
   local_manager_title: Local Manager
   kmi_components: Project Components
   sdg_goals_title: SDG Goals
@@ -112,7 +130,7 @@ project_pages:
   kpi_title: Key Performance Indicator
   target_title: Target
   rate_title: Rate of Implementation
-  date_title: Date
+  date_title: date of last update
 
   project_comparison_title: Project Comparison By Category
   comparison_chart_title1: Funding
@@ -146,7 +164,10 @@ donor_pages:
   funded_title: Projects Funded
 
 map_labels:
+  description_label : Description
+  map_value_label: Value
   no_data: No Data
+  units_label: Units
   map_group_label: Number of Project Locations
   map_project_label: Project
 

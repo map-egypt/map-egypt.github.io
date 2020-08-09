@@ -171,12 +171,15 @@
   .inpage__overview-links {
     .overview-item {
       float: right;
-      margin-left: 3%;
       margin-right: 0;
     }
     .overview-item:nth-of-type(2) {
       float: left;
       margin-left: 0;
+    }
+    .overview-item:nth-of-type(3) {
+      float: right;
+      margin-left: 3%;
     }
     li {
       @include media (medium-up) {
@@ -355,10 +358,17 @@
         border-left: 0;
         padding-left: 0;
         padding-right: 1.4em;
+        margin-right: 3%;
+      }
+      &:nth-of-type(2) {
+        border-left: 0;
       }
       @include media(medium-down) {
         &:nth-of-type(2) {
           border-left: 0;
+        }
+        &:last-of-type {
+          margin-right: 0;
         }
       }
     }

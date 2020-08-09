@@ -132,9 +132,10 @@
 }
 
 .card-stats {
+  display: flex;
   color: $base-color;
   list-style: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-weight: $base-font-light;
   line-height: 1.5rem;
   overflow: hidden;
