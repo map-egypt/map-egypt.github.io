@@ -44,9 +44,9 @@ var Home = React.createClass({
         const ontime = isOntime(project, lang);
         if (ontime === null) {
           return;
-        } else if (ontime === 'Delayed') {
+        } else if (ontime === 'Delayed' || ontime === 'متأخر') {
           status.delayed += 1;
-        } else if (ontime === 'Extended') {
+        } else if (ontime === 'Extended' || ontime === 'ممتد') {
           status.extended += 1;
         } else {
           status.ontime += 1;
