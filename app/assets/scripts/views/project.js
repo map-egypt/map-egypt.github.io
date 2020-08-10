@@ -167,6 +167,7 @@ var Project = React.createClass({
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
     const donorsTitle = isInternationalProject ? t.international_donors_title : t.domestic_donors_title;
+    const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -365,7 +366,7 @@ var Project = React.createClass({
 
               <div className='overview-charts'>
                 <div className={'chart-content chart__inline--labels' + (!authenticated ? ' chart__block' : '')}>
-                  <h3>{t.funding_by_donor_title}</h3>
+                  <h3>{fundingByDonorTitle}</h3>
                   <HorizontalBarChart
                     lang={lang}
                     data={donors}

@@ -127,7 +127,8 @@ project_pages:
   sds_pillars_title: 'أهداف استراتيجية التنمية المستدامة'
 
   monitoring_indicators_title: 'مؤشرات الرصد الرئيسية'
-  funding_by_donor_title: 'التمويل - بالدولار الأمريكي'
+  international_funding_by_donor_title: 'التمويل - بالدولار الأمريكي'
+  domestic_funding_by_donor_title : 'التمويل - بالجنية المصرى'
   status_title: 'الحالة'
   component_title: 'المكون\النشاط'
   kpi_title: 'مؤشر الأداء'
