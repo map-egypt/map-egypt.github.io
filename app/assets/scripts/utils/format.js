@@ -5,24 +5,30 @@ const tally = (n) => numeral(n).format('0,0');
 module.exports.tally = tally;
 
 const shortTally = (n, t) => {
+  const currencyB = t === undefined ? 'B' : t.total_currency_B;
+  const currencyM = t === undefined ? 'M' : t.total_currency_M;
+  const currencyK = t === undefined ? 'K' : t.total_currency_K;
   if (n >= 1000000000) {
-    return numeral(n / 1000000000).format('0,0.[00]') + ' ' + t.total_currency_B;
+    return numeral(n / 1000000000).format('0,0.[00]') + ' ' + currencyB;
   } else if (n >= 1000000) {
-    return numeral(n / 1000000).format('0,0.[00]') + ' ' + t.total_currency_M;
+    return numeral(n / 1000000).format('0,0.[00]') + ' ' + currencyM;
   } else if (n >= 1000) {
-    return numeral(n / 1000).format('0,0.[00]') + ' ' + t.total_currency_K;
+    return numeral(n / 1000).format('0,0.[00]') + ' ' + currencyK;
   }
   return tally(n);
 };
 module.exports.shortTally = shortTally;
 
 const shorterTally = (n, t) => {
+  const currencyB = t === undefined ? 'B' : t.total_currency_B;
+  const currencyM = t === undefined ? 'M' : t.total_currency_M;
+  const currencyK = t === undefined ? 'K' : t.total_currency_K;
   if (n >= 1000000000) {
-    return numeral(n / 1000000000).format('0,0') + ' ' + t.total_currency_B;
+    return numeral(n / 1000000000).format('0,0') + ' ' + currencyB;
   } else if (n >= 1000000) {
-    return numeral(n / 1000000).format('0,0') + ' ' + t.total_currency_M;
+    return numeral(n / 1000000).format('0,0') + ' ' + currencyM;
   } else if (n >= 1000) {
-    return numeral(n / 1000).format('0,0') + ' ' + t.total_currency_K;
+    return numeral(n / 1000).format('0,0') + ' ' + currencyK;
   }
   return tally(n);
 };

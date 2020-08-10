@@ -372,7 +372,7 @@ var Project = React.createClass({
                     data={donors}
                     margin={barChartMargin}
                     yTitle=''
-
+                    xFormat={shortTally}
                   />
                 </div>
                 {authenticated && disbursement.length ? (
@@ -382,7 +382,7 @@ var Project = React.createClass({
                       data={disbursement}
                       margin={barChartMargin}
                       yTitle=''
-
+                      xFormat={shortTally}
                       lang={lang}
                     />
                   </div>
@@ -432,6 +432,7 @@ var Project = React.createClass({
                   lang={lang}
                   data={budgets}
                   margin={barChartMargin}
+                  xFormat={shortTally}
                   yTitle=''
                   activeProject={projectDisplayName}
                 />
