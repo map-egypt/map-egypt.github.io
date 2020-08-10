@@ -169,6 +169,7 @@ donor_pages:
 
 map_labels:
   description_label : 'الوصف'
+  description_default_value: 'لا يوجد'
   map_value_label: 'القيمة'
   no_data: 'لا توجد بيانات'
   units_label: 'الوحدات'

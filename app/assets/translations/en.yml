@@ -170,6 +170,7 @@ donor_pages:
 
 map_labels:
   description_label : Description
+  description_default_value: Not Exit 
   map_value_label: Value
   no_data: No Data
   units_label: Units
