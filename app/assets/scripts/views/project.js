@@ -168,6 +168,7 @@ var Project = React.createClass({
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
     const donorsTitle = isInternationalProject ? t.international_donors_title : t.domestic_donors_title;
     const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
+    const relatedSdsProjectsTitle = isInternationalProject ? t.related_sds_international_projects_title : t.related_sds_domestic_projects_title;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -465,7 +466,7 @@ var Project = React.createClass({
           </div>
           <section className='inpage__section--bleed'>
             <div className='inner'>
-              <h1 className='section__title heading--small'>{t.related_sds_projects_title}</h1>
+              <h1 className='section__title heading--small'>{relatedSdsProjectsTitle}</h1>
               <ul className='projects-list'>
                 {relatedProjects.map((p) => {
                   return (

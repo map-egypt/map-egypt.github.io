@@ -142,8 +142,8 @@ project_pages:
   comparison_chart_title2: Percentage Complete
   comparision_chart_title3: Targeted Beneficiaries
 
-  related_sds_projects_title: Related Projects By SDS Goal
-
+  related_sds_international_projects_title: Related International Projects By SDS Goal
+  related_sds_domestic_projects_title: Related Domestic Projects By SDS Goal
 category_pages:
   print: Print
   stat_one: Total Funds (US dollars)
