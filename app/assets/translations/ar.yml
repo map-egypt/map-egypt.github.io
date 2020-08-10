@@ -141,7 +141,9 @@ project_pages:
   comparison_chart_title2: 'نسبة الانتهاء'
   comparision_chart_title3: 'المستفيدين المستهدفين'
 
-  related_sds_projects_title: ' مشروعات ذات صلة - حسب أهداف استراتيجية التنمية المُستدامة '
+  related_sds_international_projects_title: ' مشاريع دولية ذات صلة - حسب أهداف استراتيجية التنمية المُستدامة '
+  related_sds_domestic_projects_title: ' مشاريع محلية ذات صلة - حسب أهداف استراتيجية التنمية المُستدامة '
+
 
 category_pages:
   print: 'طباعة'
@@ -169,6 +171,7 @@ donor_pages:
 
 map_labels:
   description_label : 'الوصف'
+  description_default_value: 'لا يوجد'
   map_value_label: 'القيمة'
   no_data: 'لا توجد بيانات'
   units_label: 'الوحدات'
