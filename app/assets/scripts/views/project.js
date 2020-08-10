@@ -8,7 +8,7 @@ import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
 import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
-import { tally, shortTally, pct, shortText, currency } from '../utils/format';
+import { tally, shortTally, pct, currency } from '../utils/format';
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
@@ -70,7 +70,8 @@ var Project = React.createClass({
       return <div></div>; // TODO loading indicator
     }
     const data = meta.data;
-
+    // check project type
+    const isInternationalProject = meta.type === 'international';
     // put id on project data object since it's missing from the project detail endpoint.
     data.id = meta.id;
     const { lang } = this.props.meta;
@@ -165,6 +166,8 @@ var Project = React.createClass({
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
+    const donorsTitle = isInternationalProject ? t.international_donors_title : t.domestic_donors_title;
+    const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -216,7 +219,7 @@ var Project = React.createClass({
                 </div>
               </div>
               <div className='tags__group'>
-                <p className='tags__label'>{t.donors_title}:</p>
+                <p className='tags__label'>{donorsTitle}:</p>
                 <div className='inpage__subtitles'>
                   {donors.map((donor) => <span key={donor.name} className='inpage__subtitle'>
                       <Link to={donor.link} className='link--secondary' href=''>{donor.name}</Link>&nbsp;
@@ -236,12 +239,12 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li className='num__internal--large'>{currency(shortTally(budget))}
+                  <li className='num__internal--large'>{currency('$', shortTally(budget, t))}
                     <small>{t.budget_title}</small>
                     <ul className='num__internal'>
-                      <li>{currency(shortTally(budgetBreakdown.loan))} {t.funding_loans_title}</li>
-                      <li>{currency(shortTally(budgetBreakdown.grant))} {t.funding_grants_title}</li>
-                      <li>{currency(shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown.loan, t))} {t.funding_loans_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown.grant, t))} {t.funding_grants_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown['local contribution'], t))} {t.funding_local_title}</li>
                     </ul>
                   </li>
                   <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
@@ -363,7 +366,7 @@ var Project = React.createClass({
 
               <div className='overview-charts'>
                 <div className={'chart-content chart__inline--labels' + (!authenticated ? ' chart__block' : '')}>
-                  <h3>{t.funding_by_donor_title}</h3>
+                  <h3>{fundingByDonorTitle}</h3>
                   <HorizontalBarChart
                     lang={lang}
                     data={donors}
@@ -429,9 +432,8 @@ var Project = React.createClass({
                   lang={lang}
                   data={budgets}
                   margin={barChartMargin}
-                  yTitle=''
                   xFormat={shortTally}
-                  yFormat={shortText}
+                  yTitle=''
                   activeProject={projectDisplayName}
                 />
               </div>
@@ -443,7 +445,6 @@ var Project = React.createClass({
                   margin={barChartMargin}
                   yTitle=''
                   xFormat={pct}
-                  yFormat={shortText}
                   activeProject={projectDisplayName}
                 />
               </div>
@@ -456,7 +457,6 @@ var Project = React.createClass({
                     margin={barChartMargin}
                     yTitle=''
                     xFormat={tally}
-                    yFormat={shortText}
                     activeProject={projectDisplayName}
                   />
                 </div>

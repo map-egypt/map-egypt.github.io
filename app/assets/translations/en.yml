@@ -33,7 +33,9 @@ homepage:
 
   total: Total 
   in_funding:  Funding
-  total_currency: 'Mn/Bn'
+  total_currency_B: Bn
+  total_currency_M: Mn
+  total_currency_K: k
   currency_international_projects: USD
   currency_domestic_projects : EGP
   total_donors: total donors
@@ -99,12 +101,14 @@ project_pages:
   current_progress_title: Current Progress
   proposed_timeline_title: Proposed Timeline
   categories_title: Categories
-  donors_title: Donors
+  international_donors_title: Donors
+  domestic_donors_title: Funded 
   recommendations: Recommendations based on project experience
   contract_date: Contract Signed
 
   funding_title: Funding
-  total_currency_M: Mn/Bn
+  total_currency_B: Bn
+  total_currency_M: Mn
   total_currency_K: k
   currency_international_projects: USD
   currency_domestic_projects : EGP
@@ -124,7 +128,8 @@ project_pages:
   sds_pillars_title: SDS Pillars
 
   monitoring_indicators_title: Monitoring Indicators
-  funding_by_donor_title: Funding (US dollars)
+  international_funding_by_donor_title: Funding (US dollars)
+  domestic_funding_by_donor_title : Funding (EGY EGP)
   status_title: Status
   component_title: Component
   kpi_title: Key Performance Indicator

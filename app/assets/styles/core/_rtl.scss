@@ -360,9 +360,6 @@
         padding-right: 1.4em;
         margin-right: 3%;
       }
-      &:nth-of-type(2) {
-        border-left: 0;
-      }
       @include media(medium-down) {
         &:nth-of-type(2) {
           border-left: 0;
@@ -370,6 +367,9 @@
         &:last-of-type {
           margin-right: 0;
         }
+      }
+      @include media(small-down){
+        border: unset;
       }
     }
     &:last-child {

@@ -13,7 +13,7 @@ function categoryLink (base, categoryName) {
   return path.resolve(base, 'category', slugify(categoryName));
 }
 
-function isOntime (project, lang) {
+function isOntime (project, lang = 'en') {
   const t = get(window.t, [lang, 'project_pages'], {});
 
   if (project.status.en.toLowerCase() === 'closed') {
@@ -72,7 +72,7 @@ var ProjectCard = React.createClass({
     const t = get(window.t, [lang, 'project_pages'], {});
     // check project type to set currencyValue
     const currencyValue = project.type === 'international' ? t.currency_international_projects : t.currency_domestic_projects;
-    const ontime = isOntime(project, lang);
+    const ontime = isOntime(project).replace(/\s/g, '').toLowerCase();
     const statusClass = 'project--' + ontime;
     const basepath = '/' + lang;
     const budget = project.budget || [];
@@ -96,7 +96,7 @@ var ProjectCard = React.createClass({
 
               {completion && (
                 <ul className='card-cmplt'>
-                  <li style={{ width: completion }}><span>{completion}{t.status_complete}</span></li>
+                  <li style={{ width: completion }}><span>{completion} {t.status_complete}</span></li>
                 </ul>
               )}
             </header>

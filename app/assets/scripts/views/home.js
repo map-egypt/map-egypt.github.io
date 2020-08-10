@@ -44,9 +44,9 @@ var Home = React.createClass({
         const ontime = isOntime(project, lang);
         if (ontime === null) {
           return;
-        } else if (ontime === 'Delayed') {
+        } else if (ontime === 'Delayed' || ontime === 'متأخر') {
           status.delayed += 1;
-        } else if (ontime === 'Extended') {
+        } else if (ontime === 'Extended' || ontime === 'ممتد') {
           status.extended += 1;
         } else {
           status.ontime += 1;
@@ -147,18 +147,16 @@ var Home = React.createClass({
                 <p className='section__description'>{t.overview_description}</p>
                 <ul className='category-stats'>
                   <li className='category-stats__item'>
-                    <h2>{t.international_projects_type}</h2>
                     <h3 className='inpage-stats heading--deco-small'>{totalInternational}<small>{t.total} {t.international_projects_type}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>{totalFundingInternational} <small>{t.currency_international_projects}</small><small>{t.in_funding} {t.international_projects_type}</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{totalFundingInternational} <span>{t.currency_international_projects}</span> <small>{t.in_funding} {t.international_projects_type}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h2>{t.domestic_projects_type}</h2>
                     <h3 className='inpage-stats heading--deco-small'>{totalDomestic}<small>{t.total} {t.domestic_projects_type}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>{totalFundingDomestic}<small>{t.currency_domestic_projects}</small><small>{t.in_funding} {t.domestic_projects_type}</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'> {totalFundingDomestic} <span>{t.currency_domestic_projects}</span> <small>{t.in_funding} {t.domestic_projects_type}</small></h3>
                   </li>
                 </ul>
               </div>
