@@ -114,7 +114,7 @@ var Home = React.createClass({
         totalFundingInternational += budget.fund.amount;
       });
     });
-    totalFundingInternational = shorterTally(totalFundingInternational, t);
+    totalFundingInternational = shorterTally(totalFundingInternational);
     // set total funding for domestic projects
     domesticProjects.forEach((project) => {
       let budgets = project.budget || [];
@@ -123,7 +123,7 @@ var Home = React.createClass({
         totalFundingDomestic += budget.fund.amount;
       });
     });
-    totalFundingDomestic = shorterTally(totalFundingDomestic, t);
+    totalFundingDomestic = shorterTally(totalFundingDomestic);
 
     return (
       <div>

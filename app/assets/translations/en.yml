@@ -168,6 +168,11 @@ donor_pages:
   donor_chart_title: Amount Funded (US dollars)
   funded_title: Projects Funded
 
+currency_values:
+  total_currency_B: Bn
+  total_currency_M: Mn
+  total_currency_K: k
+  
 map_labels:
   description_label : Description
   description_default_value: Not Exit 

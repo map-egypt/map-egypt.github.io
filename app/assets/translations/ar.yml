@@ -34,9 +34,7 @@ homepage:
 
   total: 'مجموع '
   in_funding: 'تمويل'
-  total_currency_B: 'مليار'
-  total_currency_M: 'مليون'
-  total_currency_K: 'ألف'
+
   currency_international_projects: 'دولار'
   currency_domestic_projects: 'ج.م'
   total_donors: 'مجموع الجهات المانحة'
@@ -106,9 +104,7 @@ project_pages:
   recommendations: 'توصيات بناء على خبرة المشروع'
   contract_date: 'تاريخ توقيع العقد'
   funding_title: 'التمويل'
-  total_currency_B: 'مليار'
-  total_currency_M: 'مليون'
-  total_currency_K: 'ألف'
+
   currency_international_projects: 'دولار'
   currency_domestic_projects: 'ج.م'
   budget_title: 'الميزانية'
@@ -168,6 +164,11 @@ donor_pages:
   donor_stats_funded_3: 'المدفوع'
   donor_chart_title: 'التمويل - بالدولار الأمريكي'
   funded_title: 'المشروعات المُمولة'
+
+currency_values:
+  total_currency_B: 'مليار'
+  total_currency_M: 'مليون'
+  total_currency_K: 'ألف'
 
 map_labels:
   description_label : 'الوصف'

@@ -1,34 +1,37 @@
 'use strict';
 import numeral from 'numeral';
+import { get } from 'object-path';
 
 const tally = (n) => numeral(n).format('0,0');
 module.exports.tally = tally;
 
-const shortTally = (n, t) => {
-  const currencyB = t === undefined ? 'B' : t.total_currency_B;
-  const currencyM = t === undefined ? 'M' : t.total_currency_M;
-  const currencyK = t === undefined ? 'K' : t.total_currency_K;
+const shortTally = (n) => {
+  const isArabic = window.location.href.includes('/ar');
+  const lang = isArabic ? 'ar' : 'en';
+  const t = get(window.t, [lang, 'currency_values'], {});
+
   if (n >= 1000000000) {
-    return numeral(n / 1000000000).format('0,0.[00]') + ' ' + currencyB;
+    return numeral(n / 1000000000).format('0,0.[00]') + ' ' + t.total_currency_B;
   } else if (n >= 1000000) {
-    return numeral(n / 1000000).format('0,0.[00]') + ' ' + currencyM;
+    return numeral(n / 1000000).format('0,0.[00]') + ' ' + t.total_currency_M;
   } else if (n >= 1000) {
-    return numeral(n / 1000).format('0,0.[00]') + ' ' + currencyK;
+    return numeral(n / 1000).format('0,0.[00]') + ' ' + t.total_currency_K;
   }
   return tally(n);
 };
 module.exports.shortTally = shortTally;
 
-const shorterTally = (n, t) => {
-  const currencyB = t === undefined ? 'B' : t.total_currency_B;
-  const currencyM = t === undefined ? 'M' : t.total_currency_M;
-  const currencyK = t === undefined ? 'K' : t.total_currency_K;
+const shorterTally = (n) => {
+  const isArabic = window.location.href.includes('/ar');
+  const lang = isArabic ? 'ar' : 'en';
+  const t = get(window.t, [lang, 'currency_values'], {});
+
   if (n >= 1000000000) {
-    return numeral(n / 1000000000).format('0,0') + ' ' + currencyB;
+    return numeral(n / 1000000000).format('0,0') + ' ' + t.total_currency_B;
   } else if (n >= 1000000) {
-    return numeral(n / 1000000).format('0,0') + ' ' + currencyM;
+    return numeral(n / 1000000).format('0,0') + ' ' + t.total_currency_M;
   } else if (n >= 1000) {
-    return numeral(n / 1000).format('0,0') + ' ' + currencyK;
+    return numeral(n / 1000).format('0,0') + ' ' + t.total_currency_K;
   }
   return tally(n);
 };

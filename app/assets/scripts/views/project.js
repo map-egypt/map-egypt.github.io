@@ -240,12 +240,12 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li className='num__internal--large'>{currency('$', shortTally(budget, t))}
+                  <li className='num__internal--large'>{currency('$', shortTally(budget))}
                     <small>{t.budget_title}</small>
                     <ul className='num__internal'>
-                      <li>{currency('$', shortTally(budgetBreakdown.loan, t))} {t.funding_loans_title}</li>
-                      <li>{currency('$', shortTally(budgetBreakdown.grant, t))} {t.funding_grants_title}</li>
-                      <li>{currency('$', shortTally(budgetBreakdown['local contribution'], t))} {t.funding_local_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown.loan))} {t.funding_loans_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown.grant))} {t.funding_grants_title}</li>
+                      <li>{currency('$', shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
                     </ul>
                   </li>
                   <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
