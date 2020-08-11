@@ -173,7 +173,7 @@ var IndicatorBrowse = React.createClass({
     const { activeIndicator, activeIndicators } = this.state;
     const nextActiveIndicators = without(activeIndicators, indicator);
     // if the one we're removing is currently active, make the next one active
-    const nextActiveIndicator = activeIndicator !== indicator ? activeIndicator
+    const nextActiveIndicator = activeIndicator !== indicator.name ? activeIndicator
       : nextActiveIndicators.length ? nextActiveIndicators[0] : null;
     this.setState({
       activeIndicators: nextActiveIndicators,
