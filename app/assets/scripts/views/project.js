@@ -169,6 +169,8 @@ var Project = React.createClass({
     const donorsTitle = isInternationalProject ? t.international_donors_title : t.domestic_donors_title;
     const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
     const relatedSdsProjectsTitle = isInternationalProject ? t.related_sds_international_projects_title : t.related_sds_domestic_projects_title;
+    // get currency value according to project type
+    const currencyValue = isInternationalProject ? t.currency_international_projects : t.currency_domestic_projects;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -240,12 +242,12 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li className='num__internal--large'>{currency('$', shortTally(budget))}
+                  <li className='num__internal--large'>{currency(currencyValue, shortTally(budget))}
                     <small>{t.budget_title}</small>
                     <ul className='num__internal'>
-                      <li>{currency('$', shortTally(budgetBreakdown.loan))} {t.funding_loans_title}</li>
-                      <li>{currency('$', shortTally(budgetBreakdown.grant))} {t.funding_grants_title}</li>
-                      <li>{currency('$', shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
+                      <li>{currency(currencyValue, shortTally(budgetBreakdown.loan))} {t.funding_loans_title}</li>
+                      <li>{currency(currencyValue, shortTally(budgetBreakdown.grant))} {t.funding_grants_title}</li>
+                      <li>{currency(currencyValue, shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
                     </ul>
                   </li>
                   <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>

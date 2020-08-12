@@ -70,5 +70,7 @@ function roundedNumber (n, decimalPlaces = 1) {
 }
 module.exports.roundedNumber = roundedNumber;
 
-const currency = (value, currencyValue) => currencyValue + ' ' + value.toString();
+const currency = (value, currencyValue = '$') => {
+  return (currencyValue + ' ' + value.toString());
+};
 module.exports.currency = currency;
