@@ -140,10 +140,10 @@ var Project = React.createClass({
     }));
 
     const t = get(window.t, [lang, 'project_pages'], {});
-
+    const fundingTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
     const csvChartData = [
       {
-        title: 'Funding (US Dollars)',
+        title: fundingTitle,
         data: donors
       },
       {
