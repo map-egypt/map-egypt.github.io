@@ -3,6 +3,8 @@ import { get, set } from 'object-path';
 import {
   AUTHENTICATED,
   PROJECTS,
+  INTERNATIONAL_PROJECTS,
+  DOMESTIC_PROJECTS,
   PROJECT,
   INDICATORS,
   INDICATOR,
@@ -12,6 +14,8 @@ import {
 export const initialState = {
   authenticated: false,
   projects: [],
+  InternationalProjects: [],
+  DomesticProjects: [],
   projectDetail: {},
   indicators: [],
   geography: {}
@@ -27,6 +31,12 @@ export default function reducer (state = initialState, action) {
       break;
     case PROJECTS:
       set(state, 'projects', action.data);
+      break;
+    case INTERNATIONAL_PROJECTS:
+      set(state, 'InternationalProjects', action.data);
+      break;
+    case DOMESTIC_PROJECTS:
+      set(state, 'DomesticProjects', action.data);
       break;
     case PROJECT:
       set(state, ['projectDetail', action.data.id], action.data);

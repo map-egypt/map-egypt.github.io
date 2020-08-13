@@ -72,6 +72,8 @@ var Project = React.createClass({
     const data = meta.data;
     // check project type
     const isInternationalProject = meta.type === 'international';
+    // get projects from api according to project type
+    const projectsApi = isInternationalProject ? 'InternationalProjects' : 'DomesticProjects';
     // put id on project data object since it's missing from the project detail endpoint.
     data.id = meta.id;
     const { lang } = this.props.meta;
@@ -85,7 +87,7 @@ var Project = React.createClass({
       budgetBreakdown[fund.type.en.toLowerCase()] += fund.fund.amount;
     });
 
-    const allProjects = get(this.props.api, 'projects', []);
+    const allProjects = get(this.props.api, projectsApi, []);
 
     const sdsGoals = get(data, 'sds_indicator').join(',');
     const relatedProjects = allProjects.filter(function (project) {
@@ -107,7 +109,7 @@ var Project = React.createClass({
     const budgets = allProjects.map((project) => ({
       name: getProjectName(project, lang),
       value: project.budget ? get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0) : 0,
-      link: path.resolve(basepath, 'projects', project.id),
+      link: path.resolve(basepath, project.type, project.id),
       project: project
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 

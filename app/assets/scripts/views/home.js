@@ -31,11 +31,11 @@ var Home = React.createClass({
     const t = get(window.t, [lang, 'homepage'], {});
     // international projects
     let internationalProjects = [];
-    internationalProjects = projects.filter(project => project.type === 'international');
+    internationalProjects = this.props.api.InternationalProjects;
     const totalInternational = internationalProjects.length;
     // domestic projects
     let domesticProjects = [];
-    domesticProjects = projects.filter(project => project.type === 'domestic');
+    domesticProjects = this.props.api.DomesticProjects;
     const totalDomestic = domesticProjects.length;
 
     function getPie (p) {
