@@ -9,11 +9,9 @@ import { getIndicator } from '../actions';
 import Map from '../components/map';
 import Print from '../components/print-btn';
 import CSVBtn from '../components/csv-btn';
-import ProjectList from '../components/project-list';
 import AutoSuggest from '../components/auto-suggest';
 import { governorates } from '../utils/governorates';
 import { GOVERNORATE, DISTRICT } from '../utils/map-utils';
-import slugify from '../utils/slugify';
 import { indicatorTooltipContent } from '../utils/tooltips';
 import HorizontalBarChart from '../components/charts/horizontal-bar';
 import { window } from 'global';
@@ -172,9 +170,10 @@ var IndicatorBrowse = React.createClass({
   removeActiveIndicator: function (indicator) {
     const { activeIndicator, activeIndicators } = this.state;
     const nextActiveIndicators = without(activeIndicators, indicator);
+
     // if the one we're removing is currently active, make the next one active
     const nextActiveIndicator = activeIndicator !== indicator.name ? activeIndicator
-      : nextActiveIndicators.length ? nextActiveIndicators[0] : null;
+      : nextActiveIndicators.length ? nextActiveIndicators[0].name : null;
     this.setState({
       activeIndicators: nextActiveIndicators,
       activeIndicator: nextActiveIndicator
@@ -191,23 +190,14 @@ var IndicatorBrowse = React.createClass({
     });
   },
 
-  toggleSelectedIndicator: function (indicator, lang) {
+  toggleSelectedIndicator: function (id) {
     let active = this.state.selectedIndicators;
-    let original = lang === 'en' ? indicator.name : indicator.name_ar;
-    let alter = lang === 'en' ? indicator.name_ar : indicator.name;
-    // create array of object names;
-    let names = [{
-      'name': original,
-      'alter': alter,
-      'lang': lang
-    }];
-
-    if (active.findIndex((el, i) => el.name === indicator.name) >= 0) {
+    // get indicator by id
+    const indicator = get(this.props.api, 'indicators').find(ind => ind.id === id);
+    if (active.findIndex(indicate => indicate.id === id) >= 0) {
       active = without(active, indicator);
     } else {
-      names.map(item => {
-        active = active.concat(item);
-      });
+      active = active.concat([indicator]);
     }
     this.setState({
       selectedIndicators: active
@@ -289,11 +279,11 @@ var IndicatorBrowse = React.createClass({
 
           <div className='indicators--selected'>
             <span className='heading--label'>{t.selected_indicators}</span>
-            {selectedIndicators.map((el) => {
+            {selectedIndicators.map((indicate) => {
               return (
                 <span className='button--small button--tag'
-                  key={el.name}
-                  onClick={() => this.toggleSelectedIndicator(el, lang)}>{lang === el.lang ? el.name : el.alter}</span>
+                  key={indicate.name}
+                  onClick={() => this.toggleSelectedIndicator(indicate.id)}>{indicate[indicatorNameProp]}</span>
               );
             })}
           </div>
@@ -311,19 +301,19 @@ var IndicatorBrowse = React.createClass({
               </ul>
             </div>
             <div className='indicators--options'>
-              {availableIndicators.length && availableIndicators.map((indicator, i) => {
+              {availableIndicators.length && availableIndicators.map((indicator) => {
                 const name = indicator[indicatorNameProp];
                 if (!name) return null;
-                const id = 'subtypes-' + slugify(name);
+                const id = indicator.id;
 
                 return (
-                  <label key={i}
-                    className={'form__option form__option--custom-checkbox' + (selectedIndicators.findIndex((sel, i) => sel.name === name) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
+                  <label key={id}
+                    className={'form__option form__option--custom-checkbox' + (selectedIndicators.findIndex(indicate => indicate.id === id) >= 0 ? ' form__option--custom--checkbox--selected' : '')}>
                     <input type='checkbox' name='form-checkbox'
-                      checked={selectedIndicators.findIndex((el, i) => el.name === name) >= 0}
+                      checked={selectedIndicators.findIndex(indicate => indicate.id === id) >= 0}
                       id={id}
                       value={name}
-                      onChange={() => this.toggleSelectedIndicator(indicator, lang)} />
+                      onChange={() => this.toggleSelectedIndicator(indicator.id)} />
                     <span className='form__option__text'>{name}</span>
                     <span className='form__option__ui'></span>
                     <span className='form__option__info' data-tip={indicatorTooltipContent(indicator, lang)}>?</span>
@@ -347,20 +337,21 @@ var IndicatorBrowse = React.createClass({
 
   renderActiveIndicators: function (activeIndicator, activeIndicators) {
     const { lang } = this.props.meta;
+    const indicatorNameProp = lang === 'en' ? 'name' : 'name_ar';
     const t = get(window.t, [lang, 'projects_indicators'], {});
     return (
       <div className='indicator__overlay'>
         <h1 className='heading--label'>{t.selected_overlays}</h1>
         <ul className='indicator__overlay--list'>
 
-          {activeIndicators.map((indicator, i) => (
+          {activeIndicators.map((indicator) => (
 
             <li
-              key={i}
+              key={indicator.id}
               onClick={() => true}
               className={'indicator__overlay--item' + (activeIndicator === indicator.name ? ' indicator__overlay--selected' : '')}>
               <button className='indicator-toggle' onClick={() => this.setActiveIndicator(indicator.name)}><span>toggle visibility</span></button>
-              <span className='indicator-layer-name'>{lang === indicator.lang ? indicator.name : indicator.alter }</span>
+              <span className='indicator-layer-name'>{indicator[indicatorNameProp]}</span>
               <span className='form__option__info' data-tip={indicatorTooltipContent(this.props.api.indicators.find(i => i.name === indicator.name || i.name_ar === indicator.name), lang)}>?</span>
               <button className='indicator-close' onClick={() => this.removeActiveIndicator(indicator)}><span>close indicator</span></button>
             </li>
@@ -496,7 +487,6 @@ var IndicatorBrowse = React.createClass({
                 </div>
               </div>
             )}
-            <ProjectList projects={projects} meta={this.props.meta} lang={this.props.meta.lang}/>
             </div>)
           : (<div className='map__outer'>
               <Map location={mapLocation} overlay={overlay} lang={this.props.meta.lang}/>

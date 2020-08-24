@@ -23,7 +23,7 @@ import HorizontalBarChart from '../components/charts/horizontal-bar';
 import Print from '../components/print-btn';
 import CSVBtn from '../components/csv-btn';
 
-const barChartMargin = { left: 250, right: 20, top: 10, bottom: 50 };
+const barChartMargin = { left: 500, right: 20, top: 10, bottom: 50 };
 
 function linkPath (base, type, id) {
   return path.resolve(base, type, slugify(id));
@@ -72,6 +72,8 @@ var Project = React.createClass({
     const data = meta.data;
     // check project type
     const isInternationalProject = meta.type === 'international';
+    // get projects from api according to project type
+    const projectsApi = isInternationalProject ? 'InternationalProjects' : 'DomesticProjects';
     // put id on project data object since it's missing from the project detail endpoint.
     data.id = meta.id;
     const { lang } = this.props.meta;
@@ -84,8 +86,8 @@ var Project = React.createClass({
     get(data, 'budget', []).forEach((fund) => {
       budgetBreakdown[fund.type.en.toLowerCase()] += fund.fund.amount;
     });
-
-    const allProjects = get(this.props.api, 'projects', []);
+    // set all projects from project API according project type
+    const allProjects = get(this.props.api, projectsApi, []);
 
     const sdsGoals = get(data, 'sds_indicator').join(',');
     const relatedProjects = allProjects.filter(function (project) {
@@ -140,10 +142,10 @@ var Project = React.createClass({
     }));
 
     const t = get(window.t, [lang, 'project_pages'], {});
-
+    const fundingTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
     const csvChartData = [
       {
-        title: 'Funding (US Dollars)',
+        title: fundingTitle,
         data: donors
       },
       {
@@ -169,6 +171,8 @@ var Project = React.createClass({
     const donorsTitle = isInternationalProject ? t.international_donors_title : t.domestic_donors_title;
     const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
     const relatedSdsProjectsTitle = isInternationalProject ? t.related_sds_international_projects_title : t.related_sds_domestic_projects_title;
+    // get currency value according to project type
+    const currencyValue = isInternationalProject ? t.currency_international_projects : t.currency_domestic_projects;
     return (
       <section className='inpage'>
         <header className='inpage__header'>
@@ -240,12 +244,12 @@ var Project = React.createClass({
               </div>
               <div className='inpage__col--content'>
                 <ul className='inpage-stats'>
-                  <li className='num__internal--large'>{currency('$', shortTally(budget, t))}
+                  <li className='num__internal--large'>{currency(currencyValue, shortTally(budget))}
                     <small>{t.budget_title}</small>
                     <ul className='num__internal'>
-                      <li>{currency('$', shortTally(budgetBreakdown.loan, t))} {t.funding_loans_title}</li>
-                      <li>{currency('$', shortTally(budgetBreakdown.grant, t))} {t.funding_grants_title}</li>
-                      <li>{currency('$', shortTally(budgetBreakdown['local contribution'], t))} {t.funding_local_title}</li>
+                      <li>{currency(currencyValue, shortTally(budgetBreakdown.loan))} {t.funding_loans_title}</li>
+                      <li>{currency(currencyValue, shortTally(budgetBreakdown.grant))} {t.funding_grants_title}</li>
+                      <li>{currency(currencyValue, shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
                     </ul>
                   </li>
                   <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>

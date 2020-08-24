@@ -10,6 +10,8 @@ export const ACTION = 'ACTION';
 export const AUTHENTICATED = 'AUTHENTICATED';
 export const PROJECTS = 'PROJECTS';
 export const PROJECT = 'PROJECT';
+export const INTERNATIONAL_PROJECTS = 'INTERNATIONAL_PROJECTS';
+export const DOMESTIC_PROJECTS = 'DOMESTIC_PROJECTS';
 export const INDICATORS = 'INDICATORS';
 export const INDICATOR = 'INDICATOR';
 export const GEOGRAPHY = 'GEOGRAPHY';
@@ -25,6 +27,12 @@ export function updateAuth (data) {
 
 export function updateProjects (data) {
   return { type: PROJECTS, data: data };
+}
+export function updateInternationalProjects (data) {
+  return { type: INTERNATIONAL_PROJECTS, data: data };
+}
+export function updateDomesticProjects (data) {
+  return { type: DOMESTIC_PROJECTS, data: data };
 }
 
 export function updateProject (data) {
@@ -62,6 +70,20 @@ export function getProjects () {
   return function (dispatch) {
     queryApi('projects', function (data) {
       return dispatch(updateProjects(data));
+    });
+  };
+}
+export function getInternationalProjects () {
+  return function (dispatch) {
+    queryApi('projects/international', function (data) {
+      return dispatch(updateInternationalProjects(data));
+    });
+  };
+}
+export function getDomesticProjects () {
+  return function (dispatch) {
+    queryApi('projects/domestic', function (data) {
+      return dispatch(updateDomesticProjects(data));
     });
   };
 }

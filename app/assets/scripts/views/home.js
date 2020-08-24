@@ -31,11 +31,11 @@ var Home = React.createClass({
     const t = get(window.t, [lang, 'homepage'], {});
     // international projects
     let internationalProjects = [];
-    internationalProjects = projects.filter(project => project.type === 'international');
+    internationalProjects = this.props.api.InternationalProjects;
     const totalInternational = internationalProjects.length;
     // domestic projects
     let domesticProjects = [];
-    domesticProjects = projects.filter(project => project.type === 'domestic');
+    domesticProjects = this.props.api.DomesticProjects;
     const totalDomestic = domesticProjects.length;
 
     function getPie (p) {
@@ -114,7 +114,7 @@ var Home = React.createClass({
         totalFundingInternational += budget.fund.amount;
       });
     });
-    totalFundingInternational = shorterTally(totalFundingInternational, t);
+    totalFundingInternational = shorterTally(totalFundingInternational);
     // set total funding for domestic projects
     domesticProjects.forEach((project) => {
       let budgets = project.budget || [];
@@ -123,7 +123,7 @@ var Home = React.createClass({
         totalFundingDomestic += budget.fund.amount;
       });
     });
-    totalFundingDomestic = shorterTally(totalFundingDomestic, t);
+    totalFundingDomestic = shorterTally(totalFundingDomestic);
 
     return (
       <div>

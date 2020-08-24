@@ -135,15 +135,15 @@ project_pages:
   kpi_title: Key Performance Indicator
   target_title: Target
   rate_title: Rate of Implementation
-  date_title: date of last update
+  date_title: Monitoring Date
 
   project_comparison_title: Project Comparison By Category
   comparison_chart_title1: Funding
   comparison_chart_title2: Percentage Complete
   comparision_chart_title3: Targeted Beneficiaries
 
-  related_sds_international_projects_title: Related International Projects By SDS Goal
-  related_sds_domestic_projects_title: Related Domestic Projects By SDS Goal
+  related_sds_international_projects_title: Other International Projects
+  related_sds_domestic_projects_title: Other Domestic Projects
 category_pages:
   print: Print
   stat_one: Total Funds (US dollars)
@@ -168,6 +168,11 @@ donor_pages:
   donor_chart_title: Amount Funded (US dollars)
   funded_title: Projects Funded
 
+currency_values:
+  total_currency_B: Bn
+  total_currency_M: Mn
+  total_currency_K: k
+  
 map_labels:
   description_label : Description
   description_default_value: Not Exit 

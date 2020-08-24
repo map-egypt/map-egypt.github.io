@@ -128,7 +128,7 @@ var HorizontalBarChart = React.createClass({
 
     return (
       <div className='chart-container' ref='chartContainer'>
-        <svg className='chart' width={width} height={height} ref='svg'>
+        <svg className='chart' width='100%' height={height} ref='svg'>
           <Axis
             scale={axisScale}
             labels={xLabels}
