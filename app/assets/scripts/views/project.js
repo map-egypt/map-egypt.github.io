@@ -86,7 +86,7 @@ var Project = React.createClass({
     get(data, 'budget', []).forEach((fund) => {
       budgetBreakdown[fund.type.en.toLowerCase()] += fund.fund.amount;
     });
-
+    // set all projects from project API according project type
     const allProjects = get(this.props.api, projectsApi, []);
 
     const sdsGoals = get(data, 'sds_indicator').join(',');
@@ -109,7 +109,7 @@ var Project = React.createClass({
     const budgets = allProjects.map((project) => ({
       name: getProjectName(project, lang),
       value: project.budget ? get(project, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0) : 0,
-      link: path.resolve(basepath, project.type, project.id),
+      link: path.resolve(basepath, 'projects', project.id),
       project: project
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
