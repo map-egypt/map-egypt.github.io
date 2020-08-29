@@ -156,7 +156,13 @@ const Map = React.createClass({
 
         case 'categorical':
         default:
-          domain = uniq(values.map(d => d.value)).sort((a, b) => a < b ? 1 : -1);
+          domain = uniq(values.map(d => d.value));
+          if (!isNumerical(values)) {
+            domain.sort((a, b) => categoryLookup[a] < categoryLookup[b] ? 1 : -1);
+          }
+          else {
+            domain.sort((a, b) => a < b ? 1 : -1);
+          }
           let l = DIVERGENT.length;
           if (domain.length > l) {
             console.log('WARNING: categorical data for this indicator contains too many unique categories');
@@ -304,7 +310,6 @@ const Map = React.createClass({
   renderOverlayLegend: function (scale, units) {
     const isQuantile = scale.hasOwnProperty('invertExtent');
     let iterable = (isQuantile ? scale.range() : scale.domain());
-    iterable.sort((a, b) => b - a);
     let convertId = false;
     let category = get(this.props, 'overlay.category');
     if (category && category.toLowerCase() === 'categorical') {
@@ -313,6 +318,7 @@ const Map = React.createClass({
       convertId = converted.filter(Boolean).length === iterable.length;
       iterable = convertId ? converted : iterable;
     }
+    iterable.sort((a, b) => b - a);
 
     const t = get(window.t, [this.props.lang, 'map_labels'], {});
     // check legend text language
@@ -327,7 +333,7 @@ const Map = React.createClass({
       <span className='legend__overlay'>
         {nodataLegend}
         {iterable.map((d, i) => {
-          let backgroundColor = isQuantile ? d : scale(d);
+          let backgroundColor = isQuantile ? d : (isNumerical(this.props.overlay.values) ? scale(d) : scale(idLookup[d]));
           let text = isQuantile ? scale.invertExtent(d).map(roundedNumber).join(' - ') : d;
           return (
             <dl key={d} className='legend__item legend__overlay--item'>
