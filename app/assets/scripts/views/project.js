@@ -73,7 +73,7 @@ var Project = React.createClass({
     // check project type
     const isInternationalProject = meta.type === 'international';
     // get projects from api according to project type
-    const projectsApi = isInternationalProject ? 'InternationalProjects' : 'DomesticProjects';
+    const projectsApi = isInternationalProject ? 'InternationalProjects' : 'NationalProjects';
     // put id on project data object since it's missing from the project detail endpoint.
     data.id = meta.id;
     const { lang } = this.props.meta;
@@ -142,7 +142,7 @@ var Project = React.createClass({
     }));
 
     const t = get(window.t, [lang, 'project_pages'], {});
-    const fundingTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
+    const fundingTitle = isInternationalProject ? t.international_funding_by_donor_title : t.national_funding_by_donor_title;
     const csvChartData = [
       {
         title: fundingTitle,
@@ -168,11 +168,11 @@ var Project = React.createClass({
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
     const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
-    const donorsTitle = isInternationalProject ? t.international_donors_title : t.domestic_donors_title;
-    const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.domestic_funding_by_donor_title;
-    const relatedSdsProjectsTitle = isInternationalProject ? t.related_sds_international_projects_title : t.related_sds_domestic_projects_title;
+    const donorsTitle = isInternationalProject ? t.international_donors_title : t.national_donors_title;
+    const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.national_funding_by_donor_title;
+    const relatedSdsProjectsTitle = isInternationalProject ? t.related_sds_international_projects_title : t.related_sds_national_projects_title;
     // get currency value according to project type
-    const currencyValue = isInternationalProject ? t.currency_international_projects : t.currency_domestic_projects;
+    const currencyValue = isInternationalProject ? t.currency_international_projects : t.currency_national_projects;
     return (
       <section className='inpage'>
         <header className='inpage__header'>

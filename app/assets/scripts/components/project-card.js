@@ -71,7 +71,7 @@ var ProjectCard = React.createClass({
     const { project, lang } = this.props;
     const t = get(window.t, [lang, 'project_pages'], {});
     // check project type to set currencyValue
-    const currencyValue = project.type === 'international' ? t.currency_international_projects : t.currency_domestic_projects;
+    const currencyValue = project.type === 'international' ? t.currency_international_projects : t.currency_national_projects;
     const ontime = isOntime(project).replace(/\s/g, '').toLowerCase();
     const statusClass = 'project--' + ontime;
     const basepath = '/' + lang;

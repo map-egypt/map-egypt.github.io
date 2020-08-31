@@ -1,6 +1,6 @@
 main_navigation:
   international_projects_navitem: International Projects
-  domestic_projects_navitem: Domestic Projects
+  national_projects_navitem: National Projects
   indicators_navitem : Socioeconomic Indicators
   about_navitem: About
   login_navitem: Log In
@@ -12,7 +12,7 @@ homepage:
   description: Keep track of agricultural development projects, map their locations, compare their objectives and reach, and match the socioeconomic status of project areas on the subnational level.
   more: Learn More
   international_projects_type: International Projects 
-  domestic_projects_type: Domestic Projects
+  national_projects_type: National Projects
 
   map_key_circle: Number of Project Locations
   map_key_marker: Project
@@ -20,7 +20,7 @@ homepage:
   stats_overview: Overview of Agricultural Projects
   overview_description: View consolidated project information and compare investments in different subsectors.
   all_international_projects_btn: View All International Projects 
-  all_domestic_projects_btn: View All Domestic Projects
+  all_national_projects_btn: View All National Projects
   chart_title_one: Number of Projects by Category
   chart_title_two: Status
   chart_two_label: On Time
@@ -37,7 +37,7 @@ homepage:
   total_currency_M: Mn
   total_currency_K: k
   currency_international_projects: USD
-  currency_domestic_projects : EGP
+  currency_national_projects : EGP
   total_donors: total donors
   donor_collaborations: donor collaborations
 
@@ -49,10 +49,10 @@ homepage:
 
 projects_indicators:
   International_projects_title: International Projects
-  Domestic_projects_title: Domestic Projects
+  National_projects_title: National Projects
   Indicators_title: Socioeconomic Indicators
   International_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
-  Domestic_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
+  National_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
   Indicators_description:  Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
   filter_projects_btn: Add & Filter Projects
   indicator_overlays_btn: Add Indicator Overlays
@@ -102,7 +102,7 @@ project_pages:
   proposed_timeline_title: Proposed Timeline
   categories_title: Categories
   international_donors_title: Donors
-  domestic_donors_title: Funded 
+  national_donors_title: Funded 
   recommendations: Recommendations based on project experience
   contract_date: Contract Signed
 
@@ -111,7 +111,7 @@ project_pages:
   total_currency_M: Mn
   total_currency_K: k
   currency_international_projects: USD
-  currency_domestic_projects : EGP
+  currency_national_projects : EGP
   budget_title: Budget
   funding_loans_title: Loans
   funding_grants_title: Grants
@@ -129,7 +129,7 @@ project_pages:
 
   monitoring_indicators_title: Monitoring Indicators
   international_funding_by_donor_title: Funding (US dollars)
-  domestic_funding_by_donor_title : Funding (EGY EGP)
+  national_funding_by_donor_title : Funding (EGY EGP)
   status_title: Status
   component_title: Component
   kpi_title: Key Performance Indicator
@@ -143,7 +143,7 @@ project_pages:
   comparision_chart_title3: Targeted Beneficiaries
 
   related_sds_international_projects_title: Other International Projects
-  related_sds_domestic_projects_title: Other Domestic Projects
+  related_sds_national_projects_title: Other National Projects
 category_pages:
   print: Print
   stat_one: Total Funds (US dollars)

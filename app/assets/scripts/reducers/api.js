@@ -4,7 +4,7 @@ import {
   AUTHENTICATED,
   PROJECTS,
   INTERNATIONAL_PROJECTS,
-  DOMESTIC_PROJECTS,
+  NATIONAL_PROJECTS,
   PROJECT,
   INDICATORS,
   INDICATOR,
@@ -15,7 +15,7 @@ export const initialState = {
   authenticated: false,
   projects: [],
   InternationalProjects: [],
-  DomesticProjects: [],
+  NationalProjects: [],
   projectDetail: {},
   indicators: [],
   geography: {}
@@ -35,8 +35,8 @@ export default function reducer (state = initialState, action) {
     case INTERNATIONAL_PROJECTS:
       set(state, 'InternationalProjects', action.data);
       break;
-    case DOMESTIC_PROJECTS:
-      set(state, 'DomesticProjects', action.data);
+    case NATIONAL_PROJECTS:
+      set(state, 'NationalProjects', action.data);
       break;
     case PROJECT:
       set(state, ['projectDetail', action.data.id], action.data);
