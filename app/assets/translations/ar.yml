@@ -76,6 +76,7 @@ projects_indicators:
   status_delayed: 'متأخر'
   project_status: 'حالة المشروع'
   category: 'القطاع الفرعي'
+  sector: 'القطاع الفرعى'
   donor: 'الجهة المانحة'
   sds_goals: 'استراتيجية التنمية المستدامة'
   sdg_goals: 'أهداف التنمية المُستدامة'

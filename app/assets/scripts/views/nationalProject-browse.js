@@ -47,7 +47,7 @@ const STATUS = {
 };
 
 const CATEGORY = {
-  translationPath: 'category',
+  translationPath: 'sector',
   items: (projects, lang) => {
     const categories = countByProp(projects.reduce((a, b) => a.concat(b.categories), []), lang);
     return Object.keys(categories).map((category) => ({

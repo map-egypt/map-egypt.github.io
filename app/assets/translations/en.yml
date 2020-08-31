@@ -77,6 +77,7 @@ projects_indicators:
   status_delayed: Delayed
   project_status: Project Status
   category: Category
+  sector: Sector
   donor: Donor
   sds_goals: SDS Goals
   sdg_goals: SDG Goals
