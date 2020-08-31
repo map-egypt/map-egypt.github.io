@@ -2,7 +2,7 @@
 import React from 'react';
 import { scaleTime } from 'd3';
 import { get } from 'object-path';
-import { parseProjectDate, formatDate } from '../utils/date';
+import { parseProjectDate, SimpleDate } from '../utils/date';
 import { window } from 'global';
 
 var ProjectTimeline = React.createClass({
@@ -63,8 +63,8 @@ function timeline (start, end, scale, lang) {
       </div>
       <hr style={{ left: left + '%' }} />
       <hr style={{ left: right + '%' }} />
-      <h5 className='timeline__label' style={{ left: left + '%' }}>{formatDate(start, lang)}</h5>
-      <h5 className='timeline__label timeline__label--right' style={{ right: (100 - right) + '%' }}>{formatDate(end, lang)}</h5>
+      <h5 className='timeline__label' style={{ left: left + '%' }}>{SimpleDate(start, lang)}</h5>
+      <h5 className='timeline__label timeline__label--right' style={{ right: (100 - right) + '%' }}>{SimpleDate(end, lang)}</h5>
     </div>
   );
 }

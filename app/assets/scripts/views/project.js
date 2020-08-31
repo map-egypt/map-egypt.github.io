@@ -7,7 +7,7 @@ import { get } from 'object-path';
 import { uniq } from 'lodash';
 import { getProject } from '../actions';
 import slugify from '../utils/slugify';
-import { formatDate, formatSimpleDate, parseProjectDate } from '../utils/date';
+import { formatDate, SimpleDate, formatSimpleDate, parseProjectDate } from '../utils/date';
 import { tally, shortTally, pct, currency } from '../utils/format';
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
@@ -208,7 +208,7 @@ var Project = React.createClass({
             {data.contract_date && (
               <dl className='date-contract'>
                 <dt className='timeline__headline heading-alt'>{`${t.contract_date}:`}</dt>
-                <dd>{`${formatDate(data.contract_date)}`}</dd>
+                <dd>{`${SimpleDate(data.contract_date, lang)}`}</dd>
               </dl>
             )}
 

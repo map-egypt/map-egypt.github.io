@@ -31,3 +31,14 @@ module.exports.formatSimpleDate = function (date) {
   const d = new Date(date);
   return (d.getMonth() + 1) + '/' + d.getFullYear();
 };
+
+// returns MONTH/YEAR with Arabic direction
+module.exports.SimpleDate = function (date, lang) {
+  if (!date) {
+    return false;
+  }
+  const d = new Date(date);
+  return lang === 'en'
+  ? `${d.getMonth()}/${d.getFullYear()}`
+  : `${d.getFullYear()}/${d.getMonth()}`;
+};
