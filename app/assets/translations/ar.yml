@@ -178,6 +178,7 @@ map_labels:
   units_label: 'الوحدات'
   map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
+  map_projects_number: 'عدد المشاريع'
 
 general_buttons:
   share: 'شارك'

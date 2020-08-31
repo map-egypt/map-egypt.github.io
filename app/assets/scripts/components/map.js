@@ -72,7 +72,8 @@ const Map = React.createClass({
     lang: React.PropTypes.string,
     location: React.PropTypes.object,
     markers: React.PropTypes.array,
-    overlay: React.PropTypes.object
+    overlay: React.PropTypes.object,
+    projects: React.PropTypes.array
   },
 
   getInitialState: function () {
@@ -159,8 +160,7 @@ const Map = React.createClass({
           domain = uniq(values.map(d => d.value));
           if (!isNumerical(values)) {
             domain.sort((a, b) => categoryLookup[a] < categoryLookup[b] ? 1 : -1);
-          }
-          else {
+          } else {
             domain.sort((a, b) => a < b ? 1 : -1);
           }
           let l = DIVERGENT.length;
@@ -348,7 +348,17 @@ const Map = React.createClass({
       </span>
     );
   },
-
+  renderProjectsNumber: function (projects) {
+    const t = get(window.t, [this.props.lang, 'map_labels'], {});
+    return (
+      <div className='legend__markers'>
+        <div className='legend__item'>
+          <span className='legend--cluster'>{projects.length}</span>
+          <span className='legend__label--cluster'>{t.map_projects_number}</span>
+        </div>
+      </div>
+    );
+  },
   render: function () {
     return (
       <div className='map__group'>
@@ -357,6 +367,8 @@ const Map = React.createClass({
           <div className='legend__container'>
             {this.props.markers && this.renderMarkerLegend(this.props.markers.length)}
             {this.state.overlayScale && this.renderOverlayLegend(this.state.overlayScale, this.props.overlay.units)}
+            {this.props.projects && this.renderProjectsNumber(this.props.projects)}
+
           </div>
         </div>
       </div>
