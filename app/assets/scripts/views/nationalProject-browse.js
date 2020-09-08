@@ -47,7 +47,7 @@ const STATUS = {
 };
 
 const CATEGORY = {
-  translationPath: 'category',
+  translationPath: 'sector',
   items: (projects, lang) => {
     const categories = countByProp(projects.reduce((a, b) => a.concat(b.categories), []), lang);
     return Object.keys(categories).map((category) => ({
@@ -93,8 +93,8 @@ const SDG = {
 
 const projectFilters = [STATUS, CATEGORY, DONOR, SDS, SDG];
 
-var DomesticProjectBrowse = React.createClass({
-  displayName: 'DomesticProjectBrowse',
+var NationalProjectBrowse = React.createClass({
+  displayName: 'National ProjectBrowse',
 
   getInitialState: function () {
     return {
@@ -258,7 +258,7 @@ var DomesticProjectBrowse = React.createClass({
   },
 
   renderProjectSelector: function () {
-    let projects = this.props.api.DomesticProjects;
+    let projects = this.props.api.NationalProjects;
     let { lang } = this.props.meta;
     const { selectedProjectFilters } = this.state;
     const t = get(window.t, [lang, 'projects_indicators'], {});
@@ -344,7 +344,7 @@ var DomesticProjectBrowse = React.createClass({
     let projects = [];
     let markers = [];
     if (!this.state.projectsHidden) {
-      projects = this.props.api.DomesticProjects;
+      projects = this.props.api.NationalProjects;
       if (activeProjectFilters.length) {
         activeProjectFilters.forEach((filter) => {
           projects = projects.filter(filter.filter);
@@ -367,15 +367,15 @@ var DomesticProjectBrowse = React.createClass({
              <div className='inpage__headline-actions'>
                 <ul>
                   <li><CSVBtn
-                      title={t.Domestic_projects_title}
-                      relatedProjects={projects || this.props.api.DomesticProjects}
+                      title={t.National_projects_title}
+                      relatedProjects={projects || this.props.api.NationalProjects}
                       chartData={csvCharts}
                       lang={lang} /></li>
                   <li><Print lang={lang} /></li>
                 </ul>
               </div>
-                <h1 className='inpage__title heading--deco heading--large'>{t.Domestic_projects_title}</h1>
-                <p className='inpage__description'>{t.Domestic_projects_description}</p>
+                <h1 className='inpage__title heading--deco heading--large'>{t.National_projects_title}</h1>
+                <p className='inpage__description'>{t.National_projects_description}</p>
             </div>
             <div className='inpage__actions'>
             <div className='actions-filters'>
@@ -445,10 +445,10 @@ var DomesticProjectBrowse = React.createClass({
                 </div>
               </div>
             )}
-            <ProjectList projects={projects} meta={this.props.meta} lang={this.props.meta.lang} title={t.Domestic_projects_title}/>
+            <ProjectList projects={projects} meta={this.props.meta} lang={this.props.meta.lang} title={t.National_projects_title}/>
             </div>)
           : (<div className='map__outer'>
-              <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
+              <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang} projects={projects}/>
 
             </div>)}
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
@@ -465,4 +465,4 @@ function mapStateToProps (state) {
   };
 }
 
-module.exports = connect(mapStateToProps)(DomesticProjectBrowse);
+module.exports = connect(mapStateToProps)(NationalProjectBrowse);

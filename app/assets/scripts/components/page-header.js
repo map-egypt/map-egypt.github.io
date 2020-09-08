@@ -59,7 +59,7 @@ var PageHeader = React.createClass({
             <div className='nav-block' id='nav-block-browse'>
               <ul className='browse-menu'>
                 <li><Link to={basepath + '/international_projects'} title='Visit international projects' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>{t.international_projects_navitem}</span></Link></li>
-                <li><Link to={basepath + '/domestic_projects'} title='Visit domestic projects' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>{t.domestic_projects_navitem}</span></Link></li>
+                <li><Link to={basepath + '/national_projects'} title='Visit national projects' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>{t.national_projects_navitem}</span></Link></li>
                 <li><Link to={basepath + '/indicators'} title='Visit indicators page' className='browse-menu__item link--deco' activeClassName='link--deco-active' onClick={this.onRootMenuClick}><span>{t.indicators_navitem}</span></Link></li>
                 <li><Link to={basepath + '/about'} title='Visit about page' className='browse-menu__item link--deco' activeClassName='browse-menu__item link--deco-active' onClick={this.onRootMenuClick}><span>{t.about_navitem}</span></Link></li>
               </ul>

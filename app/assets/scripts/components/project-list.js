@@ -51,7 +51,7 @@ const ProjectList = React.createClass({
       alphabetical: {
         name: 'Alphabetical',
         class: 'sort-alphabetical',
-        func: (projects) => projects.sort((a, b) => a.name < b.name ? -1 : 1)
+        func: lang === 'en' ? (projects) => projects.sort((a, b) => a.name < b.name ? -1 : 1) : (projects) => projects.sort((a, b) => a.name_ar < b.name_ar ? -1 : 1)
       },
       completeUp: {
         name: 'Percent Complete',

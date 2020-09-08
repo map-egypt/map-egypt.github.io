@@ -1,6 +1,6 @@
 main_navigation:
   international_projects_navitem: 'المشاريع دولية'
-  domestic_projects_navitem: 'المشاريع المحلية'
+  national_projects_navitem: 'المشاريع المحلية'
   indicators_navitem : 'المؤشرات الإقتصادية و الإجتماعية'
   about_navitem: 'عن الموقع'
   login_navitem: 'تسجيل الدخول'
@@ -12,7 +12,7 @@ homepage:
   description: 'من خلال هذه الاداة يمكنك تتبع مشروعات التنمية الزراعية في مصر، تحديد مواقعها ، مقارنة أهدافها والمستفيدين منها. كما يمكنك مقارنة الوضع الاجتماعي والاقتصادي لمناطق تلك المشروعات على المستويين الوطنى والمحلى.'
   more: 'اقرأ المزيد'
   international_projects_type: المشاريع الدولية 
-  domestic_projects_type:  المشاريع المحلية
+  national_projects_type:  المشاريع المحلية
 
   map_key_circle: 'عدد الاماكن الجغرافية للمشروع'
   map_key_marker: 'مشروع'
@@ -21,7 +21,7 @@ homepage:
   overview_description: 'عرض معلومات مجمعة عن المشروعات ومقارنة الاستثمارات في القطاعات الفرعية المختلفة'
   all_projects_btn: 'تصفح جميع المشروعات'
   all_international_projects_btn: 'تصفح جميع المشاريع الدولية' 
-  all_domestic_projects_btn: 'تصفح جميع المشاريع المحلية'
+  all_national_projects_btn: 'تصفح جميع المشاريع المحلية'
   chart_title_one: 'عدد المشروعات في كل قطاع فرعي'
   chart_title_two: 'الحالة'
   chart_two_label: 'في الميعاد'
@@ -36,7 +36,7 @@ homepage:
   in_funding: 'تمويل'
 
   currency_international_projects: 'دولار'
-  currency_domestic_projects: 'ج.م'
+  currency_national_projects: 'ج.م'
   total_donors: 'مجموع الجهات المانحة'
   donor_collaborations: 'التعاون بين المانحين'
 
@@ -48,10 +48,10 @@ homepage:
 
 projects_indicators:
   International_projects_title: 'المشاريع الدولية'
-  Domestic_projects_title: 'المشاريع المحلية'
+  National_projects_title: 'المشاريع المحلية'
   Indicators_title: 'المؤشرات الإقتصادية و الإجتماعية'
   International_projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
-  Domestic_projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
+  National_projects_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
   Indicators_description: 'تصفح المشروعات الزراعية على الخريطة أو من خلال القائمة. يمكنك إضافة مؤشرات التنمية لوضع المشروعات في سياق الحالة التنموية في المحافظة'
   filter_projects_btn: 'اضافة وتصفية المشروعات'
   indicator_overlays_btn: 'اضافة مؤشرات'
@@ -76,6 +76,7 @@ projects_indicators:
   status_delayed: 'متأخر'
   project_status: 'حالة المشروع'
   category: 'القطاع الفرعي'
+  sector: 'القطاع الفرعى'
   donor: 'الجهة المانحة'
   sds_goals: 'استراتيجية التنمية المستدامة'
   sdg_goals: 'أهداف التنمية المُستدامة'
@@ -100,13 +101,13 @@ project_pages:
   proposed_timeline_title: 'الجدول الزمني المقترح'
   categories_title: 'القطاعات الفرعية'
   international_donors_title: 'الجهات المانحة'
-  domestic_donors_title: 'جهات ممولة' 
+  national_donors_title: 'جهات ممولة' 
   recommendations: 'توصيات بناء على خبرة المشروع'
   contract_date: 'تاريخ توقيع العقد'
   funding_title: 'التمويل'
 
   currency_international_projects: 'دولار'
-  currency_domestic_projects: 'ج.م'
+  currency_national_projects: 'ج.م'
   budget_title: 'الميزانية'
   funding_loans_title: 'قرض'
   funding_grants_title: 'منحة'
@@ -124,7 +125,7 @@ project_pages:
 
   monitoring_indicators_title: 'مؤشرات الرصد الرئيسية'
   international_funding_by_donor_title: 'التمويل - بالدولار الأمريكي'
-  domestic_funding_by_donor_title : 'التمويل - بالجنية المصرى'
+  national_funding_by_donor_title : 'التمويل - بالجنية المصرى'
   status_title: 'الحالة'
   component_title: 'المكون\النشاط'
   kpi_title: 'مؤشر الأداء'
@@ -138,7 +139,7 @@ project_pages:
   comparision_chart_title3: 'المستفيدين المستهدفين'
 
   related_sds_international_projects_title: 'مشاريع دولية أخرى '
-  related_sds_domestic_projects_title: ' مشاريع محلية أخرى '
+  related_sds_national_projects_title: ' مشاريع محلية أخرى '
 
 
 category_pages:
@@ -178,6 +179,7 @@ map_labels:
   units_label: 'الوحدات'
   map_group_label: 'عدد الاماكن الجغرافية للمشروع'
   map_project_label: 'مشروع'
+  map_projects_number: 'عدد المشاريع'
 
 general_buttons:
   share: 'شارك'

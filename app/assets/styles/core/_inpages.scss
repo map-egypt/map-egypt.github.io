@@ -236,6 +236,7 @@
     }
   }
   .inpage__col--map {
+    color: red;
     @include col(12/12);
     margin-bottom: $global-spacing * 2;
     @include media(medium-up) {

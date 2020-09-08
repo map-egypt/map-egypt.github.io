@@ -33,19 +33,19 @@ const store = createStore(reducer, applyMiddleware(
   logger
 ));
 
-import { getAuthStatus, getProjects, getInternationalProjects, getDomesticProjects, getIndicators, getGeography, updateLang } from './actions';
+import { getAuthStatus, getProjects, getInternationalProjects, getNationalProjects, getIndicators, getGeography, updateLang } from './actions';
 import { hasValidToken, resumeAuth } from './utils/auth';
 const needsValidatedFetch = !hasValidToken();
 store.dispatch(getAuthStatus(function () {
   if (needsValidatedFetch) {
     store.dispatch(getProjects());
     store.dispatch(getInternationalProjects());
-    store.dispatch(getDomesticProjects());
+    store.dispatch(getNationalProjects());
   }
 }));
 store.dispatch(getProjects());
 store.dispatch(getInternationalProjects());
-store.dispatch(getDomesticProjects());
+store.dispatch(getNationalProjects());
 store.dispatch(getIndicators());
 store.dispatch(getGeography(GOVERNORATE)); // fetch governorates
 store.dispatch(getGeography(DISTRICT)); // fetch districts
@@ -60,7 +60,7 @@ import App from './views/app';
 import Home from './views/home';
 import UhOh from './views/uhoh';
 import InternationalProjectBrowse from './views/internationalProject-browse';
-import DomesticProjectBrowse from './views/domesticProject-browse';
+import NationalProjectBrowse from './views/nationalProject-browse';
 import IndicatorBrowse from './views/indicator-browse';
 import Project from './views/project';
 import Category from './views/category';
@@ -79,7 +79,7 @@ render((
       <Route path='/access_token=:access_token' onEnter={completeAuth} />
       <Route path='/:lang' component={App} onEnter={redirectToLastUrl}>
         <Route path='international_projects' component={InternationalProjectBrowse} />
-        <Route path='domestic_projects' component={DomesticProjectBrowse} />
+        <Route path='national_projects' component={NationalProjectBrowse} />
         <Route path='indicators' component={IndicatorBrowse}/>
         <Route path='projects_sds' component={InternationalProjectBrowse} modal='SDS' />
         <Route path='projects_sdg' component={InternationalProjectBrowse} modal='SDG' />

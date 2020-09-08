@@ -33,10 +33,10 @@ var Home = React.createClass({
     let internationalProjects = [];
     internationalProjects = this.props.api.InternationalProjects;
     const totalInternational = internationalProjects.length;
-    // domestic projects
-    let domesticProjects = [];
-    domesticProjects = this.props.api.DomesticProjects;
-    const totalDomestic = domesticProjects.length;
+    // national projects
+    let nationalProjects = [];
+    nationalProjects = this.props.api.NationalProjects;
+    const totalNational= nationalProjects.length;
 
     function getPie (p) {
       const status = { ontime: 0, delayed: 0, extended: 0 };
@@ -103,8 +103,8 @@ var Home = React.createClass({
     const markers = getProjectCentroids(projects, this.props.api.geography);
     // total funding for international projects
     let totalFundingInternational = 0;
-    // total funding for domestic projects
-    let totalFundingDomestic = 0;
+    // total funding for national projects
+    let totalFundingNational = 0;
 
     // set total funding for international projects
     internationalProjects.forEach((project) => {
@@ -115,15 +115,15 @@ var Home = React.createClass({
       });
     });
     totalFundingInternational = shorterTally(totalFundingInternational);
-    // set total funding for domestic projects
-    domesticProjects.forEach((project) => {
+    // set total funding for national projects
+    nationalProjects.forEach((project) => {
       let budgets = project.budget || [];
 
       budgets.forEach((budget) => {
-        totalFundingDomestic += budget.fund.amount;
+        totalFundingNational += budget.fund.amount;
       });
     });
-    totalFundingDomestic = shorterTally(totalFundingDomestic);
+    totalFundingNational = shorterTally(totalFundingNational);
 
     return (
       <div>
@@ -153,10 +153,10 @@ var Home = React.createClass({
                     <h3 className='inpage-stats heading--deco-small'>{totalFundingInternational} <span>{t.currency_international_projects}</span> <small>{t.in_funding} {t.international_projects_type}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'>{totalDomestic}<small>{t.total} {t.domestic_projects_type}</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'>{totalNational}<small>{t.total} {t.national_projects_type}</small></h3>
                   </li>
                   <li className='category-stats__item'>
-                    <h3 className='inpage-stats heading--deco-small'> {totalFundingDomestic} <span>{t.currency_domestic_projects}</span> <small>{t.in_funding} {t.domestic_projects_type}</small></h3>
+                    <h3 className='inpage-stats heading--deco-small'> {totalFundingNational} <span>{t.currency_national_projects}</span> <small>{t.in_funding} {t.national_projects_type}</small></h3>
                   </li>
                 </ul>
               </div>
@@ -194,19 +194,19 @@ var Home = React.createClass({
                 <Link to={basepath + '/international_projects'} type='button' className='button button--primary button--large' style={{marginBottom: '25px'}} >{t.all_international_projects_btn}</Link>
               </div>
               <div className='overview-home-charts'>
-                <h3 className="project-title">{t.domestic_projects_type}</h3>
+                <h3 className="project-title">{t.national_projects_type}</h3>
                 <div className='chart-content chart__inline--labels'>
                   <h3>{t.chart_title_one}</h3>
                   <HorizontalBarChart
                     lang={lang}
-                    data={getBars(domesticProjects)}
+                    data={getBars(nationalProjects)}
                     margin={barChartMargin}
                     xFormat={tally}
                     yTitle='' />
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_two}</h3>
-                  <PieChart data={getPie(domesticProjects)} lang={lang} />
+                  <PieChart data={getPie(nationalProjects)} lang={lang} />
                   <div className='status-key'>
                     <p className='status-key__label status-ontime'>{t.chart_two_label}</p>
                     <p className='status-key__label status-delayed'>{t.chart_two_label2}</p>
@@ -215,7 +215,7 @@ var Home = React.createClass({
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
                   <h3>{t.chart_title_three}</h3>
-                  <PieChart data={getBudgetsSummary(domesticProjects)} lang={lang} />
+                  <PieChart data={getBudgetsSummary(nationalProjects)} lang={lang} />
                   <div className='status-key'>
                     <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
                     <p className='status-key__label budget-grant'>{t.chart_three_label2}</p>
@@ -224,7 +224,7 @@ var Home = React.createClass({
                 </div>
               </div>
               <div className='section__footer'>
-                <Link to={basepath + '/domestic_projects'} type='button' className='button button--primary button--large'>{t.all_domestic_projects_btn}</Link>
+                <Link to={basepath + '/national_projects'} type='button' className='button button--primary button--large'>{t.all_national_projects_btn}</Link>
               </div>
             </section>
           </div>
