@@ -1,5 +1,5 @@
 # pull official base image
-FROM node:6.11-stretch as build
+FROM node:6.11-stretch
 
 # set working directory
 WORKDIR /app
@@ -15,12 +15,11 @@ RUN yarn install
 
 
 RUN apt-get update && apt-get install -y gdal-bin
+
 RUN yarn build-geo
 
-RUN npm run build
+# add app
+# COPY . ./
 
-# production environment
-FROM nginx:stable-alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+# start app
+CMD ["npm", "run", "serve"]
