@@ -2,7 +2,11 @@
 import numeral from 'numeral';
 import { get } from 'object-path';
 
-const tally = (n) => numeral(n).format('0,0');
+const tally = (n) => {
+  if (n === null)
+    return null;
+  numeral(n).format('0,0');
+};
 module.exports.tally = tally;
 
 const shortTally = (n) => {
@@ -53,7 +57,7 @@ module.exports.shortText = shortText;
 
 function shortParagraph (s, wordCountTarget) {
   wordCountTarget = wordCountTarget || 25;
-  let result = s.split(' ');
+  let result = s ? s.split(' ') : [];
   let suffix = '';
   if (result.length > wordCountTarget) {
     result = result.slice(0, wordCountTarget);

@@ -29,7 +29,7 @@ function isOntime (project, lang = 'en') {
   const projectExtended = (!actualEnd && plannedEnd && plannedEnd < new Date().getTime()) || (actualEnd > plannedEnd);
   // if projects are both delayed and extended, they should be classed as delayed
   if (!plannedStart) {
-    return null;
+    return '';
   } else if (plannedStart > new Date().getTime()) {
     return t.status_planned;
   } else if (projectDelayed) {
