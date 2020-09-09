@@ -395,7 +395,7 @@ var Project = React.createClass({
               </div>
 
             </section>
-            {Array.isArray(data.kmi) && data.kmi.length && (
+            {authenticated && Array.isArray(data.kmi) && data.kmi.length && (
               <section className='inpage__section inpage__section--indicators'>
                 <h1 className='section__title heading--small'>{t.monitoring_indicators_title}</h1>
                 <table className='inpage__table'>
