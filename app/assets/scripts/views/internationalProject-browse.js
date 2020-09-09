@@ -284,22 +284,43 @@ var InternationalProjectBrowse = React.createClass({
 
                  <label className='form__label'>{t[filter.translationPath]}</label>
                  <div className='form__group'>
-                   {(Array.isArray(filter.items) ? filter.items : filter.items(projects, lang, t)).sort((a, b) => {
-                     return a.display < b.display ? -1 : 1;
-                   }).map((item) => (
-                    <label key={item.display}
-                      className={`form__option form__option--custom-checkbox ${this.state.projectsHidden ? 'disabled' : ''}`}>
-                      <input
-                        checked={!!selectedProjectFilters.find((f) => f.display === item.display)}
-                        type='checkbox'
-                        name='form-checkbox'
-                        value={item.display}
-                        onChange={() => this.toggleSelectedFilter(item)}
-                      />
-                      <span className='form__option__text'>{item.display}</span>
-                      <span className='form__option__ui'></span>
-                    </label>
-                  ))}
+                   {filter.translationPath == 'sdg_goals'
+                       ? (Array.isArray(filter.items) ? filter.items : filter.items(projects, lang, t)).sort(((a, b) => {
+                         let digitRegex = /\d+/g;
+                         const aIndex = digitRegex.exec(a.display)[0];
+                         digitRegex.lastIndex = 0;
+                         const bIndex = digitRegex.exec(b.display)[0];
+                         return parseInt(aIndex) > parseInt(bIndex) ? 1 : -1;
+                       })).map((item) => (
+                           <label key={item.display}
+                                  className={`form__option form__option--custom-checkbox ${this.state.projectsHidden ? 'disabled' : ''}`}>
+                             <input
+                                 checked={!!selectedProjectFilters.find((f) => f.display === item.display)}
+                                 type='checkbox'
+                                 name='form-checkbox'
+                                 value={item.display}
+                                 onChange={() => this.toggleSelectedFilter(item)}
+                             />
+                             <span className='form__option__text'>{item.display}</span>
+                             <span className='form__option__ui'></span>
+                           </label>
+                       ))
+                       : (Array.isArray(filter.items) ? filter.items : filter.items(projects, lang, t)).sort((a, b) => {
+                         return a.display < b.display ? -1 : 1;
+                       }).map((item) => (
+                           <label key={item.display}
+                                  className={`form__option form__option--custom-checkbox ${this.state.projectsHidden ? 'disabled' : ''}`}>
+                             <input
+                                 checked={!!selectedProjectFilters.find((f) => f.display === item.display)}
+                                 type='checkbox'
+                                 name='form-checkbox'
+                                 value={item.display}
+                                 onChange={() => this.toggleSelectedFilter(item)}
+                             />
+                             <span className='form__option__text'>{item.display}</span>
+                             <span className='form__option__ui'></span>
+                           </label>
+                       ))}
                 </div>
               </fieldset>
             ))}
