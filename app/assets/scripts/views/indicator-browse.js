@@ -480,6 +480,7 @@ var IndicatorBrowse = React.createClass({
                           margin={barChartMargin}
                           yTitle=''
                           lang={lang}
+                          listSize={indicatorChartData.length}
                         />
                       </div>
                     </div>

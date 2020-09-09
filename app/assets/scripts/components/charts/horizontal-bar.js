@@ -15,7 +15,8 @@ var HorizontalBarChart = React.createClass({
     xFormat: React.PropTypes.func,
     yFormat: React.PropTypes.func,
     activeProject: React.PropTypes.string,
-    lang: React.PropTypes.string
+    lang: React.PropTypes.string,
+    listSize: React.PropTypes.number
   },
 
   getInitialState: function () {
@@ -101,7 +102,7 @@ var HorizontalBarChart = React.createClass({
 
     const langSelector = rtl ? 'nameAr' : 'name';
 
-    const innerData = this.reduceDataChart(data, activeProject);
+    const innerData = this.reduceDataChart(data, activeProject, this.props.listSize ? this.props.listSize : 8);
 
     innerData.map((a, i) => {
       let name = a.name;
