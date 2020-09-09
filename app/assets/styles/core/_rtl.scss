@@ -606,6 +606,11 @@
     }
   }
 }
+/* map */
+.legend--cluster{
+  margin-right: unset;
+  margin-left: .6em;
+}
 }
 
 .legend__item--overlay--bg {
@@ -639,10 +644,4 @@
       text-align: right;
     }
   }
-}
-
-/* map */
-.legend--cluster{
-  margin-right: unset;
-  margin-left: .6em;
 }
