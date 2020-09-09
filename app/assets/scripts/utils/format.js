@@ -5,7 +5,7 @@ import { get } from 'object-path';
 const tally = (n) => {
   if (n === null)
     return null;
-  numeral(n).format('0,0');
+  return numeral(n).format('0,0');
 };
 module.exports.tally = tally;
 
