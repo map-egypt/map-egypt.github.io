@@ -462,7 +462,7 @@ var InternationalProjectBrowse = React.createClass({
             <ProjectList projects={projects} meta={this.props.meta} lang={this.props.meta.lang} title={t.International_projects_title}/>
             </div>)
           : (<div className='map__outer'>
-              <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang}/>
+              <Map location={mapLocation} markers={markers} overlay={overlay} lang={this.props.meta.lang} projects={projects}/>
 
             </div>)}
         {this.state.modal && this.state.activeModal === PROJECTS && this.renderProjectSelector()}
