@@ -39,6 +39,6 @@ module.exports.SimpleDate = function (date, lang) {
   }
   const d = new Date(date);
   return lang === 'en'
-  ? `${d.getMonth()}/${d.getFullYear()}`
-  : `${d.getFullYear()}/${d.getMonth()}`;
+  ? `${d.getMonth() + 1}/${d.getFullYear()}`
+  : `${d.getFullYear()}/${d.getMonth() + 1}`;
 };
