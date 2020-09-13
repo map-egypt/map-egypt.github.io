@@ -36,14 +36,14 @@ var Donor = React.createClass({
     const donorProjects = projects.filter((project) => {
       return get(project, 'budget', []).some((item) => {
         console.log(item);
-        let sluggedName = slugify(item.donor_name);
+        let sluggedName = slugify(item.donor.en);
         if (sluggedName === donorName) {
-          donorMeta = item;
+          donorMeta = item.donor;
         }
         return sluggedName === donorName;
       });
     });
-    const donorDisplayName = lang === 'ar' ? donorMeta.donor_name_ar : donorMeta.donor_name;
+    const donorDisplayName = donorMeta[lang];
 
     const markers = getProjectCentroids(donorProjects, this.props.api.geography);
     const mapLocation = getFeatureCollection(markers);

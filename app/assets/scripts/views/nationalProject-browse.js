@@ -60,11 +60,10 @@ const CATEGORY = {
 const DONOR = {
   translationPath: 'donor',
   items: (projects, lang) => {
-    const prop = lang === 'ar' ? 'donor_name_ar' : 'donor_name';
-    const donors = countByProp(projects.reduce((a, b) => a.concat(b.budget), []), prop);
+    const donors = countByProp(projects.reduce((a, b) => a.concat(b.budget), []), `donor.${lang}`);
     return Object.keys(donors).map((donor) => ({
       display: `${donor} (${donors[donor]})`,
-      filter: (p) => Array.isArray(p.budget) && p.budget.find((budget) => budget[prop] === donor)
+      filter: (p) => Array.isArray(p.budget) && p.budget.find((budget) => budget.donor[lang] === donor)
     }));
   }
 };

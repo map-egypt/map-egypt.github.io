@@ -39,7 +39,7 @@ export function project (p, lang) {
     get(p, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
     get(p, 'number_served.number_served'),
     get(p, 'category', []).map(c => c[lang]).join(', '),
-    get(p, 'budget', []).map(d => lang === 'en' ? d.donor_name : d.donor_name_ar).join(', '),
+    get(p, 'budget', []).map(d => d.donor[lang]).join(', '),
     p.project_link,
     get(p, 'responsible_ministry.' + lang),
     lang === 'en' ? p.local_manager : p.local_manager_ar,

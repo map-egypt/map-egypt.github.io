@@ -12,7 +12,7 @@ import { tally, shortTally, pct, currency } from '../utils/format';
 import { hasValidToken } from '../utils/auth';
 import { getProjectCentroids, getFeatureCollection } from '../utils/map-utils';
 import getLocation from '../utils/location';
-import { getDonorName, getProjectName } from '../utils/accessors';
+import { getProjectName } from '../utils/accessors';
 import { window } from 'global';
 
 import Map from '../components/map';
@@ -125,17 +125,17 @@ var Project = React.createClass({
       value: +get(d.project, 'number_served.number_served', 0)
     }));
 
-    const donors = get(data, 'budget', []).map((donor) => ({
-      name: getDonorName(donor, lang),
-      link: linkPath(basepath, 'donor', donor.donor_name),
-      value: donor.fund.amount
+    const donors = get(data, 'budget', []).map((budget) => ({
+      name: budget.donor[lang], // getDonorName(budget.donor, lang),
+      link: linkPath(basepath, 'donor', budget.donor.en),
+      value: budget.fund.amount
     })).sort((a, b) => b.value > a.value ? -1 : 1);
 
-    const disbursement = get(data, 'disbursed', []).map((fund) => ({
-      name: parseProjectDate(fund.date),
-      donor: fund.donor_name,
-      type: fund.type[lang],
-      value: fund.fund.amount
+    const disbursement = get(data, 'disbursed', []).map((disbursed) => ({
+      name: parseProjectDate(disbursed.date),
+      donor: disbursed.donor[lang],
+      type: disbursed.type[lang],
+      value: disbursed.fund.amount
     })).sort((a, b) => a.name > b.name ? 1 : -1).map((d, i) => ({
       name: `${d.donor} - ${formatDate(d.name, lang)} (${d.type})`,
       value: d.value
