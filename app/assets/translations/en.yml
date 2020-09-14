@@ -51,9 +51,9 @@ projects_indicators:
   International_projects_title: International Projects
   National_projects_title: National Projects
   Indicators_title: Socioeconomic Indicators
-  International_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
-  National_projects_description: Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
-  Indicators_description:  Browse projects on the map or see a list of all agriculture projects. Map or chart development indicators to add socioeconomic context.
+  International_projects_description: Browse projects on the map or see a list of all international agriculture projects in Egypt.
+  National_projects_description: Browse projects on the map or see a list of all national agriculture projects in Egypt.
+  Indicators_description:  Map or chart socioeconomic indicators on the subnational levels, with a focus on monitoring progress towards the Sustainable Development Goals (SDGs) and Egypt’s Sustainable Development Strategy (SDS Pillars).
   filter_projects_btn: Add & Filter Projects
   indicator_overlays_btn: Add Indicator Overlays
   search_text: Zoom to Governorate
