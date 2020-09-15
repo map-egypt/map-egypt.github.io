@@ -122,7 +122,7 @@ var Project = React.createClass({
     const served = budgets.map((d) => ({
       name: d.name,
       link: d.link,
-      value: +get(d.project, 'number_served.number_served', 0)
+      value: get(d, 'project.number_served', []).reduce((total, item) => total + get(item, 'number_served'), 0)
     }));
 
     const donors = get(data, 'budget', []).map((budget) => ({
@@ -167,7 +167,6 @@ var Project = React.createClass({
     const projectDisplayName = isArabic ? data.name_ar : data.name;
     const localManager = isArabic ? data.local_manager_ar : data.local_manager;
     const description = isArabic ? data.description_ar : data.description;
-    const servedUnits = isArabic ? data.number_served.number_served_unit_ar : data.number_served.number_served_unit;
     const donorsTitle = isInternationalProject ? t.international_donors_title : t.national_donors_title;
     const fundingByDonorTitle = isInternationalProject ? t.international_funding_by_donor_title : t.national_funding_by_donor_title;
     const relatedSdsProjectsTitle = isInternationalProject ? t.related_sds_international_projects_title : t.related_sds_national_projects_title;
@@ -252,7 +251,10 @@ var Project = React.createClass({
                       <li>{currency(currencyValue, shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
                     </ul>
                   </li>
-                  <li className='num__internal--large'>{tally(data.number_served.number_served)} <small>{servedUnits}</small></li>
+                  {data.number_served.map((item, i) => {
+                    return (<li key={i} className='num__internal--large'>{tally(item.number_served)}
+                      <small>{item.beneficiary_type[lang]}</small></li>);
+                  })}
                 </ul>
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>

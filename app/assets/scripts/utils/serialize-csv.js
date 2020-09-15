@@ -21,7 +21,7 @@ export function relatedProjects (projects, lang) {
     isOntime(p, lang),
     location(get(p, 'location', []), lang),
     get(p, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
-    get(p, 'number_served.number_served'),
+    get(p, 'number_served', []).reduce((total, item) => total + get(item, 'number_served'), 0),
     get(p, 'categories', []).map(c => c[lang]).join(', '),
     lang === 'en' ? p.description : p.description_ar
   ]));
@@ -37,7 +37,7 @@ export function project (p, lang) {
     isOntime(p, lang),
     location(get(p, 'location', []), lang),
     get(p, 'budget', []).reduce((a, b) => a + get(b, 'fund.amount', 0), 0),
-    get(p, 'number_served.number_served'),
+    get(p, 'number_served', []).reduce((total, item) => total + get(item, 'number_served'), 0),
     get(p, 'category', []).map(c => c[lang]).join(', '),
     get(p, 'budget', []).map(d => d.donor[lang]).join(', '),
     p.project_link,

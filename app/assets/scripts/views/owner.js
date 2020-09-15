@@ -42,7 +42,7 @@ var Owner = React.createClass({
       return {
         name: getProjectName(project, lang),
         link: path.resolve(basepath, 'projects', project.id),
-        value: project.number_served.number_served
+        value: get(project, 'number_served', []).reduce((total, item) => total + get(item, 'number_served'), 0)
       };
     }).sort((a, b) => b.value > a.value ? -1 : 1);
 
