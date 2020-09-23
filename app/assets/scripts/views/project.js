@@ -251,10 +251,12 @@ var Project = React.createClass({
                       <li>{currency(currencyValue, shortTally(budgetBreakdown['local contribution']))} {t.funding_local_title}</li>
                     </ul>
                   </li>
+                  <li className='number-served'>
                   {data.number_served.map((item, i) => {
-                    return (<li key={i} className='num__internal--large'>{tally(item.number_served)}
+                    return (<li key={i}>{tally(item.number_served)}
                       <small>{item.beneficiary_type[lang]}</small></li>);
                   })}
+                  </li>
                 </ul>
                 <div className='inpage__overview-links'>
                 <h2 className='overview-item__title heading-alt'>{t.objective_title}</h2>

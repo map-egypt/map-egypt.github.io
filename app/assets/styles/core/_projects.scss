@@ -21,6 +21,19 @@
   }
 }
 
+.inpage-stats{
+  max-height: unset;
+  .number-served{
+    small{
+      margin-top: 0;
+    }
+    li{
+      margin-bottom: 5px;
+    }
+  }
+}
+
+
 .overview-item__title {
     display: block;
     margin-bottom: $global-spacing/2;
