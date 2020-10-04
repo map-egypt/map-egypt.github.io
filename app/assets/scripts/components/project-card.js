@@ -125,7 +125,7 @@ var ProjectCard = React.createClass({
               <li>{currency(currencyValue, shortTally(funding, t))} <small>{t.funding_title}</small></li>
                 {project.number_served.map((item, i) => {
                   return (<li>{tally(item.number_served)}
-                    <small>{item.beneficiary_type[lang].toLowerCase()}</small>
+                    <small>{item.beneficiary_type[lang] ? item.beneficiary_type[lang].toLowerCase() : item.beneficiary_type[lang]}</small>
                   </li>);
                 })}
               </ul>
