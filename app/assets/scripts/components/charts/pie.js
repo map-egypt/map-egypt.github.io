@@ -9,7 +9,8 @@ var PieChart = React.createClass({
 
   propTypes: {
     data: React.PropTypes.array,
-    lang: React.PropTypes.string
+    lang: React.PropTypes.string,
+    format: React.PropTypes.func,
   },
 
   getInitialState: function () {
@@ -35,7 +36,7 @@ var PieChart = React.createClass({
       tooltipX: x,
       tooltipY: y,
       tooltipTitle: name,
-      tooltipBody: value
+      tooltipBody: this.props.format ? this.props.format(value) : value
     });
   },
 
@@ -81,14 +82,12 @@ var PieChart = React.createClass({
         <svg className='chart' width={width} height={height} ref='svg'>
           <g className='arc' transform={`translate(${width / 2}, ${height / 2})`}>
             {dataValues.map((d, i) => {
-               // make values readable with commas
-              let n = parseFloat(d.value).toFixed(2);
-              let withCommas = Number(n).toLocaleString('en');
+            
               return <path
                 key={i}
                 d={arc(d)}
                 className={'pie__slice__' + slugify(names[i])}
-                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, langSelector[i], withCommas)}
+                onMouseMove={(event) => this.mouseover(event.clientX, event.clientY, langSelector[i], d.value)}
                 onMouseOut={this.mouseout}
               />;
             })}
