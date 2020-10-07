@@ -189,6 +189,9 @@
     color: black;
   }
 }
+.legend__overlay{
+  display: flex;
+}
 
 .legend__item {
   float: left;
@@ -215,9 +218,9 @@
 }
 
 .legend__overlay--units {
-  float: left;
   font-size: .8rem;
-  margin-top: .8em;
+  margin-top: .7em;
+  margin-right: .8em;
   color: $base-color;
 }
 
