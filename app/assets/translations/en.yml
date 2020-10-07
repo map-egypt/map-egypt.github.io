@@ -22,7 +22,7 @@ homepage:
   all_international_projects_btn: View All International Projects 
   all_national_projects_btn: View All National Projects
   chart_title_one: Number of Projects by Category
-  chart_title_two: Status
+  chart_title_two: Number of Projects by Status
   chart_two_label: On Time
   chart_two_label2: Delayed
   chart_two_label3: Extended

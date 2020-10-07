@@ -23,7 +23,7 @@ homepage:
   all_international_projects_btn: 'تصفح جميع المشاريع الدولية' 
   all_national_projects_btn: 'تصفح جميع المشاريع المحلية'
   chart_title_one: 'عدد المشروعات في كل قطاع فرعي'
-  chart_title_two: 'الحالة'
+  chart_title_two: 'عدد المشاريع حسب الحالة'
   chart_two_label: 'في الميعاد'
   chart_two_label2: 'متأخر'
   chart_two_label3: 'ممتد'
