@@ -253,3 +253,7 @@
   padding: .2em .6em;
   font-size: .8em;
 }
+
+.leaflet-right .leaflet-control-attribution.leaflet-compact-attribution:after{
+  display: none;
+}
