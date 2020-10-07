@@ -462,6 +462,7 @@
     padding-top: 2rem;
     margin-right: 0;
     margin-left: $global-spacing * 2;
+    max-width: 530px;
   }
   .modal__filters--defaults {
     .form__option--custom-checkbox {
@@ -518,6 +519,8 @@
   }
   .form__option__text {
     padding-right: 1.5rem;
+    text-align: right;
+    margin-right: 6px;
   }
   .form__input-group {
     float: right;

@@ -230,7 +230,7 @@ footer {
   margin: 0 ($global-spacing * 2) ($global-spacing * 1.5) 0;
   border: 0;
   position: relative;
-  max-width: 300px;
+  max-width: 460px;
 
   &:last-child {
     padding-bottom: 0;
@@ -297,6 +297,7 @@ label[for] {
 
 .form__option + .form__option {
   margin-top: - $global-spacing / 2;
+  display: flex;
 }
 
 /* Form option inline modifier */
