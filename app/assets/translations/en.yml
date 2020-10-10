@@ -43,9 +43,9 @@ homepage:
 
   other_indicators_title: Other Progress Indicators
   other_indicators_description: Map and chart development indicators related to poverty and food and nutrition security in Egypt. Overlay agriculture and rural development projects in areas of interest.
-  sds_button: SDS Indicators
-  sdg_button: SDG Indicators
-  other_button: Other Indicators
+  sds_button:  SDS Pillars Indicators
+  sdg_button: SDGs Indicators
+  other_button:  Other Socioeconomic Indicators 
 
 projects_indicators:
   International_projects_title: International Projects
@@ -59,9 +59,9 @@ projects_indicators:
   search_text: Zoom to Governorate
   map_toggle_btn: Map
   list_toggle_btn: List/Chart
-  sds_dropdown: SDS Indicators
-  sdg_dropdown: SDG Indicators
-  other_dropdown: Other Indicators
+  sds_dropdown: SDS Pillars Indicators
+  sdg_dropdown: SDGs Indicators
+  other_dropdown:  Other Socioeconomic Indicators 
   compare_indicators: Add and compare development indicators listed below.
   selected_indicators: Selected Indicators
   add: Add
@@ -79,8 +79,8 @@ projects_indicators:
   category: Category
   sector: Sector
   donor: Donor
-  sds_goals: SDS Goals
-  sdg_goals: SDG Goals
+  sds_goals:  SDS Pillars
+  sdg_goals: SDGs
 
 
 projects_list_view:
