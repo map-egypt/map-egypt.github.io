@@ -475,13 +475,22 @@ var IndicatorBrowse = React.createClass({
                       <h1 className='section__title'>Indicators</h1>
                       <div className='indicator-list-container'>
                       {activeIndicators.length && this.renderActiveIndicators(activeIndicator, activeIndicators)}
-                        <HorizontalBarChart
-                          data={indicatorChartData}
-                          margin={barChartMargin}
-                          yTitle=''
-                          lang={lang}
-                          listSize={indicatorChartData.length}
-                        />
+                      {typeof(indicatorChartData[0].value) === 'string' ?
+                       <div className='chart-container' ref='chartContainer'>
+                          <div className="note-message">
+                          Chart View is unavailable for categorical data
+                          </div>
+                       </div>
+                      :
+                      <HorizontalBarChart
+                      data={indicatorChartData}
+                      margin={barChartMargin}
+                      yTitle=''
+                      lang={lang}
+                      listSize={indicatorChartData.length}
+                    />
+                      }
+                       
                       </div>
                     </div>
                   </section>
