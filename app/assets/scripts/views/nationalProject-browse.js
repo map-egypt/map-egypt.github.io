@@ -109,7 +109,8 @@ var NationalProjectBrowse = React.createClass({
 
       // is the view set to list view or map
       listView: false,
-
+      //  search input value
+      valueSearch:"0",
       // which governorate are we zoomed into
       activeGovernorate: null,
 
@@ -143,10 +144,12 @@ var NationalProjectBrowse = React.createClass({
     }
   },
 
-  zoomToGovernorate: function (event, value) {
-    const selected = value.suggestion;
+  zoomToGovernorate: function (e) {
+    const governorateId = e.target.value;
+    const selectedGovernorate = governorates.find(({id}) => id == governorateId);
     this.setState({
-      activeGovernorate: selected
+      activeGovernorate: selectedGovernorate,
+      valueSearch: governorateId
     });
   },
 
@@ -410,14 +413,20 @@ var NationalProjectBrowse = React.createClass({
           <div className='inner'>
             <div className='map__search-input'>
               <div className='autosuggest'>
-                  <AutoSuggest
-                  suggestions={governorates}
-                  getDisplayName={(d) => d.name}
-                  placeholder={t.search_text}
-                  onSelect={this.zoomToGovernorate}
-                  />
+                  <select className="search-drop"   onChange={this.zoomToGovernorate} value={this.state.valueSearch} >
+                        <option value='0'  disabled={true}>{t.search_text}</option>
+                        {governorates.map((g) => {
+                              let display = lang === "en" ? g.name : g.nameAr;
+                              return <option 
+                                        key={g.id}
+                                        className='drop__menu-item'
+                                        value={g.id} 
+                                      >
+                                        {display}
+                                      </option>;
+                          })}            
+                  </select>
               </div>
-              <span className="form__input-group-button"><button type="submit" className="button button--primary button--text-hidden button--medium button--search-icon"><span>Button</span></button></span>
             </div>
           </div>
         </div>
