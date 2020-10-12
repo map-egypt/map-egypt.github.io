@@ -181,7 +181,7 @@ var Home = React.createClass({
                   </div>
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
-                  <h3>{t.chart_title_three}</h3>
+                  <h3>{t.chart_title_three} {`( ${t.currency_international_projects} )`}</h3>
                   <PieChart data={getBudgetsSummary(internationalProjects)} lang={lang} format={shorterTally} type={'international'} />
                   <div className='status-key'>
                     <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
@@ -214,7 +214,7 @@ var Home = React.createClass({
                   </div>
                 </div>
                 <div className='chart-content chart__inline--labels chart-content--status'>
-                  <h3>{t.chart_title_three}</h3>
+                  <h3>{t.chart_title_three} {`( ${t.currency_national_projects} )`} </h3>
                   <PieChart data={getBudgetsSummary(nationalProjects)} lang={lang}  format={shorterTally} type={'national'}/>
                   <div className='status-key'>
                     <p className='status-key__label budget-loan'>{t.chart_three_label}</p>
