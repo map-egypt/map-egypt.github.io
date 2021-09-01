@@ -126,7 +126,7 @@
     "lodash": "^4.16.2",
     "mapbox.js": "^3.0.0",
     "numeral": "^1.5.5",
-    "object-path": "^0.11.3",
+    "object-path": "^0.11.6",
     "qs": "^6.2.1",
     "react": "^15.4.1",
     "react-autosuggest": "^7.0.1",
